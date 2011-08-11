@@ -1,0 +1,376 @@
+<?php
+// $Id$
+
+
+/**
+ * Implementation of hook_menu_alter().
+ */
+function og_notifications_group_menu_alter(&$items) {
+  unset($items['user/%user/notifications']);
+  unset($items['user/%user/notifications/overview']);
+  unset($items['user/%user/notifications/add']);
+  unset($items['user/%user/notifications/subscriptions']);
+  unset($items['user/%user/notifications/add/grouptype']);
+}
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function og_notifications_group_form_alter(&$form, $form_state, $form_id) {
+  global $user;
+  if ($form_id == 'user_profile_form' && isset($form['_category']['#value'])
+      && $form['_category']['#value'] == 'newsletter') {
+    $account = user_load(arg(1));
+    if (!(user_access('subscribe to content in groups', $account) ||
+        user_access('administer users'))) {
+      return;
+    }
+    
+    $groups = array();
+    foreach ($account->og_groups as $gid => $group) {
+      if ($group['status']) {
+        $groups[$gid] = $group['title'];
+      }
+    }
+
+    if (!count($groups)) {
+      $form['outside_group'] = array(
+        '#value' => l(t('Still outside the group? List of groups >>'), 'og'),
+        '#prefix' => '<div class="outside_group"><div>',
+        '#suffix' => '</div></div>'
+      );
+      return;
+    }
+
+    $form['group_notifications'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Subscriptions'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+    
+    $content_types = array_filter(variable_get('og_notifications_content_types', array()));
+    if (!empty($groups) && count($content_types)) {
+      $defaults = _notifications_subscription_defaults($account);
+      $send_methods = _notifications_send_methods();
+      $send_intervals = notifications_send_intervals();
+      $account_group_subscriptions = og_notifications_group_get_user_subsriptions($account->uid);
+      og_notifications_group_check_subscription($account_group_subscriptions);
+      
+      // Hide send methods if only one available.
+      if (count($send_methods) > 1) {
+        $num_colums = 4;
+        $form['group_notifications']['table'] = array(
+          '#value' => "<table id=\"group_notifications\">\n  <tr><th>". t('Status') .'</th><th>'. t('Group')
+            .'</th><th>'. t('Send method') .'</th><th>'. t('Send Interval')
+            ."</th></tr>",
+        );
+      }
+      else {
+        $form['group_notifications']['table'] = array(
+          '#value' => "<table id=\"group_notifications\">\n  <tr><th>". t('Status') .'</th><th>'. t('Group')
+          .'</th><th>'. t('Send Interval') ."</th></tr>",
+        );
+        $num_colums = 3;
+        $form['send_method'] = array(
+          '#type' => 'value',
+          '#default_value' => $defaults['send_method']
+        );
+      }
+
+      foreach ($groups as $gid => $group_name) {
+        $group_status = (isset($account_group_subscriptions[$gid])
+          && $account_group_subscriptions[$gid]['status']) ? 1 : 0;
+        $form['group_notifications']['group_'. $gid]['status_'. $gid] = array(
+          '#type' => 'checkbox',
+          '#prefix' => '<tr><td>',
+          '#default_value' => $group_status,
+        );
+        $form['group_notifications']['group_'. $gid]['name_'. $gid] = array( 
+          '#value' => check_plain($group_name),
+          '#prefix' => '</td><td>',
+        );
+        if ($num_colums == 4) {
+          $form['group_notifications']['group_'. $gid]['send_method_'. $gid] = array(
+            '#type' => 'select',
+            '#prefix' => '</td><td>',
+            '#options' => $send_methods,
+            '#default_value' => (
+              $group_status ?
+              $account_group_subscriptions[$gid]['send_method']
+              : $defaults['send_method']
+            ),
+          );
+        }
+        $form['group_notifications']['group_'. $gid]['send_interval_'. $gid] = array(
+          '#type' => 'select',
+          '#prefix' => '</td><td>',
+          '#sufix' => "</td></tr>\n",
+          '#options' => $send_intervals,
+          '#default_value' => (
+              $group_status ?
+              $account_group_subscriptions[$gid]['send_interval']
+              : $defaults['send_interval']
+              ),
+        );
+      }
+      $form['group_notifications']['table_end'] = array(
+        '#value' => '</table>',
+      );
+      array_unshift($form['#submit'], '_og_notifications_group_user_form_submit');
+    }
+    else {
+      drupal_set_message(t('There are no active group subscriptions available.'), 'status');
+      drupal_set_message(t('For subscription management group, you must first join it.'), 'status');
+    }
+  }
+  
+  if ($form_id == 'notifications_content_settings_form') {
+    array_unshift($form['#submit'], '_og_notifications_group_admin_form_submit');
+  }
+}
+
+
+/**
+ * Implementation of hook_submit().
+ * Transfer subscription to the group, and (managing subscriptions)
+ * in the form of editing a user profile.
+ */
+function _og_notifications_group_user_form_submit($form, &$form_state) {
+  $account = user_load(arg(1));
+  if (user_access('subscribe to content in groups', $account) || user_access('administer users')) {
+    $old_subsriptions = og_notifications_group_get_user_subsriptions($account->uid);
+    og_notifications_group_check_subscription($old_subsriptions);
+    
+    $delete_sid = array();
+    foreach ($account->og_groups as $gid => $group) {
+      if ($group['status']) {
+        if ($form_state['values']['status_'. $gid] == 1) {
+          $new_subscription = array(
+            'type' => 'grouptype',
+            'uid' => $account->uid,
+            'send_interval' => $form_state['values']['send_interval_'. $gid],
+            'send_method' => $form_state['values']['send_method_'. $gid],
+            'fields' => array(
+              'group' => (string)$gid,
+              'type' => ''
+            ),
+          );
+
+          if (isset($old_subsriptions[$gid])) {
+            if ($old_subsriptions[$gid]['send_method'] != $form_state['values']['send_method_'. $gid] ||
+            $old_subsriptions[$gid]['send_interval'] != $form_state['values']['send_interval_'. $gid]) {
+              //update subscription
+              og_notifications_group_delete_subscription(array_keys($old_subsriptions[$gid]['sid']));
+              og_notifications_group_add_update_subscription($new_subscription);
+            }
+          }
+          else {
+            //add subscription
+            og_notifications_group_add_update_subscription($new_subscription);
+          }
+          $new_subscription = FALSE;
+        }
+        else {
+          if (isset($old_subsriptions[$gid])) {
+            //delete subscription
+            foreach ($old_subsriptions[$gid]['sid'] as $sid => $subscription) {
+              $delete_sid[] = $sid;
+            }
+          }
+        }
+      }
+    }
+    
+    if (count($delete_sid)) {
+      og_notifications_group_delete_subscription($delete_sid);
+    }
+  }
+}
+
+
+/**
+ * Helper function deletes all subscriptions for the array id.
+ * Changed from function notifications_delete_subscriptions().
+ */
+function og_notifications_group_delete_subscription($delete_sid) {
+  $placeholders = db_placeholders($delete_sid);
+  foreach (array('notifications_fields', 'notifications_queue', 'notifications') as $table) {
+    db_query('DELETE FROM {'. $table .'} WHERE sid IN ('. $placeholders .')', $delete_sid);
+  }
+}
+
+
+/**
+ * Additional function updates subscription.
+ */
+function og_notifications_group_add_update_subscription($subscription) {
+  static $og_notifications_content_types;
+  if (!isset($og_notifications_content_types)) {
+    $og_notifications_content_types = array_filter(variable_get('og_notifications_content_types', array()));
+  }
+  foreach ($og_notifications_content_types as $type) {
+    $new_subscription = (object)$subscription;
+    $new_subscription->fields['type'] = $type;
+    notifications_save_subscription($new_subscription);
+  }
+}
+
+
+/**
+ * Gets all subscriptions user group.
+ * @param $uid
+ * 		USER ID
+ */
+function og_notifications_group_get_user_subsriptions($uid) {
+  $account_subscriptions = array();
+  $account_group_subscriptions = array();
+
+  $content_types = array_filter(variable_get('og_notifications_content_types', array()));
+  $content_type_names = array_keys($content_types);
+  
+  $result = db_query("SELECT n.sid, n.send_interval, n.send_method,
+    f.field AS field, f.value AS field_value
+    FROM {notifications} n
+    INNER JOIN {notifications_fields} f ON n.sid = f.sid
+    WHERE n.uid = %d AND n.status = 1 AND n.type = 'grouptype'
+    ORDER BY n.sid DESC", $uid);
+  while ($sub = db_fetch_object($result)) {
+    if ($sub->field == 'group') {
+      if (!isset($account_group_subscriptions[$sub->field_value]['sid'])) {
+        $account_group_subscriptions[$sub->field_value]['sid'] = array();
+        $account_group_subscriptions[$sub->field_value]['status'] = FALSE;
+      }
+      $account_group_subscriptions[$sub->field_value]['sid'][] = $sub->sid;
+    }
+    else {
+      if ($sub->field == 'type' && in_array($sub->field_value, $content_type_names)) {
+        $account_subscriptions[$sub->sid] = $sub;
+      }
+    }
+  }
+  
+  foreach ($account_group_subscriptions as $gid => $group) {
+    $a_temp = array();
+    foreach ($group['sid'] as $sid) {
+      $a_temp[$sid] = $account_subscriptions[$sid];
+    }
+    $account_group_subscriptions[$gid]['sid'] = $a_temp ;
+  }
+  return $account_group_subscriptions;
+}
+
+
+/**
+ * Check and the union subscriptions in groups.
+ */
+function og_notifications_group_check_subscription(&$account_group_subscriptions) {
+  $content_types = array_filter(variable_get('og_notifications_content_types', array()));
+  $content_type_names = array_keys($content_types);
+  
+  foreach ($account_group_subscriptions as $gid => $group) {
+    $notification = FALSE;
+    $subs_base = FALSE;
+    $types = $content_type_names;
+    foreach ($group['sid'] as $sid => $subscription) {
+      if (!$subs_base) {
+        $subs_base = $subscription;
+      }
+      else {
+        if ($subs_base->send_interval != $subscription->send_interval
+            || $subs_base->send_method != $subscription->send_method) {
+           continue;
+        }
+      }
+      foreach ($types as $num => $type) {
+        if ($type == $subscription->field_value) {
+          unset($types[$num]);
+          break;
+        }
+      }
+    }
+    $account_group_subscriptions[$gid]['send_interval'] = $subs_base->send_interval;
+    $account_group_subscriptions[$gid]['send_method'] = $subs_base->send_method;
+    if (!count($types)) {
+      $account_group_subscriptions[$gid]['status'] = TRUE;
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_submit().
+ * Processing changes in the types of nodes for subscriptions groups.
+ */
+function _og_notifications_group_admin_form_submit($form, &$form_state) {
+  $old_types_subscription = variable_get('og_notifications_content_types', array());
+  $new_types_subscription = $form_state['values']['og_notifications_content_types'];
+  
+  $change = FALSE;
+  foreach ($new_types_subscription as $node_type => $status) {
+    if ($old_types_subscription[$node_type] !== $status) {
+      $change = TRUE;
+      break;
+    }
+  }
+  if (!$change) {
+    return;
+  }
+  
+  $a_old_sids = array();
+  $last_type = FALSE;
+  foreach ($old_types_subscription as $node_type => $status) {
+    if ($status) {
+      $last_type = $node_type;
+      $a_old_sids[$node_type] = array();
+      $result = db_query("SELECT f.sid
+        FROM {notifications_fields} f
+        INNER JOIN {notifications} n ON n.sid = f.sid
+        WHERE f.field = 'type' AND f.value = '%s' AND n.type = 'grouptype'",
+        $node_type);
+      while ($sid = db_fetch_object($result)) {
+        $a_old_sids[$node_type][] = $sid->sid;
+      }
+    }
+  }
+  
+  $num_old_sids = $last_type ? count($a_old_sids[$last_type]) : FALSE;
+  if (!$num_old_sids) {
+    return;
+  }
+  
+  //Add subscriptions
+  foreach ($new_types_subscription as $node_type => $status) {
+    if ($status && !$old_types_subscription[$node_type]) {
+      $placeholders = db_placeholders($a_old_sids[$last_type]);
+      $result = db_query("SELECT n.*, f.value AS group_id FROM {notifications} n
+        INNER JOIN {notifications_fields} f ON n.sid = f.sid
+        WHERE n.type = 'grouptype'
+        AND n.sid IN (". $placeholders .") AND f.field = 'group'",
+        $a_old_sids[$last_type]);
+      while ($sub = db_fetch_object($result)) {
+        $sub = (array)$sub;
+        unset($sub['sid']);
+        drupal_write_record('notifications', $sub);
+        if ($sub['sid']) {
+          db_query("INSERT INTO {notifications_fields} (sid, field, value, intval)
+          	VALUES(%d, 'group', '%s', %d)",
+            $sub['sid'], $sub['group_id'], (int)$sub['group_id']);
+          db_query("INSERT INTO {notifications_fields} (sid, field, value, intval)
+          	VALUES(%d, 'type', '%s', %d)",
+            $sub['sid'], $node_type, (int)$node_type);
+        }
+      }
+    }
+  }
+  
+  //Delete subscriptions
+  foreach ($new_types_subscription as $node_type => $status) {
+    if (!$status && $old_types_subscription[$node_type]) {
+      og_notifications_group_delete_subscription($a_old_sids[$node_type]);
+    }
+  }
+}
+
+

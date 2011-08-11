@@ -1,0 +1,13 @@
+All modules should be written to support some functionality.
+
+You should not put a lot of unrelated things in one module,
+except for the cases where these changes are related to some
+section or functionality and it's really hard to divide it
+into submodules.
+
+In cases, when you see that some modules are making a category
+of functionality, create a folder for them and "svn move" them
+to this folder to keep nice code structure.
+
+If you need to write some kind of one-time-using module, put
+it to "_temp".

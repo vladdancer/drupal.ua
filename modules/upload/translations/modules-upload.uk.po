@@ -1,0 +1,184 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:32+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Size"
+msgstr "Розмір"
+
+msgid "default"
+msgstr "типовий"
+
+msgid "General settings"
+msgstr "Загальні налаштування"
+
+msgid "Please contact the site administrator."
+msgstr "Зверніться до адміністратора сайту."
+
+msgid "Attachment"
+msgstr "Долучення"
+
+msgid "Read full article to view attachments."
+msgstr "Читати всю статтю,  щоб побачити причіплені файли."
+
+msgid "1 attachment"
+msgid_plural "@count attachments"
+msgstr[0] "@count вкладення"
+msgstr[1] "@count вкладення"
+msgstr[2] "@count вкладень"
+
+msgid "Attachments"
+msgstr "Долучення"
+
+msgid "File attachments"
+msgstr "Приєднані файли"
+
+msgid ""
+"Changes made to the attachments are not permanent until you save this post. "
+"The first \"listed\" file will be included in RSS feeds."
+msgstr ""
+"Додатки завантажаться лише після збереження цього матеріалу. Перший "
+"\"відображений\" файл буде включено до RSS потоків."
+
+msgid ""
+"File attachments are disabled. The file directories have not been properly "
+"configured."
+msgstr "Вкладення файлів вимкнено. Директорія для файлів незконфігурована."
+
+msgid ""
+"Please visit the <a href=\"@admin-file-system\">file system configuration "
+"page</a>."
+msgstr ""
+"Прохання перевірити <a href=\"@admin-file-system\">конфігурацію файлової "
+"системи</a>."
+
+msgid ""
+"The maximum allowed image size expressed as WIDTHxHEIGHT (e.g. 640x480). Set "
+"to 0 for no restriction."
+msgstr ""
+"Максимальний розмір зображення у вигляді ШИРИНАxВИСОТА (наприклад, 640x480). "
+"Значення 0 означає відсутність обмежень."
+
+msgid "The %role file size limit must be a number and greater than zero."
+msgstr "Масимальний розмір файлу %role повинен бути додатнім числом."
+
+msgid ""
+"The %role maximum file size per upload is greater than the total file size "
+"allowed per user"
+msgstr ""
+"Максимальний розмір файлу %role для завантаження загального розміру файлів, "
+"дозволеного для користувача."
+
+msgid "Maximum resolution for uploaded images"
+msgstr "Максимальний розмір фото для завантаження"
+
+msgid "WIDTHxHEIGHT"
+msgstr "ШИРИНАxВИСОТА"
+
+msgid ""
+"Depending on your server environment, these settings may be changed in the "
+"system-wide php.ini file, a php.ini file in your Drupal root directory, in "
+"your Drupal site's settings.php file, or in the .htaccess file in your "
+"Drupal root directory."
+msgstr ""
+
+msgid "Attach new file"
+msgstr "Причіпити новий файл"
+
+msgid "Attach"
+msgstr "Долучити"
+
+msgid "List files by default"
+msgstr "Список файлів за замовчуванням"
+
+msgid "upload files"
+msgstr "завантажити файли"
+
+msgid "Please wait..."
+msgstr "Зачекайте, будь ласка..."
+
+msgid ""
+"The maximum allowed image size (e.g. 640x480). Set to 0 for no restriction. "
+"If an <a href=\"!image-toolkit-link\">image toolkit</a> is installed, files "
+"exceeding this value will be scaled down to fit."
+msgstr ""
+
+msgid ""
+"The default maximum file size a user can upload. If an image is uploaded and "
+"a maximum resolution is set, the size will be checked after the file has "
+"been resized."
+msgstr ""
+
+msgid ""
+"The maximum size of a file a user can upload. If an image is uploaded and a "
+"maximum resolution is set, the size will be checked after the file has been "
+"resized."
+msgstr ""
+
+msgid "The maximum size of all files a user can have on the site."
+msgstr ""
+
+msgid "Images are larger than %resolution will be resized. "
+msgstr "Зображення, що є більшими за %resolution, буде зменшено. "
+
+msgid ""
+"The maximum upload size is %filesize. Only files with the following "
+"extensions may be uploaded: %extensions. "
+msgstr ""
+"Максимальний розмір файлу загрузки обмежено до %filesize. Лише файли з "
+"наступними розширеннями можуть бути причепленими: %extensions. "
+
+msgid "view uploaded files"
+msgstr "переглянути завантажені файли"
+
+msgid "Display attached files when viewing a post."
+msgstr ""
+
+msgid ""
+"The upload module allows users to upload files to the site. The ability to "
+"upload files is important for members of a community who want to share work. "
+"It is also useful to administrators who want to keep uploaded files "
+"connected to posts."
+msgstr ""
+
+msgid ""
+"Users with the upload files permission can upload attachments to posts. "
+"Uploads may be enabled for specific content types on the content types "
+"settings page. Each user role can be customized to limit or control the file "
+"size of uploads, or the maximum dimension of image files."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@upload"
+"\">Upload module</a>."
+msgstr ""
+
+msgid ""
+"Users with the <a href=\"@permissions\">upload files permission</a> can "
+"upload attachments. Users with the <a href=\"@permissions\">view uploaded "
+"files permission</a> can view uploaded attachments. You can choose which "
+"post types can take attachments on the <a href=\"@types\">content types "
+"settings</a> page."
+msgstr ""
+"Пользователи с правами на <a href=\"@permissions\">закачивание файлов</a> "
+"могут закачивать прикрепляемые файлы. Пользователи с правами на <a href="
+"\"@permissions\">просмотр закаченных файлов</a> могу просматривать "
+"прикрепляемые файлы. Вы можете определять, к каким типам материалов можно "
+"прикреплять файлы. Это задается на странице <a href=\"@types\">установки "
+"типов материала</a>."
+
+msgid "File uploads"
+msgstr "Завантаження файлів"
+
+msgid "Control how files may be attached to content."
+msgstr "Параметри приєднання файлів до матеріалу."

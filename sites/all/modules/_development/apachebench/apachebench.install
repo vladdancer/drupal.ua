@@ -1,0 +1,154 @@
+<?php
+// $Id: apachebench.install,v 1.2 2009/03/19 21:43:28 neochief Exp $
+
+/**
+ * @file
+ * ApacheBench installation and database schema.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function apachebench_install() {
+  drupal_install_schema('apachebench');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function apachebench_uninstall() {
+  variable_del('apachebench_frequency');
+  variable_del('apachebench_requests');
+  variable_del('apachebench_concurrency');
+  variable_del('apachebench_uris');
+  variable_del('apachebench_path');
+
+  drupal_uninstall_schema('apachebench');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function apachebench_schema() {
+  $schema = array();
+
+  $schema['apachebench_results'] = array(
+    'description' => t('Results of ab invocation stored for reporting usage.'),
+    'fields' => array(
+      'rid' => array(
+        'description' => t('Primary identifier for this report.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'uri' => array(
+        'description' => t('URI tested against.'),
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => ''),
+      'requests_per_second' => array(
+        'description' => t('Total requests per second.'),
+        'type' => 'float',
+        'unsigned' => TRUE,  
+        'not null' => TRUE,
+        'default' => 0),
+      'document_length' => array(
+        'description' => t('Length of document in bytes.'),
+        'type' => 'int',
+        'unsigned' => TRUE,  
+        'not null' => TRUE,
+        'default' => 0),
+      'time_taken_for_tests' => array(
+        'description' => t('Total time taken in seconds.'),
+        'type' => 'float',
+        'precision' => 10,  
+        'scale' => 3,  
+        'not null' => TRUE,
+        'default' => 0),
+      'complete_requests' => array(
+        'description' => t('Number of completed requests.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,	
+        'default' => 0),
+      'failed_requests' => array(
+        'description' => t('Number of failed requests.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,	
+        'default' => 0),	
+      'total_transferred' => array(
+        'description' => t('Number of bytes transfered.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,	
+        'default' => 0),
+      'html_transferred' => array(
+        'description' => t('Number of bytes HTML transfered.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,	
+        'default' => 0),
+      'concurrency' => array(
+        'description' => t('Concurrency of requests.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,	
+        'default' => 0),
+      'requests' => array(
+        'description' => t('Total number of requests.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0),
+      'created' => array(
+        'description' => t('The Unix timestamp when the row was created.'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+       ),
+    'indexes' => array(
+        'uri' => array('uri'),
+        'requests_per_second' => array('requests_per_second'),
+        'concurrency' => array('concurrency'),
+        'requests' => array('requests'),
+        'document_length' => array('document_length'),
+        'time_taken_for_tests' => array('time_taken_for_tests'),
+        'complete_requests' => array('complete_requests'),
+        'failed_requests' => array('failed_requests'),
+        'total_transferred' => array('total_transferred'),
+        'html_transferred' => array('html_transferred'),
+        'created' => array('created'),
+        'uri_created' => array('uri', 'created'),
+      ),
+    'primary key' => array('rid'),
+    );
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_update().
+ */
+function apachebench_update_6001() {
+  $ret = array();
+  db_drop_table($ret, 'apachebench_results');
+  db_rename_table($ret, 'ab_results', 'apachebench_results');
+  db_change_field($ret, 'apachebench_results', 'requests_per_second', 'requests_per_second', array('type' => 'float', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0));
+  $ret[] = update_sql('UPDATE {permissions} SET perm = REPLACE(perm, "administer ab", "administer apachebench")');
+  $ret[] = update_sql('UPDATE {permissions} SET perm = REPLACE(perm, "view ab reports", "view apachebench reports")');
+
+  variable_set('apachebench_frequency', variable_get('ab_frequency', 0));
+  variable_del('ab_frequency');
+  variable_set('apachebench_requests', variable_get('ab_requests', 100));
+  variable_del('ab_requests');
+  variable_set('apachebench_concurrency', variable_get('ab_concurrency', 25));
+  variable_del('ab_concurrency');
+  variable_set('apachebench_uris', variable_get('ab_uris', ''));
+  variable_del('ab_uris');
+  variable_set('apachebench_path', variable_get('ab_path', 'ab'));
+  variable_del('ab_path');
+
+  // Clearing cache
+  cache_clear_all();
+  return $ret;
+}

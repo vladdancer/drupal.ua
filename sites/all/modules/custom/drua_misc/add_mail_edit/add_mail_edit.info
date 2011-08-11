@@ -1,0 +1,4 @@
+name = Add Mail edit
+description = Add templates to module Mail edit.
+package = Custom
+core = 6.x

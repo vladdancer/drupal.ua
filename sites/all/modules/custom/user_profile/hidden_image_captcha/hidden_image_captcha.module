@@ -1,0 +1,33 @@
+<?php
+
+function hidden_image_captcha_captcha($op, $captcha_type = '', $responce = '') {
+  switch ($op) {
+    case 'list':
+      // only offer image CAPTCHA if possible to generate an image CAPTCHA
+      $font = _image_captcha_get_enabled_fonts();
+      if (function_exists('imagejpeg') && $font) {
+        return array('Image (hidden)');
+      }
+      else {
+        return array();
+      }
+    case 'generate':
+      if ($captcha_type == 'Image (hidden)') {
+        $result = image_captcha_captcha($op, 'Image', $responce);
+
+        $rand = rand();
+        $result['form']['captcha_response']['#attributes'] = array('class' => 'c'. $rand);
+        $result['form']['captcha_response']['#suffix'] .=
+        	'<script type="text/javascript">Drupal.behaviors.hidden_captcha = function(){ $("#edit-captcha-response.c'.
+          $rand .'").each(function(){ $(this).parents(".captcha").hide(); $(this).attr("value", "'.
+          ($result['solution']) .'"); }); }</script>';
+        return $result;
+      }
+    case 'preprocess':
+      // Preprocessing the response for case insensitive validation (see above).
+      if ($captcha_type == 'Image (hidden)') {
+        return strtolower($responce);
+      }
+    break;
+  }
+}

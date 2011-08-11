@@ -1,0 +1,208 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:26+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Clear index"
+msgstr "Очистити індекс"
+
+msgid "results"
+msgstr "результати"
+
+msgid "search"
+msgstr "пошук"
+
+msgid "Search settings"
+msgstr "Налаштування пошуку"
+
+msgid "Search results"
+msgstr "Результати пошуку"
+
+msgid "Your search yielded no results"
+msgstr "За вашим запитом нічого не знайдено"
+
+msgid "Please enter some keywords."
+msgstr "Будь-ласка, введіть ключові слова."
+
+msgid "Enter the terms you wish to search for."
+msgstr "Впишіть слова для пошуку."
+
+msgid ""
+"You must include at least one positive keyword with @count characters or "
+"more."
+msgstr ""
+"Вам необхідно вказати хоча б одне ключове слово, що містить не менше @count "
+"символів."
+
+msgid "Enter your keywords"
+msgstr "Введіть ключові слова для пошуку"
+
+msgid "%keys (@type)."
+msgstr "%keys (@type)."
+
+msgid ""
+"<ul>\n"
+"<li>Check if your spelling is correct.</li>\n"
+"<li>Remove quotes around phrases to match each word individually: <em>\"blue "
+"smurf\"</em> will match less than <em>blue smurf</em>.</li>\n"
+"<li>Consider loosening your query with <em>OR</em>: <em>blue smurf</em> will "
+"match less than <em>blue OR smurf</em>.</li>\n"
+"</ul>"
+msgstr ""
+"<ul>\n"
+"<li>Перевірте орфографію.</li>\n"
+"<li>Заберіть лапки навколо виразів щоб шукати слова окремо: для запиту <em>"
+"\"чорна заздрість\"</em> буде менше співпадінь, ніж для запиту <em>чорна "
+"заздрість</em>.</li>\n"
+"<li>Спробуйте послабити свій запит, використавши оператор <em>OR</em>: "
+"<em>чорна заздрість</em> дасть менше співпадінь, ніж <em>чорна OR заздрість</"
+"em>.</li>\n"
+"</ul>"
+
+msgid "%percentage of the site has been indexed."
+msgstr "%percentage сайту було проіндексовано."
+
+msgid "There is 1 item left to index."
+msgid_plural "There are @count items left to index."
+msgstr[0] "@count елемент залишився для індексації."
+msgstr[1] "@count елемента залишилось для індексації."
+msgstr[2] "@count елементів залишилось для індексації."
+
+msgid "Search this site"
+msgstr "Пошук на сайті"
+
+msgid "Re-index site"
+msgstr "Переіндексувати сайт"
+
+msgid "Are you sure you want to re-index the site?"
+msgstr "Чи ви дійсно хочете переіндексувати сайт?"
+
+msgid ""
+"Search for either of the two terms with uppercase <strong>OR</strong>. For "
+"example, <strong>cats OR dogs</strong>."
+msgstr ""
+
+msgid ""
+" The search index is not cleared but systematically updated to reflect the "
+"new settings. Searching will continue to work but new content won't be "
+"indexed until all existing content has been re-indexed. This action cannot "
+"be undone."
+msgstr ""
+" Пошуковий індекс не очищено але систематично оновлено для нових параметрів. "
+"Пошук буде і далі працювати, але нові матеріали не будуть індексуватись до "
+"моменту повної переіндексації. дана дія не може бути відмінена."
+
+msgid "The index will be rebuilt."
+msgstr "Індекс буде перестворено."
+
+msgid "Indexing status"
+msgstr "Статус індексації"
+
+msgid "Indexing throttle"
+msgstr "Регулятор індексації"
+
+msgid "Number of items to index per cron run"
+msgstr ""
+
+msgid ""
+"The maximum number of items indexed in each pass of a <a href=\"@cron\">cron "
+"maintenance task</a>. If necessary, reduce the number of items to prevent "
+"timeouts and memory errors while indexing."
+msgstr ""
+
+msgid "Indexing settings"
+msgstr "Налаштування індексації"
+
+msgid ""
+"<p><em>Changing the settings below will cause the site index to be rebuilt. "
+"The search index is not cleared but systematically updated to reflect the "
+"new settings. Searching will continue to work but new content won't be "
+"indexed until all existing content has been re-indexed.</em></p><p><em>The "
+"default settings should be appropriate for the majority of sites.</em></p>"
+msgstr ""
+
+msgid "Minimum word length to index"
+msgstr "Мінімальна довжина слова для його індексації"
+
+msgid ""
+"The number of characters a word has to be to be indexed. A lower setting "
+"means better search result ranking, but also a larger database. Each search "
+"query must contain at least one keyword that is this size (or longer)."
+msgstr ""
+"Число букв в слове, чтобы оно было проиндексировано. Уменьшение числа "
+"приведет к лучшим результатам поиска, но увеличит размер базы данных. В "
+"каждом поисковом запросе должно быть хотя бы одно слово такого размера (или "
+"длиннее)."
+
+msgid "Simple CJK handling"
+msgstr "Проста робота із CJK (китайською, япоською і корейською мовами)"
+
+msgid ""
+"Whether to apply a simple Chinese/Japanese/Korean tokenizer based on "
+"overlapping sequences. Turn this off if you want to use an external "
+"preprocessor for this instead. Does not affect other languages."
+msgstr ""
+"Включіть для використання простого Китайсько-Японсько-Корейського "
+"токенайзера, базованого на переважних послідовностях. Вимкніть це, якщо Ви "
+"хочете використовувати зовнішній препроцесор. Не впливає на інші мови."
+
+msgid ""
+"The search module adds the ability to search for content by keywords. Search "
+"is often the only practical way to find content on a large site, and is "
+"useful for finding both users and posts."
+msgstr ""
+
+msgid ""
+"To provide keyword searching, the search engine maintains an index of words "
+"found in your site's content. To build and maintain this index, a correctly "
+"configured <a href=\"@cron\">cron maintenance task</a> is required. Indexing "
+"behavior can be adjusted using the <a href=\"@searchsettings\">search "
+"settings page</a>; for example, the <em>Number of items to index per cron "
+"run</em> sets the maximum number of items indexed in each pass of a <a href="
+"\"@cron\">cron maintenance task</a>. If necessary, reduce this number to "
+"prevent timeouts and memory errors when indexing."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@search"
+"\">Search module</a>."
+msgstr ""
+
+msgid ""
+"The search engine maintains an index of words found in your site's content. "
+"To build and maintain this index, a correctly configured <a href=\"@cron"
+"\">cron maintenance task</a> is required. Indexing behavior can be adjusted "
+"using the settings below."
+msgstr ""
+
+msgid "Search form"
+msgstr "Пошукова форма"
+
+msgid "search content"
+msgstr "пошук матеріалів"
+
+msgid "use advanced search"
+msgstr "використовувати розширений пошук"
+
+msgid "administer search"
+msgstr "адмініструвати пошук"
+
+msgid "Configure relevance settings for search and other indexing options"
+msgstr ""
+"Настройки релевантності (відповідності) пошуку та інші опції індексування"
+
+msgid "Top search phrases"
+msgstr "Популярні пошукові запити"
+
+msgid "View most popular search phrases."
+msgstr "Перегляд найпопулярніших пошукових фраз."

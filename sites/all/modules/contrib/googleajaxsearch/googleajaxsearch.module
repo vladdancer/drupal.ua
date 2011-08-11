@@ -1,0 +1,73 @@
+<?php
+// $Id: googleajaxsearch.module,v 1.8.2.1 2009/09/30 12:02:27 macperlinski Exp $
+
+
+require_once("default_settings.inc");
+require_once("googleajaxsearch.inc");
+
+/**
+ * Implementation of hook_perm
+ */
+function googleajaxsearch_perm() {
+//Access to search blocks could be defined in block settings, so we don't have to add permissions like: 'view google ajax search'.
+  return array('administer google ajax search');
+}
+
+/**
+ * Implementation of hook_menu
+ */
+function googleajaxsearch_menu() {
+  $items = array();
+
+//  Settings page
+  $items['admin/settings/googleajaxsearch'] = array(
+    'title' => 'Google Ajax Search',
+    'description' => 'Google Ajax Search settings.',
+    'page callback' => 'googleajaxsearch_settings_page',
+    'access arguments' => array('administer google ajax search'),
+    'type' => MENU_NORMAL_ITEM,
+//    'file' => 'googleajaxsearch.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_validate
+ */
+function googleajaxsearch_settings_validate($form, &$form_state) {
+  if (!is_numeric($form_state['values']['block_count'])) {
+    form_set_error('block_count', t('You must enter numeric value for this setting.'));
+  }
+}
+
+/**
+ * Implementation of hook_block
+ */
+function googleajaxsearch_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks = array();
+      $number_of_blocks = variable_get('block_count', GAS_BLOCKS_NUMBER_DEFAULT);
+      
+      for ($i = 0; $i < $number_of_blocks; $i++) {
+        $blocks[$i] = array(
+          'info' => t('Search block @i', array('@i' => $i)),
+          'weight' => GAS_BLOCK_WEIGHT_DEFAULT,
+          'status' => GAS_BLOCK_STATUS_DEFAULT,
+          'region' => GAS_BLOCK_REGION_DEFAULT,
+          'cache' =>  GAS_BLOCK_CACHE_DEFAULT,
+        );
+      }
+      return $blocks;
+      
+    case 'view':
+      return googleajaxsearch_display_block($delta);
+      
+    case 'save':
+      gas_set_settings($delta, $edit);
+      break;
+      
+    case 'configure':
+      return gas_block_form($delta);
+  }
+}

@@ -1,0 +1,605 @@
+<?php
+
+// List of possible badges. See .install file for descriptions.
+define('BADGE_ANOUNCER', 30001);
+define('BADGE_COMMENTATOR', 30002);
+define('BADGE_ANSWERER', 30003);
+define('BADGE_CRITIC', 30004);
+define('BADGE_DISCIPLINED', 30005);
+define('BADGE_EDITOR', 30006);
+define('BADGE_MORTARBOARD', 30007);
+define('BADGE_NICE_ANSWER', 30008);
+define('BADGE_NICE_QUESTION', 30009);
+define('BADGE_PEER_PRESSURE', 30010);
+define('BADGE_POPULAR_QUESTION', 30011);
+define('BADGE_REVIVAL', 30012);
+define('BADGE_SCHOLAR', 30013);
+define('BADGE_SELF_LEARNER', 30014);
+define('BADGE_STUDENT', 30015);
+define('BADGE_SUFFRAGE', 30016);
+define('BADGE_SUPPORTER', 30017);
+define('BADGE_TALKATIVE', 30018);
+define('BADGE_TEACHER', 30019);
+define('BADGE_TUMBLEWEED', 30020);
+define('BADGE_BOOSTER', 30021);
+define('BADGE_CIVIC_DUTY', 30022);
+define('BADGE_ENLIGHTENED', 30023);
+define('BADGE_ENTHUSIAST', 30024);
+define('BADGE_EPIC', 30025);
+define('BADGE_FAVORITE_QUESTION', 30026);
+define('BADGE_GENERALIST', 30027);
+define('BADGE_GOOD_ANSWER', 30028);
+define('BADGE_GOOD_QUESTION', 30029);
+define('BADGE_GURU', 30030);
+define('BADGE_NECROMANCER', 30031);
+define('BADGE_NOTABLE_QUESTION', 30032);
+define('BADGE_PUNDIT', 30033);
+define('BADGE_SPORTSMANSHIP', 30034);
+define('BADGE_STRUNK_AND_WHITE', 30035);
+define('BADGE_TENACIOUS', 30036);
+define('BADGE_YEARLING', 30037);
+define('BADGE_ELECTORATE', 30038);
+define('BADGE_FAMOUS_QUESTION', 30039);
+define('BADGE_FANATIC', 30040);
+define('BADGE_GREAT_ANSWER', 30041);
+define('BADGE_GREAT_QUESTION', 30042);
+define('BADGE_LEGENDARY', 30043);
+define('BADGE_POPULIST', 30044);
+define('BADGE_PUBLICIST', 30045);
+define('BADGE_STELLAR_QUESTION', 30046);
+define('BADGE_UNSUNG_HERO', 30047);
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function answers_badges_form_alter(&$form, &$form_state, $form_id) {
+  // Hide badges taxonomy from profile editing form for non-admins.
+  if (!user_access('administer user') && $form_id == 'node_form') {
+    foreach ($form['taxonomy'] as $k => $taxonomy) {
+      if ($taxonomy['#title'] == 'Badges') {
+        unset($form['taxonomy'][$k]); 
+      }
+    }
+  }
+
+  // BADGE_COMMENTATOR & BADGE_ANSWERER badges.
+  switch ($form_id) {
+    case 'comment_form':
+      $form['#submit'][] = 'commentator_answerer_finder';
+      break;
+  }
+}
+
+
+/**
+ * Helper for answers_badges_form_alter to track BADGE_COMMENTATOR & BADGE_ANSWERER badges.
+ */
+function commentator_answerer_finder($form, &$form_state) {
+  global $user;
+
+  if (!($account_profile = content_profile_load('profile', $user->uid))) {
+    return;
+  }
+
+  //check for 10 answers
+  if (!isset($account_profile->taxonomy[BADGE_ANSWERER])) {
+    $answer_count = db_result(db_query("SELECT COUNT(*) FROM {comments} c
+      LEFT JOIN {node} n USING (nid)
+      WHERE n.type = 'question' AND c.uid = %d AND c.pid = 0", $user->uid));
+    if ($answer_count > 9) {
+      _answers_badges_insert(
+        $account_profile->nid, $account_profile->vid, BADGE_ANSWERER);
+    }
+  }
+
+  //check for 10 comments
+  if (!isset($account_profile->taxonomy[BADGE_COMMENTATOR])) {
+    $comment_count = db_result(db_query("SELECT COUNT(*) FROM {comments} c
+      LEFT JOIN {node} n USING (nid)
+      WHERE n.type = 'question' AND c.uid = %d AND c.pid <> 0", $user->uid));
+    if ($comment_count > 9) {
+      _answers_badges_insert(
+        $account_profile->nid, $account_profile->vid, BADGE_COMMENTATOR);
+    }
+  }
+}
+
+
+/**
+ * Save new badge.
+ */
+function _answers_badges_insert($nid, $vid, $badge) {
+  $node = node_load($nid);
+  if (!isset($node->type) || $node->vid != $vid || $node->type != 'profile') {
+    return;
+  }
+  
+  if (isset($node->taxonomy[$badge])) {
+    return;
+  }
+  db_query("INSERT IGNORE INTO {term_node} (nid, vid, tid)
+    VALUES(%d, %d, %d)", $nid, $vid, $badge);
+  
+  module_invoke_all('answers_badges_insert', $node, $badge);
+}
+
+
+/**
+ * Implementation of hook_cron().
+ * Add BADGE_POPULAR_QUESTION, BADGE_NOTABLE_QUESTION, BADGE_FAMOUS_QUESTION,
+ *     BADGE_ENTHUSIAST, BADGE_FANATIC, BADGE_TUMBLEWEED.
+ */
+function answers_badges_cron() {
+  _answers_badges_add_views(BADGE_POPULAR_QUESTION);
+  _answers_badges_add_views(BADGE_NOTABLE_QUESTION);
+  _answers_badges_add_views(BADGE_FAMOUS_QUESTION);
+  
+  //BADGE_ENTHUSIAST
+  $old_day = mktime(0, 0, 0, date('n'), date('j'), date('Y')) - 86400;
+  $result = db_query("SELECT s.uid FROM {user_statistics} s 
+    WHERE s.timestamp > %d AND s.day_online > 29 AND s.uid NOT IN
+    (
+      SELECT n.uid FROM {node} n
+      INNER JOIN {term_node} t USING(nid, vid)
+      WHERE n.type = 'profile' AND t.tid = %d
+    )",
+    $old_day, BADGE_ENTHUSIAST
+  );
+  while ($row = db_fetch_object($result)) {
+    $account_profile = content_profile_load('profile', $row->uid);
+    _answers_badges_insert(
+      $account_profile->nid, $account_profile->vid, BADGE_ENTHUSIAST
+    );
+  }
+  
+  //BADGE_FANATIC
+  $result = db_query("SELECT s.uid FROM {user_statistics} s 
+    WHERE s.timestamp > %d AND s.day_online > 99 AND s.uid NOT IN
+    (
+      SELECT n.uid FROM {node} n
+      INNER JOIN {term_node} t USING(nid, vid)
+      WHERE n.type = 'profile' AND t.tid = %d
+    )",
+    $old_day, BADGE_FANATIC
+  );
+  while ($row = db_fetch_object($result)) {
+    $account_profile = content_profile_load('profile', $row->uid);
+    _answers_badges_insert(
+      $account_profile->nid, $account_profile->vid, BADGE_FANATIC
+    );
+  }
+  
+  //BADGE_TUMBLEWEED
+  $result = db_query("SELECT DISTINCT n.uid FROM {node} n
+    LEFT JOIN {votingapi_vote} v ON v.content_id = n.nid
+    LEFT JOIN {node_counter} nc USING(nid)
+    LEFT JOIN {node_comment_statistics} s USING(nid)
+    WHERE n.type = 'question' AND n.status = 1 AND (s.comment_count = 0 OR s.comment_count IS NULL)
+    AND n.created < (UNIX_TIMESTAMP() - 604800) AND (nc.totalcount < 6 OR nc.totalcount IS NULL)
+    AND (v.vote_id IS NULL OR v.content_type <> 'node') AND n.uid NOT IN
+      (
+        SELECT n2.uid FROM {node} n2
+        INNER JOIN {term_node} t USING(nid, vid)
+        WHERE n2.type = 'profile' AND t.tid = %d
+      )
+    ", BADGE_TUMBLEWEED
+  );
+  while ($row = db_fetch_object($result)) {
+    $account_profile = content_profile_load('profile', $row->uid);
+    _answers_badges_insert(
+      $account_profile->nid, $account_profile->vid, BADGE_TUMBLEWEED);
+  }
+}
+
+
+/**
+ * Add badge from cron.
+ */
+function _answers_badges_add_views($badge) {
+  switch ($badge) {
+    case BADGE_POPULAR_QUESTION: $views = 999;  break;
+    case BADGE_NOTABLE_QUESTION: $views = 2499;  break;
+    case BADGE_FAMOUS_QUESTION: $views = 9999;  break;
+    default:
+      return;
+  }
+  
+  $result = db_query("SELECT DISTINCT n.uid FROM {node} n
+    INNER JOIN {node_counter} s ON n.nid = s.nid
+    WHERE n.type = 'question' AND s.totalcount > %d AND n.uid NOT IN
+      (
+        SELECT n2.uid FROM {node} n2
+        INNER JOIN {term_node} t USING(nid, vid)
+        WHERE n2.type = 'profile' AND t.tid = %d
+      )", $views, $badge
+  );
+  
+  while ($row = db_fetch_object($result)) {
+    $account_profile = content_profile_load('profile', $row->uid);
+    _answers_badges_insert(
+      $account_profile->nid, $account_profile->vid, $badge
+    );
+  }
+}
+
+
+/**
+ * Implementation of hook_votingapi_insert().
+ * Add BADGE_CRITIC, BADGE_SUPPORTER, BADGE_NICE_QUESTION, BADGE_GOOD_QUESTION,
+ *     BADGE_GREAT_QUESTION, BADGE_SUFFRAGE, BADGE_NICE_ANSWER,
+ *     BADGE_SPORTSMANSHIP.
+ */
+function answers_badges_votingapi_insert(&$votes) {
+  $account_profile = content_profile_load('profile', $votes[0]['uid']);
+  
+  if ($account_profile) {
+    if ($votes[0]['value'] == -1 && !isset($account_profile->taxonomy[BADGE_CRITIC])) {
+      _answers_badges_insert(
+        $account_profile->nid, $account_profile->vid, BADGE_CRITIC);
+    }
+    elseif($votes[0]['value'] == 1 && !isset($account_profile->taxonomy[BADGE_SUPPORTER])) {
+      _answers_badges_insert(
+        $account_profile->nid, $account_profile->vid, BADGE_SUPPORTER);
+    }
+    
+    //BADGE_SUFFRAGE
+    if (!isset($account_profile->taxonomy[BADGE_SUFFRAGE])) {
+      $start_day = mktime(0, 0, 0, date('n'), date('j'), date('Y'));
+      $vote_count_day = db_result(db_query("SELECT COUNT(vote_id) FROM {votingapi_vote}
+        WHERE uid = %d AND timestamp > %d AND timestamp < %d",
+        $account_profile->uid, $start_day, ($start_day + 86400)));  //24 * 60 *60 = 86400
+      if ($vote_count_day >= 30) {
+        _answers_badges_insert(
+          $account_profile->nid, $account_profile->vid, BADGE_SUFFRAGE);
+      }
+    }
+    
+    //BADGE_CIVIC_DUTY
+    if (!isset($account_profile->taxonomy[BADGE_CIVIC_DUTY])) {
+      $vote_count_day = db_result(db_query("SELECT COUNT(vote_id) FROM {votingapi_vote}
+        WHERE uid = %d", $account_profile->uid));
+      if ($vote_count_day >= 300) {
+        _answers_badges_insert(
+          $account_profile->nid, $account_profile->vid, BADGE_CIVIC_DUTY);
+      }
+    }
+    
+    //BADGE_ELECTORATE
+    if (!isset($account_profile->taxonomy[BADGE_ELECTORATE])) {
+      $all_node_vote = db_result(db_query("SELECT COUNT(*) FROM {votingapi_vote}
+      	WHERE content_type = 'node' AND tag = '%s' AND uid = %d",
+        variable_get('vud_tag', 'vote'), $account_profile->uid));
+      $all_answer_vote = db_result(db_query("SELECT COUNT(*) FROM {votingapi_vote}
+      	WHERE content_type = 'comment' AND tag = '%s' AND uid = %d",
+        variable_get('vud_tag', 'vote'), $account_profile->uid));
+      $all_votes = $all_node_vote + $all_answer_vote;
+      if (($all_votes > 600) && (($all_votes / 4) < $all_node_vote)) {
+        _answers_badges_insert(
+          $account_profile->nid, $account_profile->vid, BADGE_ELECTORATE);
+      }
+    }
+  }
+  
+  if ($votes[0]['content_type'] == 'node' && ($node = node_load($votes[0]['content_id']))) {
+    $account_q_profile = content_profile_load('profile', $node->uid);
+    $vote_result = (int)votingapi_select_single_result_value(array(
+      'content_type' => 'node',
+      'content_id' => $node->nid,
+      'value_type' => 'points',
+      'tag' => variable_get('vud_tag', 'vote'),
+      'function' => 'sum'
+    ));
+    
+    //BADGE_STUDENT
+    if (!isset($account_q_profile->taxonomy[BADGE_STUDENT]) && ($vote_result >= 1 ||
+        ($vote_result == 0 && $votes[0]['value'] == 1))) {
+      _answers_badges_insert(
+        $account_q_profile->nid, $account_q_profile->vid, BADGE_STUDENT);
+    }
+    
+    //BADGE_NICE_QUESTION
+    if (!isset($account_q_profile->taxonomy[BADGE_NICE_QUESTION]) && ($vote_result >= 10
+        || ($vote_result == 9 && $votes[0]['value'] == 1))) {
+      _answers_badges_insert(
+        $account_q_profile->nid, $account_q_profile->vid, BADGE_NICE_QUESTION);
+    }
+    
+    //BADGE_GOOD_QUESTION
+    if (!isset($account_q_profile->taxonomy[BADGE_GOOD_QUESTION]) && ($vote_result >= 25
+        || ($vote_result == 24 && $votes[0]['value'] == 1))) {
+      _answers_badges_insert(
+        $account_q_profile->nid, $account_q_profile->vid, BADGE_GOOD_QUESTION);
+    }
+    
+    //BADGE_GREAT_QUESTION
+    if (!isset($account_q_profile->taxonomy[BADGE_GREAT_QUESTION]) && ($vote_result >= 100
+        || ($vote_result == 99 && $votes[0]['value'] == 1))) {
+      _answers_badges_insert(
+        $account_q_profile->nid, $account_q_profile->vid, BADGE_GREAT_QUESTION);
+    }
+  }
+
+  if ($votes[0]['content_type'] == 'comment') {
+    $comment = _comment_load($votes[0]['content_id']);
+    $account_c_profile = content_profile_load('profile', $votes[0]['uid']);
+    
+    $vote_result = (int)votingapi_select_single_result_value(array(
+      'content_type' => 'comment',
+      'content_id' => $comment->cid,
+      'value_type' => 'points',
+      'tag' => variable_get('vud_tag', 'vote'),
+      'function' => 'sum'
+    ));
+    
+    //BADGE_NICE_ANSWER
+    if (!isset($account_c_profile->taxonomy[BADGE_NICE_ANSWER]) && $vote_result >= 9) {
+      _answers_badges_insert(
+        $account_c_profile->nid, $account_c_profile->vid, BADGE_NICE_ANSWER);
+    }
+    
+    //BADGE_GOOD_ANSWER
+    if (!isset($account_c_profile->taxonomy[BADGE_GOOD_ANSWER]) && $vote_result >= 24) {
+      _answers_badges_insert(
+        $account_c_profile->nid, $account_c_profile->vid, BADGE_GOOD_ANSWER);
+    }
+    
+    //BADGE_GREAT_ANSWER
+    if (!isset($account_c_profile->taxonomy[BADGE_GREAT_ANSWER]) && $vote_result >= 99) {
+      _answers_badges_insert(
+        $account_c_profile->nid, $account_c_profile->vid, BADGE_GREAT_ANSWER);
+    }
+
+    //BADGE_SPORTSMANSHIP
+    if (!isset($account_c_profile->taxonomy[BADGE_SPORTSMANSHIP])) {
+      $all_answer_vote = db_result(db_query("SELECT COUNT(*) FROM {votingapi_vote}
+      	WHERE content_type = 'comment' AND tag = '%s' AND uid = %d",
+        variable_get('vud_tag', 'vote'), $account_c_profile->uid));
+      if ($all_answer_vote > 99) {
+        _answers_badges_insert(
+          $account_c_profile->nid, $account_c_profile->vid, BADGE_SPORTSMANSHIP);
+      }
+    }
+    
+    //BADGE_POPULIST
+    $account_c_profile = content_profile_load('profile', $comment->uid);
+    if (!isset($account_c_profile->taxonomy[BADGE_POPULIST]) && $vote_result > 20) {
+      $result = db_query("SELECT SUM(value) as vote_sum, content_id as cid FROM {votingapi_vote}
+        WHERE content_id IN (
+          SELECT c.cid FROM {comments} c
+            INNER JOIN {flag_content} f ON f.content_id = c.cid
+            INNER JOIN {flags} fn ON fn.fid = f.fid
+          WHERE c.nid = %d AND c.pid = 0 AND fn.name = '%s' AND fn.content_type = 'comment'
+        ) GROUP BY content_id", $comment->nid, 'best_answer'
+      );
+      $answer_10vote = 0;
+      while ($row = db_fetch_object($result)) {
+        if ($row->vote_sum >= 10 && $row->cid != $comment->cid) {
+          if (!$answer_10vote) {
+            $answer_10vote = $row->vote_sum;
+          }
+          elseif ($answer_10vote > $row->vote_sum) {
+            $answer_10vote = $row->vote_sum;
+          }
+        }
+      }
+      
+      if ($answer_10vote && (($answer_10vote * 2) < $vote_result)) {
+        _answers_badges_insert(
+          $account_c_profile->nid, $account_c_profile->vid, BADGE_POPULIST);
+      }
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_nodeapi().
+ * Add BADGE_DISCIPLINED and BADGE_PEER_PRESSURE.
+ */
+function answers_badges_nodeapi(&$node, $op, $teaser, $page) {
+  global $user;
+  switch ($op) {
+    case 'delete':
+      if ($user->uid == $node->uid) {
+        $account_profile = content_profile_load('profile', $user->uid);
+        $vote_result_select = FALSE;
+        
+        if (!isset($account_profile->taxonomy[BADGE_DISCIPLINED])) {
+          $vote_result = (int)votingapi_select_single_result_value(array(
+            'content_type' => 'node',
+            'content_id' => $node->nid,
+            'value_type' => 'points',
+            'tag' => variable_get('vud_tag', 'vote'),
+            'function' => 'sum'
+          ));
+          $vote_result_select = TRUE;
+          if ($vote_result >= 3) {
+            _answers_badges_insert(
+              $account_profile->nid, $account_profile->vid, BADGE_DISCIPLINED);
+            break;
+          }
+        }
+        
+        if (!isset($account_profile->taxonomy[BADGE_PEER_PRESSURE])) {
+          if (!$vote_result_select) {
+            $vote_result = (int)votingapi_select_single_result_value(array(
+              'content_type' => 'node',
+              'content_id' => $node->nid,
+              'value_type' => 'points',
+              'tag' => variable_get('vud_tag', 'vote'),
+              'function' => 'sum'
+            ));
+          }
+          if ($vote_result <= -3) {
+            _answers_badges_insert(
+              $account_profile->nid, $account_profile->vid, BADGE_PEER_PRESSURE);
+          }
+        }
+      }
+      break;
+  }
+}
+
+
+/**
+ * Implementation of hook_flag().
+ * Add BADGE_FAVORITE_QUESTION, BADGE_STELLAR_QUESTION, BADGE_ENLIGHTENED,
+ *     BADGE_GURU.
+ */
+function answers_badges_flag($action, $flag, $content_id, $account) {
+  if ($action == 'flag' && $flag->name == 'bookmarks') {
+    $count = $flag->get_count($content_id);
+    
+    if ($count >= 25) {
+      $node = node_load($content_id);
+      $node_author_profile = content_profile_load('profile', $node->uid);
+
+      if ($node_author_profile && !isset($node_author_profile->taxonomy[BADGE_FAVORITE_QUESTION])) {
+        _answers_badges_insert(
+          $node_author_profile->nid, $node_author_profile->vid, BADGE_FAVORITE_QUESTION);
+      }
+      
+      if ($count >= 100 && $node_author_profile &&
+          !isset($node_author_profile->taxonomy[BADGE_STELLAR_QUESTION])) {
+        _answers_badges_insert(
+          $node_author_profile->nid, $node_author_profile->vid, BADGE_STELLAR_QUESTION);
+      }
+    }
+  }
+  
+  if ($action == 'flag' && $flag->name == 'best_answer') {
+    $comment = _comment_load($content_id);
+    $account_comment_profile = content_profile_load('profile', $comment->uid);
+    
+    //BADGE_SCHOLAR
+    if (!isset($account_comment_profile->taxonomy[BADGE_SCHOLAR])) {
+      $node = node_load($comment->nid);
+      if ($node->uid == $comment->uid) {
+        _answers_badges_insert(
+          $account_comment_profile->nid, $account_comment_profile->vid, BADGE_SCHOLAR);
+      }
+    }
+    
+    //BADGE_ENLIGHTENED
+    if (!isset($account_comment_profile->taxonomy[BADGE_ENLIGHTENED])) {
+      $vote_result = (int)votingapi_select_single_result_value(array(
+        'content_type' => 'comment',
+        'content_id' => $content_id,
+        'value_type' => 'points',
+        'tag' => variable_get('vud_tag', 'vote'),
+        'function' => 'sum'
+      ));
+      if ($vote_result >= 10) {
+        _answers_badges_insert(
+          $account_comment_profile->nid, $account_comment_profile->vid, BADGE_ENLIGHTENED);
+      }
+    }
+    
+    //BADGE_GURU
+    if (!isset($account_comment_profile->taxonomy[BADGE_GURU])) {
+      $vote_result = (int)votingapi_select_single_result_value(array(
+        'content_type' => 'comment',
+        'content_id' => $content_id,
+        'value_type' => 'points',
+        'tag' => variable_get('vud_tag', 'vote'),
+        'function' => 'sum'
+      ));
+      if ($vote_result >= 40) {
+        _answers_badges_insert(
+          $account_comment_profile->nid, $account_comment_profile->vid, BADGE_GURU);
+      }
+    }
+    
+  }
+  
+}
+
+
+/**
+ * Implementation of hook_comment().
+ * Add BADGE_SELF_LEARNER, BADGE_REVIVAL, BADGE_TEACHER.
+ */
+function answers_badges_comment(&$a1, $op) {
+  if ($op == 'insert') {
+    $account_comment_profile = content_profile_load('profile', $a1['uid']);
+    $node = node_load($a1['nid']);
+    if ($node->uid == $account_comment_profile->uid) {
+      if (!$a1['pid']) {
+        //This answer to self.
+        
+        //BADGE_SELF_LEARNER
+        if (!isset($account_comment_profile->taxonomy[BADGE_SELF_LEARNER])) {
+          $vote_result = (int)votingapi_select_single_result_value(array(
+            'content_type' => 'node',
+            'content_id' => $node->nid,
+            'value_type' => 'points',
+            'tag' => variable_get('vud_tag', 'vote'),
+            'function' => 'sum'
+          ));
+        }
+        if ($vote_result >= 3) {
+          _answers_badges_insert(
+            $account_comment_profile->nid, $account_comment_profile->vid, BADGE_SELF_LEARNER);
+        }
+      }
+      //else {
+      // — This comment to self.
+      //}
+    }
+    else {
+      $account_node_profile = content_profile_load('profile', $node->uid);
+      //Answer or comment no self
+      
+      //BADGE_TEACHER
+      if (!isset($account_comment_profile->taxonomy[BADGE_TEACHER])) {
+        $vote_result = (int)votingapi_select_single_result_value(array(
+          'content_type' => 'node',
+          'content_id' => $node->nid,
+          'value_type' => 'points',
+          'tag' => variable_get('vud_tag', 'vote'),
+          'function' => 'sum'
+        ));
+        if ($vote_result > 0) {
+          _answers_badges_insert(
+            $account_comment_profile->nid, $account_comment_profile->vid, BADGE_TEACHER);
+        }
+      }
+      
+      
+      if (!$node->comment_count) {
+       //BADGE_REVIVAL
+        if (!isset($account_comment_profile->taxonomy[BADGE_REVIVAL])) {
+          if ($node->created < (time() - 2592000)) {  //2592000 = 30day * 24h * 60m * 60s
+            _answers_badges_insert(
+              $account_comment_profile->nid, $account_comment_profile->vid, BADGE_REVIVAL);
+          }
+        }
+      }
+      
+      //BADGE_NECROMANCER
+      if (!isset($account_comment_profile->taxonomy[BADGE_NECROMANCER]) && !$a1['pid']) {
+        if ($node->created < (time() - 5184000)) {  //5184000 = 60day * 24h * 60m * 60s
+          $vote_result = (int)votingapi_select_single_result_value(array(
+            'content_type' => 'node',
+            'content_id' => $node->nid,
+            'value_type' => 'points',
+            'tag' => variable_get('vud_tag', 'vote'),
+            'function' => 'sum'
+          ));
+          if ($vote_result >= 5) {
+            _answers_badges_insert(
+              $account_comment_profile->nid, $account_comment_profile->vid, BADGE_NECROMANCER);
+          }
+        }
+      }
+      
+    }
+  }
+}
+
+
+
+
+
+

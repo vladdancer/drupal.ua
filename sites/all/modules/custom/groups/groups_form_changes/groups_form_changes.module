@@ -1,0 +1,184 @@
+<?php
+// $Id$
+
+define ('OG_VOCABULARY', 6);  //Vocabulary for node of type = post
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function groups_form_changes_form_alter(&$form, $form_state, $form_id) {
+  /**
+   * Nice-looking translation for node form title.
+   */
+  if ((arg(0) == 'node') && (arg(1) == 'add')) {
+    if (($form['#id'] == 'node-form') && (!$form['nid']['#value'])) {
+      $types = node_get_types();
+      $type = $form['type']['#value'];
+
+      // We could have two equal Russian translations, one for specific type,
+      // and one for placeholder. So, this code means that we need to take
+      // translation for specific one if only we have it, but in case if we
+      // don't, we will fall back to default translation.
+      $new = 'Create '. filter_xss_admin($types[$type]->type);
+      $new_translated = t($new);
+      
+      if ($new == $new_translated) {
+        drupal_set_title(t('Create @name', array('@name' => $types[$type]->name)));
+      }
+      else {
+        drupal_set_title($new_translated);
+      }
+    }
+  }
+  
+  /**
+   * When creating the post, you should choose only one group.
+   * (see also - hook_nodeapi(), presave)
+   */
+  if ($form_id == 'post_node_form') {
+    global $user, $language;
+    $node = $form['#node'];
+    
+    //Load All Groups
+    $a_all_groups = array();
+    $result = db_query("SELECT n.title, n.type, n.status, n.language, n.tnid, og.*
+      FROM {node} n 
+      LEFT JOIN {og} og ON n.nid = og.nid
+      WHERE (n.status <> 0) AND (n.type IN ('group')) AND (og.og_directory <> 0)
+      	AND (n.tnid = 0 OR (n.tnid <> 0 AND n.language = '%s'))
+      ORDER BY n.title ASC",
+      $language->language);
+    while ($row = db_fetch_array($result)) {
+      $a_all_groups[$row['nid']] = $row;
+    }
+    
+    $groups = og_get_subscriptions($user->uid);
+
+    $form_group = array();
+    foreach ($a_all_groups as $group_data) {
+      if (((int)$group_data['og_selective']) != OG_OPEN && !isset($groups[$group_data['nid']])) {
+        continue;
+      }
+      $group_node = node_load($group_data['nid']);
+      if (isset($group_node->taxonomy)) {
+        foreach ($group_node->taxonomy as $tid => $o_term) {
+          if ($o_term->vid == OG_VOCABULARY) {
+            $term = tt('taxonomy:term:'. $tid .':description',
+              $o_term->description, $language->language);
+            if (!isset($form_group[$term])) {
+              $form_group[$term] = array();
+            }
+            $form_group[$term][$group_node->nid] = $group_node->title;
+          }
+        }
+      }
+    }
+
+    if (isset($node->og_groups)) {
+      $default_group = $node->og_groups;
+      foreach ($default_group as $key => $data) {
+        $default_group = $data;
+        break;
+      }
+    }
+
+    //delete fieldset
+    unset($form['#content_extra_fields']['og_nodeapi']);
+    $og_public = isset($form['og_nodeapi']['visible']['og_public'])
+      ? $form['og_nodeapi']['visible']['og_public'] : FALSE;
+    $form['og_nodeapi'] = array(
+      'visible' => array(),
+      '#weight' => -4,
+    );
+    if ($og_public) {
+      $form['og_nodeapi']['visible']['og_public'] = $og_public;
+    }
+    
+    $form['og_nodeapi']['visible']['og_groups_single'] = array(
+      '#type' => 'select',
+      '#title' => t('Group'),
+      '#attributes' => array('class' => 'og-audience'),
+      '#options' => $form_group,
+      '#required' => TRUE,
+      '#description' => t('Show this post in this group.'),
+      '#default_value' => $default_group,
+      '#weight' => -4,
+    );
+  }
+}
+
+
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function groups_form_changes_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
+  global $user;
+  switch ($op) {
+    case 'presave':
+      if ($node->og_groups_single) {
+        $node->og_groups = array($node->og_groups_single => $node->og_groups_single);
+        og_presave_group($node);
+        break;
+      }
+  }
+}
+
+
+/**
+ * Implementation of hook_block().
+ */
+function groups_form_changes_block($op = 'list', $delta = 0) {
+ switch ($op) {
+    case 'list':
+      return array(
+        'front_group' => array('info' => t('Front: Groups')),
+      );
+    case 'view':
+      switch ($delta) {
+        case 'front_group':
+          $block = module_invoke('views', 'block', 'view', 'og_most_popular_groups_by_term-block_1');
+          return array(
+            'subject' => t('Group'),
+            'content' => theme(
+              'front_group',
+              views_embed_view('og_posts_list_all', 'block_1'),
+              $block
+            ),
+          );
+          break;
+      }
+      break;
+  }
+}
+
+
+/**
+ * Implementation of hook_theme().
+ */
+function groups_form_changes_theme() {
+  return array(
+    'front_group' => array('arguments' => array(
+      'left' => NULL,
+      'right' => NULL
+    )),
+  );
+}
+
+
+/**
+ * Output block recent post in groups.
+ */
+function theme_front_group($left = '', $right = '') {
+  return '<div id="front_group"><div class="clear">
+  <div class="front_group_left">
+  '. $left .'
+  </div>
+  <div id="block-groups-categories" class="front_group_right">
+  <h3 class="pane-title">'. $right['subject'] .'</h3>
+  '. $right['content'] .'
+  </div>
+</div></div>
+';
+}

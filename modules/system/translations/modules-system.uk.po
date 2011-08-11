@@ -1,0 +1,1544 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:56+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Administer"
+msgstr "Адміністрування"
+
+msgid "Value"
+msgstr "Значення"
+
+msgid "Actions"
+msgstr "Дії"
+
+msgid "Version"
+msgstr "Версія"
+
+msgid "Variable"
+msgstr "Змінна"
+
+msgid "Small"
+msgstr "Мале"
+
+msgid "Large"
+msgstr "Великий"
+
+msgid "Continue"
+msgstr "Продовжити"
+
+msgid "Sent email to %recipient"
+msgstr "Відправлено електронну пошту до %recipient"
+
+msgid "Unable to send email to %recipient"
+msgstr "Неможливо відправити електронну пошту до %recipient"
+
+msgid "The subject of the message."
+msgstr "Тема повідомлення"
+
+msgid "Create"
+msgstr "Створення"
+
+msgid "Content management"
+msgstr "Керування вмістом"
+
+msgid "Footer message"
+msgstr "Повідомлення внизу сторінки"
+
+msgid "Logo"
+msgstr "Емблема"
+
+msgid "Mission"
+msgstr "Місія"
+
+msgid "Search box"
+msgstr "Рядок пошуку"
+
+msgid "Site slogan"
+msgstr "Гасло сайту"
+
+msgid "Drupal"
+msgstr "Друпал"
+
+msgid "Footer"
+msgstr "Нижній колонтитул"
+
+msgid "Theme configuration"
+msgstr "Конфігурація шаблонів"
+
+msgid "Time zone"
+msgstr "Часовий пояс"
+
+msgid "Global settings"
+msgstr "Глобальні настройки"
+
+msgid "Performance"
+msgstr "Швидкодія"
+
+msgid "Recipient"
+msgstr "Отримувач"
+
+msgid "Other"
+msgstr "Інше"
+
+msgid "Theme-specific settings"
+msgstr "Налаштування притаманні шаблону"
+
+msgid ""
+"These settings only exist for the %theme theme and all the styles based on "
+"it."
+msgstr ""
+"Ці налаштування існують для шаблону оформлення  %theme і всіх шаблонів, що "
+"базуються на ньому."
+
+msgid "Minimum cache lifetime"
+msgstr "Мінімальний час життя кешу"
+
+msgid "Site maintenance"
+msgstr "Обслуговування"
+
+msgid "Online"
+msgstr "В мережі"
+
+msgid "Off-line"
+msgstr "Вимкнений (на обслуговуванні)"
+
+msgid ""
+"When set to \"Online\", all visitors will be able to browse your site "
+"normally. When set to \"Off-line\", only users with the \"administer site "
+"configuration\" permission will be able to access your site to perform "
+"maintenance; all other visitors will see the site off-line message "
+"configured below. Authorized users can log in during \"Off-line\" mode "
+"directly via the <a href=\"@user-login\">user login</a> page."
+msgstr ""
+"Коли сайт знаходиться в стані \"Працює\", всі користувачі можуть переглядати "
+"сторінки сайту у звічайному режимі. У стані \"Обслуговування\" доступ до "
+"сайту мають тільки користувачі з правами \"Керування налаштуваннями сайту\"; "
+"всі інші відвідувачі побачать повідомлення про перерву роботи сатйу, яке "
+"можна налаштувати нижче. Зарєстровані користувачі можуть входити на "
+"вимкнений сайт через сторінку <a href=\"@user-login\">входу на сайт</a>."
+
+msgid "Site off-line message"
+msgstr "Повідомлення про перерву у роботі сайту"
+
+msgid "Message to show visitors when the site is in off-line mode."
+msgstr "Повідомлення для користувачів у період обслуговування сайту."
+
+msgid "Default front page"
+msgstr "Стандартна (default) перша сторінка"
+
+msgid ""
+"Enable or disable page caching for anonymous users and set CSS and JS "
+"bandwidth optimization options."
+msgstr ""
+"Вмикання вимикання кешування сторінок для гостей і зазначання оптимізації "
+"CSS та JS"
+
+msgid "Titles only"
+msgstr "Тільки назви"
+
+msgid "Full text"
+msgstr "Повний текст"
+
+msgid "This cannot be undone."
+msgstr ""
+
+msgid "Mission statement"
+msgstr "Місія"
+
+msgid "Configure permissions"
+msgstr "Налаштування прав доступу"
+
+msgid "The settings have not been saved because of the errors."
+msgstr "Налаштування не були збережені, оскільки виникли помилки."
+
+msgid "First day of week"
+msgstr "Перший день тижня"
+
+msgid "Last run !time ago"
+msgstr "Востаннє виконано !time тому"
+
+msgid "Never run"
+msgstr "Не запускався"
+
+msgid "Optimize JavaScript files"
+msgstr "Оптимізація JavaScript файлів"
+
+msgid "access administration pages"
+msgstr "доступ до сторінок адміністрування"
+
+msgid "System default"
+msgstr "Системна базово"
+
+msgid "Gray"
+msgstr "Сірий"
+
+msgid "File system path"
+msgstr "Шлях файлової системи"
+
+msgid "Redirect to URL"
+msgstr ""
+
+msgid "Please enter a valid email address or %author."
+msgstr ""
+
+msgid "Manage the actions defined for your site."
+msgstr "Керувати діями, визначеними для Вашого сайту."
+
+msgid "Delete action"
+msgstr ""
+
+msgid "Actions available to Drupal:"
+msgstr ""
+
+msgid "The action has been successfully saved."
+msgstr ""
+
+msgid "Deleted action %aid (%action)"
+msgstr ""
+
+msgid "administer actions"
+msgstr "адміністрування подій"
+
+msgid "SQL"
+msgstr "SQL"
+
+msgid "Protected"
+msgstr "Захищено"
+
+msgid "Temporary directory"
+msgstr "Тимчасова директорія"
+
+msgid "Site configuration"
+msgstr "Налагодження вебсторінки"
+
+msgid "Slogan"
+msgstr "Гасло"
+
+msgid ""
+"This text will be displayed at the bottom of each page. Useful for adding a "
+"copyright notice to your pages."
+msgstr ""
+"Цей текст відображається внизу кожної сторінки. Зручний для розміщення "
+"приміток про авторські права."
+
+msgid "Anonymous user"
+msgstr "Анонімний користувач"
+
+msgid "The name used to indicate anonymous users."
+msgstr "Ім'я для позначення анонімних користувачів."
+
+msgid ""
+"The home page displays content from this relative URL. If unsure, specify "
+"\"node\"."
+msgstr ""
+"Головна сторінка показує вміст, що розташований за цією адресою. Якщо "
+"виникли труднощі, вкажіть \"node\"."
+
+msgid "Get help"
+msgstr "Звернутись за допомогою"
+
+msgid "Site building"
+msgstr "Будівництво сайту"
+
+msgid "Theme-engine-specific settings"
+msgstr "Особливі параметри двигуна шаблонів"
+
+msgid ""
+"These settings only exist for all the templates and styles based on the %"
+"engine theme engine."
+msgstr ""
+"Ці налаштування існують тільки для шаблонів і стилів, що базуються да "
+"двигуні %engine."
+
+msgid "Use administration theme for content editing"
+msgstr "Використовувати адміністративний шаблон для редагування матеріалів"
+
+msgid ""
+"Use the administration theme when editing existing posts or creating new "
+"ones."
+msgstr ""
+"Використовувати адміністративний шаблон, коли редагувати існуючі матеріали, "
+"або створювати нові."
+
+msgid "incompatible"
+msgstr "несумісне"
+
+msgid "Incompatible with this version of Drupal core"
+msgstr "Не сумісно з поточною версією ядра Drupal"
+
+msgid ""
+"This version is incompatible with the !core_version version of Drupal core."
+msgstr "Ця версія не сумісна з версією !core_version ядра Drupal."
+
+msgid "Incompatible with this version of PHP"
+msgstr ""
+
+msgid ""
+"This module requires PHP version @php_required and is incompatible with PHP "
+"version !php_version."
+msgstr ""
+
+msgid ""
+"The email address to which the message should be sent OR enter %author if "
+"you would like to send an e-mail to the author of the original post."
+msgstr ""
+
+msgid "Show descriptions"
+msgstr "Показувати описи"
+
+msgid "Blue"
+msgstr "Синій"
+
+msgid "(site default theme)"
+msgstr "(базовий шаблон сайту)"
+
+msgid "Screenshot"
+msgstr "Знімок екрану"
+
+msgid "Path to custom logo"
+msgstr "Шлях до персоналізованого лого"
+
+msgid "Black"
+msgstr "Чорний"
+
+msgid "Expand layout to include descriptions."
+msgstr ""
+
+msgid "Hide descriptions"
+msgstr "Приховати описи"
+
+msgid "Compress layout by hiding descriptions."
+msgstr "Стискання шаблону приховуванням описів"
+
+msgid "Reports"
+msgstr "Звіти"
+
+msgid "Select the default site time zone."
+msgstr "Виберіть часовий пояс за замовчуванням."
+
+msgid "Site status"
+msgstr "Стан сайту"
+
+msgid "Toggle display"
+msgstr "Переключити відображення"
+
+msgid ""
+"If you don't have direct file access to the server, use this field to upload "
+"your logo."
+msgstr ""
+"Якщо ви не маєте прямого доступу до серверу, скористайтеся цим полем для "
+"завантаження вашого лого."
+
+msgid "Configuration file"
+msgstr "Файл налаштувань"
+
+msgid "Download method"
+msgstr "Метод завантаження"
+
+msgid "Web server"
+msgstr "Веб сервер"
+
+msgid ""
+"Actions are individual tasks that the system can do, such as unpublishing a "
+"piece of content or banning a user. Modules, such as the trigger module, can "
+"fire these actions when certain system events happen; for example, when a "
+"new post is added or when a user logs in. Modules may also provide "
+"additional actions."
+msgstr ""
+
+msgid ""
+"There are two types of actions: simple and advanced. Simple actions do not "
+"require any additional configuration, and are listed here automatically. "
+"Advanced actions can do more than simple actions; for example, send an e-"
+"mail to a specified address, or check for certain words within a piece of "
+"content. These actions need to be created and configured first before they "
+"may be used. To create an advanced action, select the action from the drop-"
+"down below and click the <em>Create</em> button."
+msgstr ""
+
+msgid ""
+"You may proceed to the <a href=\"@url\">Triggers</a> page to assign these "
+"actions to system events."
+msgstr ""
+
+msgid ""
+"An advanced action offers additional configuration options which may be "
+"filled out below. Changing the <em>Description</em> field is recommended, in "
+"order to better identify the precise action taking place. This description "
+"will be displayed in modules such as the trigger module when assigning "
+"actions to system events, so it is best if it is as descriptive as possible "
+"(for example, \"Send e-mail to Moderation Team\" rather than simply \"Send e-"
+"mail\")."
+msgstr ""
+
+msgid "Manage actions"
+msgstr "Керування подіями"
+
+msgid "Configure an advanced action"
+msgstr "Налагодження додаткової події"
+
+msgid "Delete an action."
+msgstr ""
+
+msgid "Remove orphans"
+msgstr "Видалення зайвого"
+
+msgid "Choose an advanced action"
+msgstr ""
+
+msgid "Action type"
+msgstr "Тип дії"
+
+msgid "Make a new advanced action available"
+msgstr ""
+
+msgid ""
+"A unique description for this advanced action. This description will be "
+"displayed in the interface of modules that integrate with actions, such as "
+"Trigger module."
+msgstr ""
+
+msgid "Are you sure you want to delete the action %action?"
+msgstr ""
+
+msgid "Action %action was deleted"
+msgstr "Дію %action було видалено"
+
+msgid "Deleted orphaned action (%action)."
+msgstr ""
+
+msgid "When cron runs"
+msgstr "Коли виконується планувальщик"
+
+msgid ""
+"The URL to which the user should be redirected. This can be an internal URL "
+"like node/1234 or an external URL like http://drupal.org."
+msgstr ""
+"URL, до якого буде переадресовано користувача. Це може бути внутрішня адреса "
+"на кшталт <em>node/1234</em> або зовнішня типу http://my.ukrweb.info"
+
+msgid "Display a message to the user"
+msgstr "Відображення повідомлення користувачеві"
+
+msgid "Depends on: !dependencies"
+msgstr "Залежить від: !dependencies"
+
+msgid "Required by: !required"
+msgstr "Необхідний для: !required"
+
+msgid "Some required modules must be enabled"
+msgstr "Деякі необхідні модулі повинні бути увімкнені."
+
+msgid "Would you like to continue with enabling the above?"
+msgstr "Бажаєте увімкнути перераховані нижче модулі і продовжити?"
+
+msgid "administer site configuration"
+msgstr "адмініструвати налаштування сайту"
+
+msgid "Not enabled"
+msgstr "Не увімкнено"
+
+msgid "@module (<span class=\"admin-disabled\">disabled</span>)"
+msgstr ""
+
+msgid "@module (<span class=\"admin-enabled\">enabled</span>)"
+msgstr ""
+
+msgid "File download"
+msgstr "Завантаження файлу"
+
+msgid "Custom format"
+msgstr "Власний формат"
+
+msgid "Block cache"
+msgstr "Кешування Блоків"
+
+msgid "Run cron"
+msgstr "Запустити виконання регулярних дій(cron)"
+
+msgid "Enable or disable the display of certain page elements."
+msgstr "Увімкнути або вимкнути відображення деяких елементів сторінки."
+
+msgid "Status report"
+msgstr "Статусний звіт"
+
+msgid "Not writable"
+msgstr "Запис заборонено"
+
+msgid "Path to custom icon"
+msgstr "Шлях до власної іконки"
+
+msgid ""
+"This page is displayed when no other content matches the requested document. "
+"If unsure, specify nothing."
+msgstr ""
+"Ця сторінка показуєтсья, коли більше жодна інформація не відповідає "
+"запитаному документові. Якщо Ви не впевнені, не визначайте нічого."
+
+msgid "You do not have any administrative items."
+msgstr "Ви не маєте жодних адміністративних елементів."
+
+msgid ""
+"One or more problems were detected with your Drupal installation. Check the "
+"<a href=\"@status\">status report</a> for more information."
+msgstr ""
+"Одна або більше проблем виникли при установці Drupal. Деталі дивіться на "
+"сторінці <a href=\"@status\">звіт про стан</a>."
+
+msgid "By module"
+msgstr "За модулем"
+
+msgid "Manage your site's content."
+msgstr "Керування матеріалами сайту."
+
+msgid "Control how your site looks and feels."
+msgstr "Контроль над структурою і зовнішнім виглядом вашого сайту."
+
+msgid "Adjust basic site configuration options."
+msgstr "Встановлює базові настройки конфігурації сайту."
+
+msgid "View reports from system logs and other status information."
+msgstr "Дивитись звіти з системних журналів та іншу статусну інформацію."
+
+msgid ""
+"The directory %file is not protected from modifications and poses a security "
+"risk. You must change the directory's permissions to be non-writable. "
+msgstr ""
+"Тека %file не захищена від змінювань, що є потенційною проблемою безпеки. "
+"Вам треба встановити права на теку  \"заборона на запис\". "
+
+msgid "HTTP request status"
+msgstr "Статус запиту HTTP"
+
+msgid "Fails"
+msgstr "Збій"
+
+msgid ""
+"Your system or network configuration does not allow Drupal to access web "
+"pages, resulting in reduced functionality. This could be due to your "
+"webserver configuration or PHP settings, and should be resolved in order to "
+"download information about available updates, fetch aggregator feeds, sign "
+"in via OpenID, or use other network-dependent services."
+msgstr ""
+"Конфігурація Вашої системи або мережі не дозволяє доступ Друпалу до "
+"вебсторінок, як результат - погіршення роботоздатності. Це може бути "
+"спричинене конфігурацією Вашого вебсервера, або параметрами PHP і повинно "
+"бути вирішено для можливості відображення оновлень, отримання елементів rss "
+"потоків, доступу через OpenID і інших мережево-залежних сервісів."
+
+msgid ""
+"Choose which theme the administration pages should display in. If you choose "
+"\"System default\" the administration pages will use the same theme as the "
+"rest of the site."
+msgstr ""
+"Виберіть, в якому дизайнерському шаблоні повинні відображатись сторінки "
+"адміністратора. Якщо ви виберете \"Базова системна\", сторінки "
+"адміністратора використовуватимуть той самий шаблон, що і решта сайту."
+
+msgid ""
+"Please note that the <a href=\"!admin_theme_page\">administration theme</a> "
+"is still set to the %admin_theme theme; consequently, the theme on this page "
+"remains unchanged. All non-administrative sections of the site, however, "
+"will show the selected %selected_theme theme by default."
+msgstr ""
+"Зверніть увагу, що для <a href=\"!admin_theme_page\">сторінок керування "
+"сайтом</a> використовується шаблон оформлення %admin_theme; таким чином "
+"оформлення цієї сторінки не зміниться. Всі інші розділи сайту, однак, будуть "
+"оформлені відповідно вибраному %selected_theme шаблону."
+
+msgid "User pictures in posts"
+msgstr "Зображення (фото) користувачів у дописах"
+
+msgid "User pictures in comments"
+msgstr "Зображення (фото) користувачів у коментарях"
+
+msgid "Shortcut icon"
+msgstr "Іконка ярлику"
+
+msgid "Display post information on"
+msgstr "Відобразити інформацію допису на"
+
+msgid ""
+"Enable or disable the <em>submitted by Username on date</em> text when "
+"displaying posts of the following type."
+msgstr ""
+"Включити або відключити текст <em>автор Ім'я користувача, дата</em> при "
+"відображенні публікації даного типу."
+
+msgid "Logo image settings"
+msgstr "Налаштування лого"
+
+msgid "If toggled on, the following logo will be displayed."
+msgstr "Якщо включено, буде показано наступний логотип."
+
+msgid "Use the default logo"
+msgstr "Використовувати стандартне (default) лого"
+
+msgid "Check here if you want the theme to use the logo supplied with it."
+msgstr ""
+"Відмітьте це поле, якщо хочете, щоб шаблон оформлення використовував свій "
+"стандартний логотип."
+
+msgid ""
+"The path to the file you would like to use as your logo file instead of the "
+"default logo."
+msgstr ""
+"Шлях до файлу зображення, яке ви бажаєте використати замість стандартного "
+"(default) лого."
+
+msgid "Upload logo image"
+msgstr "Завантажити лого"
+
+msgid "Shortcut icon settings"
+msgstr "Налаштування іконки"
+
+msgid ""
+"Your shortcut icon, or 'favicon', is displayed in the address bar and "
+"bookmarks of most browsers."
+msgstr ""
+"Ваша іконка, або 'favicon', відображена в адресній строці та закладках "
+"більшості браузерів."
+
+msgid "Use the default shortcut icon."
+msgstr "Використовувати іконку за замовчуванням."
+
+msgid "Check here if you want the theme to use the default shortcut icon."
+msgstr ""
+"Відмітьте тут, якщо хочете, щоб тема використовувала стандартну іконку."
+
+msgid ""
+"The path to the image file you would like to use as your custom shortcut "
+"icon."
+msgstr ""
+"Шлях до файлу зображення, який ви збираєтесь використати у якості іконки."
+
+msgid "Upload icon image"
+msgstr "Завантажити іконку"
+
+msgid ""
+"If you don't have direct file access to the server, use this field to upload "
+"your shortcut icon."
+msgstr ""
+"Якщо у вас нема прямого доступу до файлів серверу, використовуйте це поле "
+"для завантаження іконки."
+
+msgid "@module (<span class=\"admin-missing\">missing</span>)"
+msgstr ""
+
+msgid ""
+"The following modules will be completely uninstalled from your site, and "
+"<em>all data from these modules will be lost</em>!"
+msgstr ""
+"Наступні модулі будуть повністю деінстальовані з Вашого сайту, та <em> всі "
+"дані, що були створені цими модулями, будуть втрачені</em>! (самі файли з "
+"модулями всеж таки залишаться)"
+
+msgid "Confirm uninstall"
+msgstr "Підтвердити деінсталяцію"
+
+msgid "Would you like to continue with uninstalling the above?"
+msgstr "Ви все ж таки бажаєте деінсталювати вищеобране?"
+
+msgid "No modules selected."
+msgstr "Жоден модуль не вибрано."
+
+msgid "The selected modules have been uninstalled."
+msgstr "Обрані модулі було деінстальовано."
+
+msgid "The name of this website."
+msgstr "Ім'я вебсайту."
+
+msgid ""
+"Your site's motto, tag line, or catchphrase (often displayed alongside the "
+"title of the site)."
+msgstr ""
+"Гасло вашого сайту, ключові слова, влучна фраза (часто відображається поруч "
+"з назвою сайта)"
+
+msgid ""
+"Your site's mission or focus statement (often prominently displayed on the "
+"front page)."
+msgstr ""
+"Місія вашого сайту або його головні засади (часто відображається на головній "
+"сторінці сайту)"
+
+msgid "The path '@path' is either invalid or you do not have access to it."
+msgstr "Шлях '@path' некоректний або відсутній доступ до нього."
+
+msgid "Default 403 (access denied) page"
+msgstr "Стандартна сторінка 403 (у доступі відмовлено)"
+
+msgid ""
+"This page is displayed when the requested document is denied to the current "
+"user. If unsure, specify nothing."
+msgstr ""
+"Ця сторінка показуєтсья, коли доступ до документу заборонений для даного "
+"користувача. Якщо Ви не впевнені, не визначайте нічого."
+
+msgid "Default 404 (not found) page"
+msgstr "Стандартна сторінка 404 (не знайдено)"
+
+msgid "Write errors to the log"
+msgstr "Внести помилки до протоколу"
+
+msgid "Write errors to the log and to the screen"
+msgstr "Записувати помилки в журнал і виводити на екран"
+
+msgid ""
+"Specify where Drupal, PHP and SQL errors are logged. While it is recommended "
+"that a site running in a production environment write errors to the log "
+"only, in a development or testing environment it may be helpful to write "
+"errors both to the log and to the screen."
+msgstr ""
+
+msgid ""
+"The normal cache mode is suitable for most sites and does not cause any side "
+"effects. The aggressive cache mode causes Drupal to skip the loading (boot) "
+"and unloading (exit) of enabled modules when serving a cached page. This "
+"results in an additional performance boost but can cause unwanted side "
+"effects."
+msgstr ""
+
+msgid ""
+"<strong class=\"error\">The following enabled modules are incompatible with "
+"aggressive mode caching and will not function properly: %modules</strong>"
+msgstr ""
+"<strong class=\"error\">Ці модулі не сумісні з агресивним режимом "
+"використання кешу і будуть працювати некоректно: %modules</strong>"
+
+msgid ""
+"<strong class=\"ok\">Currently, all enabled modules are compatible with the "
+"aggressive caching policy.</strong> Please note, if you use aggressive "
+"caching and enable new modules, you will need to check this page again to "
+"ensure compatibility."
+msgstr ""
+"<strong class=\"ok\">В даний момент всі увімкнені модулі підтримують "
+"агресивне використовування кешу.</strong> Майте на увазі, що після "
+"увімкненні нових модулів вам потрібно відвідати цю сторінку для перевірки "
+"сумісності."
+
+msgid "Page cache"
+msgstr "Кеш сторінки"
+
+msgid ""
+"Enabling the page cache will offer a significant performance boost. Drupal "
+"can store and send compressed cached pages requested by <em>anonymous</em> "
+"users. By caching a web page, Drupal does not have to construct the page "
+"each time it is viewed."
+msgstr ""
+
+msgid "Caching mode"
+msgstr "Режим використання кешу"
+
+msgid "Normal (recommended for production sites, no side effects)"
+msgstr ""
+
+msgid "Aggressive (experts only, possible side effects)"
+msgstr "Агресивний (тільки для професіоналів, можливі побічні ефекти)"
+
+msgid ""
+"On high-traffic sites, it may be necessary to enforce a minimum cache "
+"lifetime. The minimum cache lifetime is the minimum amount of time that will "
+"elapse before the cache is emptied and recreated, and is applied to both "
+"page and block caches. A larger minimum cache lifetime offers better "
+"performance, but users will not see new content for a longer period of time."
+msgstr ""
+
+msgid "Page compression"
+msgstr "Компресія сторінок"
+
+msgid ""
+"By default, Drupal compresses the pages it caches in order to save bandwidth "
+"and improve download times. This option should be disabled when using a "
+"webserver that performs compression."
+msgstr ""
+
+msgid ""
+"Enabling the block cache can offer a performance increase for all users by "
+"preventing blocks from being reconstructed on each page load. If the page "
+"cache is also enabled, performance increases from enabling the block cache "
+"will mainly benefit authenticated users."
+msgstr ""
+
+msgid "Enabled (recommended)"
+msgstr "Увімкнено (рекомендовано)"
+
+msgid ""
+"Note that block caching is inactive when modules defining content access "
+"restrictions are enabled."
+msgstr ""
+
+msgid "Bandwidth optimizations"
+msgstr "Оптимізація пропускної здатності."
+
+msgid ""
+"<p>Drupal can automatically optimize external resources like CSS and "
+"JavaScript, which can reduce both the size and number of requests made to "
+"your website. CSS files can be aggregated and compressed into a single file, "
+"while JavaScript files are aggregated (but not compressed). These optional "
+"optimizations may reduce server load, bandwidth requirements, and page "
+"loading times.</p><p>These options are disabled if you have not set up your "
+"files directory, or if your download method is set to private.</p>"
+msgstr ""
+
+msgid "Optimize CSS files"
+msgstr "Оптимізація CSS файлів"
+
+msgid ""
+"This option can interfere with theme development and should only be enabled "
+"in a production environment."
+msgstr ""
+
+msgid ""
+"This option can interfere with module development and should only be enabled "
+"in a production environment."
+msgstr ""
+
+msgid "Clear cached data"
+msgstr "Очистити кеш"
+
+msgid ""
+"Caching data improves performance, but may cause problems while "
+"troubleshooting new modules, themes, or translations, if outdated "
+"information has been cached. To refresh all cached data on your site, click "
+"the button below. <em>Warning: high-traffic sites will experience "
+"performance slowdowns while cached data is rebuilt.</em>"
+msgstr ""
+
+msgid "Caches cleared."
+msgstr "Кеші очищено."
+
+msgid ""
+"A file system path where the files will be stored. This directory must exist "
+"and be writable by Drupal. If the download method is set to public, this "
+"directory must be relative to the Drupal installation directory and be "
+"accessible over the web. If the download method is set to private, this "
+"directory should not be accessible over the web. Changing this location will "
+"modify all download paths and may cause unexpected problems on an existing "
+"site."
+msgstr ""
+"Шлях файлової системи, де мають зберігатись завантажені файли. Ця директорія "
+"повинна бути попередньо створена та повинна мати дозволи для запису від "
+"системного користувача, під яким виконується Drupal. Зміна цього шляху також "
+"змінить всі шляхи скачування файлів, що може призвести до неочікуваних "
+"проблем на працюючому сайті."
+
+msgid "A file system path where uploaded files will be stored during previews."
+msgstr ""
+"Шлях у файловій системі, де закачані файли будуть тимчасово зберігатись "
+"(наприклад ,для попереднього перегляду)."
+
+msgid "Public - files are available using HTTP directly."
+msgstr "Публічний - файли доступні напряму по протоколу HTTP."
+
+msgid "Private - files are transferred by Drupal."
+msgstr "Приватний -- файли переводяться через Друпал."
+
+msgid ""
+"Choose the <em>Public download</em> method unless you wish to enforce fine-"
+"grained access controls over file downloads. Changing the download method "
+"will modify all download paths and may cause unexpected problems on an "
+"existing site."
+msgstr ""
+
+msgid "Select an image processing toolkit"
+msgstr "Оберіть засоби для обробки зображень"
+
+msgid "Number of items in each feed"
+msgstr ""
+
+msgid "Default number of items to include in each feed."
+msgstr ""
+
+msgid "Feed content"
+msgstr "Матеріал стрічки (feed)"
+
+msgid "Titles plus teaser"
+msgstr "Назва та перший абзац"
+
+msgid "Global setting for the default display of content items in each feed."
+msgstr ""
+
+msgid "User-configurable time zones"
+msgstr ""
+
+msgid ""
+"When enabled, users can set their own time zone and dates will be displayed "
+"accordingly."
+msgstr ""
+
+msgid "The first day of the week for calendar views."
+msgstr "Перший день тижня для вигляду календаря."
+
+msgid "Formatting"
+msgstr "Форматування"
+
+msgid "Short date format"
+msgstr "Короткий формат дати"
+
+msgid "The short format of date display."
+msgstr "Відображеня короткого формату дати."
+
+msgid "Custom short date format"
+msgstr ""
+
+msgid ""
+"A user-defined short date format. See the <a href=\"@url\">PHP manual</a> "
+"for available options. This format is currently set to display as <span>%"
+"date</span>."
+msgstr ""
+
+msgid "Medium date format"
+msgstr "Середній формат дати"
+
+msgid "The medium sized date display."
+msgstr "Відображення середнього формату дати."
+
+msgid "Custom medium date format"
+msgstr ""
+
+msgid ""
+"A user-defined medium date format. See the <a href=\"@url\">PHP manual</a> "
+"for available options. This format is currently set to display as <span>%"
+"date</span>."
+msgstr ""
+
+msgid "Long date format"
+msgstr "Довгий формат дати"
+
+msgid "Longer date format used for detailed display."
+msgstr "Довший формат дати для детального відображення."
+
+msgid "Custom long date format"
+msgstr ""
+
+msgid ""
+"A user-defined long date format. See the <a href=\"@url\">PHP manual</a> for "
+"available options. This format is currently set to display as <span>%date</"
+"span>."
+msgstr ""
+
+msgid ""
+"Before enabling clean URLs, you must perform a test to determine if your "
+"server is properly configured. If you are able to see this page again after "
+"clicking the \"Run the clean URL test\" link, the test has succeeded and the "
+"radio buttons above will be available. If instead you are directed to a "
+"\"Page not found\" error, you will need to change the configuration of your "
+"server. The <a href=\"@handbook\">handbook page on Clean URLs</a> has "
+"additional troubleshooting information."
+msgstr ""
+
+msgid "<a href=\"@clean_url\">Run the clean url test</a>."
+msgstr ""
+
+msgid "Cron ran successfully."
+msgstr "Планувальник вдало запущено."
+
+msgid "Cron run failed."
+msgstr "Невдалий запуск планувальщика."
+
+msgid "Command counters"
+msgstr "Лічильник команд"
+
+msgid "The number of <code>SELECT</code>-statements."
+msgstr "Кількість інструкцій <code>SELECT</code>."
+
+msgid "The number of <code>INSERT</code>-statements."
+msgstr "Кількість інструкцій<code>INSERT</code>."
+
+msgid "The number of <code>UPDATE</code>-statements."
+msgstr "Кількість інструкцій <code>UPDATE</code>."
+
+msgid "The number of <code>DELETE</code>-statements."
+msgstr "Кількість інструкцій <code>DELETE</code>."
+
+msgid "The number of table locks."
+msgstr "Кількість блокувань таблиць."
+
+msgid "The number of table unlocks."
+msgstr "Кількість розблокувань таблиць."
+
+msgid "Query performance"
+msgstr "Швидкодія запитів."
+
+msgid "The number of joins without an index; should be zero."
+msgstr ""
+"Кількість приєднань,  виконаних без використання індексу; повинна бути нулем."
+
+msgid ""
+"The number of joins without keys that check for key usage after each row; "
+"should be zero."
+msgstr ""
+
+msgid "The number of sorts done without using an index; should be zero."
+msgstr ""
+"Кількість сортувань,  виконаних без використання індексу; повинна бути нулем."
+
+msgid "The number of times a lock could be acquired immediately."
+msgstr "Кількість разів, коли блокування було потрібно негайно."
+
+msgid "The number of times the server had to wait for a lock."
+msgstr "Кількість разів, коли серверу доводилось чекати блокування."
+
+msgid "Query cache information"
+msgstr "Інформація про кеш запитів"
+
+msgid ""
+"The MySQL query cache can improve performance of your site by storing the "
+"result of queries. Then, if an identical query is received later, the MySQL "
+"server retrieves the result from the query cache rather than parsing and "
+"executing the statement again."
+msgstr ""
+"Кеш запросов MySQL позволяет улучшить производительность сайта путём "
+"сохранения результатов запросов. Затем, при обращении с идентичным запросом, "
+"MySQL возвращает результат из кеша вместо повторной обработки и выполнения "
+"запроса."
+
+msgid "The number of queries in the query cache."
+msgstr "Кількість запитів"
+
+msgid "The number of times MySQL found previous results in the cache."
+msgstr ""
+
+msgid "The number of times MySQL added a query to the cache (misses)."
+msgstr ""
+
+msgid ""
+"The number of times MySQL had to remove queries from the cache because it "
+"ran out of memory. Ideally should be zero."
+msgstr ""
+
+msgid "No modules are available to uninstall."
+msgstr "Нема модулів доступних для знищення."
+
+msgid ""
+"This theme requires PHP version @php_required and is incompatible with PHP "
+"version !php_version."
+msgstr ""
+
+msgid "You must enable the @dependencies module to install @module."
+msgid_plural "You must enable the @dependencies modules to install @module."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid ""
+"The system module is at the foundation of your Drupal website, and provides "
+"basic but extensible functionality for use by other modules and themes. Some "
+"integral elements of Drupal are contained in and managed by the system "
+"module, including caching, enabling or disabling of modules and themes, "
+"preparing and displaying the administrative page, and configuring "
+"fundamental site settings. A number of key system maintenance operations are "
+"also part of the system module."
+msgstr ""
+
+msgid "The system module provides:"
+msgstr ""
+
+msgid ""
+"support for enabling and disabling <a href=\"@modules\">modules</a>. Drupal "
+"comes packaged with a number of core modules; each module provides a "
+"discrete set of features and may be enabled depending on the needs of your "
+"site. A wide array of additional modules contributed by members of the "
+"Drupal community are available for download at the <a href=\"@drupal-modules"
+"\">Drupal.org module page</a>."
+msgstr ""
+
+msgid ""
+"support for enabling and disabling <a href=\"@themes\">themes</a>, which "
+"determine the design and presentation of your site. Drupal comes packaged "
+"with several core themes and additional contributed themes are available at "
+"the <a href=\"@drupal-themes\">Drupal.org theme page</a>."
+msgstr ""
+
+msgid ""
+"a robust <a href=\"@cache-settings\">caching system</a> that allows the "
+"efficient re-use of previously-constructed web pages and web page "
+"components. Drupal stores the pages requested by anonymous users in a "
+"compressed format; depending on your site configuration and the amount of "
+"your web traffic tied to anonymous visitors, Drupal's caching system may "
+"significantly increase the speed of your site."
+msgstr ""
+
+msgid ""
+"a set of routine administrative operations that rely on a correctly-"
+"configured <a href=\"@cron\">cron maintenance task</a> to run automatically. "
+"A number of other modules, including the feed aggregator, ping module and "
+"search also rely on <a href=\"@cron\">cron maintenance tasks</a>. For more "
+"information, see the online handbook entry for <a href=\"@handbook"
+"\">configuring cron jobs</a>."
+msgstr ""
+
+msgid ""
+"basic configuration options for your site, including <a href=\"@date-settings"
+"\">date and time settings</a>, <a href=\"@file-system\">file system "
+"settings</a>, <a href=\"@clean-url\">clean URL support</a>, <a href=\"@site-"
+"info\">site name and other information</a>, and a <a href=\"@site-maintenance"
+"\">site maintenance</a> function for taking your site temporarily off-line."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@system"
+"\">System module</a>."
+msgstr ""
+
+msgid ""
+"Welcome to the administration section. Here you may control how your site "
+"functions."
+msgstr ""
+"Вітаю у секції адміністрування. Тут Ви можете контролювати роботу Вашого "
+"сайту."
+
+msgid "This page shows you all available administration tasks for each module."
+msgstr ""
+"Ця сторінка показує всі доступні адміністративні завдання для кожного модуля."
+
+msgid ""
+"Select which themes are available to your users and specify the default "
+"theme. To configure site-wide display settings, click the \"configure\" task "
+"above. Alternatively, to override these settings in a specific theme, click "
+"the \"configure\" link for that theme. Note that different themes may have "
+"different regions available for displaying content; for consistency in "
+"presentation, you may wish to enable only one theme."
+msgstr ""
+
+msgid ""
+"To change the appearance of your site, a number of <a href=\"@themes"
+"\">contributed themes</a> are available."
+msgstr ""
+
+msgid ""
+"These options control the display settings for the <code>%template</code> "
+"theme. When your site is displayed using this theme, these settings will be "
+"used. By clicking \"Reset to defaults,\" you can choose to use the <a href="
+"\"@global\">global settings</a> for this theme."
+msgstr ""
+"Эти параметры контролируют отображение темы <code>%template</code>. Данные "
+"настройки будут использоваться, когда ваш сайт использует эту тему "
+"оформления. Нажатие кнопки \"Вернуться к исходным\", приведет к "
+"использованию  для этой темы <a href=\"%global\">глобальных настроек</a>."
+
+msgid ""
+"These options control the default display settings for your entire site, "
+"across all themes. Unless they have been overridden by a specific theme, "
+"these settings will be used."
+msgstr ""
+"Ці параметри задають стандартні настройки відображення всього сайту для всіх "
+"шаблонів. Ці параметри використовуватимуться, якщо вони не замінені для "
+"конкретного шаблону."
+
+msgid ""
+"Modules are plugins that extend Drupal's core functionality. Enable modules "
+"by selecting the <em>Enabled</em> checkboxes below and clicking the <em>Save "
+"configuration</em> button. Once a module is enabled, new <a href="
+"\"@permissions\">permissions</a> may be available. To reduce server load, "
+"modules with their <em>Throttle</em> checkbox selected are temporarily "
+"disabled when your site becomes extremely busy. (Note that the <em>Throttle</"
+"em> checkbox is only available if the Throttle module is enabled.)"
+msgstr ""
+"Модулі - це плагіни, що розширюють базову функціональність ядра Drupal. "
+"Додавати нові модулі Ви можете лише скачавши та разпакувавши їх від корневої "
+"папки Drupal до папки sites/all/modules - кожен модуль в свою окрему папку. "
+"Вмикаються модулі в роботу шляхом обрання селектора <em>Ввімкнено</em> "
+"навпроти відповідного модуля, та після збереження відповідною кнопкою внизу "
+"сторінки. Як тільки нові модулі ввімкнено, відповідні нові <a href="
+"\"@permissions\">дозволи</a> можуть бути доступними та потребують "
+"налаштувань. <br> Для зменшення навантаження на сервер, модулі з ввімкненим "
+"селектором <em>Дроссель</em>  тимчасово будуть вимикнені в час великих "
+"навантажень на сервер. (Селектор <em>Дроссель</em> доступний лише коли "
+"відповідний модуль\"Дроссель\" ввімкнено.)"
+
+msgid ""
+"The auto-throttle functionality must be enabled on the <a href=\"@throttle"
+"\">throttle configuration page</a> after having enabled the throttle module."
+msgstr ""
+
+msgid ""
+"It is important that <a href=\"@update-php\">update.php</a> is run every "
+"time a module is updated to a newer version."
+msgstr ""
+"Дуже важливо, щоб <a href=\"@update-php\">update.php</a> був запущений "
+"адміністратором кожного разу, якщо будь-який модуль оновлюється до нової "
+"версії. Зробіть це обов'язково після оновлення, просто клікнувши на "
+"зазначену посилку, та виконайте послідовно всі необхідні дії."
+
+msgid ""
+"You can find all administration tasks belonging to a particular module on "
+"the <a href=\"@by-module\">administration by module page</a>."
+msgstr ""
+"Ви можете виконувати адміністративні завдання відповідно до первного модуля, "
+"користуючись <a href=\"@by-module\">сторінкою адміністрування за модулем</a>."
+
+msgid ""
+"To extend the functionality of your site, a number of <a href=\"@modules"
+"\">contributed modules</a> are available."
+msgstr ""
+"Для розширення функціональності Вашого сайту, є велика кількість <a href="
+"\"@modules\">вільно розповсюджуваних модулів</a>."
+
+msgid ""
+"The uninstall process removes all data related to a module. To uninstall a "
+"module, you must first disable it. Not all modules support this feature."
+msgstr ""
+"Процес деінсталяції видалить всі дані з таблиць, що мають відношення до "
+"обраного модуляю. Для деінсталяції модуля спершу Ви повинні відключити його. "
+"Не всім модулям потрібно здійснювати деінсталяцію."
+
+msgid ""
+"The <em>Powered by Drupal</em> block is an optional link to the home page of "
+"the Drupal project. While there is absolutely no requirement that sites "
+"feature this link, it may be used to show support for Drupal."
+msgstr ""
+
+msgid ""
+"Here you can find a short overview of your site's parameters as well as any "
+"problems detected with your installation. It may be useful to copy and paste "
+"this information into support requests filed on drupal.org's support forums "
+"and project issue queues."
+msgstr ""
+"Тут Ви можете знайти короткий звіт параметрів Вашого сайту, а також певні "
+"проблеми, виявлені під час встановлення. Це може бути дуже зручним при "
+"повідомленнях про проблеми в службу підтримки проекту drupal.org а також на "
+"різноманітних форумах."
+
+msgid "Selecting a different theme will change the look and feel of the site."
+msgstr "Вибір іншого шаблону змінить зовнішній вигляд сайту."
+
+msgid ""
+"Select your current local time. Dates and times throughout this site will be "
+"displayed using this time zone."
+msgstr ""
+"Виберіть ваш локальний час. Дати і час на всьому сайті будуть "
+"використовувати цю часову зону."
+
+msgid "Powered by Drupal"
+msgstr "Побудовано на Drupal"
+
+msgid "Badge color"
+msgstr ""
+
+msgid "Badge size"
+msgstr ""
+
+msgid ""
+"The message that should be sent. You may include the following variables: %"
+"site_name, %username, %node_url, %node_type, %title, %teaser, %body. Not all "
+"variables will be available in all contexts."
+msgstr ""
+
+msgid ""
+"The message to be displayed to the current user. You may include the "
+"following variables: %site_name, %username, %node_url, %node_type, %title, %"
+"teaser, %body. Not all variables will be available in all contexts."
+msgstr ""
+
+msgid "Powered by Drupal, an open source content management system"
+msgstr "Побудовано на Drupal, відкритій системі керування сайтом"
+
+msgid "Could not delete temporary file \"%path\" during garbage collection"
+msgstr ""
+
+msgid "Cannot use %author token in this context."
+msgstr ""
+
+msgid "access site reports"
+msgstr "адміністрування звітів вебсайту"
+
+msgid "select different theme"
+msgstr "вибрати інший шаблон"
+
+msgid "administer files"
+msgstr "адміністрування файлів"
+
+msgid "Compact mode"
+msgstr "Компактний режим"
+
+msgid "By task"
+msgstr "За завданням"
+
+msgid "Settings for how your administrative pages should look."
+msgstr "Налаштувати оформлення сторінок адмініструвння."
+
+msgid "Change which theme your site uses or allows users to set."
+msgstr ""
+"Настроює, який шаблон дизайну використовує сайт, або надає право вибору "
+"користувачам."
+
+msgid "Select the default theme."
+msgstr "Вибрати стандартну тему."
+
+msgid "Enable or disable add-on modules for your site."
+msgstr "Увімкнення/Вимкнення додаткових модулів сайту."
+
+msgid ""
+"Change basic site information, such as the site name, slogan, e-mail "
+"address, mission, front page and more."
+msgstr ""
+"Змінює базову інформацію сайту, таку як назва сайту, слоган, e-mail адреса, "
+"місія, головна сторінка і т.д."
+
+msgid ""
+"Control how Drupal deals with errors including 403/404 errors as well as PHP "
+"error reporting."
+msgstr ""
+"Контролює поведінку Друпалу з помилками, включно із помилками 403/404 та "
+"звітуванням помилок PHP."
+
+msgid "Logging and alerts"
+msgstr "Звіти та повідомлення"
+
+msgid ""
+"Settings for logging and alerts modules. Various modules can route Drupal's "
+"system events to different destination, such as syslog, database, email, ..."
+"etc."
+msgstr ""
+"Налаштування журналу і модулів повідомлень. Різні модулі можуть "
+"перенаправляти системні події Друпала до різних місць, наприклад в syslog, "
+"базу даних, пошту тощо"
+
+msgid "Tell Drupal where to store uploaded files and how they are accessed."
+msgstr ""
+"Вказує Друпалу де зберігати завантажені файли та спосіб доступу до них."
+
+msgid "Image toolkit"
+msgstr "Інструменти зображень"
+
+msgid ""
+"Choose which image toolkit to use if you have installed optional toolkits."
+msgstr "Вибір засобів опрацювання зображень, якщо використовуєтося додаткові."
+
+msgid "RSS publishing"
+msgstr "Параметри RSS"
+
+msgid ""
+"Configure the number of items per feed and whether feeds should be titles/"
+"teasers/full-text."
+msgstr ""
+"Конфігурація кількості елементів для подачі, і чи це повинні бути назви/"
+"анонси/повні-тексти."
+
+msgid "Date and time"
+msgstr "Дата і час"
+
+msgid ""
+"Settings for how Drupal displays date and time, as well as the system's "
+"default timezone."
+msgstr ""
+"Вибір способу відображення дати і часу, а також системного часового опоясу "
+"за замовченням."
+
+msgid "Date and time lookup"
+msgstr "Запит дати і часу"
+
+msgid "Take the site off-line for maintenance or bring it back online."
+msgstr ""
+"Вимкнення сайту на технічне обслуговування і його увімкнення у робочий режим."
+
+msgid "Enable or disable clean URLs for your site."
+msgstr "Включити або відключити механізм чистих адрес на сайті."
+
+msgid "Clean URL check"
+msgstr "Тест на чисті(mod_rewrite) адреси"
+
+msgid ""
+"Get a status report about your site's operation and any detected problems."
+msgstr "Перегляд звіту про роботу сайту і знайдені помилки."
+
+msgid "-1 (Unlimited)"
+msgstr "-1 (Необмежено)"
+
+msgid ""
+"Stores details about batches (processes that run in multiple HTTP requests)."
+msgstr ""
+
+msgid ""
+"Your PHP installation is too old. Drupal requires at least PHP %version."
+msgstr ""
+"Встановлений PHP застарілий. Для роботи Drupal потрібно як мінімум PHP "
+"версії %version."
+
+msgid "PHP register globals"
+msgstr "параметр PHP register globals"
+
+msgid ""
+"<em>register_globals</em> is enabled. Drupal requires this configuration "
+"directive to be disabled. Your site may not be secure when "
+"<em>register_globals</em> is enabled. The PHP manual has instructions for <a "
+"href=\"http://php.net/configuration.changes\">how to change configuration "
+"settings</a>."
+msgstr ""
+"Увімкнено <em>register_globals</em>. Друпал потребує вимкнення даної "
+"директиви. Ваш вебсайт може бути послабленим в безпеці, якщо увімкнено "
+"<em>register_globals</em>. Документація PHP описує <a href=\"http://php.net/"
+"configuration.changes\">процедуру зміни параметрів конфігурації</a>."
+
+msgid "Enabled ('@value')"
+msgstr "Увімкнено ('@value')"
+
+msgid "PHP memory limit"
+msgstr "Ліміт пам'яті PHP"
+
+msgid ""
+"Consider increasing your PHP memory limit to %memory_minimum_limit to help "
+"prevent errors in the installation process."
+msgstr ""
+"Забезпечте збільшення межі пам'яті PHP до %memory_minimum_limit для уникання "
+"помилок під час процесу встановлення."
+
+msgid ""
+"Consider increasing your PHP memory limit to %memory_minimum_limit to help "
+"prevent errors in the update process."
+msgstr ""
+"Забезпечте збільшення межі пам'яті PHP до %memory_minimum_limit для уникання "
+"помилок під час процесу оновлення."
+
+msgid ""
+"Depending on your configuration, Drupal can run with a %memory_limit PHP "
+"memory limit. However, a %memory_minimum_limit PHP memory limit or above is "
+"recommended, especially if your site uses additional custom or contributed "
+"modules."
+msgstr ""
+"В залежності від Вашої конфігурації, Друпал може працювати на межі %"
+"memory_limit для PHP. Однак, рекомендовано %memory_minimum_limit мінімум для "
+"PHP, особливо в випадках, якщо використовуються додаткові модулі."
+
+msgid ""
+"Increase the memory limit by editing the memory_limit parameter in the file %"
+"configuration-file and then restart your web server (or contact your system "
+"administrator or hosting provider for assistance)."
+msgstr ""
+"Збільшуйте межу пам'яті редагуванням параметра memory_limit в файлі %"
+"configuration-file, після чого перезавантажуйте Ваш вебсервер(або прохайте "
+"Вашого хостінг провайдера або адміністратора про допомогу)"
+
+msgid ""
+"Contact your system administrator or hosting provider for assistance with "
+"increasing your PHP memory limit."
+msgstr ""
+"Контактуйте Вашого системного адміністратора або хостінг провайдера щодо "
+"збільшення межі пам'яті PHP"
+
+msgid "See the <a href=\"@url\">Drupal requirements</a> for more information."
+msgstr ""
+"Перегляньте сторінку <a href=\"@url\">Вимоги Друпал</a> для додаткової "
+"інформації"
+
+msgid "Not protected"
+msgstr "Не захищено"
+
+msgid ""
+"The file %file is not protected from modifications and poses a security "
+"risk. You must change the file's permissions to be non-writable."
+msgstr ""
+"Файл %file не захищений від змінювань, що є потенційною проблемою безпеки. "
+"Вам треба встановити права на файл \"заборона на запис\"."
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@cron-"
+"handbook\">configuring cron jobs</a>."
+msgstr ""
+"Для додаткової інформації читайте розділ довідника для <a href=\"@cron-"
+"handbook\">налагодження завдань планувальника</a>."
+
+msgid ""
+"Cron has not run. Please visit the <a href=\"@status\">status report</a> for "
+"more information."
+msgstr ""
+"Планувальник не запущено. Відвідайте <a href=\"@status\">сторінку звітів</a> "
+"для додаткової інформації"
+
+msgid "Cron has not run."
+msgstr "Планувальник не запущений"
+
+msgid "Cron has not run recently."
+msgstr "Планувальник не було запущено"
+
+msgid "Cron maintenance tasks"
+msgstr "Виконання регулярних процедур (завдання cron)"
+
+msgid "You can <a href=\"@cron\">run cron manually</a>."
+msgstr ""
+"Ви можете <a href=\"@cron\">запустити виконання регулярних дій</a> (cron) "
+"вручну."
+
+msgid "The directory %directory is not writable."
+msgstr "Каталог %directory не доступний для запису."
+
+msgid ""
+"You may need to set the correct directory at the <a href=\"@admin-file-system"
+"\">file system settings page</a> or change the current directory's "
+"permissions so that it is writable."
+msgstr ""
+"Вам потрібно встановти правильний аталог на <a href=\"@admin-file-system"
+"\">сторінці налаштувань файлової системи</a> або встановити для поточного "
+"каталогу права, що дозволяють запис."
+
+msgid ""
+"An automated attempt to create this directory failed, possibly due to a "
+"permissions problem. To proceed with the installation, either create the "
+"directory and modify its permissions manually, or ensure that the installer "
+"has the permissions to create it automatically. For more information, please "
+"see INSTALL.txt or the <a href=\"@handbook_url\">on-line handbook</a>."
+msgstr ""
+"Помилка автоматичної спроби створення теки, можливо через проблеми доступа. "
+"Для продовження встановлення, або створюйте теку і змінюте права вручну, або "
+"надайте можливість програмі встановлення зробити це автоматично. Для "
+"додаткової інформації, прохання перечитати файл INSTALL.txt в кореневій "
+"папці Друпал, або переглянути <a href=\"@handbook_url\">довідник</a>."
+
+msgid "Writable (<em>public</em> download method)"
+msgstr "Доступний для запису (<em>публічний</em> метод завантаження)"
+
+msgid "Writable (<em>private</em> download method)"
+msgstr "Запис дозволено (<em>приватний</em> метод завантаження)"
+
+msgid "Database updates"
+msgstr "Оновлення бази даних"
+
+msgid ""
+"Some modules have database schema updates to install. You should run the <a "
+"href=\"@update\">database update script</a> immediately."
+msgstr ""
+"Деякі модулі потребують оновлення бази даних для своєї установки. Ви повинні "
+"запустити зараз  <a href=\"@update\">скрипт оновлення бази даних</a>."
+
+msgid ""
+"The update.php script is accessible to everyone without authentication "
+"check, which is a security risk. You must change the $update_free_access "
+"value in your settings.php back to FALSE."
+msgstr ""
+"Скрипт update.php доступний навіть анонімному користувачеві, що є ризиком "
+"безпеки. Необхідно змінити значення $update_free_access  в файлі  settings."
+"php на FALSE"
+
+msgid "Access to update.php"
+msgstr "Доступ до update.php"
+
+msgid ""
+"Update notifications are not enabled. It is <strong>highly recommended</"
+"strong> that you enable the update status module from the <a href=\"@module"
+"\">module administration page</a> in order to stay up-to-date on new "
+"releases. For more information please read the <a href=\"@update\">Update "
+"status handbook page</a>."
+msgstr ""
+"Повідомлення про оновлення не увімкнено. <strong>Дуже рекомендовано</strong> "
+"ввімкнути модуль оновлення на <a href=\"@module\">сторінці керування "
+"модулями</a> для можливості бути в курсі останніх змін і заплаток безпеки. "
+"Для додаткової інформації читайте <a href=\"@update\">сторінку статусу "
+"оновлень</a> довідника"
+
+msgid ""
+"To clear all caches, click the button on the <a href=\"@performance"
+"\">Performance page</a>."
+msgstr ""

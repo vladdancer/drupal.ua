@@ -1,0 +1,1034 @@
+# Ukrainian translation of og (6.x-2.1)
+# Copyright (c) 2010 by the Ukrainian translation team
+# Generated from files:
+#  og.module,v 1.628.4.34 2010/02/21 17:32:35 amitaibu
+#  og.pages.inc,v 1.1.2.5 2010/03/14 07:57:59 amitaibu
+#  og.install,v 1.71.4.6 2009/09/17 12:52:42 weitzman
+#  og/og.info: n/a
+#  og.js,v 1.9.2.3 2010/01/24 14:44:56 amitaibu
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: og (6.x-2.1)\n"
+"POT-Creation-Date: 2010-06-08 19:30+0400\n"
+"PO-Revision-Date: 2009-10-30 20:03+0300\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: og.module:2206
+msgid "OPML feed"
+msgstr "матеріал OPML"
+
+#: og.module:2221
+msgid "more"
+msgstr "далі"
+
+#: og.pages.inc:440
+msgid "Title"
+msgstr "Title"
+
+#: og.module:960,1038,1470
+msgid "Description"
+msgstr "Опис"
+
+#: og.pages.inc:126,166,331,361
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: og.pages.inc:443
+msgid "Comments"
+msgstr "Коментарі"
+
+#: og.pages.inc:442
+msgid "Posts"
+msgstr "Дописи"
+
+#: og.pages.inc:125
+msgid "Confirm"
+msgstr "Confirm"
+
+#: og.module:1252
+msgid "Home"
+msgstr "Головна"
+
+#: og.module:1430
+msgid "Mission statement"
+msgstr "Формулювання місії"
+
+#: og.module:1010
+msgid "Moderated"
+msgstr ""
+
+#: og.module:60
+msgid "OPML"
+msgstr "OPML"
+
+#: og.module:94
+msgid "Create group administrator"
+msgstr "Створити адміністратора групи"
+
+#: og.module:103
+msgid "Delete group administrator"
+msgstr "Видалити адміністратора групи"
+
+#: og.module:128,128
+msgid "Group activity"
+msgstr "Активність груп"
+
+#: og.module:137
+msgid "Administer the suite of Organic groups modules."
+msgstr ""
+"Адміністрування набору модулів "
+"Органічних груп."
+
+#: og.module:148
+msgid "Organic groups configuration"
+msgstr "Конфігурація Органічних груп"
+
+#: og.pages.inc:165,359
+msgid "Remove"
+msgstr "Видалити"
+
+#: og.pages.inc:189
+msgid "Email addresses or usernames"
+msgstr "E-mail адреси або імена користувачів"
+
+#: og.pages.inc:190
+msgid ""
+"Enter up to %max email addresses or usernames. Separate multiple "
+"addresses by commas or new lines. Each person will receive an "
+"invitation message from you."
+msgstr ""
+"Введіть до %max електронних адрес або "
+"імен користувачів. Відділіть окремі "
+"адреси комами або вводьте їх у новій "
+"лінійці. Кожен користувач отримає від "
+"вас запрошення."
+
+#: og.pages.inc:194
+msgid "Personal message"
+msgstr "Особисте повідомлення"
+
+#: og.pages.inc:195
+msgid ""
+"Optional. Enter a message which will become part of the invitation "
+"email."
+msgstr ""
+"На вибір. Введіть повідомлення, яке "
+"стане частиною листа запрошення."
+
+#: og.pages.inc:212
+msgid "You may not specify more than %max email addresses or usernames."
+msgstr ""
+"Ви не можете зазначити більше ніж %max "
+"електронних адрес або імен "
+"користувачів."
+
+#: og.pages.inc:318
+msgid "Additional details"
+msgstr "Додаткова інформація"
+
+#: og.pages.inc:329
+msgid "Are you sure you want to join the group %title?"
+msgstr ""
+"Ви впевнені, що хочете стати учасником "
+"групи %title?"
+
+#: og.pages.inc:390
+msgid "List of users"
+msgstr "Список користувачів"
+
+#: og.pages.inc:395
+msgid ""
+"Add one or more usernames in order to associate users with this group. "
+"Multiple usernames should be separated by a comma."
+msgstr ""
+
+#: og.module:1971
+msgid "(approval needed)"
+msgstr "(очікується підтвердження)"
+
+#: og.pages.inc:444
+msgid "Age"
+msgstr "Вік"
+
+#: og.pages.inc:445,445
+msgid "Last comment"
+msgstr "Останній коментар"
+
+#: og.module:985
+msgid "No posts in this group."
+msgstr "У цій групі немає записів."
+
+#: og.module:1001
+msgid "No public posts in this group."
+msgstr "У цій групі немає відкритих записів."
+
+#: og.module:1043
+msgid ""
+"A brief description for the group details block and the group "
+"directory."
+msgstr ""
+"Короткий опис для блоку інформації "
+"групи і директорії групи."
+
+#: og.module:1138
+msgid ""
+"Selecting a different theme will change the look and feel of the "
+"group."
+msgstr ""
+"Вибір іншої теми змінить зовнішній "
+"вигляд вашої групи."
+
+#: og.module:1431
+msgid ""
+"A welcome greeting for your group home page. Consider listing the "
+"group objectives and mission."
+msgstr ""
+"Вітання для домашньої сторінки вашої "
+"групи. Розгляньте можливість додати "
+"цілі і місію групи."
+
+#: og.module:1434
+msgid "Group manager"
+msgstr "Менеджер групи"
+
+#: og.module:1589
+msgid "Do nothing."
+msgstr ""
+
+#: og.module:1590
+msgid "Delete all group posts which don't also belong to another group."
+msgstr ""
+"Стерти всі записи в групі, які не "
+"належать також до жодної іншої групи."
+
+#: og.module:1592
+msgid "Move all group posts to the group listed below."
+msgstr ""
+"Перемістіть всі записи цієї групи до "
+"іншої групи."
+
+#: og.module:1597
+msgid "Group posts"
+msgstr "Записи групи"
+
+#: og.module:1608
+msgid "Target group"
+msgstr "Цільова група"
+
+#: og.module:1621
+msgid "Delete group"
+msgstr "Видалити групу"
+
+#: og.module:1856,1872
+msgid "Audience"
+msgstr "Групи"
+
+#: og.module:1901
+msgid "@group: '@title' at @site"
+msgstr "@group: '@title' на @site"
+
+#: og.module:1907
+msgid ""
+"@body\n"
+"\n"
+"--\n"
+"This message was sent by an administrator in the '@group' group at "
+"@site. To visit this group, browse to !url_group. To unsubscribe from "
+"this group, visit !url_unsubscribe"
+msgstr ""
+
+#: og.module:1911
+msgid "You may now post messages in this group located at !group_url"
+msgstr ""
+
+#: og.module:1918
+msgid "Invitation to join the group '@group' at @site"
+msgstr ""
+
+#: og.module:1926
+msgid "You are now an administrator for the group '@group'"
+msgstr ""
+
+#: og.module:1928,1928
+msgid ""
+"@username, you are now an administrator for the group '@group'.\n"
+"\n"
+"You can administer this group by logging in here:\n"
+" !group_url"
+msgstr ""
+"@username, ви стали адміністратором групи "
+"'@group'.\n"
+"\n"
+"Ви можете керувати групою, увійшовши "
+"сюди:\n"
+" !group_url"
+
+#: og.module:2125,2223
+msgid "New groups"
+msgstr "Нові групи"
+
+#: og.module:2221
+msgid "Browse the newest groups."
+msgstr "Оглянути нові групи."
+
+#: og.module:2239
+msgid "Invite friend"
+msgstr "Запросити друга"
+
+#: og.module:2336,2336
+msgid "Create !type"
+msgstr "Створити !type"
+
+#: og.module:2353
+msgid "(pending approval)"
+msgstr ""
+
+#: og.module:2386
+msgid "Title of top group"
+msgstr "Заголовок найвищої групи"
+
+#: og.module:2387
+msgid "Unfiltered title of top group. WARNING - raw user input."
+msgstr ""
+
+#: og.module:2388
+msgid "ID of top group"
+msgstr "Ідентифікатор найвищої групи"
+
+#: og.install:484
+msgid "Organic groups group type"
+msgstr ""
+
+#: og.pages.inc:265
+msgid "1 invitation sent."
+msgid_plural "@count invitations sent."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:1876
+msgid "Show this post in this group."
+msgid_plural "Show this post in these groups."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:519
+msgid "administer organic groups"
+msgstr ""
+
+#: og.pages.inc:39
+msgid "Send message"
+msgstr ""
+
+#: og.module:1131
+msgid "Language neutral"
+msgstr "Нейтрально до мови"
+
+#: og.module:1009
+msgid "Open"
+msgstr ""
+
+#: og.module:32
+msgid ""
+"Group specific blocks are only visible on group pages and not on "
+"systemwide pages like the home page or admin pages."
+msgstr ""
+
+#: og.module:1087,1480
+msgid "Registration form"
+msgstr ""
+
+#: og.module:2169
+msgid "Group roles"
+msgstr "Статуси учасників групи"
+
+#: og.module:2431
+msgid "README file"
+msgstr ""
+
+#: og.module:1775,1775,1804,1804
+msgid "Other groups"
+msgstr "Інші групи"
+
+#: og.module:53
+msgid "Join group"
+msgstr "Приєднатися до групи"
+
+#: og.module:69
+msgid "Leave group"
+msgstr "Вийти з групи"
+
+#: og.module:78
+msgid "Approve membership request"
+msgstr ""
+"Підтвердити участь користувача в "
+"групі"
+
+#: og.module:86
+msgid "Deny membership request"
+msgstr ""
+"Відхилити прохання стати учасником "
+"групи"
+
+#: og.module:122
+msgid "Manage membership"
+msgstr "Керувати статусами учасників"
+
+#: og.module:159
+msgid "Add members"
+msgstr "Запросити в групу"
+
+#: og.pages.inc:95
+msgid ""
+"You may not leave this group because you are its owner. A site "
+"administrator can assign ownership to another user and then you may "
+"leave."
+msgstr ""
+"Ви не можете залишити цю групу, "
+"оскільки ви її власник.  Ви зможете "
+"залишити групу, коли адміністратор "
+"сайту надасть іншому користувачу "
+"статус власника."
+
+#: og.pages.inc:98
+msgid "Leave this group"
+msgstr "Залишити цю групу"
+
+#: og.pages.inc:112
+msgid "Membership saved."
+msgstr "Статус учасника збережено."
+
+#: og.module:758
+msgid "Membership request approved."
+msgstr ""
+"Прохання стати учасником групи "
+"підтверджено."
+
+#: og.module:781
+msgid "Membership request denied."
+msgstr ""
+"Прохання стати учасником групи "
+"відхилено."
+
+#: og.pages.inc:319
+msgid ""
+"Add any detail which will help an administrator decide whether to "
+"approve or deny your membership request."
+msgstr ""
+"Додайте будь-яку інформацію, яка "
+"допоможе адміністратору вирішити, "
+"прийняти або відхилити ваше прохання "
+"стати учасником групи."
+
+#: og.module:852,852
+msgid ""
+"Membership request to the %group group awaits approval by an "
+"administrator."
+msgstr ""
+"Прохання стати учасником групи %group "
+"очікує на підтвердження "
+"адміністратора."
+
+#: og.pages.inc:358
+msgid "Are you sure you want to remove !name from the group %title?"
+msgstr ""
+"Ви впевнені, що хочете видалити !name з "
+"групи %title?"
+
+#: og.module:1056,1475
+msgid "Membership requests"
+msgstr "Прохання стати учасниками групи"
+
+#: og.module:1061
+msgid ""
+"How should membership requests be handled in this group? When you "
+"select <em>closed</em>, users will not be able to join "
+"<strong>or</strong> leave."
+msgstr ""
+
+#: og.module:1774,1774,1803,1803
+msgid "My groups"
+msgstr "Мої групи"
+
+#: og.module:1909
+msgid "Membership request approved for '@title'"
+msgstr ""
+"Підтверджено прохання стати "
+"учасником групи '@title'"
+
+#: og.module:1913
+msgid "Membership request denied for '@title'"
+msgstr ""
+
+#: og.module:1915
+msgid "Sorry, your membership request was denied."
+msgstr ""
+"Вибачте, ваше прохання стати "
+"учасником групи було відхилено."
+
+#: og.module:1920
+msgid ""
+"Hi. I'm a member of '@group' and I welcome you to join this group as "
+"well. Please see the link and message below.\n"
+"\n"
+"@group\n"
+"@description\n"
+"Join: !group_url\n"
+"@body"
+msgstr ""
+"Привіт. Я учасник '@group' і хочу "
+"запросити вас також приєднатися до "
+"цієї групи. Будь ласка прочитайте "
+"повідомлення і посилання нижче."
+
+#: og.module:1922
+msgid "Membership request for '@group' from '@username'"
+msgstr ""
+
+#: og.module:2245
+msgid "My membership"
+msgstr "Мій статус учасника"
+
+#: og.module:2251
+msgid "Your membership request awaits approval."
+msgstr ""
+"Ваше прохання стати учасником групи "
+"ще не підтверджено."
+
+#: og.module:2315
+msgid "Request membership"
+msgstr ""
+"Надіслати прохання стати учасником "
+"групи"
+
+#: og.module:2372
+msgid "All members for a given group."
+msgstr "Всі учасники цієї групи."
+
+#: og.module:2377
+msgid "Retrieve the group memberships for a given user."
+msgstr ""
+
+#: og.module:2307
+msgid "1 member"
+msgid_plural "@count members"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:2163
+msgid "Maximum number of members to show"
+msgstr "Максимальна кількість учасників"
+
+#: og.module:2172
+msgid "Standard members"
+msgstr "Звичайні учасники"
+
+#: og.module:2173
+msgid "Administrators"
+msgstr "Адміністратори"
+
+#: og.module:2175
+msgid "You may specify which types of group members appear in the listing."
+msgstr ""
+"Ви можете вказати, які типи учасників "
+"групи з'являтимуться в переліку."
+
+#: og.module:2179
+msgid "Maximum number of groups to show"
+msgstr "Максимальна кількість груп"
+
+#: og.pages.inc:459
+msgid "No groups available."
+msgstr ""
+
+#: og.pages.inc:355
+msgid "Leave"
+msgstr ""
+
+#: og.module:1903
+msgid ""
+"@type '@subject' by @username\n"
+"\n"
+"@node_teaser\n"
+"\n"
+"!read_more: !content_url\n"
+"Post reply: !reply_url\n"
+"\n"
+"--\n"
+"You are subscribed from the group '@group' at @site.\n"
+"To manage your subscription, visit !group_url"
+msgstr ""
+
+#: og.module:1535
+msgid "Organic groups usage"
+msgstr "Використання в Органічних групах"
+
+#: og.module:1538
+msgid ""
+"Specify how organic groups should treat nodes of this type. Nodes may "
+"behave as a group, as group posts, or may not participate in organic "
+"groups at all."
+msgstr ""
+"Визначіть, як Органічні групи повинні "
+"опрацьовувати цей тип нод. Ноди можуть "
+"створюватись як нові Групи, як "
+"публікації до існуючих Груп, або не "
+"мати жодного відношення до Груп "
+"взагалі."
+
+#: og.module:1969
+msgid "Join %name."
+msgstr "Станьте учасником %name."
+
+#: og.module:753
+msgid "!name already approved to group %group."
+msgstr "!name вже використовується групою %group."
+
+#: og.module:2367
+msgid "Add a user to a group."
+msgstr "Додати користувача до групи."
+
+#: og.pages.inc:434
+msgid "1 user added to the group."
+msgid_plural "@count users added to the group."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:747,776
+msgid "Bad token. You seem to have followed an invalid link."
+msgstr ""
+
+#: og.pages.inc:215
+msgid "You may not invite yourself - @self."
+msgstr ""
+
+#: og.pages.inc:301
+msgid "@user is already a member the group @group."
+msgstr ""
+
+#: og.module:868
+msgid ""
+"Membership request to the %group group was rejected, only group "
+"administrators can add users to this group."
+msgstr ""
+
+#: og.pages.inc:379
+msgid "%user removed from %group."
+msgstr ""
+
+#: og.pages.inc:398
+msgid "Add users"
+msgstr ""
+
+#: og.module:1090
+msgid ""
+"May users join this group during registration? If checked, a "
+"corresponding checkbox will be added to the registration form."
+msgstr ""
+
+#: og.module:1118,1485
+msgid "List in groups directory"
+msgstr ""
+
+#: og.module:1435
+msgid "Sticky at top of group home page and other lists."
+msgstr ""
+
+#: og.module:1612
+msgid ""
+"If you chose <strong>Move all group posts</strong> above, specify a "
+"destination group."
+msgstr ""
+
+#: og.module:1924
+msgid ""
+"To instantly approve this request, visit !approve_url.\n"
+"You may deny this request or manage members at !group_url. \n"
+"\n"
+"Personal message from @username:\n"
+"------------------\n"
+"\n"
+"@request"
+msgstr ""
+
+#: og.module:2252
+msgid "Delete request"
+msgstr ""
+
+#: og.module:1378
+msgid "1 group"
+msgid_plural "@count groups"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:150
+msgid "Configure the main Organic groups module (og)."
+msgstr ""
+"Конфігурувати головний модуль "
+"Органічних груп (og)."
+
+#: og.module:35
+msgid ""
+"In order to let group admins determine their own group theme, you must "
+"enable multiple themes using <a href=\"@url\">theme configuration "
+"page</a>."
+msgstr ""
+
+#: og.pages.inc:92
+msgid ""
+"You may not leave this group because it is a <em>closed</em> group. "
+"You should request removal from a group administrator."
+msgstr ""
+
+#: og.pages.inc:137
+msgid "%name was promoted to <em>group administrator</em>."
+msgstr ""
+
+#: og.pages.inc:177
+msgid "%name is no longer a <em>group administrator</em>."
+msgstr ""
+
+#: og.pages.inc:239
+msgid "Invalid email address or username: @value."
+msgstr ""
+
+#: og.module:1049
+msgid "Open - membership requests are accepted immediately."
+msgstr ""
+
+#: og.module:1050
+msgid "Moderated - membership requests must be approved."
+msgstr ""
+
+#: og.module:1051
+msgid "Invite only - membership must be created by an administrator."
+msgstr ""
+
+#: og.module:1052
+msgid "Closed - membership is exclusively managed by an administrator."
+msgstr ""
+
+#: og.module:1297
+msgid ""
+"You must <a href=\"@join\">join a group</a> before posting on this web "
+"site."
+msgstr ""
+
+#: og.module:1882
+msgid "You must <a href=\"@join\">join a group</a> before posting a %type."
+msgstr ""
+
+#: og.module:2242
+msgid "Manager: !name"
+msgstr ""
+
+#: og.module:2267
+msgid ""
+"This is an <em>invite only</em> group. The group administrators "
+"add/remove members as needed."
+msgstr ""
+
+#: og.module:2270
+msgid ""
+"This is a <em>closed</em> group. The group administrators add/remove "
+"members as needed."
+msgstr ""
+
+#: og.module:2337
+msgid "Add a new !type in this group."
+msgstr ""
+
+#: og.install:493
+msgid ""
+"Organic groups access control module is disabled. See the <a "
+"href=\"@modules\">modules page</a>."
+msgstr ""
+
+#: og.pages.inc:418
+msgid "Unrecognized name: %bad."
+msgid_plural "Unrecognized names: %bad."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.install:161
+msgid ""
+"Organic groups module enabled. Please see the included !readme_file "
+"for further installation instructions."
+msgstr ""
+
+#: og.info:0
+msgid ""
+"Enable users to create and manage groups.  OG Views integration module "
+"is recommended for best experience."
+msgstr ""
+
+#: og.module:170
+msgid "Broadcast"
+msgstr ""
+
+#: og.pages.inc:17
+msgid "Send message to %group"
+msgstr ""
+
+#: og.pages.inc:28
+msgid "Enter a subject for your message."
+msgstr ""
+
+#: og.pages.inc:73
+msgid "1 message queued for delivery."
+msgid_plural "@count messages queued for delivery."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:1471
+msgid "Group description."
+msgstr ""
+
+#: og.module:1121
+msgid ""
+"Should this group appear on the <a href=\"@url\">list of groups "
+"page</a> (requires OG Views module)? Disabled if the group is set to "
+"<em>private group</em>."
+msgstr ""
+
+#: og.module:1129,1492
+msgid "Group language"
+msgstr ""
+
+#: og.module:1133
+msgid ""
+"Selecting a different locale will change the interface language for "
+"all group pages and emails. Users who have chosen a preferred language "
+"always see their chosen language."
+msgstr ""
+
+#: og.module:2060
+msgid "Standard group post (typically only author may edit)."
+msgstr ""
+
+#: og.module:2064
+msgid "Wiki group post (any group member may edit)."
+msgstr ""
+
+#: og.pages.inc:20
+msgid "Your message will be sent to all members of this group."
+msgstr ""
+
+#: og.pages.inc:36
+msgid "Enter a body for your message."
+msgstr ""
+
+#: og.module:1464
+msgid "OG audience & Public checkbox."
+msgstr ""
+
+#: og.module:1464
+msgid "OG audience."
+msgstr ""
+
+#: og.module:1476
+msgid "Handling of group membership requests."
+msgstr ""
+
+#: og.module:1481
+msgid "Checkbox for visibility on registration form."
+msgstr ""
+
+#: og.module:1486
+msgid "Checkbox for visibility in the groups directory."
+msgstr ""
+
+#: og.module:1493
+msgid "The default interface language for this group."
+msgstr ""
+
+#: og.module:1593
+msgid "Move all group posts and memberships to the group listed below."
+msgstr ""
+
+#: og.module:1601
+msgid ""
+"In addition to deleting this group, you choose how to disposition the "
+"posts and memberships within it."
+msgstr ""
+
+#: og.module:1668
+msgid "Deleted 1 orphan post."
+msgid_plural "Deleted @count orphan posts."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:1671
+msgid "Moved 1 orphan post."
+msgid_plural "Moved @count orphan posts."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:1693
+msgid "Moved 1 membership."
+msgid_plural "Moved @count memberships."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:993
+msgid ""
+"No public posts in this group. You must <a "
+"href=\"!register\">register</a> or <a href=\"!login\">login</a> and "
+"become a member in order to post messages, and view any private posts."
+msgstr ""
+
+#: og.module:998
+msgid ""
+"No public posts in this group. Consider <a href=\"!url\">joining this "
+"group</a> in order to view its posts."
+msgstr ""
+
+#: og.pages.inc:277
+msgid ""
+"In order to join this group, you must <a href=\"!login\">login</a>. "
+"After you have successfully done so, you will need to request "
+"membership again."
+msgstr ""
+
+#: og.pages.inc:280
+msgid ""
+"In order to join this group, you must <a href=\"!login\">login</a> or "
+"<a href=\"!register\">register</a> a new account. After you have "
+"successfully done so, you will need to request membership again."
+msgstr ""
+
+#: og.module:990
+msgid ""
+"No public posts in this group. You must <a href=\"!login\">login</a> "
+"and become a member in order to post messages, and view any private "
+"posts."
+msgstr ""
+
+#: og.module:2257
+msgid ""
+"You must <a href=\"!login\">login</a> in order to post into this "
+"group."
+msgstr ""
+
+#: og.module:2260
+msgid ""
+"You must <a href=\"!register\">register</a> or <a "
+"href=\"!login\">login</a> in order to post into this group."
+msgstr ""
+
+#: og.module:2389
+msgid "Type of top group"
+msgstr ""
+
+#: og.pages.inc:122
+msgid ""
+"Are you sure you want to make !name a group administrator for the "
+"group %title?"
+msgstr ""
+
+#: og.pages.inc:162
+msgid ""
+"Are you sure you want to remove !name as a group administrator for the "
+"group %title?"
+msgstr ""
+
+#: og.module:2390
+msgid "URL alias for the top group."
+msgstr ""
+
+#: og.module:817
+msgid ""
+"Membership request to the %group group was rejected; the anonymous "
+"user may not join a group."
+msgstr ""
+
+#: og.module:858
+msgid "You are now a member of %group."
+msgstr ""
+
+#: og.module:1547
+msgid "Group limit"
+msgstr ""
+
+#: og.module:1550
+msgid ""
+"If the usage is standard group post, specify the number of groups the "
+"nodes of this type may be posted into. Leave blank for no limit."
+msgstr ""
+
+#: og.module:1570
+msgid "The group limit must be a positive integer"
+msgstr ""
+
+#: og.module:1307
+msgid "The audience for this post may not exceed !max_number group."
+msgid_plural "The audience for this post may not exceed !max_number groups."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.module:1869
+msgid " Limited to !max_groups choice."
+msgid_plural " Limited to !max_groups choices."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: og.js:0
+msgid "Standard group post"
+msgstr ""
+
+#: og.js:0
+msgid "Wiki group post"
+msgstr ""
+
+#: og.module:219
+msgid "New user joins a group"
+msgstr ""
+
+#: og.module:222
+msgid "A user changes their subscription to a group"
+msgstr ""
+
+#: og.module:225
+msgid "A user deletes their subscription to a group"
+msgstr ""
+
+#: og.module:228
+msgid "A user has been approved for membership to a group"
+msgstr ""
+
+#: og.module:231
+msgid "A user is denied membership to a group"
+msgstr ""
+
+#: og.module:234
+msgid "A user requests membership to a group"
+msgstr ""
+
+#: og.module:237
+msgid "A new user is added as an admin to a group"
+msgstr ""
+
+#: og.pages.inc:354
+msgid "Are you sure you want to leave the group %title?"
+msgstr ""
+
+#: og.pages.inc:376
+msgid "You left the group %group."
+msgstr ""
+

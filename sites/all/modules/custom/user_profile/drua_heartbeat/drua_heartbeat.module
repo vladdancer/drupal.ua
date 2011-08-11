@@ -1,0 +1,33 @@
+<?php
+// $Id$
+
+
+/**
+ * Implementation of hook_views_api().
+ */
+function drua_heartbeat_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'drua_heartbeat'),
+  );
+}
+
+
+/**
+ * Implementation of hook_rules_defaults().
+ */
+function drua_heartbeat_rules_defaults() {
+  module_load_include('inc', 'drua_heartbeat', 'drua_heartbeat.rules_defaults');
+  $args = func_get_args();
+  return call_user_func_array('_drua_heartbeat_rules_defaults', $args);
+}
+
+
+/**
+ * Implementation of hook_heartbeat_message_info().
+ */
+function drua_heartbeat_heartbeat_message_info() {
+  module_load_include('inc', 'drua_heartbeat', 'drua_heartbeat.defaults');
+  $args = func_get_args();
+  return call_user_func_array('_drua_heartbeat_heartbeat_message_info', $args);
+}

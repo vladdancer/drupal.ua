@@ -1,0 +1,4 @@
+name = Groups Miscellaneous
+description = Makes various changes to groups forms and nodes.
+package = Custom
+core = 6.x

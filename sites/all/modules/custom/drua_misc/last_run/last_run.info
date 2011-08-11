@@ -1,0 +1,4 @@
+name = Last run module
+description = Makes some things after all modules.
+package = Custom
+core = 6.x

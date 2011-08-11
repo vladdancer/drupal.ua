@@ -1,0 +1,14 @@
+div.embedded-node {
+  border: 2px dashed #c1c1c1;
+  padding:5px;
+}
+
+div.embedded-node h2 {
+  font-size: 0.917em;
+}
+
+span.embed-msg {
+  font-style:italic;
+  float:right;
+  font-weight:bold;
+}

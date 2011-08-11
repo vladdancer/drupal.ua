@@ -1,0 +1,13 @@
+; $Id: og_views_extra.info,v 1.2 2010/03/11 23:12:36 kscheirer Exp $
+name = "OG Views - Extra"
+description = "Additional integration between Views and OG."
+package = "Organic groups"
+core = 6.x
+dependencies[] = views
+dependencies[] = og
+; Information added by drupal.org packaging script on 2010-03-11
+version = "6.x-1.1"
+core = "6.x"
+project = "og_views_extra"
+datestamp = "1268349906"
+

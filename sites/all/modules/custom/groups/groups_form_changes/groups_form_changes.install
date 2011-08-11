@@ -1,0 +1,9 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_install().
+ */
+function groups_form_changes_install() {
+  db_query("UPDATE {system} SET weight = 15 WHERE name = 'groups_form_changes'");
+}

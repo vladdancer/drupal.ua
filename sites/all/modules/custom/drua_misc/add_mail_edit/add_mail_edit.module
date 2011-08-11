@@ -1,0 +1,49 @@
+<?php
+// $Id$
+
+if (module_exists('mail_edit')) {
+  $path = drupal_get_path('module', 'add_mail_edit');
+  if (module_exists('simplenews')) {
+    require_once("$path/add_simplenews.inc");
+  }
+}
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function add_mail_edit_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'simplenews_admin_users_form' || $form_id == 'simplenews_subscription_manager_form') {
+    array_unshift($form['#submit'], 'add_mail_simplenews_subscription_form_submit');
+  }
+}
+
+
+/**
+ * Save the form when submit.
+ */
+function add_mail_simplenews_subscription_form_submit($form, &$form_state) {
+  add_mail_processing_simplenews_subscription_form('save', $form_state['values']);
+}
+
+
+/**
+ * Store and retrieve data in the form.
+ * @param $process
+ * 		'save' OR 'get' data form 
+ * @param $form_values
+ * 		Form data to save.
+ */
+function add_mail_processing_simplenews_subscription_form($process = 'get', $form_values = NULL) {
+  static $data;
+  if ($process == 'save') {
+    $data = array(
+      'value' => $form_values,
+      'current' => 0
+    );
+  }
+  elseif ($process == 'get') {
+    return isset($data) ? $data : FALSE ;
+  }
+}
+

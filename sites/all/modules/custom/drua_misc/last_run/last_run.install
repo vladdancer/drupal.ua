@@ -1,0 +1,10 @@
+<?php
+// $Id$
+
+
+/**
+ * We do start of the module by the last
+ */
+function last_run_install() {
+  db_query("UPDATE {system} SET weight = 1000 WHERE name = 'last_run'");
+}

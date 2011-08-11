@@ -1,0 +1,57 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_schema().
+ */
+function ad_advanced_html_schema() {
+  $schema['ad_advanced_html'] = array(
+    'fields' => array(
+      'aid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'html' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'url' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'unique keys' => array(
+      'aid' => array('aid')
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * ad_advanced_html module installation.
+ */
+function ad_advanced_html_install() {
+  db_query("UPDATE {system} SET weight = 10 WHERE name = 'ad_advanced_html'");
+  drupal_install_schema('ad_advanced_html');
+}
+
+/**
+ * Allow complete uninstallation of the ad_advanced_html module.
+ */
+function ad_advanced_html_uninstall() {
+  // Delete all ad_image content.
+  $result = db_query("SELECT aid FROM {ad_advanced_html}");
+  while ($aid = db_result($result)) {
+    node_delete($aid);
+  }
+
+  // Remove tables.
+  drupal_uninstall_schema('ad_advanced_html');
+}
+

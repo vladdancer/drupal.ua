@@ -1,0 +1,65 @@
+div.recent_question_row a:link {
+  color: #888888;
+  text-decoration: underline;
+}
+div.recent_question_row a:visited {
+  color: #888888;
+  text-decoration: underline;
+}
+
+div.recent_question_row_info,
+div.recent_question_row_title span {
+  padding-left: 24px;
+  padding-bottom:8px;
+}
+
+div.recent_question_row_title span.closed {
+  background: transparent url('../images/answers/question-closed.gif') no-repeat 0 0;
+  font-weight: bold;
+}
+
+div.recent_question_row_title span.not_answered {
+  background: transparent url('../images/answers/question-not-answered.gif') no-repeat 0 0;
+  font-weight: bold;
+}
+div.recent_question_row_title span.not_answered a:link,
+div.recent_question_row_title span.not_answered a:visited {
+  color: #1C739B;
+}
+
+
+div.recent_question_row_title span.answered {
+  background: transparent url('../images/answers/question-answered.gif') no-repeat 0 0;
+  font-weight: bold;
+}
+div.recent_question_row_title span.answered a:link,
+div.recent_question_row_title span.answered a:visited {
+  color: #228822;
+}
+
+div.recent_question_row_title span.gold {
+  background: transparent url('../images/answers/question-gold.gif') no-repeat 0 0;
+  font-weight: bold;
+}
+div.recent_question_row_title span.gold a:link,
+div.recent_question_row_title span.gold a:visited {
+  color: #228822;
+}
+
+div.recent_question_row_info {
+  margin: 2px 0 4px 0;
+}
+
+div.recent_question_row_info span.user_name {
+  padding-left: 20px;
+  margin-right: 16px;
+  background: transparent url('../images/answers/question-userpic.gif') no-repeat 0 0;
+}
+
+div.recent_question_row_info span.comment_count {
+  padding-left: 20px;
+  background: transparent url('../images/answers/question-answers.gif') no-repeat 0 0;
+}
+h3.pane-title {
+  font-size: 1.45em;
+}

@@ -1,0 +1,211 @@
+<?php
+/**
+ *  This module provides advanced "HTML ad" functionality to handle such features:
+ *  - Showing RBN's border around some banners in sidebar
+ *  -
+ */
+
+/**
+ * Function used to display the selected ad.
+ */
+function ad_advanced_html_display_ad($ad) {
+  $ad_html = "<div class=\"html-advertisement\" id=\"ad-$ad->aid\"><div class=\"ad-header\">$ad->html</div></div>";
+  if ($ad->url) {
+    //foreach ($ad->taxonomy as $key => $term) {
+    //  $ad_groups[] = $key;
+    //}
+    $ad->redirect .= '/@HOSTID___';//.implode(','.$ad_groups);
+    $ad_html = str_replace('href=', ad_link_attributes() .' href=', $ad_html);
+    $ad_html = str_replace('{CLICK_URL}', $ad->redirect, $ad_html);
+  }
+
+
+  $node = node_load($ad->aid);
+  if (variable_get('ad_filter', 0)) {
+    $ad_html = check_markup($ad_html, $ad->format, FALSE);
+  }
+
+  // Show ad in style of right sidebar's block if needed
+  if ($node->field_ad_border[0]['value']) {
+    $block = new stdClass();
+    $block->content = $ad_html;
+    $block->region = 'right';
+    $block->module = 'ad-border';
+    $output = theme('block', $block);
+  }
+  else {
+    $output = $ad_html;
+  }
+  return $output;
+}
+
+/**
+ * Implementation of hook_help().
+ */
+function ad_advanced_html_help($path, $arg) {
+  switch ($path) {
+    case 'node/add/ad#html':
+      $output = t('A html advertisement.');
+      break;
+  }
+  return $output;
+}
+
+/**
+ * Implementation of hook_access().
+ */
+function ad_advanced_html_access($op, $node, $account) {
+  return ad_access($op, $node, $account);
+}
+
+/**
+ * Implementation of the ad module's _adapi hook.
+ */
+function ad_advanced_html_adapi($op, &$node) {
+  switch ($op) {
+    case 'load':
+      $data = db_fetch_array(db_query('SELECT html, url FROM {ad_advanced_html} WHERE aid = %d', $node['aid']));
+      return $data;
+
+    case 'insert':
+      db_query("INSERT INTO {ad_advanced_html} (aid, html, url) VALUES(%d, '%s', '%s')", $node->nid, $node->html, $node->url);
+      break;
+
+    case 'update':
+      db_query("UPDATE {ad_advanced_html} SET html = '%s', url = '%s' WHERE aid = %d", $node->html, $node->url, $node->nid);
+      break;
+
+    case 'delete':
+      db_query('DELETE FROM {ad_advanced_html} WHERE aid = %d', $node->nid);
+      break;
+
+    case 'redirect':
+      return db_result(db_query('SELECT url FROM {ad_advanced_html} WHERE aid = %d', $node->nid));
+
+    case 'form':
+      return ad_advanced_html_node_form($node);
+
+    case 'view':
+      return ad_advanced_html_node_view($node);
+
+    case 'type':
+      return array(
+        'advanced_html' => array(
+          'name' => t('Advanced html'),
+          'module' => 'advanced_html',
+        ),
+      );
+
+    case 'permissions':
+      if (!isset($node->adtype) || $node->adtype == 'advanced_html') {
+        return array('manage ad html');
+      }
+  }
+}
+
+/**
+ * Adapi helper function for displaying a node form.
+ */
+function ad_advanced_html_node_form(&$node) {
+  $form = array();
+
+  $form['ad_advanced_html'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('HTML'),
+    '#collapsible' => TRUE,
+  );
+
+  $form['ad_advanced_html']['display'] = array(
+    '#type' => 'markup',
+    '#value' => ad_advanced_html_display_ad($node),
+  );
+
+  if ( ad_permission($node->nid, 'manage ad html') || (arg(1) == 'add' && user_access('create advertisements'))) {
+    $form['ad_advanced_html']['html'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Ad HTML'),
+      '#required' => TRUE,
+      '#default_value' => $node->html,
+      '#description' => t('Paste the complete HTML provided by your advertising affiliate.'),
+    );
+
+    $form['ad_advanced_html']['url'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Click URL'),
+      '#default_value' => $node->url,
+      '#description' => t('If you need to track clicks on ad by the system, leave {CLICK_URL} token in above HTML code and paste click URL here instead. <br/><b>NOTE:</b> If you will leave static URL in your HTML code, clicks will not be tracked!'),
+    );
+  }
+
+  return $form;
+}
+
+/**
+ * Helper function, display the html ad as a node.
+ */
+function ad_advanced_html_node_view(&$node) {
+  $node->content['ad'] = array(
+    '#value' => theme('box', '', stripslashes(ad_advanced_html_display_ad($node))),
+    '#weight' => -1,
+  );
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function ad_advanced_html_form_alter(&$form, $form_state, $form_id) {
+  if (($form_id == 'ad_node_form')){
+    unset($form['body_filter']);
+    unset($form['revision_information']);
+    if (!empty($form['options'])) {
+      $form['options']['#type'] = 'markup';
+      foreach ($form['options'] as &$element) {
+        if (is_array($element)) {
+          $element['#type'] = 'hidden';
+        }
+      }
+    }
+    if (!empty($form['author'])) {
+      $form['author']['#type'] = 'markup';
+      foreach ($form['author'] as &$element) {
+        if (is_array($element)) {
+          $element['#type'] = 'hidden';
+        }
+      }
+    }
+
+    unset($form['menu']);
+    unset($form['path']);
+    unset($form['teaser']);
+    unset($form['comment_settings']);
+
+
+    $form['ad_advanced_html']['#weight'] = 1;
+
+    $form['title']['#weight'] = $form['ad_advanced_html']['#weight'] - 4;
+    $form['taxonomy']['#weight'] = $form['ad_advanced_html']['#weight'] - 3;
+    $form['field_ad_border']['#weight'] = $form['ad_advanced_html']['#weight'] - 2;
+
+    $form['attachments']['#weight'] = $form['ad_advanced_html']['#weight'] + 1;
+    $form['adstatus']['#weight'] = $form['ad_advanced_html']['#weight'] + 2;
+    $form['statistics']['#weight'] = $form['ad_advanced_html']['#weight'] + 3;
+    $form['schedule']['#weight'] = $form['ad_advanced_html']['#weight'] + 4;
+    $form['schedule']['#collapsed'] = TRUE;
+
+    if (!$form['nid']['#value']) {
+      unset($form['statistics']);
+    }
+
+    if ((arg(1) == 'add') && (arg(2) == 'ad')) {
+      $form['ad_advanced_html']['html']['#default_value'] = '<a href="{CLICK_URL}"><img src="{IMAGE_URL}" alt="" /></a>';
+    }
+
+    $form['ad_advanced_html']['html']['#description'] = t('Paste the complete HTML provided by your advertising affiliate or use upload form to upload your own ads.');
+    $form['attachments']['#description'] = '<p>'.t('Don\'t forget to fill the HTML code of the ad!').'</p>'.
+    '<p><b>'.t('Example for image ads').':</b><br/>&lt;img src="{IMAGE_URL}" alt="" /&gt;</p>'.
+    '<p><b>'.t('Example for flash ads').':</b><br/>&lt;object width="{WIDTH}" height="{HEIGHT}"&gt;&lt;param name="movie" value="{FLASH_MOVIE_URL}"&gt;&lt;/param&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;embed src="{FLASH_MOVIE_URL}" type="application/x-shockwave-flash" allowfullscreen="true" width="{WIDTH}" height="{HEIGHT}"&gt;&lt;/embed&gt;&lt;/object&gt;</p>'.
+    '<p><b>'.t('To add some background color, wrap your banner with this tags (optional)').':</b><br/>&lt;div style="background-color:#FFF"&gt;  ...banner code...  &lt;/div&gt;</p>'.
+    '<p><b>'.t('Paste after banner code to insert banner URL (optional)').':</b><br/>&lt;a href="{CLICK_URL}" class="wlink"&gt;&lt;/a&gt;</p>';
+
+  }
+}

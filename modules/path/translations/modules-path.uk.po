@@ -1,0 +1,172 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-09-30 12:24+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Existing system path"
+msgstr "Існуючий системний шлях"
+
+msgid "Path alias"
+msgstr "Аліас шляху"
+
+msgid ""
+"Specify the existing path you wish to alias. For example: node/28, forum/1, "
+"taxonomy/term/1+2."
+msgstr ""
+"Вкажіть існуючий шлях, для якого ви створюєте синонім. Наприклад: node/28, "
+"forum/1, taxonomy/term/1+2."
+
+msgid ""
+"Specify an alternative path by which this data can be accessed. For example, "
+"type \"about\" when writing an about page. Use a relative path and don't add "
+"a trailing slash or the URL alias won't work."
+msgstr ""
+"Вкажіть альтернативний шлях, за яким дані будуть доступні. Для прикладу, "
+"напишіть \"Про Сайт\" , коли створюєте сторінку про ваш сайт. Використовуйте "
+"відносні шляхи і не додавайте на початку слеш, інкаше синонім не буде "
+"працювати."
+
+msgid "URL path settings"
+msgstr "Налаштування URL адрес"
+
+msgid "Alias"
+msgstr "Псевдонім"
+
+msgid "create url aliases"
+msgstr "створити синоніми URL адрес"
+
+msgid "administer url aliases"
+msgstr "адмініструвати аліаси url"
+
+msgid ""
+"Optionally specify an alternative URL by which this node can be accessed. "
+"For example, type \"about\" when writing an about page. Use a relative path "
+"and don't add a trailing slash or the URL alias won't work."
+msgstr ""
+"Можна визначити альтернативний URL, за яким ця нода може бути доступною. "
+"Наприклад, наберіть \"about\" коли пишете сторінку про себе. Використовуйте "
+"відносні адреси і не додавайте кінцевий слеш (косу риску), інакше URL "
+"псевдонім не буде працювати."
+
+msgid "No URL aliases found."
+msgstr "Не знайдено синонімів адрес."
+
+msgid "No URL aliases available."
+msgstr "Нема синонімів посилань."
+
+msgid "Update alias"
+msgstr "Оновити аліас"
+
+msgid "Create new alias"
+msgstr "Створити новий аліас"
+
+msgid "The alias %alias is already in use in this language."
+msgstr ""
+
+msgid "The alias has been saved."
+msgstr "Синонім збережено."
+
+msgid "Are you sure you want to delete path alias %title?"
+msgstr "Ви дійсно хочете знищити %title?"
+
+msgid "Filter aliases"
+msgstr "Фільтрувати псевдоніми"
+
+msgid ""
+"The path module allows you to specify aliases for Drupal URLs. Such aliases "
+"improve readability of URLs for your users and may help internet search "
+"engines to index your content more effectively. More than one alias may be "
+"created for a given page."
+msgstr ""
+"Модуль шляху дозволяє призначати псевдоніми для URL-адрес. Ці псевадоніми "
+"підвищують читабельність адрес сайту для користувачів і можуть допомогти "
+"пошуковим системам ефективніше індексувати наповнення сайту. Для одної "
+"сторінки може бути призначено більше ніж один псевдонім."
+
+msgid ""
+"<p>Some examples of URL aliases are:</p>\n"
+"<ul>\n"
+"<li>user/login =&gt; login</li>\n"
+"<li>image/tid/16 =&gt; store</li>\n"
+"<li>taxonomy/term/7+19+20+21 =&gt; store/products/whirlygigs</li>\n"
+"<li>node/3 =&gt; contact</li>\n"
+"</ul>\n"
+msgstr ""
+"<p>Декілька прикладів синонімів:</p>\n"
+"<ul>\n"
+"<li>user/login =&gt; login</li>\n"
+"<li>image/tid/16 =&gt; store</li>\n"
+"<li>taxonomy/term/7+19+20+21 =&gt; store/products/whirlygigs</li>\n"
+"<li>node/3 =&gt; contact</li>\n"
+"</ul>\n"
+
+msgid ""
+"The path module enables appropriately permissioned users to specify an "
+"optional alias in all node input and editing forms, and provides an "
+"interface to view and edit all URL aliases. The two permissions related to "
+"URL aliasing are <em>administer url aliases</em> and <em>create url aliases</"
+"em>. "
+msgstr ""
+
+msgid ""
+"This module also provides user-defined mass URL aliasing capabilities, which "
+"is useful if you wish to uniformly use URLs different from the default. For "
+"example, you may want to have your URLs presented in a different language. "
+"Access to the Drupal source code on the web server is required to set up "
+"mass URL aliasing. "
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@path"
+"\">Path module</a>."
+msgstr ""
+
+msgid ""
+"Drupal provides complete control over URLs through aliasing, which is often "
+"used to make URLs more readable or easy to remember. For example, the alias "
+"'about' may be mapped onto the post at the system path 'node/1', creating a "
+"more meaningful URL. Each system path can have multiple aliases."
+msgstr ""
+"Drupal забезпечує повний контроль над URL-ами за допомогою псевдонімів, які "
+"часто використовуються аби зробити адреси URL більш читабельними та легкими "
+"для запам'ятовування. Наприклад, зрозумілий псевдоним 'about'  може бути "
+"наведений на повідомлення, яке зареєстроване в системі під стандартним "
+"шляхом 'node/1'. Кожен системний шлях до публікацій може мати декілька "
+"псевдонімів."
+
+msgid ""
+"Enter the path you wish to create the alias for, followed by the name of the "
+"new alias."
+msgstr ""
+"Введіть шлях, для якого ви хочете створити синонім, а потім сам синонім."
+
+msgid "The alias has been deleted."
+msgstr "Синонім знищено."
+
+msgid "The path is already in use."
+msgstr "Шлях уже використовується."
+
+msgid "URL aliases"
+msgstr "Синоніми URL"
+
+msgid "Change your site's URL paths by aliasing them."
+msgstr "Зміна адрес сторінок сайту шляхом створення синонімів."
+
+msgid "Edit alias"
+msgstr "Змінити псевдонім"
+
+msgid "Delete alias"
+msgstr "Видалити псевдонім"
+
+msgid "Add alias"
+msgstr "Додати псевдонім"

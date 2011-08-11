@@ -1,0 +1,159 @@
+# Ukrainian translation of og (6.x-2.1)
+# Copyright (c) 2010 by the Ukrainian translation team
+# Generated from files:
+#  og_actions.module,v 1.9.4.2 2009/06/09 01:04:44 weitzman
+#  og_actions.info,v 1.2.4.1 2009/05/29 00:45:31 weitzman
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: og (6.x-2.1)\n"
+"POT-Creation-Date: 2010-06-08 19:30+0400\n"
+"PO-Revision-Date: 2008-10-12 17:33+0400\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: modules/og_actions/og_actions.module:104,114,124,137,187,235,284,333,381,429,476
+msgid "action"
+msgstr "дія"
+
+#: modules/og_actions/og_actions.module:163,262,311,359,407,455,502
+msgid "Please <a href=\"!url\">create</a> a group first."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:213
+msgid ""
+"There are no groups. You must have at least one existing group with "
+"nodes assigned to use this action."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:104
+msgid "Set node %id to public."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:114
+msgid "Set node %id to private."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:124
+msgid "Removed node %id from all groups."
+msgstr ""
+
+#: modules/og_actions/og_actions.info:0
+msgid "Organic groups actions"
+msgstr ""
+
+#: modules/og_actions/og_actions.info:0
+msgid "Provides actions for use with Organic Groups and Trigger."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:11
+msgid "Remove post from all groups"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:77
+msgid "Make post publicly visible"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:86
+msgid "Make post private to its groups"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:50
+msgid "Promote user to an administrator in the specified group"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:56
+msgid "Demote user from an administrator in the specified group"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:62
+msgid "Approve user subscription to the specified group"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:68
+msgid "Deny user subscription to the specified group"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:353
+msgid "Select the group to which this user should be promoted."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:401
+msgid "Select the group from which this user should be demoted."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:449
+msgid "Select the group whose user subscription request should be approved."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:496
+msgid "Select the group whose user subscription request should be denied."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:333
+msgid "%name was promoted to <em>group administrator</em> in %group."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:381
+msgid "Demoted user %name from <em>group administrator</em> in %group."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:429
+msgid "Approved user %name's subscription to %group."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:476
+msgid "Denied user %name's subscription to %group."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:38
+msgid "Subscribe user to the specified groups"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:255
+msgid "Select the groups to which this user should be subscribed."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:20
+msgid "Add post to the specified groups"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:29
+msgid "Remove post from the specified groups"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:44
+msgid "Unsubscribe user from the specified groups"
+msgstr ""
+
+#: modules/og_actions/og_actions.module:156
+msgid "Select the groups to add to the node."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:206
+msgid "Select the groups to remove from the node."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:304
+msgid "Select the groups to which this user should be unsubscribed."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:137
+msgid "Added node id %id to groups %groups."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:187
+msgid "Removed node id %id from groups %groups."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:235
+msgid "Subscribed user %name to groups %groups."
+msgstr ""
+
+#: modules/og_actions/og_actions.module:284
+msgid "Unsubscribed user %name from groups %groups."
+msgstr ""
+

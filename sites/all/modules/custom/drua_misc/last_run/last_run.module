@@ -1,0 +1,113 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function last_run_form_alter(&$form, $form_state, $form_id) {
+  /**
+   * Switch-off possibility of rewriting of translations
+   * http:// ... /admin/build/translate/import
+   */
+  if ($form_id == 'locale_translate_import_form') {
+    if (isset($form['import']['mode']['#options'][LOCALE_IMPORT_OVERWRITE])) {
+      $form['import']['mode']['#default_value'] = LOCALE_IMPORT_KEEP;
+      $form['import']['mode']['#disabled'] = TRUE;
+    }
+  }
+  
+  /**
+   * Hide the fieldset in the form of registration/profile/change license
+   */
+  if ($form_id == 'user_register' || $form_id == 'user_profile_form' || $form_id == 'legal_login') {
+    if (isset($form['legal'])) {
+      $form['legal']['#attributes'] = array('class' => 'legal-fieldset-form');
+      $form['legal']['legal_accept']['#title'] = $form['legal']['conditions']['#value'];
+      $form['legal']['conditions']['#value'] = '<div class="legal-hide-form">'. $form['legal']['conditions']['#value'] .'</div>';
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_init().
+ */
+function last_run_init() {
+  global $user;
+  if (module_exists('content_profile') && arg(0) == 'node') {
+    if (arg(1) == 'add' && arg(2) == 'profile') {
+      drupal_goto('user/'. $user->uid .'/edit/profile');
+    }
+    else {
+      $node = node_load(arg(1));
+      if ($node && $node->type == 'profile') {
+        //delete destination patch
+        if ($_REQUEST['edit']['destination']) {
+          unset($_REQUEST['edit']['destination']);
+        }
+        if ($_REQUEST['destination']) {
+          unset($_REQUEST['destination']);
+        }
+        
+        if (arg(2) == 'edit') {
+          drupal_goto('user/'. $node->uid .'/edit/profile');
+        }
+        else {
+          drupal_goto('user/'. $node->uid);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_link_alter().
+ */
+function last_run_link_alter($links, $node, $comment = NULL) {
+  if (isset($node->type)) {
+    unset($links['node_read_more']);
+    if (isset($links['comment_comments'])) {
+      $all = comment_num_all($node->nid);
+      $links['comment_comments'] = array(
+        'title' => $all,
+        'href' => "node/$node->nid",
+        'attributes' => array('title' => t('Jump to the first comment of this posting.')),
+        'fragment' => 'comments'
+      );
+    }
+    if (isset($links['comment_new_comments'])) {
+      unset($links['comment_new_comments']);
+      $new = comment_num_new($node->nid);
+      $links['comment_comments']['title'] .= '<sup class="new"><b>'. $new .'</b></sup>';
+      $links['comment_comments']['html'] = TRUE;
+    }
+    if (isset($links['comment_add'])) {
+      $links['comment_add']['title'] = t('Add comment');
+    }
+    if (isset($links['comment_forbidden'])) {
+      unset($links['comment_forbidden']);
+      $links['comment_comments'] = array(
+        'title' => '0',
+        'href' => "node/$node->nid",
+        'attributes' => array('title' => t('Jump to the first comment of this posting.')),
+        'fragment' => 'comments'
+      );
+    }
+
+    // Put number of page views in links.
+    if (module_exists('statistics')) {
+      if (user_access('view post access counter')) {
+        $statistics = statistics_get($node->nid);
+        // Sanity check, cause we don't want to mess taxonomy links.
+        if ($statistics && $links['statistics_counter']['title']) {
+          $links['statistics_counter']['title'] = $statistics['totalcount'];
+        }
+      }
+    }
+  }
+  // Move reply always into end of row.
+  if (isset($comment) && $comment != NULL) {
+    array_unshift($links, $links['comment_reply']);
+    unset($links['comment_reply']);
+  }
+}

@@ -1,0 +1,187 @@
+<?php
+// $Id: apachebench.module,v 1.1 2009/03/19 21:18:20 neochief Exp $
+
+/**
+ * @file
+ * ApacheBench support and report generator.
+ */
+
+function apachebench_help($path, $arg) {
+  $output = '';
+
+  switch ($path) {
+    case 'admin/reports/apachebench':
+      $output = '<p>'. t('Cron-based benchmarks allow to track average site performance through the time.').'</p>';
+      break;
+    case 'admin/reports/apachebench/instant':
+      $output = '<p>'. t('Instant benchmarks helps to test recent site changes without waiting for cron jobs to run.') .'</p>';
+      break;
+  }
+
+  return $output;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function apachebench_perm() {
+  return array('administer apachebench', 'view apachebench reports');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function apachebench_menu() {
+  $items = array();
+
+  $items['admin/reports/apachebench'] = array(
+    'title' => 'ApacheBench Reports',
+    'page callback' => 'drupal_get_form', 
+    'page arguments' => array('apachebench_reports'),
+    'access arguments' => array('view apachebench reports'), 
+    'file' => 'apachebench.admin.inc',
+  );
+  $items['admin/reports/apachebench/cron'] = array(
+    'title' => 'Cron-based benchmark',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/reports/apachebench/instant'] = array(
+    'title' => 'Instant Benchmark',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apachebench_instant'),
+    'access arguments' => array('view apachebench reports'), 
+    'file' => 'apachebench.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/settings/apachebench'] = array(
+    'title' => 'ApacheBench',
+    'page callback' => 'drupal_get_form', 
+    'page arguments' => array('apachebench_settings'), 
+    'access arguments' => array('administer apachebench'), 
+    'file' => 'apachebench.admin.inc',
+  );
+ 
+  return $items;
+}
+
+/**
+ * Implementation of hook_cron().
+ */
+function apachebench_cron() {
+  if ($last_run = variable_get('cron_last', FALSE)){
+    $frequency = variable_get('apachebench_frequency', 0);
+    $last_run_hours = floor((time() - $last_run) / (60 * 60));
+
+    // Ensure we can invoke apachebench
+    if ($frequency <= 0 || $last_run_hours <= $frequency){
+      return;
+    }
+
+    // Perform tests
+    $uris = explode("\n", variable_get('apachebench_uris', ''));
+    // @todo allow $uri(s) for apachebench().
+    foreach((array) $uris AS $uri){
+      apachebench(trim($uri), variable_get('apachebench_requests', 100), variable_get('apachebench_concurrency', 25), TRUE); 
+    }
+
+    // Log success
+    watchdog('apachebench', 'ApacheBench invoked on %count uris.', array('%count' => count($uris)), WATCHDOG_INFO);
+  }
+}
+
+/**
+ * Invoke ApacheBench
+ *
+ * @param string $uri
+ *   Valid absolute URI and path such as 'http://vision-media.ca/', 
+ *   note the trailing slash (/).
+ *
+ * @param int $requests
+ *   (optional) Total number of requests.
+ *  
+ * @param int $concurrency
+ *   (optional) Concurrency of requests.
+ *
+ * @param bool $store
+ *   (optional) Bool indicating database storage for reporting.
+ *
+ * @return mixed
+ *   - success: Array of results
+ *   - failure: int
+ */
+function apachebench($uri, $requests = 100, $concurrency = 25, $store = FALSE) {
+  $results = array();
+  
+  // Ensure concurrency is larger than requests
+  if ($concurrency > $requests){
+    return -1;
+  }
+
+  // Preven malicious args
+  if (!is_numeric($concurrency) || !is_numeric($requests)){
+    return -3;
+  }
+
+  // Ensure a valid uri
+  if (!valid_url($uri, TRUE)){
+    return -2;
+  }
+
+  $ab = variable_get('apachebench_path', 'ab');
+  $results = apachebench_parse_output(shell_exec("{$ab} -n {$requests} -c {$concurrency} {$uri}"));
+
+  $results['uri'] = $uri;
+  $results['concurrency'] = $concurrency;
+  $results['requests'] = $requests;
+  $results['created'] = time();
+
+  // Store data
+  if ($store === TRUE){
+    drupal_write_record('apachebench_results', $results);
+  }
+
+  return $results;
+}
+
+/**
+ * Clear all ab results.
+ */
+function apachebench_clear_all() {
+  db_query("DELETE FROM {apachebench_results}");
+}
+
+/**
+ * Parse ab invocation output.
+ *
+ * @param string $output
+ * 
+ * @return array
+ */
+function apachebench_parse_output($output) {
+  $results = array();
+  
+  $cols = array();
+  $cols[] = 'complete requests';
+  $cols[] = 'document length';
+  $cols[] = 'failed requests';
+  $cols[] = 'total transferred';
+  $cols[] = 'html transferred';
+  $cols[] = 'requests per second';
+  $cols[] = 'time taken for tests';
+  
+  preg_match_all('!('. implode('|', $cols) . '):\s+([0-9\.]+)!i', $output, $matches, PREG_SET_ORDER);
+  foreach((array) $matches AS $match){
+    $results[drupal_strtolower(strtr($match[1], ' ', '_'))] = $match[2];
+  }
+
+  return $results;
+}
+
+/**
+ * Require ApacheBenchChart class.
+ */
+function apachebench_require_chart() {
+  if (module_exists('open_flash_chart_api')){
+    require_once(dirname(__FILE__) . '/apachebench.chart.inc');
+  }
+}

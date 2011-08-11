@@ -1,0 +1,563 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:15+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Filter HTML tags"
+msgstr "Фільтрувати HTML теґи"
+
+msgid "Input format"
+msgstr "Формат вводу"
+
+msgid "Table"
+msgstr "Таблиця"
+
+msgid "Filters"
+msgstr "Фільтри"
+
+msgid "Preformatted"
+msgstr "Відформатований текст"
+
+msgid "Deleted"
+msgstr "Видалено"
+
+msgid "Greater than"
+msgstr "Більше ніж"
+
+msgid "Less than"
+msgstr "Менше ніж"
+
+msgid "Spam link deterrent"
+msgstr "Захист від спамерських посилань"
+
+msgid "administer filters"
+msgstr "адмініструвати фільтри"
+
+msgid "Line break converter"
+msgstr "Конвертор розриву рядків"
+
+msgid "Underlined"
+msgstr "Підкреслений"
+
+msgid "Input formats"
+msgstr "Формати вводу"
+
+msgid "Subtitle"
+msgstr "Підзаголовок"
+
+msgid "Escape all tags"
+msgstr "Залишити всі теги"
+
+msgid "Strip disallowed tags"
+msgstr "Знищити заборонені теги"
+
+msgid "input formats"
+msgstr "формати вводу"
+
+msgid "Rearrange"
+msgstr "Пересортувати"
+
+msgid ""
+"If enabled, Drupal will add rel=\"nofollow\" to all links, as a measure to "
+"reduce the effectiveness of spam links. Note: this will also prevent valid "
+"links from being followed by search engines, therefore it is likely most "
+"effective when enabled for anonymous users."
+msgstr ""
+"Якщо ввімкнено, Друпал додасть rel=\"nofollow\" до всіх посиланьна сайті, як "
+"засіб запобігання ефективності спамових посилань. Примітка: це також "
+"заборонить пошуковим системам відслідковувати дійсні посилання; таким чином, "
+"ця функція найбільш ефективна для анонімних користувачів."
+
+msgid "Maximum link text length"
+msgstr "Максимальна довжина тексту посилання"
+
+msgid ""
+"URLs longer than this number of characters will be truncated to prevent long "
+"strings that break formatting. The link itself will be retained; just the "
+"text portion of the link will be truncated."
+msgstr ""
+"Посилання довжина яких більша ніж це число обрізаються, щоб уникнути "
+"порушення форматування тексту. Саме посилання зберігається, але його "
+"текстова частина обрізається."
+
+msgid "URL filter"
+msgstr "URL фільтр"
+
+msgid "Acronym"
+msgstr "Скорочення"
+
+msgid "Abbreviation"
+msgstr "Скорочення"
+
+msgid "Inserted"
+msgstr "Вставлене"
+
+msgid "All roles may use default format"
+msgstr "Всі ролі можуть використовувати формат за замовченням."
+
+msgid "No roles may use this format"
+msgstr "Ролі не використовують цей формат"
+
+msgid "Set default format"
+msgstr "Встановити типовий формат"
+
+msgid "Default format updated."
+msgstr "Формат за замовчуванням оновлено."
+
+msgid "All roles for the default format must be enabled and cannot be changed."
+msgstr ""
+"Всі ролі у форматі за замовчуванням повинні бути включені і не можуть "
+"змінюватися."
+
+msgid "Specify a unique name for this filter format."
+msgstr "Задайте унікальне ім'я для цього формату."
+
+msgid ""
+"Choose which roles may use this filter format. Note that roles with the "
+"\"administer filters\" permission can always use all the filter formats."
+msgstr ""
+"Виберіть, які ролі можуть використовувати цей формат. Зверніть увагу, що "
+"ролі із можливостями \"керування фільтрами\" завжди можуть використовувати "
+"всі формати фільтрів."
+
+msgid "Choose the filters that will be used in this filter format."
+msgstr ""
+"Виберіть фільтри, які будуть використовуватися в цьому форматі фільтрів."
+
+msgid "No guidelines available."
+msgstr "Інструкції недоступні."
+
+msgid ""
+"These are the guidelines that users will see for posting in this input "
+"format. They are automatically generated from the filter settings."
+msgstr ""
+"Ці пояснення побачать ваші користувачі під час додавання повідомлень в цьому "
+"форматі. Пояснения беруться із налаштувань фільтру."
+
+msgid ""
+"Filter format names need to be unique. A format named %name already exists."
+msgstr "Назви форматів повинні бути унікальними. Формат %name вже існує."
+
+msgid "Added input format %format."
+msgstr "Доданий формат вводу %format."
+
+msgid "The input format settings have been updated."
+msgstr "Налаштування формату вводу поновлено."
+
+msgid "Are you sure you want to delete the input format %format?"
+msgstr "Ви впевнені, що хочете стерти формат вводу %format?"
+
+msgid ""
+"If you have any content left in this input format, it will be switched to "
+"the default input format. This action cannot be undone."
+msgstr ""
+"Якщо у вас є текст в цьому форматі, він буде перетворюватися у формат за "
+"замовчуванням. Цю дію відмінити не можна."
+
+msgid "The default format cannot be deleted."
+msgstr "Вихідний формат не може бути видалений."
+
+msgid "Deleted input format %format."
+msgstr "Стертий формат вводу %format."
+
+msgid "Configure %format"
+msgstr "Конфігурувати %format"
+
+msgid "No settings are available."
+msgstr "Немає жодних налаштувань."
+
+msgid "Rearrange %format"
+msgstr "Пересортувати %format"
+
+msgid "The filter ordering has been saved."
+msgstr "Порядок сортування фільтрів було збережено."
+
+msgid ""
+"The filter module allows administrators to configure text input formats for "
+"use on your site. An input format defines the HTML tags, codes, and other "
+"input allowed in both content and comments, and is a key feature in guarding "
+"against potentially damaging input from malicious users. Two input formats "
+"included by default are <em>Filtered HTML</em> (which allows only an "
+"administrator-approved subset of HTML tags) and <em>Full HTML</em> (which "
+"allows the full set of HTML tags). Additional input formats may be created "
+"by an administrator."
+msgstr ""
+
+msgid ""
+"Each input format uses filters to manipulate text, and most input formats "
+"apply several different filters to text in a specific order. Each filter is "
+"designed for a specific purpose, and generally either adds, removes or "
+"transforms elements within user-entered text before it is displayed. A "
+"filter does not change the actual content of a post, but instead, modifies "
+"it temporarily before it is displayed. A filter may remove unapproved HTML "
+"tags, for instance, while another automatically adds HTML to make links "
+"referenced in text clickable."
+msgstr ""
+
+msgid ""
+"Users can choose between the available input formats when creating or "
+"editing content. Administrators can configure which input formats are "
+"available to which user roles, as well as choose a default input format."
+msgstr ""
+"Користувачі можуть вибирати, який із доступних форматів використовувати для "
+"створення  або зміни змісту своїх повідомлень. Адміністратори можуть "
+"визначати, які формати доступні для якоїсь ролі, а також який формат буде за "
+"замовченням. Адміністратори можуть створювати нові формати. Кожен формат "
+"можна налаштувати на використання деякого набору фільтрів."
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@filter"
+"\">Filter module</a>."
+msgstr ""
+"Для додаткової інформації читайте онлайн підручник для <a href=\"@trigger"
+"\">модуля Тригерів</a>."
+
+msgid ""
+"<em>Input formats</em> define a way of processing user-supplied text in "
+"Drupal. Each input format uses filters to manipulate text, and most input "
+"formats apply several different filters to text, in a specific order. Each "
+"filter is designed to accomplish a specific purpose, and generally either "
+"removes elements from or adds elements to text before it is displayed. Users "
+"can choose between the available input formats when submitting content."
+msgstr ""
+
+msgid ""
+"Use the list below to configure which input formats are available to which "
+"roles, as well as choose a default input format (used for imported content, "
+"for example). The default format is always available to users. All input "
+"formats are available to users in a role with the \"administer filters\" "
+"permission."
+msgstr ""
+"Користувачі можуть вибирати, який із доступних форматів використовувати для "
+"створення  або зміни змісту своїх повідомлень. Адміністратори можуть "
+"визначати, які формати доступні для якоїсь ролі, а також який формат буде за "
+"замовченням. Адміністратори можуть створювати нові формати. Кожен формат "
+"можна налаштувати на використання деякого набору фільтрів."
+
+msgid ""
+"Every <em>filter</em> performs one particular change on the user input, for "
+"example stripping out malicious HTML or making URLs clickable. Choose which "
+"filters you want to apply to text in this input format. If you notice some "
+"filters are causing conflicts in the output, you can <a href=\"@rearrange"
+"\">rearrange them</a>."
+msgstr ""
+"<p>Кожен <em>фільтр</em> проводить якусь зміну введеної користувачем "
+"інформації, наприклад, прибирає небезпечні теги розмітки HTML або створює "
+"гіперпосилання. Виберіть, які фільтри потрібно використовувати для поточного "
+"формату вводу.</p>\n"
+"<p>Якщо ви помітите, що фільтри конфліктуєть при вводі тексту, ви можете <a "
+"href=\"@rearrange\">відсортувати</a> їх.</p>"
+
+msgid ""
+"If you cannot find the settings for a certain filter, make sure you have "
+"enabled it on the <a href=\"@url\">view tab</a> first."
+msgstr ""
+"Якщо ви не можете знайти опції певного фільтру, перевірте увімкнений <a href="
+"\"@url\">функціонал</a>."
+
+msgid ""
+"Because of the flexible filtering system, you might encounter a situation "
+"where one filter prevents another from doing its job. For example: a word in "
+"an URL gets converted into a glossary term, before the URL can be converted "
+"to a clickable link. When this happens, rearrange the order of the filters."
+msgstr ""
+"Завдяки гнучкості системи фільтрів, ви можете зіштовхнутися із ситуацією, "
+"коли один фільтр заважає іншому. Наприклад: слово в електронній адресі "
+"перетворюється в термін зі словника, невстигаючи перетворитись у працююче "
+"посилання. У цьому випадку потрібно перевстановити порядок виконання "
+"фільтрів."
+
+msgid ""
+"Filters are executed from top-to-bottom. To change the order of the filters, "
+"modify the values in the <em>Weight</em> column or grab a drag-and-drop "
+"handle under the <em>Name</em> column and drag filters to new locations in "
+"the list. (Grab a handle by clicking and holding the mouse while hovering "
+"over a handle icon.) Remember that your changes will not be saved until you "
+"click the <em>Save configuration</em> button at the bottom of the page."
+msgstr ""
+
+msgid "Allowed HTML tags: @tags"
+msgstr "Дозволені теги HTML: @tags"
+
+msgid ""
+"\n"
+"<p>This site allows HTML content. While learning all of HTML may feel "
+"intimidating, learning how to use a very small number of the most basic HTML "
+"\"tags\" is very easy. This table provides examples for each tag that is "
+"enabled on this site.</p>\n"
+"<p>For more information see W3C's <a href=\"http://www.w3.org/TR/html/"
+"\">HTML Specifications</a> or use your favorite search engine to find other "
+"sites that explain HTML.</p>"
+msgstr ""
+"\n"
+"<p>Цей сайт допускає використання матеріалів із розміткою HTML. Вивчення "
+"всієї мови HTML може здатися страшним, але використання невеликої кількості "
+"основних \"тегів\" -це дуже просто. Ця таблиця показує приклади для кожного "
+"тегу із доступних на сайті.</p>\n"
+"<p>Більше інформації ви можете отримати на сторінці <a href=\"http://www.w3."
+"org/TR/html/\">офіційних вказівок для використання HTML</a> або використайте "
+"ваш улюблений пошук, щоб знайти сайти, що пояснюють використання HTML.</p>"
+
+msgid "Anchors are used to make links to other pages."
+msgstr "Якори використовують для створення посилань на інші сторінки."
+
+msgid ""
+"By default line break tags are automatically added, so use this tag to add "
+"additional ones. Use of this tag is different because it is not used with an "
+"open/close pair like all the others. Use the extra \" /\" inside the tag to "
+"maintain XHTML 1.0 compatibility"
+msgstr ""
+"Стандартно (by default) теґи розриву рядків додаються автоматично, таким "
+"чином використовуйте цей теґ, щоб додати ще трохи таких теґів. Використання "
+"цього теґу трохи інакше, тому що він не використовується у парі відкрити/"
+"закрити, як решта. Використовуйте додаткову косу риску \" /\" всередині "
+"теґу, щоб зберігати сумісність з XHTML 1.0."
+
+msgid "Text with <br />line break"
+msgstr "Текст з розривом рядків <br />"
+
+msgid ""
+"By default paragraph tags are automatically added, so use this tag to add "
+"additional ones."
+msgstr ""
+"Стандартно (by default) теґи параграфів додаються автоматично, таким чином "
+"використовуйте цей теґ, щоб додати ще трохи таких теґів."
+
+msgid "Paragraph one."
+msgstr "Перший параграф."
+
+msgid "Paragraph two."
+msgstr "Другий параграф."
+
+msgid "Strong"
+msgstr "Сильне"
+
+msgid "Emphasized"
+msgstr "Курсив"
+
+msgid "Cited"
+msgstr "Цитата"
+
+msgid "Coded text used to show programming source code"
+msgstr "Текст для відображення початкового програмного коду"
+
+msgid "Coded"
+msgstr "Вихідний код"
+
+msgid "Bolded"
+msgstr "Жирний"
+
+msgid "Italicized"
+msgstr "Курсив"
+
+msgid "Superscripted"
+msgstr "Верхній індекс"
+
+msgid "<sup>Super</sup>scripted"
+msgstr "<sup>Верхній</sup>індекс"
+
+msgid "Subscripted"
+msgstr "Нижній індекс"
+
+msgid "<sub>Sub</sub>scripted"
+msgstr "<sub>Нижній</sub>індекс"
+
+msgid "<abbr title=\"Abbreviation\">Abbrev.</abbr>"
+msgstr "<abbr title=\"Скорочення\">Скор.</abbr>"
+
+msgid "<acronym title=\"Three-Letter Acronym\">TLA</acronym>"
+msgstr "<acronym title=\"Абривіатура трьох літер\">АТЛ</acronym>"
+
+msgid "Block quoted"
+msgstr "Процитований блок"
+
+msgid "Quoted inline"
+msgstr "Цитата у тексті"
+
+msgid "Table header"
+msgstr "Заголовок таблиці"
+
+msgid "Table cell"
+msgstr "Комірка таблиці"
+
+msgid "Ordered list - use the &lt;li&gt; to begin each list item"
+msgstr ""
+"Пронумерований список - використовуйте &lt;li&gt; на початку кожного "
+"елементу списку"
+
+msgid "First item"
+msgstr "Перший елемент"
+
+msgid "Second item"
+msgstr "Другий елемент"
+
+msgid "Unordered list - use the &lt;li&gt; to begin each list item"
+msgstr ""
+"Ненумерованний список – використовуйте &lt;li&gt; для початку кожного "
+"елементу списку"
+
+msgid ""
+"Definition lists are similar to other HTML lists. &lt;dl&gt; begins the "
+"definition list, &lt;dt&gt; begins the definition term and &lt;dd&gt; begins "
+"the definition description."
+msgstr ""
+"Списки визначень подібні до інших списків HTML. &lt;dl&gt; починає увесь "
+"список визначень, &lt;dt&gt; починає кожний термін для визначення і &lt;"
+"dd&gt; починає самий опис терміну."
+
+msgid "First term"
+msgstr "Перший термін"
+
+msgid "First definition"
+msgstr "Перше визначення"
+
+msgid "Second term"
+msgstr "Другий термін"
+
+msgid "Second definition"
+msgstr "Друге визначення"
+
+msgid "Subtitle three"
+msgstr "Заголовок третього рівня"
+
+msgid "Subtitle four"
+msgstr "Заголовок четвертого рівня"
+
+msgid "Subtitle five"
+msgstr "Заголовок п'ятого рівня"
+
+msgid "Subtitle six"
+msgstr "Загловок шостого рівня"
+
+msgid "Tag Description"
+msgstr "Опис теґа"
+
+msgid "You Type"
+msgstr "Ви пишете"
+
+msgid "You Get"
+msgstr "Отримуєте"
+
+msgid "No help provided for tag %tag."
+msgstr "Немає допомоги для теґу %tag."
+
+msgid ""
+"\n"
+"<p>Most unusual characters can be directly entered without any problems.</"
+"p>\n"
+"<p>If you do encounter problems, try using HTML character entities. A common "
+"example looks like &amp;amp; for an ampersand &amp; character. For a full "
+"list of entities see HTML's <a href=\"http://www.w3.org/TR/html4/sgml/"
+"entities.html\">entities</a> page. Some of the available characters include:"
+"</p>"
+msgstr ""
+"\n"
+"<p>Більшість символів, що рідко використовуються, можуть бути введені без "
+"проблем.</p>\n"
+"<p>Якщо проблеми все ж таки виникли, спробуйте використати підстановки для "
+"символів мови HTML. Наприклад, &amp;amp; для виводу знаку амперсанда. Повний "
+"список таких підстановок дивіться на сторінці <a href=\"http://www.w3.org/TR/"
+"html4/sgml/entities.html\">підстановки</a>. Деякі із доступних символів:</p>"
+
+msgid "Ampersand"
+msgstr "Амперсанд"
+
+msgid "Quotation mark"
+msgstr "Лапки"
+
+msgid "Character Description"
+msgstr "Опис символа"
+
+msgid "No HTML tags allowed"
+msgstr "HTML теґи не дозволені."
+
+msgid "Lines and paragraphs break automatically."
+msgstr "Рядки та параграфи відокремлюються автоматично."
+
+msgid ""
+"Lines and paragraphs are automatically recognized. The &lt;br /&gt; line "
+"break, &lt;p&gt; paragraph and &lt;/p&gt; close paragraph tags are inserted "
+"automatically. If paragraphs are not recognized simply add a couple blank "
+"lines."
+msgstr ""
+"Рядки та параграфи розпізнаються автоматично. Теґи розриву рядків &lt;br /"
+"&gt;, параграфа &lt;p&gt;, та закритого параграфа &lt;/p&gt; додаються "
+"автоматично. Якщо параграф не розпізнано, просто додайте кілька порожніх "
+"рядків."
+
+msgid "Web page addresses and e-mail addresses turn into links automatically."
+msgstr ""
+"Адреси сторінок і електронної пошти атоматично перетворюються у посилання."
+
+msgid "HTML filter"
+msgstr "Фільтр HTML"
+
+msgid "HTML corrector"
+msgstr "Коректор HTML"
+
+msgid ""
+"Allows you to restrict whether users can post HTML and which tags to filter "
+"out. It will also remove harmful content such as JavaScript events, "
+"JavaScript URLs and CSS styles from those tags that are not removed."
+msgstr ""
+
+msgid "Converts line breaks into HTML (i.e. &lt;br&gt; and &lt;p&gt; tags)."
+msgstr ""
+"Перетворює закінчення рядків у HTML (тобто в теги &lt;br&gt; і &lt;p&gt;)."
+
+msgid "Turns web and e-mail addresses into clickable links."
+msgstr ""
+"Автоматично перетворює адреси інтернет сторінок і електронної пошти в "
+"гіперпосилання."
+
+msgid "Corrects faulty and chopped off HTML in postings."
+msgstr "Виправлення помилкових і надлишкових тегів HTML в дописах"
+
+msgid ""
+"How to deal with HTML tags in user-contributed content. If set to \"Strip "
+"disallowed tags\", dangerous tags are removed (see below). If set to "
+"\"Escape tags\", all HTML is escaped and presented as it was typed."
+msgstr ""
+"Що робити з HTML-тегами у матеріалах, які додали користувачі. Якщо "
+"установлено значення \"Видаляти заборонені теги\", небезпечні теги будуть "
+"видалені (див. нижче). Якщо встановлено \"Залинити всі теги\", будь-який "
+"HTML-код будет показаний так, як він був введений."
+
+msgid ""
+"If \"Strip disallowed tags\" is selected, optionally specify tags which "
+"should not be stripped. JavaScript event attributes are always stripped."
+msgstr ""
+"Якщо вибрано \"Видаляти заборонені теги\", ви можете додатково вказати теги, "
+"які видалаятись на будуть. Атрибути опрацьовування подій у JavaScript "
+"видаляються завжди."
+
+msgid "Display HTML help"
+msgstr "Відобразити допомогу для HTML"
+
+msgid ""
+"If enabled, Drupal will display some basic HTML help in the long filter tips."
+msgstr ""
+"Якщо увімкнене, Drupal буде відображати базову довідку  HTML у підказках."
+
+msgid ""
+"Configure how content input by users is filtered, including allowed HTML "
+"tags. Also allows enabling of module-provided filters."
+msgstr ""
+"Параметри фільтрації вводу від користувачів, включаючи таги HTML. Також "
+"дозволяє керувати фільтрами, наданими модулями."
+
+msgid "Delete input format"
+msgstr "Видалити формат вводу"
+
+msgid "Compose tips"
+msgstr "Підказки публікування"

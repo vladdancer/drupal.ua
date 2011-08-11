@@ -1,0 +1,13 @@
+name = Organic groups Webform integration
+description = "Enables organic group administrators to modify webforms within their groups."
+package = "Organic groups"
+core = 6.x
+dependencies[] = og
+dependencies[] = webform
+
+; Information added by drupal.org packaging script on 2010-09-08
+version = "6.x-1.0-beta1"
+core = "6.x"
+project = "og_webform"
+datestamp = "1283925710"
+

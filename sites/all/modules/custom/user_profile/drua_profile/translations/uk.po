@@ -1,0 +1,156 @@
+# $Id$
+#
+# Ukrainian translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  drua_profile.module: n/a
+#  drua_profile.info: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2011-04-14 23:50+0300\n"
+"PO-Revision-Date: 2011-04-14 23:50+0300\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Ukrainian <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: drua_profile.module:50
+msgid "Profile: About"
+msgstr ""
+
+#: drua_profile.module:51
+msgid "Profile: Contacts"
+msgstr ""
+
+#: drua_profile.module:52
+msgid "Profile: Avatar"
+msgstr ""
+
+#: drua_profile.module:53
+msgid "Profile: Drupal planet"
+msgstr ""
+
+#: drua_profile.module:54
+msgid "Profile: Drupal activity"
+msgstr ""
+
+#: drua_profile.module:55
+msgid "Profile: User groups"
+msgstr ""
+
+#: drua_profile.module:56
+msgid "Profile: User bookmarks"
+msgstr ""
+
+#: drua_profile.module:72
+msgid "Add information about yourself"
+msgstr "Додати інформацію про себе"
+
+#: drua_profile.module:74
+msgid "About me"
+msgstr "Про мене"
+
+#: drua_profile.module:130
+msgid "Add Contacts"
+msgstr "Додати контакти"
+
+#: drua_profile.module:132
+msgid "Contacts"
+msgstr "Контакти"
+
+#: drua_profile.module:185
+msgid "Avatar"
+msgstr "Аватар"
+
+#: drua_profile.module:196
+msgid "Drupal planet"
+msgstr "Планета Drupal"
+
+#: drua_profile.module:214
+msgid "Your public activity on display in this block.\n                When you write articles, comment on materials, joining groups or simply\n                add material to your bookmarks, your friends can keep up to date here."
+msgstr ""
+"Ваша публічна ативність на сайті "
+"відображається у цьому блоці. Коли ви "
+"пишете статті, коментуєте матеріали, "
+"приєднуєтесь до груп чи просто "
+"додаєте матеріали у закладки, ваші "
+"друзі можуть стежити за оновленнями "
+"тут."
+
+#: drua_profile.module:219
+msgid "Recent activities"
+msgstr "Остання активність"
+
+#: drua_profile.module:220
+msgid " on the site"
+msgstr " на сайті"
+
+#: drua_profile.module:242
+msgid "Place of communication and collaboration of developers, translators and users."
+msgstr "Місце спілкування та спільної роботи розробників, перекладачів та користувачів системи."
+
+#: drua_profile.module:243
+msgid "View list of groups"
+msgstr "Переглянути список груп"
+
+#: drua_profile.module:266
+msgid "Bookmarks help to return valuable materials later. To add material to bookmark, click the star in his signature."
+msgstr ""
+"Закладки допомагають повертатись до "
+"цінних матеріалів пізніше. Для того, "
+"щоб додати матеріал у закладки, "
+"натисніть зірочку у його підписі."
+
+#: drua_profile.module:390
+msgid "There may be information about you, such as profession, place of work, interests, hobbies and more. The more information you enter, the more likely to interest potential new contacts."
+msgstr ""
+"Тут може бути інформація про вас, як то "
+"професія, місце роботи, інтереси, хобі "
+"та інше. Чим більше інформації ви "
+"вкажите, тим більше шансів зацікавити "
+"нові потенційні контакти."
+
+#: drua_profile.module:407
+msgid "Your contacts open the way for new people and introduce new relationships."
+msgstr ""
+"Ваші контакти відкривають шлях для "
+"нових знайомств та заведення нових "
+"зв’язків."
+
+#: drua_profile.module:462;467
+msgid "Anonymous"
+msgstr "Гість"
+
+#: drua_profile.module:493
+msgid "top"
+msgstr ""
+
+#: drua_profile.module:525
+msgid "karma"
+msgstr ""
+
+#: drua_profile.module:585
+msgid "Activity: "
+msgstr ""
+
+#: drua_profile.module:0
+msgid "drua_profile"
+msgstr ""
+
+#: drua_profile.info:0
+msgid "User profile"
+msgstr ""
+
+#: drua_profile.info:0
+msgid "User Profile for Drupal.ua"
+msgstr ""
+
+#: drua_profile.info:0
+msgid "Custom"
+msgstr "Власний"
+

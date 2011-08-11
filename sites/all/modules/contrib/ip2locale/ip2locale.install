@@ -1,0 +1,14 @@
+<?php
+// $Id: ip2locale.install,v 1.1.2.2 2009/05/02 18:50:09 mrfelton Exp $
+
+/**
+ * @file
+ * Install file for IP to Locale module.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function ip2locale_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'ip2locale_%'");
+}

@@ -1,0 +1,367 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Grabbing and parsing content from drupal accounts
+ */
+
+
+/**
+ * Implementation of hook_menu().
+ */
+ function drupal_account_menu() {
+  $items['account/grabbing_js'] = array(
+    'page callback' => 'account_grabbing_js',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content')
+  );
+  return $items;
+}
+
+
+/**
+ * Implementation of hook_theme().
+ */
+function drupal_account_theme() {
+  return array(
+    'drupal_account_block' => array('arguments' => array('items' => NULL)),
+    'drupal_account_links' => array('arguments' => array('links' => NULL)),
+    'drupal_account_formatter_default' => array('arguments' => array('element' => NULL)),
+  );
+}
+
+
+/**
+ * Implementation of hook_field_info().
+ */
+function drupal_account_field_info() {
+  return array('drupal_account' => array(
+    'label' => t('Drupal account field'))
+  );
+}
+
+
+/**
+ * Implementation of hook_field_settings().
+ */
+function drupal_account_field_settings($op, $field) {
+  switch ($op) {
+    case 'database columns':
+      $columns['data'] = array(
+        'type' => 'text',
+        'size' => 'big',
+      );
+      return $columns;
+   }
+}
+
+
+/**
+ * Implementation of hook_field().
+ */
+function drupal_account_field($op, &$node, $field, &$items, $teaser, $page) {
+  switch ($op) {
+    case 'sanitize':
+      drupal_add_css(drupal_get_path('module', 'drupal_account') .'/drupal_account.css');
+      foreach ($items as $delta => $item) {
+        $items[$delta]['safe'] = get_drupal_account_block($node->nid);
+      }
+  }
+}
+
+
+/**
+ * Implementation of hook_content_is_empty().
+ */
+function drupal_account_content_is_empty($item, $field) {
+  if (empty($item['data'])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+
+/**
+ * Implementation of hook_field_formatter_info().
+ */
+function drupal_account_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label' => t('Default'),
+      'field types' => array('drupal_account'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+    )
+  );
+}
+
+
+/**
+ * Theme function for 'default' field formatter.
+ */
+function theme_drupal_account_formatter_default($element) {
+  return $element['#item']['safe'];
+}
+
+
+/**
+ * Implementation of hook_widget_info().
+ */
+function drupal_account_widget_info() {
+  return array(
+    'drupal_account_widget' => array(
+      'label' => t('Drupal account widget'),
+      'field types' => array('drupal_account'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array('default value' => CONTENT_CALLBACK_DEFAULT),
+    ),
+  );
+}
+
+
+/**
+ * Implementation of hook_widget().
+ */
+function drupal_account_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  global $user;
+  
+  $field_name = str_replace('_', '-', substr(drupal_account_fiefd_name(), 0 , -5));
+  $field_name = "edit-{$field_name}-0-fieldset-data";
+
+  drupal_add_js('$(function(){ $("#'. $field_name
+    .'").click(function(){ $("#check_status .sub").addClass("warning")})})  ',
+    'inline');
+
+  $code = '<strong>DUSER-'. check_plain($user->uid) .'</strong>';
+
+  $element['fieldset'] = array(
+    '#type'  => 'fieldset',
+    '#title' => t('Drupal account'),
+  );
+
+  $element['fieldset']['data'] = array(
+    '#type'   => 'textfield',
+    '#description' => t('URL of your accounts on drupal.org or drupal.ru sites.'),
+    '#title'  => 'Url',
+    '#size'   => '60',
+    '#prefix' => '<div id="check_status"><div class="sub">'.
+      t('Before parsing your accounts, please paste the private code (!code) in the
+      "%field_1" field on drupal.org and in the "%field_2" field on drupal.ru.',
+      array(
+        '!code' => $code,
+        '%field_1' => 'Drupal contributions',
+        '%field_2' => 'Anything else about yourself'
+      )) .'</div></div>'
+  );
+
+  $element['fieldset']['check'] = array(
+    '#type'  => 'button',
+    '#value' => t('Check'),
+    '#ahah'  => array(
+      'event'    => 'click',
+      'path'     => 'account/grabbing_js',
+      'wrapper'  => 'check_status',
+      'effect'   => 'fade',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('One moment...')
+      )
+    )
+  );
+  return $element;
+}
+
+
+ /**
+ * Implementation of hook_nodeapi().
+ */
+function drupal_account_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($node->type == 'profile') {
+    switch ($op) {
+      case 'presave':
+        $field_name = drupal_account_fiefd_name();
+        $field_name_ = substr($field_name, 0, -5);
+        if (isset($_SESSION['account'])) {
+          $result = @db_query_range(
+            "SELECT $field_name FROM {content_type_profile} WHERE nid = %d",
+            $node->nid, 0, 1);
+          if ($result) {
+            $store = db_result($result);
+          }
+          $items = $store ?
+            array_merge(unserialize($store), unserialize($_SESSION['account']))
+            : unserialize($_SESSION['account']);
+          asort($items);
+          $node->{$field_name_}[0]['data'] = serialize($items);
+        }
+        else {
+          unset($node->{$field_name_});
+        }
+        unset($_SESSION['account']);
+        break;
+        
+      case 'load':
+        if (isset($node->field_account[0]['data'])) {
+          $node->field_account[0]['value'] = unserialize($node->field_account[0]['data']);
+        }
+        break;
+    }
+  }
+}
+
+
+/**
+ * Menu callback for AHAH additions.
+ */
+function account_grabbing_js() {
+  include_once drupal_get_path('module', 'drupal_account/') .'simple_html_dom.inc';
+  include_once drupal_get_path('module', 'drupal_account/') .'grabbing_content.inc';
+
+  $field = substr(drupal_account_fiefd_name(), 0 , -5);
+  $url = $_POST[$field][0]['fieldset']['data'];
+
+  $result = drupal_account_grabbing_content($url);
+  $result = "<div class=\"{$result['status']}\">{$result['message']}</div>";
+
+  drupal_json(array('status' => TRUE, 'data' => $result));
+  exit();
+}
+
+
+/**
+ * Implementation of hook_cron().
+ */
+function account_grabbing_cron() {
+  $interval = 604800;   // 60 * 60 * 24 * 7
+  $account_grabbing_time = variable_get('account_grabbing_time', NULL);
+
+  if (!$account_grabbing_time || (time() > $account_grabbing_time + $interval)) {
+    account_grabbing_update();
+  }
+}
+
+
+/**
+ * Drupal accounts updating.
+ */
+function account_grabbing_update() {
+  include_once drupal_get_path('module', 'drupal_account/') .'simple_html_dom.inc';
+  include_once drupal_get_path('module', 'drupal_account/') .'grabbing_content.inc';
+  
+  $field = drupal_account_fiefd_name();
+  $result = db_query('SELECT * FROM {content_type_profile}');
+  
+  while ($data = db_fetch_array($result)) {
+    $items = unserialize($data[$field]);
+    $output = array();
+    foreach ($items as $domain => $info) {
+      $output[$domain] = drupal_account_grabbing_content($info['profile'], TRUE);
+    }
+    $output = serialize($output);
+    db_query("UPDATE {content_type_profile} SET ". $field ." = '%s' WHERE vid = %d",
+      $output, $data['vid']);
+  }
+  variable_set('account_grabbing_time', time());
+}
+
+
+/**
+ * Get name of cck drupal_account field
+ * @return
+ *   string
+ */
+function drupal_account_fiefd_name() {
+  $name = variable_get('drupal_account_fiefd_name', NULL);
+  if (!$name) {
+    $name = db_result(db_query(
+      'SELECT field_name FROM {content_node_field} WHERE module = "drupal_account"'
+    ));
+    $name = variable_set('drupal_account_fiefd_name', $name) .'_data';
+  }
+  return $name;
+}
+
+
+/**
+ * Get drupal_account block
+ * @return
+ *   A themed HTML string representing the drupal_account_block.
+ */
+function get_drupal_account_block($nid = NULL) {
+  if ($nid) {
+    $filed_name = drupal_account_fiefd_name();
+    $data = unserialize(@db_result(db_query_range(
+      "SELECT $filed_name FROM {content_type_profile} WHERE nid = %d", $nid, 0, 1)));
+  }
+  return $data ? theme_drupal_account_block($data) : '';
+}
+
+
+/**
+ * Calculates the user activity.
+ */
+function _drupal_account_calculate_activity($track) {
+  return ($track < 50 ? t('low') : ($track <= 200 ? t('middle') : t('hight')));
+}
+
+
+/**
+ * Return a themed block.
+ * @param $items
+ *   Associative array of fields
+ * @return
+ *   A themed HTML string representing the drupal_account_block.
+ */
+function theme_drupal_account_block($items = NULL) {
+  if (!$items) {
+    return '';
+  }
+  $username = $projects = '';
+  foreach ($items as $domain => $info) {
+    //domains
+    $username .= '<span class="domain"><strong>'. ucfirst($domain)
+      .':</strong> '. l($info['username'], $info['profile']) . t(' (@a activity)',
+      array('@a' => _drupal_account_calculate_activity($info['track']))) .'</span>';
+    //projects
+    if (isset($info['projects'])) {
+      foreach ($info['projects'] as $type => $data) {
+        $projects .= '<span class="projects"><span>'.
+          t('@p', array('@p' => ucfirst($type))) .':</span> '.
+          theme('drupal_account_links', $info['projects'][$type]) .'</span>';
+      }
+    }
+  }
+  return '<span id="drupal_account">'. $username . $projects .'</span>';
+}
+
+
+/**
+ * Return a themed list of items.
+ * @param $items
+ *   Associative array of links
+ * @return
+ *   lists
+ */
+function theme_drupal_account_links($links, $attributes = array('class' => 'links')) {
+  $output = '<div class="drupal_activity">';
+
+  if (count($links) > 0) {
+    $output = '<ul'. drupal_attributes($attributes) .'>';
+
+    $num_links = count($links);
+    $i = 1;
+
+    foreach ($links as $key => $link) {
+      $class = $key;
+      $output .= '<li'. drupal_attributes(array('class' => $class)) .'>';
+      if (isset($link['href'])) {
+        $output .= l($link['title'], $link['href'], $link);
+      }
+      $output .= $i != $num_links ? "<span>,</span></li> \n" : "</li>\n";
+      $i++;
+    }
+    $output .= '</ul>';
+  }
+
+  return $output;
+}

@@ -1,0 +1,4 @@
+;$Id: apachebench.info,v 1.1 2009/03/19 21:18:20 neochief Exp $
+name = ApacheBench
+description = ApacheBench support and report generator
+core = 6.x

@@ -1,0 +1,31 @@
+/**
+* Google Ajax Search Block
+*/
+
+.hidden {
+    display: none;
+}
+
+.sidebar .block-googleajaxsearch table.gsc-search-box td.gsc-input {
+    display: block;  
+/*    width: 200px; */
+}
+
+
+.sidebar .block-googleajaxsearch table.gsc-search-box td.gsc-search-button {
+    display: block;
+    width: 100px;   
+}
+
+.sidebar .block-googleajaxsearch .gsc-control {
+    width: 200px;   
+}
+
+.sidebar .block-googleajaxsearch .gsc-search-button {
+    width: 70px;   
+    font-size: 10px;
+}
+
+#center .block-googleajaxsearch .gsc-control {
+    width: 100%;   
+}

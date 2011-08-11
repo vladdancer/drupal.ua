@@ -1,0 +1,46 @@
+<?php
+// $Id$
+
+
+/**
+ * Implementation of hook_init().
+ */
+function user_statistics_init() {
+  global $user;
+  if (!$user->uid) {
+    return;
+  }
+
+  $curret_day = (int)date('j');
+  $time = time();
+  if (!isset($_SESSION['user_statistics_day']) || $_SESSION['user_statistics_day'] != $curret_day) {
+    $user_count_day = db_fetch_object(db_query_range(
+    	"SELECT * FROM {user_statistics} WHERE uid = %d", $user->uid, 0, 1));
+    if ($user_count_day) {
+      $save_day = (int)date('j', $user_count_day->timestamp);
+      //24h * 60m * 60s = 86400
+      $old_day = mktime(0, 0, 0, date('n'), date('j'), date('Y')) - 86400;
+      if ($save_day != $curret_day && $user_count_day->timestamp > $old_day) {
+        $user_count_day->timestamp = $time;
+        $_SESSION['user_statistics_online'] = ++$user_count_day->day_online;
+        drupal_write_record('user_statistics', $user_count_day, array('uid'));
+      }
+    }
+    
+    if (!$user_count_day) {
+      $user_count_day = new stdClass();
+      $user_count_day->uid = $user->uid;
+      $user_count_day->day_online = 1;
+      $user_count_day->timestamp = $time;
+      $_SESSION['user_statistics_online'] = 1;
+      drupal_write_record('user_statistics', $user_count_day);
+    }
+    $_SESSION['user_statistics_day'] = $curret_day;
+  }
+}
+
+
+function user_statistics_get_day_online() {
+  return($_SESSION['user_statistics_online']);
+}
+

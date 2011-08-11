@@ -1,0 +1,503 @@
+# Ukrainian translation of og (6.x-2.1)
+# Copyright (c) 2010 by the Ukrainian translation team
+# Generated from files:
+#  og.admin.inc,v 1.15.4.2 2009/06/22 15:59:27 weitzman
+#  og/includes/og.xmlrpc.inc: n/a
+#  og.rules.inc,v 1.4.4.3 2010/03/14 08:24:16 amitaibu
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: og (6.x-2.1)\n"
+"POT-Creation-Date: 2010-06-08 19:30+0400\n"
+"PO-Revision-Date: 2009-10-30 20:05+0300\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: includes/og.admin.inc:21
+msgid "Operations"
+msgstr "Operations"
+
+#: includes/og.xmlrpc.inc:17,37,52
+msgid "Wrong username or password."
+msgstr ""
+"Неправильне ім'я користувача чи "
+"пароль."
+
+#: includes/og.admin.inc:80
+msgid "Optional"
+msgstr "Необов'язковий"
+
+#: includes/og.admin.inc:80
+msgid "Required"
+msgstr "Необхідне"
+
+#: includes/og.admin.inc:15
+msgid "Content types"
+msgstr "Типи наповнення"
+
+#: includes/og.rules.inc:241
+msgid "User"
+msgstr "Користувач"
+
+#: includes/og.admin.inc:43
+msgid ""
+"New groups don't appear in the groups directory. Administrators "
+"control the directory exclusively."
+msgstr ""
+"Нові групи не з'являються в каталозі "
+"Груп. Адміністратори власноруч "
+"керують цим каталогом."
+
+#: includes/og.admin.inc:44
+msgid "New groups always appear in the groups directory."
+msgstr ""
+"Нові групи завжди з'являються в "
+"каталозі груп."
+
+#: includes/og.admin.inc:50
+msgid "Groups directory control"
+msgstr "Керування каталогом Органічних Груп"
+
+#: includes/og.admin.inc:58
+msgid ""
+"New groups don't appear on the registration form. Administrators "
+"control the form exclusively."
+msgstr ""
+"Нові групи не відображуються у "
+"реєстраційній формі. Адміністратори "
+"керують формою власноруч."
+
+#: includes/og.admin.inc:59
+msgid "New groups always appear on the registration form."
+msgstr ""
+"Нові групи завжди відображуються в "
+"реєстраційній формі."
+
+#: includes/og.admin.inc:65
+msgid "Registration form control"
+msgstr "Керування реєстраційною формою"
+
+#: includes/og.admin.inc:74
+msgid "Audience checkboxes"
+msgstr "Позначки аудієнції"
+
+#: includes/og.admin.inc:83
+msgid "Audience required"
+msgstr "Вимога до аудієнції"
+
+#: includes/og.admin.inc:86
+msgid ""
+"Do you require that all (non administrator) posts be affiliated with a "
+"group? Note that changing this setting will affect existing posts when "
+"they are edited."
+msgstr ""
+"Чи вимагається аби всі (не "
+"адміністраторські) публікації були "
+"розміщені в Групах? Зміна цієї опці "
+"вплине на існуючі публікації лише під "
+"час їх редагування."
+
+#: includes/og.admin.inc:105
+msgid "New content subject"
+msgstr "Тема нового контенту"
+
+#: includes/og.admin.inc:111
+msgid "New content body"
+msgstr "Вміст нового контенту"
+
+#: includes/og.admin.inc:29
+msgid "Edit"
+msgstr "Змінити"
+
+#: includes/og.admin.inc:21
+msgid "Usage"
+msgstr "Використання"
+
+#: includes/og.xmlrpc.inc:48
+msgid ""
+"User is not allowed to retrieve membership information for another "
+"user."
+msgstr ""
+
+#: includes/og.admin.inc:93
+msgid "Messaging & Notifications"
+msgstr ""
+
+#: includes/og.rules.inc:21
+msgid "User approved to group by admin"
+msgstr ""
+
+#: includes/og.xmlrpc.inc:13
+msgid "Unrecognized user ID: %uid."
+msgstr ""
+
+#: includes/og.xmlrpc.inc:33
+msgid "User is not a member of the specified group."
+msgstr ""
+
+#: includes/og.admin.inc:11
+msgid ""
+"You must designate at least one content type to act as a group node "
+"and another as a group post. <a href=\"!create\">Create new content "
+"type</a> if needed."
+msgstr ""
+"Ви повинні визначити хоча б один тип "
+"контенту, що має бути визначальною "
+"нодою групи, та ще один як публікацією "
+"до групи. <a href=\"!create\">Створіть новий "
+"тип контенту</a> якщо це потрібно."
+
+#: includes/og.admin.inc:76,76
+msgid ""
+"Show each group that the user is a member of as a checkbox in the "
+"\"Audience\" section. This enables the member to place her post into "
+"multiple groups. If unchecked, simplify the user interface by omitting "
+"the checkboxes and assuming user wants to post into the current group. "
+"This simplification only applies to new nodes, and not to edits of "
+"existing nodes. Group administrators always see checkboxes."
+msgstr ""
+"Показати кожну групу, учасником якої є "
+"користувач, разом з позначкою в секції "
+"\"Аудиєнція\". Це дозволить учаснику "
+"розмістити його повідомлення в "
+"декілька груп відразу. Якщо опція "
+"відключена, це спростить інтерфейс "
+"користувача щляхом виключення таких "
+"позначок та обмеження розміщення "
+"повідомлення лише до поточної групи. "
+"Таке спрощення буде застосовано лише "
+"до нових нод, та залишиться для "
+"редагування раніше створених нод (де "
+"ця опція раніше була ввімкнена). "
+"Адміністратори груп завжди бачать "
+"такі позначки."
+
+#: includes/og.admin.inc:99
+msgid "Format of \"From:\" field"
+msgstr "Формат поля \"Від:\""
+
+#: includes/og.admin.inc:45
+msgid ""
+"Group creator chooses whether her group appears in the directory. "
+"Defaults to <em>in directory</em>."
+msgstr ""
+
+#: includes/og.admin.inc:46
+msgid ""
+"Group creator chooses whether her group appears in the directory. "
+"Defaults to <em>not in directory</em>."
+msgstr ""
+
+#: includes/og.admin.inc:60
+msgid ""
+"Group creator chooses whether her group appears on the registration "
+"form. Defaults to <em>on form</em>."
+msgstr ""
+
+#: includes/og.admin.inc:61
+msgid ""
+"Group creator chooses whether her group appears on the registration "
+"form. Defaults to <em>not on form</em>."
+msgstr ""
+
+#: includes/og.admin.inc:67
+msgid ""
+"OG admins always see the checkbox for adding a group to the "
+"<em>registration form</em>. Note that changing this setting has no "
+"effect on existing posts. Re-save those posts to acquire this new "
+"setting."
+msgstr ""
+
+#: includes/og.admin.inc:101
+msgid ""
+"Specify the format of the \"From:\" field on outgoing notifications. "
+"Available variables: @user_mail, @user_name, @site_mail, @site_name. "
+"Note that the @user_mail token reveals the author's email address. If "
+"the admin email examples above appear blank, you need to set your site "
+"email in the \"Site information\" panel."
+msgstr ""
+
+#: includes/og.rules.inc:82
+msgid "Subscribe user to group"
+msgstr ""
+
+#: includes/og.rules.inc:86
+msgid "User who will be subscribed"
+msgstr ""
+
+#: includes/og.rules.inc:90
+msgid "Group that user will be subscribed to"
+msgstr ""
+
+#: includes/og.rules.inc:96
+msgid "Unsubscribe user from group"
+msgstr ""
+
+#: includes/og.rules.inc:99
+msgid "User who will be unsubscribed"
+msgstr ""
+
+#: includes/og.rules.inc:103
+msgid "Group that user will be unsubscribed from"
+msgstr ""
+
+#: includes/og.rules.inc:192
+msgid "Subscription is approved"
+msgstr ""
+
+#: includes/og.rules.inc:237
+msgid "User is group member"
+msgstr ""
+
+#: includes/og.rules.inc:252
+msgid "Content is a group"
+msgstr ""
+
+#: includes/og.rules.inc:259
+msgid "Evaluates to TRUE if the content is a group."
+msgstr ""
+
+#: includes/og.rules.inc:15
+msgid "User subscribes to group"
+msgstr ""
+
+#: includes/og.rules.inc:16
+msgid ""
+"A user has subscribed to a group and is approved. If the user isn't "
+"approved then this event won't be triggered."
+msgstr ""
+
+#: includes/og.rules.inc:26
+msgid "User unsubscribes from group"
+msgstr ""
+
+#: includes/og.rules.inc:51
+msgid "User that subscribed to the group"
+msgstr ""
+
+#: includes/og.rules.inc:193
+msgid ""
+"When enabled the user will automatically be approved. When disabled "
+"user will be a pending member."
+msgstr ""
+
+#: includes/og.rules.inc:248
+msgid ""
+"Evaluates to TRUE if the user is an approved member of the group. If "
+"the user is a pending member this condition will return FALSE."
+msgstr ""
+
+#: includes/og.admin.inc:106
+msgid ""
+"Subject of notification message for new content. Available variables: "
+"@group, !group_url, @type, @site, !content_url, !reply_url, @title, "
+"@subject, @node_full, @node_teaser, @username. %subject contains the "
+"comment title in the case of a comment but the node title in the case "
+"of a new post. @title is always the node title."
+msgstr ""
+
+#: includes/og.admin.inc:113
+msgid ""
+"Body of the notification for new content. Available variables: @group, "
+"!group_url, @type, @site, !content_url, !reply_url, @title, @subject, "
+"@node_full, @node_teaser, @username. @subject contains the comment "
+"title in the case of a comment but the node title in the case of a new "
+"post. %title is always the node title."
+msgstr ""
+
+#: includes/og.admin.inc:118
+msgid "Group admin notification body"
+msgstr ""
+
+#: includes/og.admin.inc:120
+msgid ""
+"The body of the message sent to users from the group admin. Available "
+"variables: @group, @body, @site, !url_group, !url_unsubscribe"
+msgstr ""
+
+#: includes/og.admin.inc:125
+msgid "User approved notification subject"
+msgstr ""
+
+#: includes/og.admin.inc:126
+msgid ""
+"The subject of the message sent to new approved members. Available "
+"variables: !group_url, @title"
+msgstr ""
+
+#: includes/og.admin.inc:131
+msgid "User approved notification body"
+msgstr ""
+
+#: includes/og.admin.inc:133
+msgid ""
+"The body of the message sent to new approved members. Available "
+"variables: !group_url, @title"
+msgstr ""
+
+#: includes/og.admin.inc:138
+msgid "User denied notification subject"
+msgstr ""
+
+#: includes/og.admin.inc:139
+msgid ""
+"The subject of the message sent to denied users. Available variables: "
+"!group_url, @title"
+msgstr ""
+
+#: includes/og.admin.inc:144
+msgid "User denied notification body"
+msgstr ""
+
+#: includes/og.admin.inc:146
+msgid ""
+"The body of the message sent to denied users. Available variables: "
+"!group_url, @title"
+msgstr ""
+
+#: includes/og.admin.inc:151
+msgid "Invite user notification subject"
+msgstr ""
+
+#: includes/og.admin.inc:152
+msgid ""
+"The subject of the message sent to users invited to join a group. "
+"Available variables: @group, @site, @description, !group_url, @body"
+msgstr ""
+
+#: includes/og.admin.inc:157
+msgid "Invite user notification body"
+msgstr ""
+
+#: includes/og.admin.inc:159
+msgid ""
+"The body of the message sent to users invited to join a group. "
+"Available variables: @group, @site, @description, !group_url, @body"
+msgstr ""
+
+#: includes/og.admin.inc:164
+msgid "Request user notification subject"
+msgstr ""
+
+#: includes/og.admin.inc:165
+msgid ""
+"The subject of the message sent to a user's request to join a group. "
+"Available variables: @group, @username, !approve_url, !group_url"
+msgstr ""
+
+#: includes/og.admin.inc:170
+msgid "Request user notification body"
+msgstr ""
+
+#: includes/og.admin.inc:172
+msgid ""
+"The body of the message sent to a user's request to join a group. "
+"Available variables: @group, @username, !approve_url, !group_url"
+msgstr ""
+
+#: includes/og.admin.inc:177
+msgid "New admin user notification subject"
+msgstr ""
+
+#: includes/og.admin.inc:178
+msgid ""
+"The subject of the message sent to a new admin for a group. Available "
+"variables: @group, @username, !group_url"
+msgstr ""
+
+#: includes/og.admin.inc:183
+msgid "New admin user notification body"
+msgstr ""
+
+#: includes/og.admin.inc:185
+msgid ""
+"The body of the message sent to a new admin for a group. Available "
+"variables: @group, @username, !group_url, !invite_url"
+msgstr ""
+
+#: includes/og.rules.inc:267
+msgid "Group post"
+msgstr ""
+
+#: includes/og.rules.inc:109
+msgid "Add group node settings to content"
+msgstr ""
+
+#: includes/og.rules.inc:113
+msgid "Content that will become a group node"
+msgstr ""
+
+#: includes/og.rules.inc:116
+msgid ""
+"When creating a group node organic groups module requires some group "
+"settings. This action should be used after 'Add new content' action, "
+"that adds a <a href=\"@group-node-type\">group node type</a> content, "
+"and will result with a new group node."
+msgstr ""
+
+#: includes/og.rules.inc:226
+msgid "Organic groups form settings"
+msgstr ""
+
+#: includes/og.rules.inc:263
+msgid "Content is a group post"
+msgstr ""
+
+#: includes/og.rules.inc:270
+msgid "Evaluates to TRUE if the content is a group post."
+msgstr ""
+
+#: includes/og.admin.inc:52
+msgid ""
+"Site admins always see the checkbox for adding a group to the "
+"<em>groups directory</em>. Note that changing this setting has no "
+"effect on existing posts. Re-save those posts to acquire this new "
+"setting."
+msgstr ""
+
+#: includes/og.admin.inc:16
+msgid ""
+"You may <a href=\"!create\">create new content types</a> as needed. "
+"Note that you may have multiple types acting as groups and multiple "
+"types are allowed as group posts."
+msgstr ""
+
+#: includes/og.rules.inc:289
+msgid "Include admins"
+msgstr ""
+
+#: includes/og.rules.inc:290
+msgid ""
+"When enabled, users with \"administer nodes\" permission will always "
+"be treated as group members."
+msgstr ""
+
+#: includes/og.rules.inc:120
+msgid "Add group to audience of content"
+msgstr ""
+
+#: includes/og.rules.inc:124,139
+msgid "Content whose audience is changed"
+msgstr ""
+
+#: includes/og.rules.inc:128
+msgid "Group that will be added to audience"
+msgstr ""
+
+#: includes/og.rules.inc:131
+msgid ""
+"Note, that group node id must be known when this action runs, so for "
+"it to work on newly created group you must save that group first."
+msgstr ""
+
+#: includes/og.rules.inc:135
+msgid "Remove group from audience of content"
+msgstr ""
+
+#: includes/og.rules.inc:143
+msgid "Group that will be removed from audience"
+msgstr ""
+

@@ -1,0 +1,9 @@
+; $Id$
+
+name = Organic Groups - group Notifications
+description = Grouping types of nodes in the group.
+dependencies[] = og
+dependencies[] = notifications
+dependencies[] = simplenews
+package = Custom
+core = 6.x

@@ -1,0 +1,328 @@
+/*
+For more details about theming check: http://code.google.com/intl/pl/apis/ajaxsearch/documentation/reference.html#_intro_GResultCss
+
+##################collection of Results template####################
+
+<!-- A collection of web search results in the search control -->
+<div class="gsc-results gsc-webResult">
+
+  <!-- A single web result in the search control -->
+  <div class="gsc-result gsc-webResult">
+
+    <!-- A single web result, full structure defined below -->
+    <div class="gs-result gs-webResult"></div>
+  </div>
+  ...
+</div>
+
+<!-- Similar pattern for local, blog, etc. -->
+<div class="gsc-results gsc-localResult"></div>
+<div class="gsc-results gsc-blogResult"></div>
+
+####################################################################
+
+##############single webResult template#############################
+<div class="gs-result gs-webResult">
+
+  <!-- Note, a.gs-title can have embedded HTML
+  // so make sure to account for this in your rules.
+  // For instance, to change the title color to red,
+  // use a rule like this:
+  // a.gs-title, a.gs-title * { color : red; }
+  -->
+  <div class="gs-title">
+    <a class="gs-title"></a>
+  </div>
+  <div class="gs-snippet"></div>
+
+  <!-- The default CSS rule has the -short URL visible and
+   // the -long URL hidden.
+   //
+   // If you want to reverse this, use a rule like:
+   // #mycontrol .gs-webResult .gs-visibleUrl-short { display:none; }
+   // #mycontrol .gs-webResult .gs-visibleUrl-long { display:block; }
+  -->
+  <div class="gs-visibleUrl gs-visibleUrl-short"></div>
+  <div class="gs-visibleUrl gs-visibleUrl-long"></div>
+</div>
+####################################################################
+
+##############single loocalResult template##########################
+<div class="gs-result gs-localResult">
+
+  <!-- Note, a.gs-title can have embedded HTML
+  // so make sure to account for this in your rules.
+  // For instance, to change the title color to red,
+  // use a rule like this:
+  // a.gs-title, a.gs-title * { color : red; }
+  -->
+  <div class="gs-title">
+    <a class="gs-title"></a>
+  </div>
+
+  <!-- Note, ONLY present for "kml" results -->
+  <div class="gs-snippet"></div>
+
+  <div class="gs-address">
+    <div class="gs-street"></div>
+    <div class="gs-city"></div>
+    <div class="gs-region"></div>
+    <div class="gs-country"></div>
+  </div>
+  <div class="gs-phone"></div>
+
+  <!-- This element provides driving directions from
+  // the center point location to this result. This
+  // is the default setting.
+  -->
+  <div class="gs-directions">
+    <a class="gs-directions"></a>
+  </div>
+
+
+  <!-- This element provides driving directions to/from the search result
+  // with the user supplying the starting/ending point (based on the link
+  // they clicked on). This is an alternate link. If you want this behavior
+  // instead of the default, use a set of rules similar to this:
+  //
+  //  #mycontrol .gs-directions { display : none; }
+  //  #mycontrol .gs-directions-to-from { display : block; }
+  //
+  // Directions here are provided in the form of:
+  //
+  // Get directions: To here - From here
+  -->
+  <div class="gs-directions-to-from">
+    <div class="gs-label"></div>
+    <div class="gs-secondary-link">
+      <a class="gs-secondary-link"></a>
+    </div>
+    <div class="gs-spacer"></div>
+    <div class="gs-secondary-link">
+      <a class="gs-secondary-link"></a>
+    </div>
+  </div>
+</div>
+
+####################################################################
+
+##############single videoResult template###########################
+<div class="gs-result gs-videoResult">
+
+  <table>
+    <tr>
+
+      <!-- The Result's Thumbnail image is sitting in this column -->
+      <td class="gs-image-box">
+        <div class="gs-image-box">
+          <a class="gs-image">
+            <img class="gs-image"></img>
+          </a>
+        </div>
+      </td>
+
+      <!-- The Result's Text based result data is sitting in this column -->
+      <td class="gs-text-box">
+        <div class="gs-text-box">
+          <!-- Note, a.gs-title can have embedded HTML
+          // so make sure to account for this in your rules.
+          // For instance, to change the title color to red,
+          // use a rule like this:
+          // a.gs-title, a.gs-title * { color : red; }
+          -->
+          <div class="gs-title">
+            <a class="gs-title"></a>
+          </div>
+          <div class="gs-snippet"></div>
+          <div class="gs-publishedDate"></div>
+          <div class="gs-publisher">
+            <a class="gs-publisher"></a>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+####################################################################
+
+##############single blogResult template############################
+<div class="gs-result gs-blogResult">
+
+  <!-- Note, a.gs-title can have embedded HTML
+  // so make sure to account for this in your rules.
+  // For instance, to change the title color to red,
+  // use a rule like this:
+  // a.gs-title, a.gs-title * { color : red; }
+  -->
+  <div class="gs-title">
+    <a class="gs-title"></a>
+  </div>
+
+  <!-- The default CSS rule enables the relative
+  // published date while a result is sitting in
+  // a search control, and an absolute published date
+  // if the result is outside of the control. Using your
+  // own CSS rule, you can select whichever date form
+  // works best for your pages.
+  -->
+  <div class="gs-publishedDate"></div>
+  <div class="gs-relativePublishedDate"></div>
+
+  <div class="gs-snippet"></div>
+  <div class="gs-visibleUrl">
+    <a class="gs-visibleUrl"></a>
+  </div>
+</div>
+####################################################################
+
+##############single newsResult template############################
+<div class="gs-result gs-newsResult">
+
+  <!-- Note, a.gs-title can have embedded HTML
+  // so make sure to account for this in your rules.
+  // For instance, to change the title color to red,
+  // use a rule like this:
+  // a.gs-title, a.gs-title * { color : red; }
+  -->
+  <div class="gs-title">
+    <a class="gs-title"></a>
+  </div>
+  <div class="gs-publisher"></div>
+
+  <!-- The default CSS rule enables the relative
+  // published date while a result is sitting in
+  // a search control, and an absolute published date
+  // if the result is outside of the control. Using your
+  // own CSS rule, you can select whichever date form
+  // works best for your pages.
+  -->
+  <div class="gs-publishedDate"></div>
+  <div class="gs-relativePublishedDate"></div>
+
+  <div class="gs-snippet"></div>
+
+  <!-- If a result is related to other
+  // articles, this element is present.
+  -->
+  <div class="gs-clusterUrl">
+    <a class="gs-clusterUrl"></a>
+  </div>
+</div>
+
+####################################################################
+
+##############single bookResult template############################
+<div class="gs-result gs-bookResult">
+
+  <table>
+    <tr>
+
+      <!-- The Result's Thumbnail image is sitting in this column -->
+      <td class="gs-image-box">
+
+        <!-- Applying your own styles to gs-row1/* and .gs-row2
+        // should be avoided. This structure is going to change.
+        // All you can really count on is a.gs-image/*.
+        -->
+        <div class="gs-image-box gs-book-image-box">
+
+          <!-- the page components -->
+          <div class="gs-row1">
+            <img class="gs-pages"></img>
+            <img class="gs-page-edge"></img>
+          </div>
+
+          <!-- the hyperlinked thumbnail -->
+          <div class="gs-row2">
+            <a class="gs-image">
+              <img class="gs-image"></img>
+            </a>
+          </div>
+        </div>
+      </td>
+
+      <!-- The Result's Text based result data is sitting in this column -->
+      <td class="gs-text-box">
+        <div class="gs-text-box">
+          <!-- Note, a.gs-title can have embedded HTML
+          // so make sure to account for this in your rules.
+          // For instance, to change the title color to red,
+          // use a rule like this:
+          // a.gs-title, a.gs-title * { color : red; }
+          -->
+          <div class="gs-title">
+            <a class="gs-title"></a>
+          </div>
+          <div class="gs-author"></div>
+          <div class="gs-publishedDate"></div>
+          <div class="gs-pageCount"></div>
+          <div class="gs-visibleUrl">
+            <a class="gs-visibleUrl"></a>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+####################################################################
+
+##############single imageResult template###########################
+<div class="gs-result gs-imageResult">
+  <div class="gs-image-box">
+    <!-- img is hyperlinked to the original content url -->
+    <a class="gs-image">
+      <!-- Note explicit sizing is set during thumbnail scaling -->
+      <img class="gs-image"/>
+    </a>
+  </div>
+  <div class="gs-text-box">
+    <div class="gs-snippet"></div>
+    <div class="gs-size"></div>
+    <div class="gs-visibleUrl"></div>
+  </div>
+</div>
+
+####################################################################
+
+##############single patentResult template##########################
+<div class="gs-result gs-patentResult">
+
+  <table>
+    <tr>
+
+      <!-- The Result's Thumbnail image is sitting in this column -->
+      <td class="gs-image-box">
+        <div class="gs-image-box">
+          <a class="gs-image">
+            <img class="gs-image"></img>
+          </a>
+        </div>
+      </td>
+
+      <!-- The Result's Text based result data is sitting in this column -->
+      <td class="gs-text-box">
+        <div class="gs-text-box">
+          <!-- Note, a.gs-title can have embedded HTML
+          // so make sure to account for this in your rules.
+          // For instance, to change the title color to red,
+          // use a rule like this:
+          // a.gs-title, a.gs-title * { color : red; }
+          -->
+          <div class="gs-title">
+            <a class="gs-title"></a>
+          </div>
+          <div class="gs-patent-info gs-metadata">
+            <div class="gs-patent-number"></div>
+            <div class="gs-publishedDate"></div>
+            <div class="gs-author"></div>
+          </div>
+
+          <div class="gs-snippet"></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+####################################################################
+*/

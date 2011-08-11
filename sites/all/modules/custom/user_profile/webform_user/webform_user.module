@@ -1,0 +1,197 @@
+<?php
+// $Id$
+
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function webform_user_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  global $user;
+  
+  if ($node->type == 'webform') {
+    //Replace webform token by webform value in body of the webform.
+    if ($op == 'view') {
+      if (!empty($node->content['webform']) && strpos($node->content['body']['#value'], '%WEBFORM%') !== FALSE) {
+        $node->content['body']['#value'] =
+          str_replace('%WEBFORM%', $node->content['webform']['#value'], $node->content['body']['#value']);
+        unset($node->content['webform']);
+      }
+      else {
+        $node->content['body']['#value'] = str_replace('%WEBFORM%', '', $node->content['body']['#value']);
+      }
+    }
+    elseif ($op == 'prepare') {
+      drupal_set_message(t('You can use %WEBFORM% token to put the form somewhere inside body.'), 'warning');
+    }
+ 
+    switch ($op) {
+      case 'insert':
+      case 'update':
+        db_query('DELETE FROM {webform_user} WHERE nid = %d AND vid = %d',
+          $node->nid, $node->vid);
+        if ($node->webform_user_action) {
+          $user_action= new stdClass();
+          $user_action->nid = $node->nid;
+          $user_action->vid = $node->vid;
+          $user_action->choice = $node->webform_user_action;
+          drupal_write_record('webform_user', $user_action);
+        }
+        break;
+      case 'delete':
+        db_query('DELETE FROM {webform_user} WHERE nid = %d AND vid = %d',
+          $node->nid, $node->vid);
+        break;
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function webform_user_form_alter(&$form, $form_state, $form_id) {
+  global $user;
+  if ($form_id == 'webform_node_form') {
+    $form['webform_user'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Registration'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+      '#weight' => 11,
+    );
+
+   $default_value = 0;
+    if (isset($form['nid']['#value']) && isset($form['vid']['#value'])) {
+      if ($choice = db_result(db_query("SELECT choice FROM {webform_user}
+        WHERE nid = %d AND vid = %d", $form['nid']['#value'], $form['vid']['#value']))) {
+        $default_value = $choice;
+      }
+    }
+    
+    $form['webform_user']['webform_user_action'] = array(
+      '#type' => 'radios',
+      '#title' => t('Select the action after sending a webform'),
+      '#default_value' => $default_value,
+      '#description' => t('To register, users need to form such a field "email" - email address, "name" - user name, "last" - last name (and also "about" - about yourself, "phone" - phone).'),
+      '#options' => array(
+        t('Do not register'),
+        t('Create Account'),
+        t('Ask for confirmation, but the register by default'),
+        t('Ask for confirmation, and do not register by default')
+      ),
+    );
+  }
+
+  if (isset($form['#node']->nid) && $form_id == 'webform_client_form_'. $form['#node']->nid) {
+    if (!$user->uid && $choice = db_result(db_query("SELECT choice FROM {webform_user}
+        WHERE nid = %d AND vid = %d", $form['#node']->nid, $form['#node']->vid))) {
+      if ($choice == 2 || $choice == 3) {
+        $conditions = legal_get_conditions();
+        $form['webform_add_user'] = array(
+          '#type' => 'checkboxes',
+          '#default_value' => ($choice == 2 ? array('add_user') : array() ),
+          '#options' => array(
+            'add_user' => t('Create an account on site for me'),
+            'legal' => $conditions['conditions'],
+          ),
+          '#weight' => 6,
+        );
+      }
+      if ($choice > 0) {
+        $form['#validate'][] = 'webform_user_form_validate';
+      }
+    }
+  }
+}
+
+
+/**
+ * Validate form: Check if the user?
+ */
+function webform_user_form_validate($form, $form_state) {
+  global $user;
+  if ($user->uid) {
+    return;
+  }
+  
+  $choice = db_result(db_query("SELECT choice FROM {webform_user}
+  	WHERE nid = %d AND vid = %d", $form['#node']->nid, $form['#node']->vid));
+  if ($choice > 0) {
+    if ($account = user_load(array('mail' => $form_state['values']['submitted']['email']))
+        && $form_state['values']['submitted']['email'] != ''
+        ) {
+      form_error($form['submitted']['email'],
+        t('The e-mail address %email is already registered. <a href="@login">You can login</a>',
+        array('%email' => $user->mail, '@login' => url('user')))
+      );
+    }
+    
+    if ($form_state['values']['submitted']['name'] != '') {
+      $i = 0;
+      $user_name = '';
+      do {
+        $user_name .= $form_state['values']['submitted']['email'][$i];
+      } while ($form_state['values']['submitted']['email'][++$i] != '@');
+      if ($account = user_load(array('name' => $user_name))) {
+        form_error($form['submitted']['name'],
+          t('The user %name is already registered. <a href="@login">You can login</a>',
+          array('%name' => $user->name, '@login' => url('user')))
+        );
+      }
+    }
+    if ($form_state['values']['webform_add_user']['add_user']
+        && !$form_state['values']['webform_add_user']['legal']) {
+      form_set_error('webform_user_action', t('Terms & Conditions must be entered.'));
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_webform_submission_presave().
+ */
+function webform_user_webform_submission_presave($node, &$submission) {
+  global $user;
+  if ($user->uid) {
+    return;
+  }
+
+  $checkboxes = $_POST['webform_add_user'];
+  $submitted = $_POST['submitted'];
+  $choice = db_result(db_query("SELECT choice FROM {webform_user}
+  	WHERE nid = %d AND vid = %d", $node->nid, $node->vid));
+  if ($choice > 0 && $checkboxes['add_user'] && $checkboxes['legal']) {
+    $account = new stdClass();
+    $i = 0;
+    $user_name = '';
+    do {
+      $user_name .= $submitted['email'][$i];
+    } while ($submitted['email'][++$i] != '@');
+    $profile = array(
+      'name' => $user_name,
+      'mail' => $submitted['email'],
+      'pass' => user_password(),
+      'status' => 1,
+    );
+    $user = user_save($account, $profile);
+    if ($user) {
+      $content_profile = new stdClass();
+      $content_profile->title = $user_name;
+      $content_profile->type = 'profile';
+      $content_profile->uid = $user->uid;
+      $content_profile->field_first_name[0]['value'] = isset($submitted['name']) ? $submitted['name'] : '';
+      $content_profile->field_last_name[0]['value'] = isset($submitted['last']) ? $submitted['last'] : '';
+      $content_profile->field_bio[0]['value'] = isset($submitted['about']) ? $submitted['about'] : '';
+      $content_profile->field_phone[0]['value'] = isset($submitted['phone']) ? $submitted['phone'] : '';
+      $content_profile->status = 1;
+      node_save($content_profile);
+      
+      //Login
+      $user->password  = $profile['pass'];
+      _user_mail_notify('register_no_approval_required', $user);
+      user_authenticate(array('name' => $user->name, 'pass' => $profile['pass']));
+    }
+    $submission->uid = $user->uid;
+  }
+}
+

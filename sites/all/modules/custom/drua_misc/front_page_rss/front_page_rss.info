@@ -1,0 +1,5 @@
+; $Id$
+name = FrontRSS
+description = RSS feed for front page
+core = 6.x
+package = Custom

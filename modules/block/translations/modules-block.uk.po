@@ -1,0 +1,331 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:17+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Show on every page except the listed pages."
+msgstr "Показувати на всіх сторінках, окрім вказаних."
+
+msgid "Show on only the listed pages."
+msgstr "Показувати тільки на вказаних сторінках."
+
+msgid "Pages"
+msgstr "Сторінки"
+
+msgid "Block title"
+msgstr "Назва блоку"
+
+msgid "The title of the block as shown to the user."
+msgstr "Заголовок блоку, який бачить користувач."
+
+msgid "Region"
+msgstr "Область"
+
+msgid "Add block"
+msgstr "Додати блок"
+
+msgid ""
+"Show if the following PHP code returns <code>TRUE</code> (PHP-mode, experts "
+"only)."
+msgstr ""
+"Показати, якщо даний PHP-код повертає <strong>TRUE</strong> (PHP-режим, "
+"тільки для експертів)."
+
+msgid ""
+"Enter one page per line as Drupal paths. The '*' character is a wildcard. "
+"Example paths are %blog for the blog page and %blog-wildcard for every "
+"personal blog. %front is the front page."
+msgstr ""
+"Введіть по одній сторінці на рядок у вигляді адрес Друпалу. Символ '*' буде "
+"означати будь-що. Наприклад %blog для сторінки блогу і %blog-* для будь-"
+"якого персонального блогу. %front - головна сторінка."
+
+msgid "Configure block"
+msgstr "Настроїти блок"
+
+msgid "Are you sure you want to delete the block %name?"
+msgstr "Ви впевнені, що бажаєте стерти блок %name?"
+
+msgid "The block %name has been removed."
+msgstr "Блок %name знищено."
+
+msgid "Role specific visibility settings"
+msgstr "Налаштування видимості для ролей"
+
+msgid "Block description"
+msgstr "Опис блоку"
+
+msgid "Blocks"
+msgstr "Блоки"
+
+msgid ""
+"Configure what block content appears in your site's sidebars and other "
+"regions."
+msgstr ""
+"Настроює вміст блоків, що буде відображатись у бокових панелях та інших "
+"областях Вашого сайту."
+
+msgid "Delete block"
+msgstr "Видалити блок"
+
+msgid "Save blocks"
+msgstr "Запам'ятати блоки"
+
+msgid "The block settings have been updated."
+msgstr "Конфігурацію блоку було оновлено."
+
+msgid "Block specific settings"
+msgstr "Особливі параметри блоку"
+
+msgid ""
+"Override the default title for the block. Use <em>&lt;none&gt;</em> to "
+"display no title, or leave blank to use the default block title."
+msgstr ""
+"Замінює стандартний заголовок блоку. Використовуйте <em>&lt;none&gt;</em> "
+"для того, щоб не показувати заголовок, або залиште пустим для використання "
+"стандартного заголовку."
+
+msgid "'%name' block"
+msgstr "Блок '%name'"
+
+msgid "User specific visibility settings"
+msgstr "Налаштування відображення для обраних користувачів"
+
+msgid "Custom visibility settings"
+msgstr "Налаштування видимості"
+
+msgid "Users cannot control whether or not they see this block."
+msgstr "Користувачі не можуть налаштовувати видимість блоку."
+
+msgid "Show this block by default, but let individual users hide it."
+msgstr ""
+"Показувати цей блок автоматично, але дозволити користувачам ховати його."
+
+msgid "Hide this block by default but let individual users show it."
+msgstr ""
+"Ховати цей блок автоматично, але дозволити користувачам показувати його."
+
+msgid ""
+"Allow individual users to customize the visibility of this block in their "
+"account settings."
+msgstr ""
+"Дозволити користувачам контролювати відображення цього блоку в налаштуваннях "
+"їхніх реєстрацій."
+
+msgid "Show block for specific roles"
+msgstr "Показувати блок для певних ролей"
+
+msgid ""
+"Show this block only for the selected role(s). If you select no roles, the "
+"block will be visible to all users."
+msgstr ""
+"Показувати цей блок тільки для вибраної ролі(ролей). Якщо не вибрати жодної "
+"ролі, блок буде видимим для всіх користувачів."
+
+msgid "Page specific visibility settings"
+msgstr "Налаштування відображення для обраних сторінок"
+
+msgid ""
+"If the PHP-mode is chosen, enter PHP code between %php. Note that executing "
+"incorrect PHP-code can break your Drupal site."
+msgstr ""
+"Якщо вибрано режим PHP, введіть PHP код між %php. Пам'ятайте - виконання "
+"неправильного коду PHP може зламати Ваш сайт."
+
+msgid "Show block on specific pages"
+msgstr "Показувати блоки на певних сторінках."
+
+msgid "Save block"
+msgstr "Запам'ятати блок"
+
+msgid "Please ensure that each block description is unique."
+msgstr "Будь-ласка, описуйте кожен блок по-різному."
+
+msgid "The block configuration has been saved."
+msgstr "Конфігурацію блоку запам'ятовано."
+
+msgid "The block has been created."
+msgstr "Блок створений."
+
+msgid ""
+"A brief description of your block. Used on the <a href=\"@overview\">block "
+"overview page</a>."
+msgstr ""
+"Короткий опис вашого блоку. Використовується на <a href=\"@overview"
+"\">сторінці огляду блоків</a>."
+
+msgid "Block body"
+msgstr "Тіло блоку"
+
+msgid "The content of the block as shown to the user."
+msgstr "Вміст блоку для користувачів."
+
+msgid "Block configuration"
+msgstr "Налаштування блоків"
+
+msgid "administer blocks"
+msgstr "редагувати блоки"
+
+msgid "use PHP for block visibility"
+msgstr "використовувати PHP для налаштування видимості блоків"
+
+msgid "No blocks in this region"
+msgstr "Нема блоків в цьому регіоні"
+
+msgid ""
+"Blocks are boxes of content rendered into an area, or region, of a web page. "
+"The default theme Garland, for example, implements the regions \"left sidebar"
+"\", \"right sidebar\", \"content\", \"header\", and \"footer\", and a block "
+"may appear in any one of these areas. The <a href=\"@blocks\">blocks "
+"administration page</a> provides a drag-and-drop interface for assigning a "
+"block to a region, and for controlling the order of blocks within regions."
+msgstr ""
+"Блоки - це елементи матеріалу, розташовані на полях або частинах "
+"вебсторінок. Базова тема Гарланд, для прикладу, надає поля \"ліва панель\", "
+"\"права панель\", \"матеріал\", \"заголовок\", і \"підвал\", і блок може "
+"відображатись в одній з цих зон. <a href=\"@blocks\">Сторінка керування "
+"блоками</a> надає зручний інтерфейс для проставляння блоків по регіонах "
+"звичайним перетягуванням."
+
+msgid ""
+"Although blocks are usually generated automatically by modules (like the "
+"<em>User login</em> block, for example), administrators can also define "
+"custom blocks. Custom blocks have a title, description, and body. The body "
+"of the block can be as long as necessary, and can contain content supported "
+"by any available <a href=\"@input-format\">input format</a>."
+msgstr ""
+"Також блоки бувають автоматично генерованими з модулів (як блок <em>Вхід "
+"користувача</em>, наприклад), адміністратори можуть також назначати власні "
+"блоки. Власні блоки мають назву, опис і тіло. Тіло блока може бути скільки "
+"завгодно великим і підтримує всі <a href=\"@input-format\">формати вводу</"
+"a>, доступні на сайті."
+
+msgid "When working with blocks, remember that:"
+msgstr "Працюючи з блоками, пам'ятайте, що:"
+
+msgid ""
+"since not all themes implement the same regions, or display regions in the "
+"same way, blocks are positioned on a per-theme basis."
+msgstr ""
+"через те, що не всі шаблони надають аналогічні поля, або відображають поля "
+"однаково, блоки позиціонуються в залежності від шаблону"
+
+msgid "disabled blocks, or blocks not in a region, are never shown."
+msgstr "вимкнені блоки, або блоки не в полях, ніколи не відображаються"
+
+msgid ""
+"when throttle module is enabled, throttled blocks (blocks with the "
+"<em>Throttle</em> checkbox selected) are hidden during high server loads."
+msgstr ""
+"коли модуль обмежувача увімкнено, \"обмежені\" блоки (ті, які обробляються і "
+"обмежуються параметром \"Обмежник\") приховуються при високих навантаженнях"
+
+msgid "blocks can be configured to be visible only on certain pages."
+msgstr ""
+"блоки можна налаштувати так, що вони будуть відображатися лише на певних "
+"сторінках"
+
+msgid ""
+"blocks can be configured to be visible only when specific conditions are "
+"true."
+msgstr ""
+"блоки можна налаштувати так, що вони будуть відображатися лише при виконанні "
+"певних умов"
+
+msgid "blocks can be configured to be visible only for certain user roles."
+msgstr ""
+"блоки можна налаштувати так, що вони будуть відображатися лише для певних "
+"ролей користувачів."
+
+msgid ""
+"when allowed by an administrator, specific blocks may be enabled or disabled "
+"on a per-user basis using the <em>My account</em> page."
+msgstr ""
+"коли дозволено адміністратором, деякі блоки можуть бути ввімкнені або "
+"вимкнені персоналізовано користувачами на сторінці <em>Мій профіль</em>"
+
+msgid ""
+"some dynamic blocks, such as those generated by modules, will be displayed "
+"only on certain pages."
+msgstr ""
+"деякі динамічні блоки, як ті, що формуються модулями, будуть відображатись "
+"тільки на певних сторінках"
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@block"
+"\">Block module</a>."
+msgstr ""
+"Докладніша інформація в інтернет-підручнику у розділі <a href=\"@blog"
+"\">Модуль Блоків</a>."
+
+msgid ""
+"This page provides a drag-and-drop interface for assigning a block to a "
+"region, and for controlling the order of blocks within regions. To change "
+"the region or order of a block, grab a drag-and-drop handle under the "
+"<em>Block</em> column and drag the block to a new location in the list. "
+"(Grab a handle by clicking and holding the mouse while hovering over a "
+"handle icon.) Since not all themes implement the same regions, or display "
+"regions in the same way, blocks are positioned on a per-theme basis. "
+"Remember that your changes will not be saved until you click the <em>Save "
+"blocks</em> button at the bottom of the page."
+msgstr ""
+"Ця сторінка надає інтерфейс перетягування блоків в поля і для контролю "
+"черговості розташування їх на цих полях. Для зміни поля чи розташування "
+"блока, перетягуйте вказівник поряд з назвою блока і тяніть його в місце, "
+"куди його потрібно розташувати. Пам'ятайте, що Ваші зміни запам'ятаються "
+"після натискання кнопки <em>Запам'ятати блоки</em> внизу сторінки."
+
+msgid ""
+"To reduce CPU usage, database traffic or bandwidth, blocks may be "
+"automatically disabled during high server loads by selecting their "
+"<em>Throttle</em> checkbox. Adjust throttle thresholds on the <a href="
+"\"@throttleconfig\">throttle configuration page</a>."
+msgstr ""
+"Для зниження використання процесорного часу і зниження споживання ресурсів "
+"сервера, блоки можуть бути автоматично вимкнені під час високих навантажень "
+"вибором параметра \"Обмежник\". Поріг обмеження можна змінити на сторінці <a "
+"href=\"@throttleconfig\">налагодження обмежувача</a>."
+
+msgid ""
+"Click the <em>configure</em> link next to each block to configure its "
+"specific title and visibility settings. Use the <a href=\"@add-block\">add "
+"block page</a> to create a custom block."
+msgstr ""
+"Натисніть посилання <em>налаштувати</em> поряд з кожним блоком для зміни "
+"його параметрів та видимості. Використовуйте <a href=\"@add-block\">сторінку "
+"додавання блоку</a> для створення власного блоку."
+
+msgid ""
+"Use this page to create a new custom block. New blocks are disabled by "
+"default, and must be moved to a region on the <a href=\"@blocks\">blocks "
+"administration page</a> to be visible."
+msgstr ""
+"Використовуйте цю сторінку для створення нового власного блока. Базово, нові "
+"блоки вимкнені, і потребують переміщення в потрібне поле на <a href=\"@blocks"
+"\">сторінці керування блоками</a> для надання йому видимості"
+
+msgid ""
+"The block %info was assigned to the invalid region %region and has been "
+"disabled."
+msgstr ""
+"Блок %info було привязано до неправильного поля %region і було вимкнено"
+
+msgid "JavaScript List Form"
+msgstr "Форма списка JavaScript"
+
+msgid ""
+"The changes to these blocks will not be saved until the <em>Save blocks</em> "
+"button is clicked."
+msgstr ""
+"Зміни до нового розташування блоків не будуть збередені, доки Ви не "
+"натисните на кнопку <em>Зберегти блоки</em>."

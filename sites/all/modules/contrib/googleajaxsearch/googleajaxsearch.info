@@ -1,0 +1,12 @@
+; $Id$
+name = googleajaxsearch
+description = Google Ajax Search for Drupal
+core = 6.x
+package = meant4
+version = 1
+; Information added by drupal.org packaging script on 2009-09-30
+version = "6.x-1.2"
+core = "6.x"
+project = "googleajaxsearch"
+datestamp = "1254313245"
+

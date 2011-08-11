@@ -1,0 +1,224 @@
+<?php
+// $Id$
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function term_filter_menu() {
+  $items = array();
+  $items['admin/build/term_filter'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('term_filter_settings_form'),
+    'title' => 'Term filter settings',
+    'description' => 'Configure Term filter module',
+    'access arguments'   => array('administer site configuration'),
+  );
+  return $items;
+}
+
+
+/**
+ * Settings form.
+ */
+function term_filter_settings_form($form_state) {
+  $form = array();
+  $form['contact_information'] = array(
+    '#prefix' => '<h3>',
+    '#suffix' => '</h3>',
+    '#value' => t('When you turn on dictionaries, will activate the blocks with the contents of the dictionary.'),
+  );
+
+  $vocabularies = taxonomy_get_vocabularies();
+  $term_filter_blocks = variable_get('term_filter_blocks', array());
+  
+  foreach ($vocabularies as $vid => $voc_value) {
+    if (isset($term_filter_blocks[$vid])) {
+      $status = $term_filter_blocks[$vid]['status'];
+      $select = $term_filter_blocks[$vid]['select'];
+    }
+    else {
+      $status = $select = FALSE;
+    }
+    
+    $form['block_'. $vid] = array(
+      '#type' => 'fieldset',
+      '#title' => $voc_value->name,
+    );
+    
+    $form['block_'. $vid]['status_'. $vid] = array(
+      '#type' => 'checkbox', 
+      '#title' => t('Create block — !name', array(
+      	'!name' => '"Term filter: '. $voc_value->name .'-'. $vid .'"',
+      )),
+      '#description' => t('Vocabulary used in: !types', array(
+      	'!types' => implode(', ', array_keys($voc_value->nodes))
+      )),
+      '#default_value' => $status,
+    );
+    
+    $form['block_'. $vid]['select_'. $vid] = array(
+      '#type' => 'checkbox', 
+      '#title' => t('Select or expanded select box?'),
+      '#description' => t('Expanded list will have a size of 5 rows.'),
+      '#default_value' => $select,
+    );
+  }
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  return $form;
+}
+
+
+/**
+ * Save Settings.
+ */
+function term_filter_settings_form_submit($form, &$form_state) {
+  unset($form_state['storage']);
+  drupal_set_message(t('Preferences have been saved'));
+  $vocabularies = taxonomy_get_vocabularies();
+  $term_filter_blocks = array();
+  
+  foreach ($vocabularies as $vid => $voc_value) {
+    $term_filter_blocks[$vid]['status'] =
+      isset($form_state['values']['status_'. $vid])
+      ? $form_state['values']['status_'. $vid] : 0;
+    $term_filter_blocks[$vid]['select'] =
+      isset($form_state['values']['select_'. $vid])
+      ? $form_state['values']['select_'. $vid] : 0;
+  }
+  variable_set('term_filter_blocks', $term_filter_blocks);
+}
+
+
+/**
+ * Implementation of hook_block().
+ */
+function term_filter_block($op = 'list', $delta = '', $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $term_filter_blocks = variable_get('term_filter_blocks', array());
+      $blocks = array();
+      if (count($term_filter_blocks)) {
+        $vocabularies = taxonomy_get_vocabularies();
+        foreach ($term_filter_blocks as $vid => $settings) {
+          if ($settings['status']) {
+            $blocks['term_filter_block_'. $vid] = array(
+            	'info' => 'Term filter: '. $vocabularies[$vid]->name .'-'. $vid,
+            );
+          }
+        }
+      }
+      return $blocks;
+
+    case 'view':
+      $vid = (int)drupal_substr($delta, 18);
+      if ($vid) {
+        return array(
+          'subject' => t('Term filter'),
+        	'content' => drupal_get_form('term_filter_switch_form', $vid),
+        );
+      }
+    break;
+  }
+}
+
+
+/**
+ * Switch term filter form.
+ */
+function term_filter_switch_form($form_state, $vid = FALSE) {
+  $form = array();
+  $term_filter_blocks = variable_get('term_filter_blocks', array());
+  
+  if (isset($term_filter_blocks[$vid]) && $term_filter_blocks[$vid]['status'] == 1) {
+    $terms = taxonomy_get_tree($vid);
+    $current_term = term_filter_parse_term();
+    $default_value = 0;
+    $options = array();
+    $options[] = '- Not select -';
+    foreach ($terms as $key => $term) {
+      $options[$term->tid] = $term->name;
+      if ($term->tid == $current_term) {
+        $default_value = $current_term;
+      }
+    }
+
+    if ($default_value && !$term_filter_blocks[$vid]['select']) {
+      $default_value = array(
+        $default_value => $default_value,
+      );
+    }
+    
+    $form['term_'. $vid] = array(
+      '#type' => 'select',
+      '#default_value' => $default_value,
+      '#options' => $options,
+      '#multiple' => !$term_filter_blocks[$vid]['select'],
+      '#size' => !$term_filter_blocks[$vid]['select'] ? 5 : 0,
+    );
+    drupal_add_js(
+  	  "Drupal.behaviors.term_filter_". $vid ." = function() {
+
+  $('#edit-submit-". $vid ."').hide();
+
+  $('#edit-term-". $vid ."').change(function () {
+     $('#edit-submit-". $vid ."').click();
+  })
+}",
+      'inline', 'footer'
+    );
+  }
+
+  $form['vid'] = array(
+    '#type' => 'hidden',
+    '#value' => $vid,
+  );
+  
+  $form['submit_'. $vid] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  return $form;
+}
+
+
+/**
+ * Switch term filter form.
+ */
+function term_filter_switch_form_submit($form, &$form_state) {
+  unset($form_state['storage']);
+  $current_term = term_filter_parse_term();
+  
+  if (isset($form_state['values']['vid']) && isset($form_state['values']['term_'. $form_state['values']['vid']])) {
+    $new_url = $form_state['values']['term_'. $form_state['values']['vid']];
+    $new_url = is_array($new_url) ? (int)current($new_url) : (int)$new_url;
+    
+    $arg = arg();
+    $index = count($arg);
+    if ($index > 0) {
+      if ($new_url) {
+        $arg[$current_term ? ($index - 1) : $index] = $new_url;
+      }
+      else {
+        if ($current_term) {
+          unset($arg[($index - 1)]);
+        }
+      }
+      drupal_goto(implode('/', $arg));
+    }
+  }
+}
+
+
+/**
+ * Load last number from URL or return 0.
+ */
+function term_filter_parse_term() {
+  $arg = arg();
+  $old = count($arg) - 1;
+  return ($old > 0 && is_numeric($arg[$old])) ? (int)$arg[$old] : 0;
+}

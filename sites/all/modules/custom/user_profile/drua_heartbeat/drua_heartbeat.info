@@ -1,0 +1,9 @@
+; $Id$
+
+name = Drupal.ua heartbeat addon
+description = Additional features accounting activity.
+dependencies[] = views
+dependencies[] = heartbeat
+dependencies[] = rules
+package = Custom
+core = 6.x

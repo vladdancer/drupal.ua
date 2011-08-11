@@ -1,0 +1,62 @@
+Index: content_profile.module
+===================================================================
+--- content_profile.module	(revision 17)
++++ content_profile.module	(working copy)
+@@ -585,6 +585,14 @@
+     	'file' => 'content_profile.pageroute.inc',
+     );
+   }
++  if (module_exists('imagecache')) {
++    foreach (imagecache_presets() as $preset) {
++      $return['content_profile_formatter_'. $preset['presetname'] .'_userlink'] = array(
++        'arguments' => array('element' => NULL),
++        'function' => 'theme_imagecache_formatter_userlink',
++      );
++    }
++  }
+   return $return;
+ }
+ 
+@@ -647,3 +655,42 @@
+     )
+   );
+ }
++
++ /**
++ * Add formatter for imagefields to be able to link images to node authors, e.g. to user profiles.
++ */
++if (module_exists('imagecache')) {
++  /**
++   * Implementation of hook_field_formatter_info().
++   */
++  function content_profile_field_formatter_info() {
++    $formatters = array();
++    foreach (imagecache_presets() as $preset) {
++      $formatters[$preset['presetname'] .'_userlink'] = array(
++        'label' => t('@preset image linked to user', array('@preset' => $preset['presetname'])),
++        'field types' => array('image', 'filefield'),
++      );
++    }
++    return $formatters;
++  }
++
++  function theme_imagecache_formatter_userlink($element) {
++    // Inside a view $element may contain NULL data. In that case, just return.
++    if (empty($element['#item']['fid'])) {
++      return '';
++    }
++
++    // Extract the preset name from the formatter name.
++    $presetname = substr($element['#formatter'], 0, strrpos($element['#formatter'], '_'));
++    $style = 'linked';
++
++    $item = $element['#item'];
++    $item['data']['alt'] = isset($item['data']['alt']) ? $item['data']['alt'] : '';
++    $item['data']['title'] = isset($item['data']['title']) ? $item['data']['title'] : NULL;
++
++    $imagetag = theme('imagecache', $presetname, $item['filepath'], $item['data']['alt'], $item['data']['title']);
++    $path = empty($item['uid']) ? '' : 'user/'. $item['uid'];
++    $class = "imagecache imagecache-$presetname imagecache-$style imagecache-{$element['#formatter']}";
++    return l($imagetag, $path, array('attributes' => array('class' => $class), 'html' => TRUE));
++  }
++}

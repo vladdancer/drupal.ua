@@ -1,0 +1,5 @@
+; $Id$
+name = Get rid of useless menu items
+description = Get rid of useless menu items.
+package = Custom
+core = 6.x

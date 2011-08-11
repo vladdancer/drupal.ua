@@ -1,0 +1,6 @@
+; $Id$
+name = Answers drupal.ua
+description =  Extends Answers module for Drupal.ua
+dependencies[] = answers
+package = "Answers"
+core = "6.x"

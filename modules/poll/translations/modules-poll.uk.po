@@ -1,0 +1,165 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 12:35+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Closed"
+msgstr "Закрито"
+
+msgid "closed"
+msgstr "закрите"
+
+msgid "Question"
+msgstr "Питання"
+
+msgid "Poll duration"
+msgstr "Тривалість опитування"
+
+msgid "Votes"
+msgstr "Голоси"
+
+msgid "Choice"
+msgstr "Вибір"
+
+msgid "Results"
+msgstr "Результати"
+
+msgid "Older polls"
+msgstr "Старі опитування"
+
+msgid "View the list of polls on this site."
+msgstr "Переглянути список опитувань на цьому сайті."
+
+msgid "Poll settings"
+msgstr "Параметри голосування"
+
+msgid "You must fill in at least two choices."
+msgstr "Треба подати щонайменше два варіанти відповідей."
+
+msgid "open"
+msgstr "відкрите"
+
+msgid ""
+"This table lists all the recorded votes for this poll. If anonymous users "
+"are allowed to vote, they will be identified by the IP address of the "
+"computer they used when they voted."
+msgstr ""
+"В этой таблице перечислены все голоса, поданные в данном опросе. Если "
+"анонимным пользователям разрешено голосовать, они идентифицируются по IP "
+"адресам тех компьютеров, с которых они голосовали."
+
+msgid "Cancel your vote"
+msgstr "Скасувати Ваш голос"
+
+msgid "View the current poll results."
+msgstr "Переглянути поточні результати опитування."
+
+msgid "vote on polls"
+msgstr "брати участь в опитуваннях"
+
+msgid "cancel own vote"
+msgstr "відмінити свій голос"
+
+msgid "inspect all votes"
+msgstr "проглянути всі голоси"
+
+msgid "Your vote was recorded."
+msgstr "Ваш голос було додано."
+
+msgid "Choice @n"
+msgstr "Варіант @n"
+
+msgid ""
+"If the amount of boxes above isn't enough, click here to add more choices."
+msgstr ""
+
+msgid "More choices"
+msgstr ""
+
+msgid "Javascript Choice Form"
+msgstr "Форма вибору JavaScript"
+
+msgid ""
+"The poll module can be used to create simple polls for site users. A poll is "
+"a simple, multiple choice questionnaire which displays the cumulative "
+"results of the answers to the poll. Having polls on the site is a good way "
+"to receive feedback from community members."
+msgstr ""
+
+msgid ""
+"When creating a poll, enter the question being posed, as well as the "
+"potential choices (and beginning vote counts for each choice). The status "
+"and duration (length of time the poll remains active for new votes) can also "
+"be specified. Use the <a href=\"@poll\">poll</a> menu item to view all "
+"current polls. To vote in or view the results of a specific poll, click on "
+"the poll itself."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@poll"
+"\">Poll module</a>."
+msgstr ""
+
+msgid "Most recent poll"
+msgstr "Останнє опитування"
+
+msgid ""
+"A <em>poll</em> is a question with a set of possible responses. A <em>poll</"
+"em>, once created, automatically provides a simple running count of the "
+"number of votes received for each response."
+msgstr ""
+
+msgid "Poll status"
+msgstr "Статус опитування"
+
+msgid "When a poll is closed, visitors can no longer vote for it."
+msgstr ""
+"Коли опитування закрите, відвідувачі більше не можуть брати участі в ньому."
+
+msgid "After this period, the poll will be closed automatically."
+msgstr "Опитування завершиться автоматично після зазначеного часу."
+
+msgid "Votes for choice @n"
+msgstr "Голоси за варіант @n"
+
+msgid "Negative values are not allowed."
+msgstr "Від'ємні значення недопустимі."
+
+msgid ""
+"Your vote could not be recorded because you did not select any of the "
+"choices."
+msgstr ""
+
+msgid "Add another choice"
+msgstr ""
+
+msgid "Vote count"
+msgstr ""
+
+msgid "create poll content"
+msgstr "створення голосувань"
+
+msgid "delete own poll content"
+msgstr "видалення власних матеріалів голосувань"
+
+msgid "delete any poll content"
+msgstr "видалення матеріалів голосувань"
+
+msgid "edit any poll content"
+msgstr "редагування опитувань"
+
+msgid "edit own poll content"
+msgstr "редагування власних опитувань"
+
+msgid "Polls"
+msgstr "Опитування"

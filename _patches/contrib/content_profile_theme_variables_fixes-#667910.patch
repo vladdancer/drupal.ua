@@ -1,0 +1,38 @@
+Index: content_profile.module
+===================================================================
+--- content_profile.module	(revision 18)
++++ content_profile.module	(working copy)
+@@ -616,7 +616,7 @@
+   foreach ($templates as $key) {
+     if (isset($items[$key])) {
+       $items[$key] += array('preprocess functions' => array());
+-      $items[$key]['preprocess functions'][] = 'content_profile_template_preprocess';
++      array_unshift($items[$key]['preprocess functions'], 'content_profile_template_preprocess');
+     }
+   }
+ }
+Index: content_profile.theme_vars.inc
+===================================================================
+--- content_profile.theme_vars.inc	(revision 17)
++++ content_profile.theme_vars.inc	(working copy)
+@@ -55,6 +55,20 @@
+         $node = node_build_content($node, $teaser, $page);
+         $vars = array('node' => $node, 'teaser' => $teaser, 'page' => $page);
+ 
++        // Set the proper node part, then unset unused $node part so that a bad
++        // theme can not open a security hole.
++        $content = drupal_render($node->content);
++        if ($teaser) {
++          $node->teaser = $content;
++          unset($node->body);
++        }
++        else {
++          $node->body = $content;
++          unset($node->teaser);
++        }
++
++        node_invoke_nodeapi($node, 'alter', $teaser, $page);
++
+         // Apply all node template preprocessors
+         foreach ($this->_get_node_preprocessors() as $function) {
+           if (function_exists($function)) {

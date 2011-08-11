@@ -1,0 +1,1567 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:46+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "not verified"
+msgstr "гість"
+
+msgid "cron"
+msgstr "бог часу"
+
+msgid "updated"
+msgstr "оновлено"
+
+msgid "You are not authorized to access this page."
+msgstr "У вас немає повноважень для перегляду цієї сторінки."
+
+msgid "file"
+msgstr "файл"
+
+msgid "Access denied"
+msgstr "Доступ заборонено"
+
+msgid "1 hour"
+msgid_plural "@count hours"
+msgstr[0] "@count година"
+msgstr[1] "@count години"
+msgstr[2] "@count годин"
+
+msgid "1 day"
+msgid_plural "@count days"
+msgstr[0] "@count день"
+msgstr[1] "@count дні"
+msgstr[2] "@count днів"
+
+msgid "Configuration saved."
+msgstr "Налаштування збережені."
+
+msgid "Mode"
+msgstr "Режим"
+
+msgid "This field is required."
+msgstr "Це поле - обов'язкове."
+
+msgid "Code"
+msgstr "Код"
+
+msgid "Tonga"
+msgstr "Тонґа"
+
+msgid "Navajo"
+msgstr "Навахо"
+
+msgid "String"
+msgstr "Рядок"
+
+msgid "Nauru"
+msgstr "Науру"
+
+msgid "[<a href=\"@link\">more help...</a>]"
+msgstr "[<a href=\"@link\">дізнатись більше...</a>]"
+
+msgid "Arabic"
+msgstr "Арабська"
+
+msgid "English"
+msgstr "Англійська"
+
+msgid "French"
+msgstr "Французька"
+
+msgid "Italian"
+msgstr "Італійська"
+
+msgid "Spanish"
+msgstr "Іспанська"
+
+msgid "Japanese"
+msgstr "Японська"
+
+msgid "Korean"
+msgstr "Норвезьке"
+
+msgid "‹ previous"
+msgstr "‹ назад"
+
+msgid "next ›"
+msgstr "далі ›"
+
+msgid "Language file"
+msgstr "Файл з перекладом"
+
+msgid "None."
+msgstr "Ні."
+
+msgid "Syndicate content"
+msgstr "RSS-матеріал"
+
+msgid "The specified passwords do not match."
+msgstr "Вказані паролі не співпадають."
+
+msgid "Fiji"
+msgstr "Фіджі"
+
+msgid "XML feed"
+msgstr "XML feed"
+
+msgid "<a href=\"@link\" title=\"@title\">more</a>"
+msgstr "<a href=\"@link\" title=\"@title\">далі...</a>"
+
+msgid "Action '%action' added."
+msgstr "Дію '%action' додано"
+
+msgid "Remove orphaned actions"
+msgstr "Видалення лишніх дій"
+
+msgid "JPEG quality"
+msgstr "Якість JPEG"
+
+msgid "%"
+msgstr "%"
+
+msgid "!name field is required."
+msgstr "Поле !name - обов'язкове."
+
+msgid "File upload error. Could not move uploaded file."
+msgstr "Помилка завантаження файлу. Неможливо перемістити завантажений файл."
+
+msgid "The specified date is invalid."
+msgstr "Вказана дата неправильна."
+
+msgid "Go to first page"
+msgstr "На першу сторінку"
+
+msgid "Go to last page"
+msgstr "На останню сторінку"
+
+msgid "Go to page @number"
+msgstr "На сторінку номер @number"
+
+msgid "English name"
+msgstr "Назва англійською"
+
+msgid "Native name"
+msgstr "Справжня назва"
+
+msgid "!title: !required"
+msgstr "!title: !required"
+
+msgid "Language code"
+msgstr "Код мови"
+
+msgid "debug"
+msgstr "відладка"
+
+msgid "KB"
+msgstr "КБ"
+
+msgid "Page not found"
+msgstr "Сторінку не знайдено"
+
+msgid "info"
+msgstr "інформація"
+
+msgid "« first"
+msgstr "« на початок"
+
+msgid "last »"
+msgstr "в кінець »"
+
+msgid "The directory %directory is not writable"
+msgstr "Каталог %directory закритий для записів."
+
+msgid ""
+"The directory %directory is not writable, because it does not have the "
+"correct permissions set."
+msgstr ""
+"Каталог %directory закритий для записів, оскільки не має коректно "
+"установлених прав доступу."
+
+msgid "1 year"
+msgid_plural "@count years"
+msgstr[0] "%count  рік"
+msgstr[1] "%count роки"
+
+msgid "1 week"
+msgid_plural "@count weeks"
+msgstr[0] "@count тиждень"
+msgstr[1] "@count тижня"
+msgstr[2] "@count тижнів"
+
+msgid "1 min"
+msgid_plural "@count min"
+msgstr[0] "@count хв"
+msgstr[1] "@count хв"
+msgstr[2] "@count хв"
+
+msgid "1 sec"
+msgid_plural "@count sec"
+msgstr[0] "@count секунда"
+msgstr[1] "@count секунди"
+msgstr[2] "@count секунд"
+
+msgid "Bulgarian"
+msgstr "Болгарська"
+
+msgid "Croatian"
+msgstr "Хорватська"
+
+msgid "Czech"
+msgstr "Чеська"
+
+msgid "Danish"
+msgstr "Данська"
+
+msgid "Dutch"
+msgstr "Голландська"
+
+msgid "Finnish"
+msgstr "Фінська"
+
+msgid "German"
+msgstr "Німецька"
+
+msgid "Greek"
+msgstr "Грецький"
+
+msgid "Hebrew"
+msgstr "Іврит"
+
+msgid "Hungarian"
+msgstr "Угорська"
+
+msgid "Indonesian"
+msgstr "Індонезійська"
+
+msgid "Polish"
+msgstr "Польська"
+
+msgid "Romanian"
+msgstr "Румунська"
+
+msgid "Russian"
+msgstr "Російська"
+
+msgid "Slovak"
+msgstr "Словацька"
+
+msgid "Swedish"
+msgstr "Шведська"
+
+msgid "Turkish"
+msgstr "Турецька"
+
+msgid "The file could not be created."
+msgstr "Неможливо створити файл."
+
+msgid "The selected file %name could not be uploaded."
+msgstr "Вибраний файл %name не вдалося вивантажити."
+
+msgid ""
+"The selected file %file could not be uploaded, because the destination %"
+"directory is not properly configured."
+msgstr ""
+"Вибраний файл %file не вдалося завантажити, оскільки назва каталогу "
+"призначння неправаильно сформульована."
+
+msgid ""
+"The selected file %file could not be copied, because no file by that name "
+"exists. Please check that you supplied the correct filename."
+msgstr ""
+"Вибраний файл %file не вдалося скопіювати, оскільки файлу з таким іменем не "
+"знайдено. Перевірте назву файлу."
+
+msgid ""
+"The selected file %file could not be copied, because a file by that name "
+"already exists in the destination."
+msgstr ""
+"Вибраний файл %file не вдалося скопіювати, оскільки файл з таким іменем вже "
+"існує у місці призначення."
+
+msgid "The selected file %file could not be copied."
+msgstr "Вибраний файл %file не вдалося скопіювати."
+
+msgid "The removal of the original file %file has failed."
+msgstr "Під час знищення оригінального файлу %file виникла помилка."
+
+msgid "sort by @s"
+msgstr "сортувати за @s"
+
+msgid ""
+"Stack overflow: too many calls to actions_do(). Aborting to prevent infinite "
+"recursion."
+msgstr ""
+"Переповнення буфера: занадто багато викликів actions_do(). Припинено для "
+"попередження непередбачених рекурсій"
+
+msgid "Action %action saved."
+msgstr "Дію %action збережено"
+
+msgid "Action %action created."
+msgstr "Дію %action створено"
+
+msgid "Path prefix"
+msgstr "Префікс шляху"
+
+msgid "Lithuanian"
+msgstr "Литовська"
+
+msgid "File to import not found."
+msgstr "Файл не знайдено."
+
+msgid ""
+"The translation import failed, because the file %filename could not be read."
+msgstr ""
+"Імпорт перекладу не зроблений, оскільки неможливо прочитати файл %filename."
+
+msgid ""
+"The translation file %filename contains an error: \"msgstr\" was expected "
+"but not found on line %line."
+msgstr ""
+"Файл перекладу %filename містить помилку: очікуване \"msgstr\" не знайдено у "
+"рядку  %line."
+
+msgid ""
+"The translation file %filename contains an error: \"msgid_plural\" was "
+"expected but not found on line %line."
+msgstr ""
+"Файл локалізації  %filename містить помилку: очікується \"msgid_plural\" , "
+"але не знайдено в рядку %line."
+
+msgid "The translation file %filename contains a syntax error on line %line."
+msgstr ""
+"Файл перекладу %filename містить синтаксичну помилку у рядку номер %line."
+
+msgid ""
+"The translation file %filename contains an error: \"msgid\" is unexpected on "
+"line %line."
+msgstr ""
+"Файл перекладу %filename істить помилку: неочікуване \"msgid\" у рядку %line."
+
+msgid ""
+"The translation file %filename contains an error: \"msgstr[]\" is unexpected "
+"on line %line."
+msgstr ""
+"Файл перекладу %filename істить помилку: неочікуване \"msgstr[]\" у рядку %"
+"line."
+
+msgid ""
+"The translation file %filename contains an error: \"msgstr\" is unexpected "
+"on line %line."
+msgstr ""
+"Файл перекладу %filename істить помилку: неочікуване \"msgstr\" у рядку %"
+"line."
+
+msgid ""
+"The translation file %filename contains an error: there is an unexpected "
+"string on line %line."
+msgstr ""
+"Файл перекладу %filename істить помилку: неочікуваний текст у рядку %line."
+
+msgid "The translation file %filename ended unexpectedly at line %line."
+msgstr "Файл перекладу %filename неочікувано закінчився на рядку %line."
+
+msgid "Save translations"
+msgstr "Зберегти переклади"
+
+msgid "Export template"
+msgstr "Експортувати шаблон"
+
+msgid "Original text"
+msgstr "Початковий текст"
+
+msgid "For security reasons, your upload has been renamed to %filename."
+msgstr "З міркувань безпеки, Ваш файл було перейменовано в %filename."
+
+msgid "notice"
+msgstr "сповіщення"
+
+msgid "Direction"
+msgstr "Напрям"
+
+msgid "Password field is required."
+msgstr "Поле Пароль - обов'язкове."
+
+msgid "Confirm password"
+msgstr "Підтвердіть пароль"
+
+msgid "No strings found for your search."
+msgstr "За Вашим пошуком нічого не знайдено."
+
+msgid "Afar"
+msgstr "Афар"
+
+msgid "Somali"
+msgstr "Сомалі"
+
+msgid "Komi"
+msgstr "Комі"
+
+msgid ""
+"Security warning: Couldn't write .htaccess file. Please create a .htaccess "
+"file in your %directory directory which contains the following lines: <code>!"
+"htaccess</code>"
+msgstr ""
+"Безпека сайту під загрозою: Неможливо записати файл .htaccess. Створіть цей "
+"файл вручну у каталозі %directory і внесіть в нього наступні рядки:<code>!"
+"htaccess</code>"
+
+msgid ""
+"The file %file could not be saved, because it exceeds %maxsize, the maximum "
+"allowed size for uploads."
+msgstr ""
+"Файл %file не вдалося зберегти, оскільки його розмір перевищує максимальний "
+"допустимий %maxsize для вивантаження."
+
+msgid "The file %file could not be saved, because the upload did not complete."
+msgstr ""
+"Файл %file не вдалося зберегти, оскільки завантаження не було завершене."
+
+msgid "The file %file could not be saved. An unknown error has occurred."
+msgstr "Файл %file не вдалося зберегти. Виникла невідома помилка."
+
+msgid "Only files with the following extensions are allowed: %files-allowed."
+msgstr ""
+"Лише файли з наступними розширеннями можуть бути використані: %files-allowed."
+
+msgid "The file is %filesize exceeding the maximum file size of %maxsize."
+msgstr "Файл розміром %filesize, перевищує максимум в %maxsize."
+
+msgid "The file is %filesize which would exceed your disk quota of %quota."
+msgstr "Файл розміром %filesize перевищує межу місця на диску %quota."
+
+msgid "Only JPEG, PNG and GIF images are allowed."
+msgstr "Тільки файли JPEG, PNG і GIF можуть використовуватись."
+
+msgid ""
+"The image was resized to fit within the maximum allowed dimensions of %"
+"dimensions pixels."
+msgstr ""
+"Фото змінено в розмірі, щоб відповідати максимально допустимому значенню в %"
+"dimensions пікселів."
+
+msgid "The image is too large; the maximum dimensions are %dimensions pixels."
+msgstr ""
+"Завантажене зображення завелике; максимальні розміри зображення %dimensions "
+"пікселів."
+
+msgid "The image is too small; the minimum dimensions are %dimensions pixels."
+msgstr ""
+"Завантажене зображення замале; мінімальні розміри зображення %dimensions "
+"пікселів."
+
+msgid ""
+"Upload error. Could not move uploaded file %file to destination %destination."
+msgstr ""
+"Помилка завантаження, неможливо перемістити завантажений файл (%file) до "
+"пункту призначення (%destination)."
+
+msgid ""
+"Its name exceeds the 255 characters limit. Please rename the file and try "
+"again."
+msgstr ""
+"Ім'я перевищує 255 символьну межу. Прохання перейменувати файл і спробувати "
+"ще раз"
+
+msgid "Illegal choice %choice in !name element."
+msgstr "Неможливий вибір %choice в елементі !name."
+
+msgid "Language negotiation"
+msgstr "Мовні опції"
+
+msgid ""
+"The selected file %file could not be uploaded, because the destination %"
+"directory could not be found, or because its permissions do not allow the "
+"file to be written."
+msgstr ""
+"Вибраний файл %file не вдалося завантажити, оскільки заборонено дописувати у "
+"каталог %directory, або він не існує."
+
+msgid "%message in %file on line %line."
+msgstr "%message у файлі %file в рядку %line."
+
+msgid "Are you sure you want to delete the language %name?"
+msgstr "Ви певні, що хочете стерти %name мову ?"
+
+msgid "The language %locale has been removed."
+msgstr "Мову %locale видалено."
+
+msgid "Are you sure you want to delete the string \"%source\"?"
+msgstr "Ви впевнені, що бажаєте видалити рядок \"%source\"?"
+
+msgid ""
+"Deleting the string will remove all translations of this string in all "
+"languages. This action cannot be undone."
+msgstr ""
+"Видалення рядка видалить всі переклади цього рядка у всіх мовах. Дія "
+"незворотня."
+
+msgid ""
+"The selected image handling toolkit %toolkit can not correctly process %"
+"function."
+msgstr ""
+"Обраний механізм роботи із зображеннями '%toolkit' не може правильно "
+"обробити '%function'."
+
+msgid "Hindi"
+msgstr "Гінді"
+
+msgid "Initializing."
+msgstr "Ініціювання."
+
+msgid "Remaining @remaining of @total."
+msgstr "Залишилось @remaining із @total."
+
+msgid "An error has occurred."
+msgstr "Сталася помилка."
+
+msgid "Please continue to <a href=\"@error_url\">the error page</a>"
+msgstr "Прохання продовжити на <a href=\"@error_url\">сторінці помилок</a>"
+
+msgid "HTTP POST is required."
+msgstr "Вимагається HTTP POST"
+
+msgid "0 sec"
+msgstr "0 сек"
+
+msgid "The translation import of %filename failed."
+msgstr "Помилка імпорту перекладу %filename."
+
+msgid "Cron has been running for more than an hour and is most likely stuck."
+msgstr ""
+"Виконання cron зайняло більше часу, ніж зазвичай. Швидше за все, це "
+"зависання."
+
+msgid "Attempting to re-run cron while it is already running."
+msgstr "Спроба запустити cron в той час, як він вже виконується."
+
+msgid "Cron run completed."
+msgstr "Виконання cron завершено."
+
+msgid "Already added languages"
+msgstr "Вже додані мови"
+
+msgid "Language name"
+msgstr "Мова"
+
+msgid "Catalan"
+msgstr "Каталанська"
+
+msgid "The requested page could not be found."
+msgstr ""
+"Сторінка, яку Ви намагались переглянути, зараз недоступна або взагалі вже "
+"відсутня. Проте Ви маєте можливість переглянути багато інших сторінок на "
+"нашому сайті."
+
+msgid "Removed orphaned action '%action' from database."
+msgstr "Видалено застарілу дію %action з бази даних"
+
+msgid "One orphaned action (%orphans) exists in the actions table. !link"
+msgid_plural ""
+"@count orphaned actions (%orphans) exist in the actions table. !link"
+msgstr[0] "@count стара дія (%orphans) присутня в таблиці дій. !link"
+msgstr[1] "@count старих дії (%orphans) присутні в таблиці дій. !link"
+msgstr[2] "@count старих дій (%orphans) присутні в таблиці дій. !link"
+
+msgid "Site off-line"
+msgstr "Сайт на тимчасово не працює. Ми робимо його кращим. Чекайте... :)"
+
+msgid "@size @suffix"
+msgstr "@size @suffix"
+
+msgid "Cron run exceeded the time limit and was aborted."
+msgstr "Виконання крон перевищило відведений час і було перерване."
+
+msgid "1 byte"
+msgid_plural "@count bytes"
+msgstr[0] "@count байт"
+msgstr[1] "@count байта"
+
+msgid "PostgreSQL database"
+msgstr "База даних PostgreSQL"
+
+msgid ""
+"Your PostgreSQL Server is too old. Drupal requires at least PostgreSQL %"
+"version."
+msgstr ""
+"Ваш сервер PostgreSQL застарів. Drupal потребує щонайменше PostgreSQL %"
+"version."
+
+msgid ""
+"Your PostgreSQL database is set up with the wrong character encoding (%"
+"encoding). It is possible it will not work as expected. It is advised to "
+"recreate it with UTF-8/Unicode encoding. More information can be found in "
+"the <a href=\"@url\">PostgreSQL documentation</a>."
+msgstr ""
+"Для вашої бази даних PostgreSQL встановлена неправильне кодування (%"
+"encoding). Скоріш за все, все буде працювати не так, як очікується, тому "
+"реомендуємо конвертувати базу даних, використовуючи кодування UTF-8/Unicode. "
+"Додаткову інформацію можна знайти у  <a href=\"@url\">документації із "
+"PostgreSQL</a>."
+
+msgid "The directory %directory has been created."
+msgstr "Каталог %directory створено."
+
+msgid ""
+"The permissions of directory %directory have been changed to make it "
+"writable."
+msgstr ""
+"Права доступу для каталога %directory змінено, для того, щоб дозволити "
+"записи до нього."
+
+msgid ""
+"!name cannot be longer than %max characters but is currently %length "
+"characters long."
+msgstr ""
+"!name не може бути довим, чим %max знаків, зараз його довжина %length знаків."
+
+msgid "GD2 image manipulation toolkit"
+msgstr "Пакет обробки фото GD2"
+
+msgid "The GD toolkit is installed and working properly."
+msgstr "Вбудований інструмент GD2 заінстальований і працює добре."
+
+msgid ""
+"Define the image quality for JPEG manipulations. Ranges from 0 to 100. "
+"Higher values mean better image quality but bigger files."
+msgstr ""
+"Визначає якість обробки зображень JPEG. Величини від 0 до 100. Більше "
+"значення визначає кращу якість але більший розмір файла."
+
+msgid ""
+"The GD image toolkit requires that the GD module for PHP be installed and "
+"configured properly. For more information see <a href=\"@url\">PHP's image "
+"documentation</a>."
+msgstr ""
+"Вбудований інструмент GD для зображень потребує інсталяції на налаштування "
+"модуля GD для PHP. Детальніше див. %url."
+
+msgid "JPEG quality must be a number between 0 and 100."
+msgstr "JPEG якість повинна бути числом між 0 і 100."
+
+msgid "Right to left"
+msgstr "Справа ліворуч"
+
+msgid "Left to right"
+msgstr "Зліва праворуч"
+
+msgid "Predefined language"
+msgstr "Базова мова"
+
+msgid ""
+"Select the desired language and click the <em>Add language</em> button. (Use "
+"the <em>Custom language</em> options if your desired language does not "
+"appear in this list.)"
+msgstr ""
+"Оберіть відповідну мову і тисніть на кнопку <em>Додавання мови</em>. "
+"(Використовуйте <em>Власна мова</em>, якщо потрібна Вам відсутня в списку)"
+
+msgid "Custom language"
+msgstr "Інша мова"
+
+msgid "Add custom language"
+msgstr "Додати окрему мову"
+
+msgid "Save language"
+msgstr "Збереження мови"
+
+msgid ""
+"<a href=\"@rfc4646\">RFC 4646</a> compliant language identifier. Language "
+"codes typically use a country code, and optionally, a script or regional "
+"variant name. <em>Examples: \"en\", \"en-US\" and \"zh-Hant\".</em>"
+msgstr ""
+"Ідентифікатор мови згідно <a href=\"@rfc4646\">RFC 4646</a>. Коди мови "
+"типово є кодами країни, але додатково, - можливі варіанти. <em>Приклади: \"uk"
+"\", \"uk-UA\" and \"ru-UA\".</em>"
+
+msgid "Language name in English"
+msgstr "Назва мови англійською"
+
+msgid ""
+"Name of the language in English. Will be available for translation in all "
+"languages."
+msgstr "Назва мови англійською. Буде доступна для перекладу на всі мови."
+
+msgid "Native language name"
+msgstr "Рідна назва мови"
+
+msgid "Name of the language in the language being added."
+msgstr "Назва мови в доданій мові"
+
+msgid ""
+"Language code or other custom string for pattern matching within the path. "
+"With language negotiation set to <em>Path prefix only</em> or <em>Path "
+"prefix with language fallback</em>, this site is presented in this language "
+"when the Path prefix value matches an element in the path. For the default "
+"language, this value may be left blank. <strong>Modifying this value will "
+"break existing URLs and should be used with caution in a production "
+"environment.</strong> <em>Example: Specifying \"deutsch\" as the path prefix "
+"for German results in URLs in the form \"www.example.com/deutsch/node\".</em>"
+msgstr ""
+"Код мови, або власний рядок для шаблону, що буде використовуватись в адресі. "
+"З параметром мови, в становленим в <em>Тільки префікс адреси</em> або "
+"<em>Префікс адреси з ідентифікацією мови</em>, сайт буде відображено в цій "
+"мові, якщо буде розпізнано префікс як частину адреси. Для базової мови це "
+"значення може бути пустим. <strong>Зміна цього параметру замінить всі наявні "
+"адреси і може бути використана з обережністю на реальних сайтах</strong> "
+"<em>Приклад: Вказавши \"українська\", як префікс адреси, перетворить всі "
+"Українські результати в адреси формату \"www.example.ua/українська/node\"</"
+"em>"
+
+msgid "Language domain"
+msgstr "Домен мови"
+
+msgid ""
+"Language-specific URL, with protocol. With language negotiation set to "
+"<em>Domain name only</em>, the site is presented in this language when the "
+"URL accessing the site references this domain. For the default language, "
+"this value may be left blank. <strong>This value must include a protocol as "
+"part of the string.</strong> <em>Example: Specifying \"http://example.de\" "
+"or \"http://de.example.com\" as language domains for German results in URLs "
+"in the forms \"http://example.de/node\" and \"http://de.example.com/node\", "
+"respectively.</em>"
+msgstr ""
+"Залежний від мови URL, з протоколом. З параметром мови, встановленим в "
+"<em>Тільки доменне ім'я</em>, сайт відбражається мовою в випадку, якщо "
+"доступ відбувається з відповідного домену. Для базової мови значення може "
+"бути чистим. <strong>Це значення повинне містити протокол як частину рядка</"
+"strong>. <em>Приклад: Вказуючи \"http://example.ua\" або \"http://uk.example."
+"ua\" як домен мови для Української в результаті відображатиметься  в форматі "
+"\"http://example.ua/node\" and \"http://uk.example.com/node\" відповідно</em>"
+
+msgid "Direction that text in this language is presented."
+msgstr "Напрямок читання тексту"
+
+msgid "The language %language (%code) already exists."
+msgstr "Мова %language (%code) вже існує."
+
+msgid "Invalid language code."
+msgstr "Неправильно заданий код мови."
+
+msgid ""
+"The language %language has been created and can now be used. More "
+"information is available on the <a href=\"@locale-help\">help screen</a>."
+msgstr ""
+"Створена мова %language і тепер вона доступна. Більше інформації можна "
+"знайти на <a href=\"@locale-help\">сторінці допомоги</a>."
+
+msgid "Domain and path prefix values should not be set at the same time."
+msgstr "Заборонено назначати одночасно префікс адреси і домен"
+
+msgid "The domain (%domain) is already tied to a language (%language)."
+msgstr "Для мови (%language) вже назначено домен (%domain)"
+
+msgid "Only the default language can have both the domain and prefix empty."
+msgstr "Тільки базова мова може мати порожніми і домен і префікс"
+
+msgid "The prefix (%prefix) is already tied to a language (%language)."
+msgstr "Для мови (%language) вже створено префікс (%prefix)"
+
+msgid "The English language cannot be deleted."
+msgstr "Англійську мову видалити неможливо."
+
+msgid "The default language cannot be deleted."
+msgstr "Базову мову видалити неможливо"
+
+msgid ""
+"Deleting a language will remove all interface translations associated with "
+"it, and posts in this language will be set to be language neutral. This "
+"action cannot be undone."
+msgstr ""
+"Видалення мови стре всі переклади інтерфейсу, пов'язані з нею, а всі "
+"матеріали в цій мові буде переназначено на нейтральну мову. Дія незворотня."
+
+msgid "Path prefix only."
+msgstr "Тільки префікс шляху"
+
+msgid "Path prefix with language fallback."
+msgstr "Префікс сторінки з варіантом мови"
+
+msgid "Domain name only."
+msgstr "Тільки доменний префікс"
+
+msgid ""
+"Select the mechanism used to determine your site's presentation language. "
+"<strong>Modifying this setting may break all incoming URLs and should be "
+"used with caution in a production environment.</strong>"
+msgstr ""
+"Оберіть алгоритм, що буде використовуватись для визначення мови відображення "
+"Вашого вебсайту. <strong>Зміна цих параметрів може зруйнувати всі вхідні "
+"адреси сторінок і може використовуватись на реальних сайтах з великою "
+"обережністю</strong>"
+
+msgid "Language negotiation configuration saved."
+msgstr "Конфігурацію мови збережено"
+
+msgid "English (built-in)"
+msgstr "Англійська (вбудована)"
+
+msgid "String contains"
+msgstr "Вміст рядка"
+
+msgid "Leave blank to show all strings. The search is case sensitive."
+msgstr ""
+"Залишити порожнім, щоб відобразилися всі фрази. Пошук залежний від реґістру."
+
+msgid "English (provided by Drupal)"
+msgstr "Англійська (надана Друпалом)"
+
+msgid "Search in"
+msgstr "Шукати в"
+
+msgid "Both translated and untranslated strings"
+msgstr "Перекладені та неперекладені рядки"
+
+msgid "Only translated strings"
+msgstr "Лише перекладені фрази"
+
+msgid "Only untranslated strings"
+msgstr "Лише неперекладені фрази"
+
+msgid "Limit search to"
+msgstr "Обмежити пошук в"
+
+msgid "All text groups"
+msgstr "Всі текстові групи"
+
+msgid "Languages not yet added"
+msgstr "Ще не додані мови"
+
+msgid "Import translation"
+msgstr "Імпортувати переклад"
+
+msgid "A Gettext Portable Object (<em>.po</em>) file."
+msgstr "Файл перекладу (<em>.po</em>) системи Gettext"
+
+msgid "Import into"
+msgstr "Імпортувати до"
+
+msgid ""
+"Choose the language you want to add strings into. If you choose a language "
+"which is not yet set up, it will be added."
+msgstr ""
+"Виберіть мову, до якої ви хочете додати фрази. Якщо ви виберете ще не додану "
+"мову, її буде додано."
+
+msgid "Text group"
+msgstr "Група тексту"
+
+msgid "Imported translations will be added to this text group."
+msgstr "Втягнуті переклади будуть додані до цих текстових груп"
+
+msgid "Strings in the uploaded file replace existing ones, new ones are added"
+msgstr "Фрази у завантажених файлах заміняють існуючі, нові фрази додаються"
+
+msgid "Existing strings are kept, only new strings are added"
+msgstr "Існуючі фрази залишаються без змін, додаються лише нові фрази"
+
+msgid "The language %language has been created."
+msgstr "Мову %language створено."
+
+msgid "Export translation"
+msgstr "Експортувати переклад"
+
+msgid ""
+"Select the language to export in Gettext Portable Object (<em>.po</em>) "
+"format."
+msgstr ""
+"Оберіть мову для експорту в формат Gettext Portable Object (<em>.po</em>)."
+
+msgid ""
+"Generate a Gettext Portable Object Template (<em>.pot</em>) file with all "
+"strings from the Drupal locale database."
+msgstr ""
+"Згенерувати файл шаблону Gettext Portable Object Template (<em>.pot</em>) з "
+"усіма рядками, що є в локальній базі даних Drupal."
+
+msgid "String not found."
+msgstr "Рядок не знайдено."
+
+msgid "The submitted string contains disallowed HTML: %string"
+msgstr "Поданий рядок містить заборонений HTML: %string"
+
+msgid "The string has been saved."
+msgstr "Рядок збережено."
+
+msgid "The string has been removed."
+msgstr "Рядок було видалено."
+
+msgid "The language selected for import is not supported."
+msgstr "Мова, що була вибрана для імпотру, не підтримується."
+
+msgid ""
+"The translation file %filename appears to have a missing or malformed header."
+msgstr ""
+"Файл перекладу  %filename не має заголовку або його заголовок пошкоджено."
+
+msgid ""
+"The translation was successfully imported. There are %number newly created "
+"translated strings, %update strings were updated and %delete strings were "
+"removed."
+msgstr ""
+"Переклад успішно імпортований. Створено %number нових перекладених рядків, %"
+"update рядків оновлено та %delete рядків було видалено."
+
+msgid ""
+"The translation file %filename contains an error: the plural formula could "
+"not be parsed."
+msgstr ""
+"Файл перекладу %filename містить помилку: неможливо опрацювати формулу "
+"множинних чисел."
+
+msgid "Importing interface translations"
+msgstr "Втягування перекладів інтерфейсу"
+
+msgid "Starting import"
+msgstr "Початок втягування"
+
+msgid "Error importing interface translations"
+msgstr "Помилка втягування перекладів інтерфейсу"
+
+msgid ""
+"Attempted submission of a translation string with disallowed HTML: %string"
+msgstr "Спроба подання рядка перекладу з забороненим HTML: %string"
+
+msgid "The %language language (%code) has been created."
+msgstr "Мову %language (%code) створено."
+
+msgid ""
+"Imported %file into %locale: %number new strings added, %update updated and %"
+"delete removed."
+msgstr ""
+"Втягнуто %file в %locale: %number нових рядків додано, %update оновлено і %"
+"delete видалено."
+
+msgid "Exported %locale translation file: %filename."
+msgstr "Експортовано файл перекладу для %locale: %filename."
+
+msgid "Exported translation file: %filename."
+msgstr "Переклад експортовано у файл: %filename."
+
+msgid "Updated JavaScript translation file for the language %language."
+msgstr "Оновлено файл перекладу JavaScript для мови %language."
+
+msgid "Created JavaScript translation file for the language %language."
+msgstr "Створено файл перекладу JavaScript для мови %language."
+
+msgid ""
+"Removed JavaScript translation file for the language %language, because no "
+"translations currently exist for that language."
+msgstr ""
+"Видалено JavaScript файл перекладу для мови %language, через відсутність "
+"перекладу для цієї мови"
+
+msgid ""
+"An error occurred during creation of the JavaScript translation file for the "
+"language %language."
+msgstr ""
+"Сталася помилка протягом створення файла перекладу JavaScript для мови %"
+"language."
+
+msgid "One translation string was skipped because it contains disallowed HTML."
+msgid_plural ""
+"@count translation strings were skipped because they contain disallowed HTML."
+msgstr[0] "@count рядок перекладу пропущена через наявність забороненого HTML"
+msgstr[1] "@count рядка перекладу пропущено через наявність забороненого HTML"
+msgstr[2] "@count рядків перекладу пропущено через наявність забороненого HTML"
+
+msgid "One translation file imported for the newly installed modules."
+msgid_plural ""
+"@count translation files imported for the newly installed modules."
+msgstr[0] "@count файл перекладу було втягнуто для щойно встановлених модулів"
+msgstr[1] "@count файла перекладу було втягнуто для щойно встановлених модулів"
+msgstr[2] ""
+"@count файлів перекладу було втягнуто для щойно встановлених модулів"
+
+msgid "One translation file imported for the enabled modules."
+msgid_plural "@count translation files imported for the enabled modules."
+msgstr[0] "@count файл перекладу втягнуто до ввімкнених модулів"
+msgstr[1] "@count файла перекладу втягнуто до ввімкнених модулів"
+msgstr[2] "@count файлів перекладу втягнуто до ввімкнених модулів"
+
+msgid "Abkhazian"
+msgstr "Абхазька"
+
+msgid "Avestan"
+msgstr "Авестійська"
+
+msgid "Afrikaans"
+msgstr "Африкаанс"
+
+msgid "Akan"
+msgstr "Акан"
+
+msgid "Amharic"
+msgstr "Амхарська"
+
+msgid "Assamese"
+msgstr "Ассамі"
+
+msgid "Avar"
+msgstr "Аварська"
+
+msgid "Aymara"
+msgstr "Аймара"
+
+msgid "Azerbaijani"
+msgstr "Азербайджанська"
+
+msgid "Bashkir"
+msgstr "Башкирська"
+
+msgid "Belarusian"
+msgstr "Білоруська"
+
+msgid "Bihari"
+msgstr "Біхарі"
+
+msgid "Bislama"
+msgstr "Біслама"
+
+msgid "Bambara"
+msgstr "Бамбара"
+
+msgid "Bengali"
+msgstr "Бенгальська"
+
+msgid "Tibetan"
+msgstr "Тибетська"
+
+msgid "Breton"
+msgstr "Бретонська"
+
+msgid "Bosnian"
+msgstr "Боснійська"
+
+msgid "Chechen"
+msgstr "Чеченська"
+
+msgid "Chamorro"
+msgstr "Чаморро"
+
+msgid "Corsican"
+msgstr "Корсіканська"
+
+msgid "Cree"
+msgstr "Крі"
+
+msgid "Old Slavonic"
+msgstr "Церковнослов'янська"
+
+msgid "Chuvash"
+msgstr "Чуваська"
+
+msgid "Welsh"
+msgstr "Валлійська"
+
+msgid "Maldivian"
+msgstr "Мальдівська"
+
+msgid "Bhutani"
+msgstr "Бгутані"
+
+msgid "Ewe"
+msgstr "Еве"
+
+msgid "Esperanto"
+msgstr "Есперанто"
+
+msgid "Estonian"
+msgstr "Естонська"
+
+msgid "Basque"
+msgstr "Баскська"
+
+msgid "Persian"
+msgstr "Перська"
+
+msgid "Fulah"
+msgstr "Фула"
+
+msgid "Faeroese"
+msgstr "Фарерська"
+
+msgid "Frisian"
+msgstr "Фризька"
+
+msgid "Irish"
+msgstr "Ірландська"
+
+msgid "Scots Gaelic"
+msgstr "Шотландська ґельська"
+
+msgid "Galician"
+msgstr "Галісійська"
+
+msgid "Guarani"
+msgstr "Ґварані"
+
+msgid "Gujarati"
+msgstr "Гуджараті"
+
+msgid "Manx"
+msgstr "Манкс"
+
+msgid "Hausa"
+msgstr "Гауса"
+
+msgid "Hiri Motu"
+msgstr "Гірі-моту"
+
+msgid "Armenian"
+msgstr "Вірменська"
+
+msgid "Herero"
+msgstr "Гереро"
+
+msgid "Interlingua"
+msgstr "Інтерлінґва"
+
+msgid "Interlingue"
+msgstr "Інтерлінґве"
+
+msgid "Igbo"
+msgstr "Іґбо"
+
+msgid "Inupiak"
+msgstr "Інуп'як"
+
+msgid "Icelandic"
+msgstr "Ісландська"
+
+msgid "Inuktitut"
+msgstr "Інуктітут"
+
+msgid "Javanese"
+msgstr "Яванська"
+
+msgid "Georgian"
+msgstr "Грузинська"
+
+msgid "Kongo"
+msgstr "Конго"
+
+msgid "Kikuyu"
+msgstr "Кікуйю"
+
+msgid "Kwanyama"
+msgstr "Кваньяма"
+
+msgid "Kazakh"
+msgstr "Казахська"
+
+msgid "Greenlandic"
+msgstr "Ґренландська"
+
+msgid "Cambodian"
+msgstr "Кхмерська"
+
+msgid "Kannada"
+msgstr "Каннада"
+
+msgid "Kanuri"
+msgstr "Канурі"
+
+msgid "Kashmiri"
+msgstr "Кашмірі"
+
+msgid "Kurdish"
+msgstr "Курдська"
+
+msgid "Cornish"
+msgstr "Корнійська"
+
+msgid "Kirghiz"
+msgstr "Киргизька"
+
+msgid "Latin"
+msgstr "Латина"
+
+msgid "Luxembourgish"
+msgstr "Люксембурзька"
+
+msgid "Luganda"
+msgstr "Луґанда"
+
+msgid "Lingala"
+msgstr "Лінґала"
+
+msgid "Laothian"
+msgstr "Лаоська"
+
+msgid "Latvian"
+msgstr "Латвійська"
+
+msgid "Malagasy"
+msgstr "Малаґасійська"
+
+msgid "Marshallese"
+msgstr "Маршальська"
+
+msgid "Maori"
+msgstr "Маорі"
+
+msgid "Macedonian"
+msgstr "Македонська"
+
+msgid "Malayalam"
+msgstr "Малайяламський"
+
+msgid "Mongolian"
+msgstr "Монгольська"
+
+msgid "Moldavian"
+msgstr "Молдовська"
+
+msgid "Marathi"
+msgstr "Маратхі"
+
+msgid "Malay"
+msgstr "Малайська"
+
+msgid "Maltese"
+msgstr "Мальтійська"
+
+msgid "Burmese"
+msgstr "Бірманська"
+
+msgid "North Ndebele"
+msgstr "Північне ндебеле"
+
+msgid "Nepali"
+msgstr "Непалі"
+
+msgid "Ndonga"
+msgstr "Ндонґа"
+
+msgid "Norwegian Bokmål"
+msgstr "Норвежський Bokmål"
+
+msgid "Norwegian Nynorsk"
+msgstr "Норвежський Nynorsk"
+
+msgid "South Ndebele"
+msgstr "Південне ндебеле"
+
+msgid "Chichewa"
+msgstr "Чічева"
+
+msgid "Occitan"
+msgstr "Оксітанська"
+
+msgid "Oromo"
+msgstr "Оромо"
+
+msgid "Oriya"
+msgstr "Орія"
+
+msgid "Ossetian"
+msgstr "Осетинська"
+
+msgid "Punjabi"
+msgstr "Панджабі"
+
+msgid "Pali"
+msgstr "Палі"
+
+msgid "Pashto"
+msgstr "Пашто"
+
+msgid "Portuguese, Portugal"
+msgstr "Portuguese, Portugal"
+
+msgid "Portuguese, Brazil"
+msgstr "Portuguese, Brazil"
+
+msgid "Quechua"
+msgstr "Кечуа"
+
+msgid "Rhaeto-Romance"
+msgstr "Рето-романська"
+
+msgid "Kirundi"
+msgstr "Кірунді"
+
+msgid "Kinyarwanda"
+msgstr "Кіньярванда"
+
+msgid "Sanskrit"
+msgstr "Санскрит"
+
+msgid "Sardinian"
+msgstr "Сардинська"
+
+msgid "Sindhi"
+msgstr "Синдхі"
+
+msgid "Northern Sami"
+msgstr "Північна Самі"
+
+msgid "Sango"
+msgstr "Санґо"
+
+msgid "Serbo-Croatian"
+msgstr "Сербо-хорватська"
+
+msgid "Sinhala"
+msgstr "Сингальська"
+
+msgid "Slovenian"
+msgstr "Словенська"
+
+msgid "Samoan"
+msgstr "Самоанська"
+
+msgid "Shona"
+msgstr "Шона"
+
+msgid "Albanian"
+msgstr "Албанська"
+
+msgid "Serbian"
+msgstr "Сербська"
+
+msgid "Siswati"
+msgstr "Свазі"
+
+msgid "Sesotho"
+msgstr "Сесотго"
+
+msgid "Sudanese"
+msgstr "Суданська"
+
+msgid "Swahili"
+msgstr "Суахілі"
+
+msgid "Tamil"
+msgstr "Тамільське"
+
+msgid "Telugu"
+msgstr "Телугу"
+
+msgid "Tajik"
+msgstr "Таджицька"
+
+msgid "Thai"
+msgstr "Тайська"
+
+msgid "Tigrinya"
+msgstr "Тіґрай"
+
+msgid "Turkmen"
+msgstr "Туркменська"
+
+msgid "Tagalog"
+msgstr "Таґальська"
+
+msgid "Setswana"
+msgstr "Тсвана"
+
+msgid "Tsonga"
+msgstr "Тсонґа"
+
+msgid "Tatar"
+msgstr "Татарська"
+
+msgid "Twi"
+msgstr "Тві"
+
+msgid "Tahitian"
+msgstr "Таїтянська"
+
+msgid "Uighur"
+msgstr "Уйґурська"
+
+msgid "Ukrainian"
+msgstr "Українська"
+
+msgid "Urdu"
+msgstr "Урду"
+
+msgid "Uzbek"
+msgstr "Узбецька"
+
+msgid "Venda"
+msgstr "Венда"
+
+msgid "Vietnamese"
+msgstr "В'єтнамська"
+
+msgid "Wolof"
+msgstr "Волоф"
+
+msgid "Xhosa"
+msgstr "Кхоса"
+
+msgid "Yiddish"
+msgstr "Ідиш"
+
+msgid "Yoruba"
+msgstr "Йоруба"
+
+msgid "Zhuang"
+msgstr "Чжуан"
+
+msgid "Chinese, Simplified"
+msgstr "Китайська, спрощена"
+
+msgid "Chinese, Traditional"
+msgstr "Китайська, традиційна"
+
+msgid "Zulu"
+msgstr "Зулу"
+
+msgid ""
+"Unable to send e-mail. Please contact the site administrator if the problem "
+"persists."
+msgstr ""
+"Неможливо надіслати електронне повідомлення. Будь ласка, повідомте "
+"адміністратору сайта."
+
+msgid "Error sending e-mail (from %from to %to)."
+msgstr "Помилка під час надсилання пошти(від %from до %to)."
+
+msgid "Operating in off-line mode."
+msgstr "Робота в режимі off-line."
+
+msgid "Menu router rebuild failed - some paths may not work correctly."
+msgstr ""
+"Помилка перебудовування меню - деякі адреси можуть некоректно відображатись"
+
+msgid ""
+"%module is part of a circular dependency. This is not supported and you will "
+"not be able to switch it on."
+msgstr ""
+"%module - частина обов'язкової залежності. Не підтримується і Ви не зможете "
+"увімкнути."
+
+msgid "sort icon"
+msgstr "іконка для сортування"
+
+msgid "sort ascending"
+msgstr "зростаючий порядок сортування"
+
+msgid "sort descending"
+msgstr "спадаючий порядок сортування"
+
+msgid ""
+"The PCRE library in your PHP installation is outdated. This will cause "
+"problems when handling Unicode text. If you are running PHP 4.3.3 or higher, "
+"make sure you are using the PCRE library supplied by PHP. Please refer to "
+"the <a href=\"@url\">PHP PCRE documentation</a> for more information."
+msgstr ""
+"Бібліотека PCRE, встановлена з PHP застаріла. Це може викликати проблеми при "
+"опрацюванні рядків Unicode. Якщо ви використовуєте PHP не менш, ніж 4.3.3, "
+"переконайтесь, що використовується бібліотека PCRE тої ж версії. Детальніше "
+"читайте <a href=\"@url\">документацію PHP PCRE</a>."
+
+msgid ""
+"Operations on Unicode strings are emulated on a best-effort basis. Install "
+"the <a href=\"@url\">PHP mbstring extension</a> for improved Unicode support."
+msgstr ""
+"Операції над Unicode рядками емулюються задля кращої роботи. Інсталюйте <a "
+"href=\"@url\">розширення PHP mbstring</a> для кращої підтримки Юнікоду."
+
+msgid ""
+"Multibyte string function overloading in PHP is active and must be disabled. "
+"Check the php.ini <em>mbstring.func_overload</em> setting. Please refer to "
+"the <a href=\"@url\">PHP mbstring documentation</a> for more information."
+msgstr ""
+"Увімкнене перезавантаження (overloading) мультибайтових рядків у PHP, але "
+"його потрібно вимкнути. Перевірте налаштування <em>mbstring.func_overload</"
+"em> у php.ini. Деталі ви зможете знайти у  <a href=\"@url\">документації по "
+"PHP mbstring</a>."
+
+msgid ""
+"Multibyte string input conversion in PHP is active and must be disabled. "
+"Check the php.ini <em>mbstring.encoding_translation</em> setting. Please "
+"refer to the <a href=\"@url\">PHP mbstring documentation</a> for more "
+"information."
+msgstr ""
+"Конвертація вводу мультибайтових рядків у PHP вувімкнена, але її потрібно "
+"вимкнути. Перевітре налаштування <em>mbstring.encoding_translation</em> у "
+"php.ini. Деталі Ви зможете знайти у <a href=\"@url\">документації із PHP "
+"mbstring</a>."
+
+msgid ""
+"Multibyte string input conversion in PHP is active and must be disabled. "
+"Check the php.ini <em>mbstring.http_input</em> setting. Please refer to the "
+"<a href=\"@url\">PHP mbstring documentation</a> for more information."
+msgstr ""
+"Конвертація введення мультибайтових рядків у PHP увімкнена, але її треба "
+"відключити. Перевірте налаштування <em>mbstring.http_input</em> у php.ini. "
+"деталі Ви зможете знайти у  <a href=\"@url\">документації із PHP mbstring</"
+"a>."
+
+msgid ""
+"Multibyte string output conversion in PHP is active and must be disabled. "
+"Check the php.ini <em>mbstring.http_output</em> setting. Please refer to the "
+"<a href=\"@url\">PHP mbstring documentation</a> for more information."
+msgstr ""
+"Конвертація виведення мультибайтових рядків у PHP увімкнена, але її треба "
+"відключити. Перевірте налаштування <em>mbstring.http_output</em> у php.ini. "
+"Деталі ви сможете знайти на <a href=\"@url\">документации із PHP mbstring</"
+"a>."
+
+msgid "Standard PHP"
+msgstr "Стандартний PHP"
+
+msgid "PHP Mbstring Extension"
+msgstr "Розширення PHP Mbstring"
+
+msgid "Unicode library"
+msgstr "Бібліотека Юнікоду"
+
+msgid "Could not convert XML encoding %s to UTF-8."
+msgstr "Не вдалося конвертувати кодування XML %s у UTF-8."
+
+msgid ""
+"Unsupported encoding %s. Please install iconv, GNU recode or mbstring for "
+"PHP."
+msgstr ""
+"Кодування не підтримується %s. Встановіть iconv, GNU recode або mbstring для "
+"PHP."
+
+msgid "Parse error. Not well formed"
+msgstr "Помилка розбору. Сформовано неправильно"
+
+msgid "Parse error. Request not well formed."
+msgstr "Помилка розбору. Запит сформовано неправильно."
+
+msgid "Server error. Invalid XML-RPC. Request must be a methodCall."
+msgstr ""
+"Помилка на сервері. Н XML-RPC. Запит повинен бути викликом методу "
+"(methodCall)."
+
+msgid "Server error. Requested method @methodname not specified."
+msgstr "Помилка на сервері. Метод запиту %methodname не визначено."
+
+msgid "Server error. Wrong number of method parameters."
+msgstr "Помилка на сервері. Помилкове число параметрів методу."
+
+msgid "Server error. Invalid method parameters."
+msgstr "Помилка на сервері. Неправильні параметри методу."
+
+msgid "Server error. Requested function @method does not exist."
+msgstr "Помилка на сервері. Запитуваної функції %method не існує."
+
+msgid "Invalid syntax for system.multicall."
+msgstr "Неправильний синтаксис запиту system.multicall."
+
+msgid "Recursive calls to system.multicall are forbidden."
+msgstr "Рекурсивне звернення до system.multical заборонено."
+
+msgid "Server error. Requested method @methodname signature not specified."
+msgstr ""
+"Помилка на сервері. Не визначена сигнатура запитуваного методу %methodname."

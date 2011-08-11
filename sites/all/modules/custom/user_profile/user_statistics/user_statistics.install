@@ -1,0 +1,59 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Contains install and update functions for user_statistics module.
+ */
+
+
+/**
+ * Implementation of hook_install().
+ */
+function user_statistics_install() {
+  drupal_install_schema('user_statistics');
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function user_statistics_uninstall() {
+  drupal_uninstall_schema('user_statistics');
+}
+
+
+/**
+ * Implementation of hook_schema().
+ */
+function user_statistics_schema() {
+  $schema['user_statistics'] = array(
+    'description' => 'User main statistics.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'User ID.',
+      ),
+      'day_online' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Count of days Online User.',
+      ),
+      'timestamp' => array(
+        'description' => 'The Unix timestamp.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'indexes' => array(
+      'uid' => array('uid'),
+    ),
+  );
+  return $schema;
+}

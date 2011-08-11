@@ -1,0 +1,129 @@
+<?php
+// $Id$
+
+/**
+ * The administrator must edit the file — og_to_forum.admin_setting.inc
+ */
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function og_to_forum_menu() {
+  $items = array();
+  
+  $items['admin/content/convert_og_to_forum'] = array(
+    'title' => 'Convert OG to Forum',
+    'page callback' => 'og_to_forum_convert_page',
+    'access arguments' => array('administer forums'),
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Page callback. Function to convert OG in the forum.
+ */
+function og_to_forum_convert_page() {
+  $output = '';
+  
+  module_load_include('inc', 'og_to_forum');
+  module_load_include('inc', 'og_to_forum', 'og_to_forum.admin_setting');
+  
+  $status = variable_get('og_to_forum_status', array());
+  
+  $posts = _og_to_forum_load_posts();
+  $forum_alias = _og_to_forum_load_alias();
+  $map = _og_to_forum_define_map();
+  
+  $num_forum_post = db_result(db_query("SELECT COUNT(n.nid) FROM {node} n
+  	LEFT JOIN {term_node} t USING(nid, vid)
+  	WHERE n.type = 'post' AND t.tid IN (
+  		SELECT td.tid FROM {term_data} td WHERE td.vid = %d
+  	)", variable_get('forum_nav_vocabulary', '')
+  ));
+  
+  $output .= '<div>Num Group post — '. count($posts) .'</div>
+  <div>Num Forum post — '. $num_forum_post .'</div>'.
+  '<h3>Order of conversion:</h3>';
+  
+  $temp = '1. Check status for convert operation.';
+  $output .= "\n<p>". ($status['step'] > 0 ? '<strike>'. $temp .'</strike>': $temp) ."</p>";
+  
+  $temp = '2. Add forum alias.';
+  $output .= "\n<p>". ($status['step'] > 1 ? '<strike>'. $temp .'</strike>': $temp) ."</p>";
+  
+  $temp = '3. Convert OG term to Forum term.';
+  $output .= "\n<p>". ($status['step'] > 2 ? '<strike>'. $temp .'</strike>': $temp) ."</p>";
+  
+  if (isset($_GET['convert']) && $_GET['convert'] == 'yes') {
+    if ($status['step'] > 2) {
+      drupal_set_message('Data conversion is completed.');
+      drupal_goto('admin/content/convert_og_to_forum');
+    }
+    $output .= "<h2>Convert process</h2>\n";
+    
+    switch ($status['step']) {
+      case 0:
+        //Check status for convert operation
+        $check_flag = TRUE;
+        
+        if (count($posts) <= $num_forum_post) {
+          $check_flag = FALSE;
+          $output .= "\n<h2>Post already belong to Forum.</h2>\n";
+        }
+        
+        if ($check_flag) {
+          $output .= "\n<h2>Refresh the page to continue!</h2>\n";
+          $status['step']++;
+        }
+        else {
+          $output .= "\n<h2>Correct errors.</h2>\n";
+        }
+        break;
+        
+      case 1:
+        //Add forum alias
+        _og_to_forum_add_alias($map);
+        $output .= "\n<h2>Refresh the page to continue!</h2>\n";
+        $forum_alias = _og_to_forum_load_alias();
+        if (count($forum_alias) == count($map['terms'])) {
+          $status['step']++;
+        }
+        else {
+          $output .= "\n<h2>Error: The forum is not specified aliases.</h2>\n";
+        }
+        break;
+        
+      case 2:
+        //Convert OG term to Forum term
+        $output .= _og_to_forum_convert_posts($posts, $map, $forum_alias);
+        $output .= "\n<h2>Data conversion is completed!</h2>\n";
+        $status['step']++;
+        break;
+    }
+    if ($status['step']) {
+      variable_set('og_to_forum_status', $status);
+    }
+  }
+  else {
+    if ($status['step'] > 2) {
+      $output .= "\n<h2>Data conversion is completed!</h2>\n";
+    }
+    else {
+      $output .= "<h2>Add to URL —> ?convert=yes</h2>\n";
+    }
+  }
+  return $output;
+}
+
+
+
+function og_to_forum_init() {  //FIXME
+  //variable_set('og_to_forum_status', array('step' => 0, ));
+  
+  
+}
+
+

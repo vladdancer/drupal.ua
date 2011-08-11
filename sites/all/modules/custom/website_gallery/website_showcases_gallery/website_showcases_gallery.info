@@ -1,0 +1,7 @@
+; $Id$
+
+name = website_showcases_gallery export module
+description = Export objects from CTools
+dependencies[] = page_manager
+package = Custom
+core = 6.x

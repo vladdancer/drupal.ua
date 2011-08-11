@@ -1,0 +1,323 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-09-29 19:25+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Page title"
+msgstr "Назва сторінки"
+
+msgid "Visibility"
+msgstr "Видимість"
+
+msgid "Explanation"
+msgstr "Пояснення"
+
+msgid "Selection options"
+msgstr "Опції вибору"
+
+msgid "The field %field is required."
+msgstr "Поле %field є обов'язковим."
+
+msgid "profile"
+msgstr "профіль"
+
+msgid "date"
+msgstr "дата"
+
+msgid "Form name"
+msgstr "Назва форми"
+
+msgid ""
+"The title of the new field. The title will be shown to the user. An example "
+"title is \"Favorite color\"."
+msgstr ""
+"Заголовок нового поля. Заголовок показується користувачеві. Приклад "
+"заголовку - \"Улюблений колір\"."
+
+msgid ""
+"An optional explanation to go with the new field. The explanation will be "
+"shown to the user."
+msgstr ""
+"Можливе пояснення для нового поля. Пояснення показується користувачеві."
+
+msgid ""
+"To enable browsing this field by value, enter a title for the resulting "
+"page. The word <code>%value</code> will be substituted with the "
+"corresponding value. An example page title is \"People whose favorite color "
+"is %value\". This is only applicable for a public field."
+msgstr ""
+"Щоб надати можливість перегляду цього поля за значенням, введіть заголовок "
+"сторінки результату. Слово <Code>%value</code> буде замінено відповідним "
+"значенням. Приклад заголовку сторінки: \"Люди, чий улюблений колір - %value"
+"\". Це застосовуєтсья тільки для публіних полів."
+
+msgid ""
+"To enable browsing this field by value, enter a title for the resulting "
+"page. An example page title is \"People who are employed\". This is only "
+"applicable for a public field."
+msgstr ""
+"Чтобы дать возможность просмотра значения этого поля, укажите заголовок "
+"итоговой страницы. Например: \"Люди, которые участвовали в проекте\". "
+"Применяется только для публичных полей."
+
+msgid "Save field"
+msgstr "Зберегти поле"
+
+msgid "Add field"
+msgstr "Додати поле"
+
+msgid "Profiles"
+msgstr "Профілі"
+
+msgid ""
+"The category the new field should be part of. Categories are used to group "
+"fields logically. An example category is \"Personal information\"."
+msgstr ""
+"Категорія до якої повинне належати нове поле. Категорії використовуються для "
+"логічного групування полів. Приклад категорії - \"Персональна інформація\"."
+
+msgid "The user must enter a value."
+msgstr "Користувач має ввести значення."
+
+msgid "Visible in user registration form."
+msgstr "Відображене у формі реєстрації користувача."
+
+msgid "Field settings"
+msgstr "Налаштування поля"
+
+msgid "Add new field"
+msgstr "Додати нове поле"
+
+msgid "The field has been updated."
+msgstr "Поле оновлено."
+
+msgid "No fields available."
+msgstr "Недоступні поля"
+
+msgid "Profile fields have been updated."
+msgstr ""
+
+msgid ""
+"No fields in this category. If this category remains empty when saved, it "
+"will be removed."
+msgstr ""
+
+msgid "edit %title"
+msgstr "змінити %title"
+
+msgid "add new %type"
+msgstr "додати новий %type"
+
+msgid ""
+"The name of the field. The form name is not shown to the user but used "
+"internally in the HTML code and URLs.\n"
+"Unless you know what you are doing, it is highly recommended that you prefix "
+"the form name with <code>profile_</code> to avoid name clashes with other "
+"fields. Spaces or any other special characters except dash (-) and "
+"underscore (_) are not allowed. An example name is \"profile_favorite_color"
+"\" or perhaps just \"profile_color\"."
+msgstr ""
+"Назва поля. Назва форми не показуєтсья користувачеві але використовується "
+"усередині в коді HTML і URL-адрес.\n"
+"Якщо Ви не знаєте, що робите, наполегливо рекомендуєтсья додавати префікс "
+"<code>profile_</code> до назви форми , для уникнення конфліктів назв з "
+"іншими полями. Пробіли або будь-які інші спеціальні символи крім тире (-) і "
+"пікреслення (_) не дозволяються. Прикладом назви є \"profile_favorite_color"
+"\" або тільки \"profile_color\"."
+
+msgid ""
+"A list of all options. Put each option on a separate line. Example options "
+"are \"red\", \"blue\", \"green\", etc."
+msgstr ""
+"Список всіх варіантів. Вкажіть по одному варіанту на рядок. Приклад "
+"варіантів: \"червоний\", \"синій\", \"зелений\"."
+
+msgid ""
+"Hidden profile field, only accessible by administrators, modules and themes."
+msgstr ""
+"Приховане поле профілю, доступне тільки для адміністраторів, модулів і тем."
+
+msgid "Private field, content only available to privileged users."
+msgstr "Приватне поле, вміст доступний тільки вповноваженим користувачам."
+
+msgid ""
+"Public field, content shown on profile page but not used on member list "
+"pages."
+msgstr ""
+"Оприлюднене поле, вміст відображається на сторінці профілю, але не на "
+"сторінках списку учасників."
+
+msgid "Public field, content shown on profile page and on member list pages."
+msgstr ""
+"Оприлюднене поле, вміст відображається на сторінці профілю та на сторінках "
+"списку учасників."
+
+msgid ""
+"The weights define the order in which the form fields are shown. Lighter "
+"fields \"float up\" towards the top of the category."
+msgstr ""
+"Вага визначає порядок показу полей форми. Легші поля \"випливають\" до верху "
+"категорії."
+
+msgid "Form will auto-complete while user is typing."
+msgstr "Форма буде автоматично заповнюватись, поки користувач друкує."
+
+msgid ""
+"For security, auto-complete will be disabled if the user does not have "
+"access to user profiles."
+msgstr ""
+
+msgid ""
+"The specified form name contains one or more illegal characters. Spaces or "
+"any other special characters except dash (-) and underscore (_) are not "
+"allowed."
+msgstr ""
+"Указанное имя содержит один или более недопустимых символов. Пробелы и "
+"другие специальные символы за исключением дефиса (-) и подчёркивания (_) "
+"недопустимы."
+
+msgid "The specified form name is reserved for use by Drupal."
+msgstr "Вказане ім'я форми вже зарезервоване для використання Друпалом."
+
+msgid "The specified category name is reserved for use by Drupal."
+msgstr "Вказана назва категорії зарезервована для Drupal."
+
+msgid "The specified title is already in use."
+msgstr "Вказана назва вже використовується."
+
+msgid "The specified name is already in use."
+msgstr "Вказане ім'я вже використовується."
+
+msgid "A hidden field cannot be required."
+msgstr ""
+
+msgid "A hidden field cannot be set to visible on the user registration form."
+msgstr ""
+
+msgid "The field has been created."
+msgstr "Поле створено."
+
+msgid "Are you sure you want to delete the field %field?"
+msgstr "Ви дійсно хочете знищити поле %field?"
+
+msgid ""
+"This action cannot be undone. If users have entered values into this field "
+"in their profile, these entries will also be deleted. If you want to keep "
+"the user-entered data, instead of deleting the field you may wish to <a href="
+"\"@edit-field\">edit this field</a> and change it to a hidden profile field "
+"so that it may only be accessed by administrators."
+msgstr ""
+"Это действие не может быть отменено. Если пользователи ввели значения в это "
+"поле в своем профиле, эти данные будут потеряны. Если вы хотите сохранить "
+"данные, введенные пользователями, то вместо удаления поля, вы можете <a href="
+"\"@edit-field\">изменить его</a> и сделать его скрытым - тогда доступ к нему "
+"будет иметь только администраторы."
+
+msgid "The field %field has been deleted."
+msgstr "Поле %field було знищене."
+
+msgid "Profile field %field added under category %category."
+msgstr "Поле %field додане у категорію %category."
+
+msgid "Profile field %field deleted."
+msgstr "Поле %field було знищене."
+
+msgid ""
+"The profile module allows custom fields (such as country, full name, or age) "
+"to be defined and displayed in the <em>My Account</em> section. This permits "
+"users of a site to share more information about themselves, and can help "
+"community-based sites organize users around specific information."
+msgstr ""
+
+msgid "The following types of fields can be added to a user profile:"
+msgstr ""
+
+msgid "single-line textfield"
+msgstr "однорядкове текстове поле"
+
+msgid "multi-line textfield"
+msgstr "багаторядкове текстове поле"
+
+msgid "checkbox"
+msgstr "прапорець"
+
+msgid "list selection"
+msgstr "вибір зі списку"
+
+msgid "freeform list"
+msgstr "вільно виповнений список"
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@profile"
+"\">Profile module</a>."
+msgstr ""
+
+msgid ""
+"This page displays a list of the existing custom profile fields to be "
+"displayed on a user's <em>My Account</em> page. To provide structure, "
+"similar or related fields may be placed inside a category. To add a new "
+"category (or edit an existing one), edit a profile field and provide a new "
+"category name. To change the category of a field or the order of fields "
+"within a category, grab a drag-and-drop handle under the Title column and "
+"drag the field to a new location in the list. (Grab a handle by clicking and "
+"holding the mouse while hovering over a handle icon.) Remember that your "
+"changes will not be saved until you click the <em>Save configuration</em> "
+"button at the bottom of the page."
+msgstr ""
+
+msgid "Author information"
+msgstr "Інформація про автора"
+
+msgid "Link to full user profile"
+msgstr "Посилання на повний користувацький профіль"
+
+msgid "Profile fields to display"
+msgstr "Поля профілю для показу"
+
+msgid ""
+"Select which profile fields you wish to display in the block. Only fields "
+"designated as public in the <a href=\"@profile-admin\">profile field "
+"configuration</a> are available."
+msgstr ""
+"Выберите, какие поля профиля вы хотите отображать в блоке. Доступны только "
+"публичные поля (см. <a href=\"@profile-admin\">настройки поля</a>)."
+
+msgid "View full user profile"
+msgstr "Дивитись профіль"
+
+msgid "About %name"
+msgstr "Про користувача %name"
+
+msgid ""
+"Put each item on a separate line or separate them by commas. No HTML allowed."
+msgstr ""
+"Вкажіть кожен елемент у окремому рядку або розділіть їх комами. HTML "
+"використовувати не можна."
+
+msgid "The value provided for %field is not a valid URL."
+msgstr "Значення у полі %field не є правильною адресою."
+
+msgid "Create customizable fields for your users."
+msgstr "Створення додаткових полів інформації про користувача."
+
+msgid "Profile category autocomplete"
+msgstr "Автозаповнення категорії профілю"
+
+msgid "Edit field"
+msgstr "Змінити поле"
+
+msgid "Delete field"
+msgstr "Видалити поле"
+
+msgid "Profile autocomplete"
+msgstr "Автозаповнення профілю"

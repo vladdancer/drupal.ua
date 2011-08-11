@@ -1,0 +1,9 @@
+/*Drupal account block*/
+#drupal_account{display:block;margin:20px 0;}
+#drupal_account li{padding: 0 .5em 0 0}
+#drupal_account .domain, #drupal_account .projects {display: block;margin-bottom:5px;}
+#drupal_account .domain strong, #drupal_account .domain a{font-size: 115%}
+#drupal_account .domain a{font-size: 115%}
+#drupal_account a{ text-decoration: underline}
+#drupal_account a:hover{ text-decoration: none}
+#drupal_account .links{display: inline}

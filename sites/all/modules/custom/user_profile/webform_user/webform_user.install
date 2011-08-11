@@ -1,0 +1,62 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Contains install and update functions for webform_user module.
+ */
+
+
+/**
+ * Implementation of hook_install().
+ */
+function webform_user_install() {
+  drupal_install_schema('webform_user');
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function webform_user_uninstall() {
+  drupal_uninstall_schema('webform_user');
+}
+
+
+/**
+ * Implementation of hook_schema().
+ */
+function webform_user_schema() {
+  $schema['webform_user'] = array(
+    'description' => 'Memorize options webforms.',
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Primary Key: The {node}.nid of the webform.',
+      ),
+      'vid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Primary Key: The {node}.vid of the webform.',
+      ),
+      'choice' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Parameter that determines the behavior of web forms.',
+      ),
+    ),
+    'indexes' => array(
+      'vid' => array('vid'),
+      'nid' => array('nid'),
+    ),
+    'primary key' => array('vid'),
+  );
+  return $schema;
+}

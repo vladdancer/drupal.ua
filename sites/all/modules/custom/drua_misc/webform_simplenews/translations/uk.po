@@ -1,0 +1,33 @@
+# $Id$
+#
+# Ukrainian translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  webform_simplenews.module: n/a
+#  webform_simplenews.info: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2010-11-24 17:16+0200\n"
+"PO-Revision-Date: 2010-11-24 17:16+0200\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Ukrainian <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=0; plural=;\n"
+
+#: webform_simplenews.module:11
+msgid "Subscribe simplenews"
+msgstr "Підписати на Simplenews"
+
+#: webform_simplenews.module:36
+msgid "Newsletter"
+msgstr "Розсилання"
+
+#: webform_simplenews.module:37
+msgid "Choose a subscription that you want to sign the user after submitting a webform."
+msgstr "Виберіть підписки, на які ви хочете підписати користувача після відправки веб-форми."
+

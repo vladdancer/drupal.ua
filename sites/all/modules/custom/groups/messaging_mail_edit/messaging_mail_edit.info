@@ -1,0 +1,10 @@
+; $Id$
+name = Messaging Mail Edit
+description = Sending letters through Mail Edit.
+package = "Messaging"
+dependencies[] = messaging
+dependencies[] = notifications
+dependencies[] = mail_edit
+dependencies[] = mimemail
+core = 6.x
+

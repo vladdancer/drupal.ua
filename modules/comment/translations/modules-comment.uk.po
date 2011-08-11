@@ -1,0 +1,449 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:12+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Administration"
+msgstr "Адміністрування"
+
+msgid "Homepage"
+msgstr "Домашня сторінка"
+
+msgid "Preview comment"
+msgstr "Переглянути коментар"
+
+msgid "Jump to the first comment of this posting."
+msgstr "Перейти до першого коментаря цього допису."
+
+msgid "Jump to the first new comment of this posting."
+msgstr "Перейти до першого нового коментаря до цього допису."
+
+msgid "Add new comment"
+msgstr "Коментувати..."
+
+msgid "Add a new comment to this page."
+msgstr "Додати новий коментар до цієї сторінки."
+
+msgid "Share your thoughts and opinions related to this posting."
+msgstr "Поділіться своїми думками та поглядами з приводу цього допису."
+
+msgid "Recent comments"
+msgstr "Останні коментарі"
+
+msgid "The comment no longer exists."
+msgstr "Коментар більше не існує."
+
+msgid "The comment and all its replies have been deleted."
+msgstr "Коментар та всі відповіді на нього було стерто."
+
+msgid "Do not display"
+msgstr "Приховати"
+
+msgid "reply"
+msgstr "відповісти"
+
+msgid "administer comments"
+msgstr "адмініструвати коментарі"
+
+msgid "Delete comments"
+msgstr "Знищити коментарі"
+
+msgid "by"
+msgstr "від"
+
+msgid "The comments have been deleted."
+msgstr "Коментарі знищено."
+
+msgid "Published comments"
+msgstr "Опубліковані коментарі"
+
+msgid ""
+"Your comment has been queued for moderation by site administrators and will "
+"be published after approval."
+msgstr ""
+"Ваш коментар поставлено на чергу модерації адміністрацією сайту і після "
+"схвалення його буде опубліковано."
+
+msgid "Comment settings"
+msgstr "Налаштування коментарів"
+
+msgid "Read only"
+msgstr "Тільки для читання"
+
+msgid "Approval queue"
+msgstr "Черга на підтвердження"
+
+msgid "Display on separate page"
+msgstr "Показувати на окремій сторінці"
+
+msgid "Location of comment submission form"
+msgstr "Розміщення форми подання коментаря"
+
+msgid "Anonymous commenting"
+msgstr "Анонімне коментування"
+
+msgid "Anonymous posters may not enter their contact information"
+msgstr "Анонімні дописувачі можуть не вводити свою контактну інформацію"
+
+msgid "Anonymous posters may leave their contact information"
+msgstr "Анонімні дописувачі можуть залишити свою контактну інформацію"
+
+msgid "Anonymous posters must leave their contact information"
+msgstr "Анонімні дописувачі повинні залишити свою контактну інформацію"
+
+msgid ""
+"This option is enabled when anonymous users have permission to post comments "
+"on the <a href=\"@url\">permissions page</a>."
+msgstr ""
+"Ця опція доступна, якщо незареєстровані користувачі мажуть залишати "
+"коментарі (див. сторінку <a href=\"@url\">Контроль доступу</a>)."
+
+msgid "Display below post or comments"
+msgstr "Показувати під повідомленням або коментарями"
+
+msgid "Default comment setting"
+msgstr "Стандартне (default) налаштування коментарів"
+
+msgid "Read/Write"
+msgstr "Читати/Писати"
+
+msgid ""
+"Users with the <em>administer comments</em> permission will be able to "
+"override this setting."
+msgstr ""
+"Користувачі з повноваженням <em>адмініструвати коментарі</em> зможуть "
+"відмінити це налаштування."
+
+msgid "parent"
+msgstr "попередник"
+
+msgid "Flat list - collapsed"
+msgstr "Суцільним списком - згорнуто"
+
+msgid "Flat list - expanded"
+msgstr "Суцільним списком - розгорнуто"
+
+msgid "Threaded list - collapsed"
+msgstr "У вигляді гілки - згорнуто"
+
+msgid "Threaded list - expanded"
+msgstr "У вигляді гілки - розгорнуто"
+
+msgid "1 new comment"
+msgid_plural "@count new comments"
+msgstr[0] "@count новий коментар"
+msgstr[1] "@count нових коментаря"
+msgstr[2] "@count нових коментарів"
+
+msgid "access comments"
+msgstr "доступ до коментарів"
+
+msgid "post comments"
+msgstr "коментувати"
+
+msgid "post comments without approval"
+msgstr "додати коментарі без схвалення"
+
+msgid "<a href=\"@login\">Login</a> to post comments"
+msgstr "<a href=\"@login\">Увійдіть</a> щоб залишати відгуки"
+
+msgid "Reply"
+msgstr "Відповісти"
+
+msgid "No comments available."
+msgstr "Немає коментарів."
+
+msgid "!a comments per page"
+msgstr "!a коментарів на сторінку"
+
+msgid "Edit comment"
+msgstr "Редагувати коментар"
+
+msgid "Please select one or more comments to perform the update on."
+msgstr "Оберіть будь ласка один або кілька коментарів для оновлення."
+
+msgid "Unpublish comment"
+msgstr "Зняти з публікації коментар"
+
+msgid "Unpublish comment containing keyword(s)"
+msgstr "Не публікувати коментар, який містить ключові слова"
+
+msgid "After saving a new comment"
+msgstr "Після збереження нового коментаря"
+
+msgid "After saving an updated comment"
+msgstr "Після збереження зміненого коментаря"
+
+msgid "After deleting a comment"
+msgstr "Після видалення коментаря"
+
+msgid "When a comment is being viewed by an authenticated user"
+msgstr "Коли коментар проглядає авторизований користувач"
+
+msgid "Unpublished comment %subject."
+msgstr "Неопубліковані коментарі %subject."
+
+msgid ""
+"The comment will be unpublished if it contains any of the character "
+"sequences above. Use a comma-separated list of character sequences. Example: "
+"funny, bungee jumping, \"Company, Inc.\". Character sequences are case-"
+"sensitive."
+msgstr ""
+"Коментар буде знято з публікування якщо він включатиму будь-який з символів, "
+"вказаних нижче. Використовуйте список, розділений комами. Приклад: free, "
+"porno, canabis. Список чутливий до регістру."
+
+msgid "Post new comment"
+msgstr "Додати новий коментар"
+
+msgid "Default display order"
+msgstr "Порядок сортування за замовчуванням"
+
+msgid ""
+"The default sorting for new users and anonymous users while viewing "
+"comments. These users may change their view using the comment control panel. "
+"For registered users, this change is remembered as a persistent user "
+"preference."
+msgstr ""
+"Стандартне (default) сортування для нових користувачів та відвідувачів при "
+"перегляді коментарів. Ці користувачі можуть змінити спосіб перегляду через "
+"панель керування коментарями. Для зареєстрованих користувачів ця зміна "
+"запам'ятовується як постійне налаштування користувача."
+
+msgid ""
+"Below is a list of the comments posted to your site that need approval. To "
+"approve a comment, click on 'edit' and then change its 'moderation status' "
+"to Approved. Click on a subject to see the comment, the author's name to "
+"edit the author's user information, 'edit' to modify the text, and 'delete' "
+"to remove their submission."
+msgstr ""
+"Нижче Ви бачите список кометарів на Вашому сайті, що потребують "
+"затвердження. Щоб затвердити коментар клікніть 'змінити', і змініть 'статус "
+"модерації' на 'Затверджено'. Клікніть на заголовок, щоб переглянути "
+"коментар, на ім'я автора, щоб змінити інформацію про автора, 'змінити' для "
+"редагування тексту, і  'знищити', щоб видалити коментар."
+
+msgid "List and edit site comments and the comment moderation queue."
+msgstr "Перелік та зміна коментарів сайту та черга коментарів для модерації."
+
+msgid "Delete comment"
+msgstr "Знищити коментар"
+
+msgid "Reply to comment"
+msgstr "Відповісти"
+
+msgid "Default display mode"
+msgstr "Стандартний (default) спосіб відображення"
+
+msgid ""
+"The default view for comments. Expanded views display the body of the "
+"comment. Threaded views keep replies together."
+msgstr ""
+"Стандартний (default) вигляд коментарів. Розгорнутий вигляд показує тіло "
+"коментаря. Вигляд гілками тримає разом відповіді до певного коментаря."
+
+msgid "Default comments per page"
+msgstr "Стандартна (default) кількість коментарів на сторінку"
+
+msgid ""
+"Default number of comments for each page: more comments are distributed in "
+"several pages."
+msgstr ""
+"Кількість коментарів на сторіці за замовчуванням: якщо їх більше, то вони "
+"будуть показані на декількох сторінках."
+
+msgid "Comment controls"
+msgstr "Елементи керування коментарями"
+
+msgid "Display above the comments"
+msgstr "Розташувати над коментарями"
+
+msgid "Display below the comments"
+msgstr "Розташувати під коментарями"
+
+msgid "Display above and below the comments"
+msgstr "Розташувати над і під коментарями"
+
+msgid ""
+"Position of the comment controls box. The comment controls let the user "
+"change the default display mode and display order of comments."
+msgstr ""
+"Місце для панелі управління коментарями. Ця панель дозволяє користувачам "
+"змінювати стандартний режим відображення і сортування коментарів."
+
+msgid "Comment subject field"
+msgstr "Поле теми коментаря"
+
+msgid "Can users provide a unique subject for their comments?"
+msgstr "Чи можуть користувачі давати назви своїм коментарям?"
+
+msgid "You are not authorized to post comments."
+msgstr "Ви не авторизовані для відправки коментарів."
+
+msgid "The comment you are replying to does not exist."
+msgstr "Коментар, на який ви намагаєтесь відповісти, більше не існує."
+
+msgid "This discussion is closed: you can't post new comments."
+msgstr "Це обговорення закрите: ви не можете додати нові коментарі."
+
+msgid "You are not authorized to view comments."
+msgstr "Ви не авторизовані для перегляду коментарів."
+
+msgid "Comment: added %subject."
+msgstr "Коментар: додано %subject."
+
+msgid "Are you sure you want to delete the comment %title?"
+msgstr "Ви дійсно хочете знищити коментар \"%title\"?"
+
+msgid "Any replies to this comment will be lost. This action cannot be undone."
+msgstr ""
+"Будь-які відповіді на цей коментар будуть втрачені. Ця дія незворотня, її не "
+"можна скасувати."
+
+msgid "Publish the selected comments"
+msgstr "Опублікувати вибрані коментарі"
+
+msgid "Unpublish the selected comments"
+msgstr "Відмінити публікацію вибраних коментарів"
+
+msgid ""
+"There do not appear to be any comments to delete or your selected comment "
+"was deleted by another administrator."
+msgstr ""
+"Не вдалось знайти коментарі для знищення. Можливо, вони були знищені іншим "
+"адміністратором."
+
+msgid "Are you sure you want to delete these comments and all their children?"
+msgstr "Ви дійсно хочете знищити ці коментарі і всі відповіді на них?"
+
+msgid "You have to specify a valid author."
+msgstr "Ви повинні правильно вказати автора."
+
+msgid "The name you used belongs to a registered user."
+msgstr "Використане вами ім'я належить зареєстрованому користувачу."
+
+msgid "You have to leave your name."
+msgstr "Ви повинні вказати своє ім'я."
+
+msgid "The e-mail address you specified is not valid."
+msgstr "Вказана вами адреса електронної пошти недійсна."
+
+msgid "You have to leave an e-mail address."
+msgstr "Потрібно вказати адресу електронної пошти."
+
+msgid ""
+"The URL of your homepage is not valid. Remember that it must be fully "
+"qualified, i.e. of the form <code>http://example.com/directory</code>."
+msgstr ""
+"URL Вашої сторінки не дійсний. Він повинен виглядати так <code>http://"
+"example.com/directory</code>."
+
+msgid "(No subject)"
+msgstr "(Без теми)"
+
+msgid ""
+"Select your preferred way to display the comments and click \"Save settings"
+"\" to activate your changes."
+msgstr ""
+"Виберіть потрібний метод показу коментарів і натисніть \"Зберегти "
+"налаштування\"."
+
+msgid "Comment viewing options"
+msgstr "Налаштування перегляду коментарів"
+
+msgid ""
+"<a href=\"@login\">Login</a> or <a href=\"@register\">register</a> to post "
+"comments"
+msgstr ""
+"<a href=\"@login\">Увійдіть</a> або <a href=\"@register\">зареєструйтесь</"
+"a>, щоб отримати можливість надсилати коментарі."
+
+msgid "Comment: deleted %subject."
+msgstr "Коментар: стерто %subject."
+
+msgid "Posted in"
+msgstr "Доданий в"
+
+msgid "Cannot delete non-existent comment."
+msgstr "Неможливо видалити неіснуючий коментар."
+
+msgid ""
+"Comment permissions are assigned to user roles, and are used to determine "
+"whether anonymous users (or other roles) are allowed to comment on posts. If "
+"anonymous users are allowed to comment, their individual contact information "
+"may be retained in cookies stored on their local computer for use in later "
+"comment submissions. When a comment has no replies, it may be (optionally) "
+"edited by its author. The comment module uses the same input formats and "
+"HTML tags available when creating other forms of content."
+msgstr ""
+"Права доступу для коментарів призначаються до ролей і використовуються для "
+"визначення можливості коментування гостями. Якщо гості мають право "
+"коментувати, їхні персональні контакти будуть збережені в коржиках на "
+"їхньому локальному комп'ютері для використання в подальшому коментуванні. "
+"Якщо коментарі не мають відповідей, вони будуть опціонально з можливістю "
+"редагування автором. Модуль коментарів використовує загальносайтові формати "
+"вводу матеріалу."
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@comment"
+"\">Comment module</a>."
+msgstr ""
+"Докладнішу інформацію дізнайтеся в інтернет-підручнику в розділі <a href="
+"\"@comment\">Модуль відгуків</a>."
+
+msgid ""
+"Below is a list of the latest comments posted to your site. Click on a "
+"subject to see the comment, the author's name to edit the author's user "
+"information, 'edit' to modify the text, and 'delete' to remove their "
+"submission."
+msgstr ""
+"<p>Нижче наведено список найновіших коментарів, надісланих на ваш сайт. "
+"Клацніть на тему, щоб подивитися коментар, на ім'я автора -- щоб змінити "
+"персоналізовані дані автора, на \"редагувати\" -- щоб змінити текст, і на "
+"\"стерти\" -- щоб скасувати подання коментаря.</p>"
+
+msgid ""
+"Forces a user to look at their comment by clicking on a 'Preview' button "
+"before they can actually add the comment"
+msgstr ""
+"Примусовий перегляд користувачем коментаря перед публікацією з допомогою "
+"кнопки <em>Переглянути</em>"
+
+msgid ""
+"Comment: unauthorized comment submitted or comment submitted to a closed "
+"post %subject."
+msgstr ""
+"Коментар: додано неавторизований коментар або додано для закритого матеріалу "
+"%subject."
+
+msgid "Submitted by !username on @datetime."
+msgstr "Надіслав !username @datetime."
+
+msgid ""
+"The comment module allows visitors to comment on your posts, creating ad hoc "
+"discussion boards. Any <a href=\"@content-type\">content type</a> may have "
+"its <em>Default comment setting</em> set to <em>Read/Write</em> to allow "
+"comments, or <em>Disabled</em>, to prevent comments. Comment display "
+"settings and other controls may also be customized for each content type "
+"(some display settings are customizable by individual users)."
+msgstr ""
+"Модуль Коментарі дозволяє відвідувачам дописувати коментарі до Ваших "
+"статтей, створюючи щось на зразок дискусій. Будь-який <a href=\"@content-type"
+"\">тип матеріалу</a> може бути з власними <em>Базовими параметрами "
+"коментарів</em> встановленими в <em>Читати/Писати</em> - для дозволу "
+"коментування, або <em>Вимкнено</em> для заборони коментарів. Параметри "
+"відображення коментарів та інших можливостей можуть бути змінені для кожного "
+"з типів матеріалу."
+
+msgid "Delete the selected comments"
+msgstr "Знищити вибрані коментарі"

@@ -1,0 +1,223 @@
+<?php
+// $Id$
+
+
+/**
+ * Implementation of hook_theme().
+ */
+function navigation_theme() {
+  return array(
+    'navigation_main_block' => array('arguments' => array('data' => NULL, $num = 5)),
+  	'navigation_new_block' => array('arguments' => array('data' => NULL, $num = 5)),
+  );
+}
+
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function navigation_nodeapi(&$node, $op, $teaser, $page) {
+  global $language;
+  switch ($op) {
+    case 'insert':
+    case 'update':
+    case 'delete':
+      cache_clear_all('navigation:og_main_navigation:', 'cache_block', TRUE);
+      
+      $gnid = 0;
+      if ($node->type == 'group') {
+        $gnid = $node->nid;
+      }
+      elseif (og_is_group_post_type($node->type)) {
+        reset($node->og_groups);
+        $gnid = current($node->og_groups);
+      }
+      $output = cache_get('navigation:og_new_navigation:'. $language->language, 'cache_block');
+      if ($gnid && in_array($gnid, $output->data['nids'])) {
+        cache_clear_all('navigation:og_new_navigation:', 'cache_block', TRUE);
+      }
+      break;
+  }
+}
+
+
+/**
+ * Implementation of hook_block().
+ */
+function navigation_block($op = 'list', $delta = 0) {
+  global $language;
+  switch ($op) {
+    case 'list':
+      return array(
+        'navigation_og_main' => array('info' => t('OG: Main Navigation')),
+      	'navigation_og_new' => array('info' => t('OG: Navigation New')),
+      );
+
+    case 'view':
+      switch ($delta) {
+        case 'navigation_og_main':
+          drupal_add_css(drupal_get_path('module', 'navigation') .'/navigation.css');
+          
+          $output = cache_get('navigation:og_main_navigation:'. $language->language, 'cache_block');
+          if (!$output) {
+            $data = navigation_load_data();
+            $output = $data ? theme('navigation_main_block', $data) : '';
+            cache_set('navigation:og_main_navigation:'. $language->language, $output, 'cache_block');
+          }
+          else {
+            $output = $output->data;
+          }
+          return array(
+            'subject' => t('OG: Main Navigation'),
+            'content' => $output,
+          );
+          
+        case 'navigation_og_new': 
+          drupal_add_css(drupal_get_path('module', 'navigation') .'/navigation.css');
+          
+          $output = cache_get('navigation:og_new_navigation:'. $language->language, 'cache_block');
+          if (!$output) {
+            $data = navigation_load_data_new();
+            $output = $data ? theme('navigation_new_block', $data) : array('html' => '', );
+            cache_set('navigation:og_new_navigation:'. $language->language, $output, 'cache_block');
+          }
+          else {
+            $output = $output->data;
+          }
+          return array(
+            'subject' => t('New groups'),
+            'content' => $output['html'],
+          );
+        }
+      break;
+   }
+}
+
+
+/**
+ * Additional function — load data.
+ */
+function navigation_load_data() {
+  global $language;
+  $result = db_query("SELECT n.nid, n.title, n.language, n.tnid,
+   td.tid, td.name AS term_name, os.posts_count
+  FROM {node} n
+  LEFT JOIN {og} og ON n.nid = og.nid
+  LEFT JOIN {term_node} tn ON n.vid = tn.vid
+  LEFT JOIN {term_data} td ON tn.tid = td.tid
+  LEFT JOIN {og_statistics} os ON n.nid = os.nid
+  WHERE (n.status <> 0) AND (og.og_directory <> 0) AND (n.type in ('group'))
+    AND (td.vid in ('6'))
+  ORDER BY td.weight ASC");
+  $data = array();
+  while ($row = db_fetch_object($result)) {
+    if (!isset($data[$row->tid])) {
+      $data[$row->tid] = array(
+      	'name' => $row->term_name,
+        'data' => array()
+      );
+    }
+    if (!isset($data[$row->tid]['sym_'. $row->tnid])) {
+      $data[$row->tid]['sym_'. $row->tnid] = 0;
+    }
+    $data[$row->tid]['sym_'. $row->tnid] += (int)$row->posts_count;
+    if ($language->language == $row->language) {
+      $data[$row->tid]['data'][$row->nid] = $row;
+    }
+  }
+  return $data;
+}
+
+
+/**
+ * Additional function — load data.
+ */
+function navigation_load_data_new() {
+  global $language;
+  $result = db_query("SELECT n.nid, n.title, n.language, n.tnid, os.posts_count
+ FROM {node} n 
+ LEFT JOIN {og} og ON n.nid = og.nid
+ LEFT JOIN {og_statistics} os ON n.nid = os.nid
+ WHERE (n.status <> 0) AND (n.type IN ('group')) AND (og.og_directory <> 0)
+   ORDER BY n.created DESC");
+  $data = array(
+  	'group' => array(),
+  );
+  while ($row = db_fetch_object($result)) {
+    if (!isset($data['sym_'. $row->tnid])) {
+      $data['sym_'. $row->tnid] = 0;
+    }
+    $data['sym_'. $row->tnid] += (int)$row->posts_count;
+    if ($language->language == $row->language) {
+      $data['group'][$row->nid] = $row;
+    }
+  }
+  return $data;
+}
+
+
+/**
+ * Theming main block.
+ */
+function theme_navigation_main_block($data, $num = 5) {
+  $output = '';
+  foreach ($data as $tid_term => $term_group) {
+    $output_group = '';
+    $num_group = 0;
+    foreach ($term_group['data'] as $tid_group => $group) {
+      $output_group .= '  <li>
+    <div>'. l($group->title, 'node/'. $group->nid) .'</div>
+    <div class="views-field-posts-count"><span><span class="posts-count">'.
+        (isset($data[$tid_term]['sym_'. $group->tnid])
+        ? $data[$tid_term]['sym_'. $group->tnid] : 0) .'</span></span></div>
+  </li>
+';
+       if (++$num_group == $num) {
+         break;
+       }
+    }
+    $output .= '<h3>'. l(tt('taxonomy:term:'. $tid_term .':name',
+      $data[$tid_term]['name'], $language->language),
+      'taxonomy/term/'. $tid_term) .'</h3>
+<ul>
+'. $output_group .'</ul>
+';
+  }
+  return '<div class="og_navigation">
+'. $output .'</div>';
+}
+
+
+/**
+ * Theming navigation New block.
+ */
+function theme_navigation_new_block($data, $num = 5) {
+  $output = '';
+  $num_group = 0;
+  $out_nid = array();
+  
+  foreach ($data['group'] as $tid_group => $group) {
+    $output_group .= '  <li>
+    <div>'. l($group->title, 'node/'. $group->nid) .'</div>
+    <div class="views-field-posts-count"><span><span class="posts-count">'.
+      (isset($data['sym_'. $group->tnid])
+      ? $data['sym_'. $group->tnid] : 0) .'</span></span></div>
+  </li>
+';
+    $out_nid[] = $group->tnid;
+    if (++$num_group == $num) {
+      break;
+    }
+  }
+  return array(
+  'nids' => $out_nid,
+  'html' => '<div class="og_navigation">
+<ul>
+'. $output_group .'</ul>
+</div>
+',
+  );
+}
+
+
+

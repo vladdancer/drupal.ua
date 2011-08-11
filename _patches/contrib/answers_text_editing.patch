@@ -1,0 +1,79 @@
+Index: answers.admin.inc
+===================================================================
+--- answers.admin.inc	(revision 1980)
++++ answers.admin.inc	(working copy)
+@@ -27,7 +27,7 @@
+     '#type' => 'checkboxes',
+     '#title' => t('Node types to use as questions'),
+     '#options' => $nt,
+-    '#description' => t('Check node types witch you want to use as qustions.'),
++    '#description' => t('Check node types witch you want to use as questions.'),
+     '#default_value' => variable_get('answers_node_types', array('question' => 'question')),
+   );
+   $form['answers_node_add_from_block'] = array(
+@@ -45,10 +45,10 @@
+   );
+   $form['answers_settings']['answers_allow_answeranon'] = array(
+     '#type' => 'checkbox',
+-    '#title' => t('Allow anonimization'),
++    '#title' => t('Allow anonymity'),
+     '#options' => array('0', '1'),
+     '#default_value' => variable_get('answers_allow_answeranon', 0),
+-    '#description' => t('Allow users to post questions anonymously.<br/> NOTE: the question still belongs to the user the name is just hidden from normal users'),
++    '#description' => t('Allow users to post questions anonymously.<br /> NOTE: the question still belongs to the user the name is just hidden from normal users'),
+     '#required' => FALSE
+   );
+   $form['answers_settings']['answers_allow_best_answer'] = array(
+@@ -88,7 +88,7 @@
+   switch ($op) {
+     case 'view':
+       $sql = 'SELECT sid, name, title, description, weight FROM {answers_status} ORDER BY weight ASC';
+-      $header = array(t('Engine name'), t('Human name'), t('Descripion'), t('Weight'), t('Edit'), t('Delete'));
++      $header = array(t('Engine name'), t('Human name'), t('Description'), t('Weight'), t('Edit'), t('Delete'));
+       $result = db_query($sql);
+       while($row = db_fetch_array($result)) {
+         if($row['sid'] == 1 || $row['sid'] == 2) {
+@@ -148,7 +148,7 @@
+   );
+   $form['description'] = array(
+     '#type' => 'textarea',
+-    '#title' => t('Descripion'),
++    '#title' => t('Description'),
+     '#description' => t('Add some description.'),
+     '#default_value' => $status['description'],
+     '#required' => FALSE,
+Index: answers.module
+===================================================================
+--- answers.module	(revision 1980)
++++ answers.module	(working copy)
+@@ -147,7 +147,7 @@
+     'page callback' => 'answers_user_profile',
+     'page arguments' => array(1, 'answers'),
+     'title'    => 'Answers',
+-    'description' => 'View user\' answers',
++    'description' => 'View user\'s answers',
+     'access callback'   => 'answers_access_menu',
+     'access arguments'  => array('user_profile', 1),
+     'file' => 'answers.pages.inc',
+@@ -638,7 +638,7 @@
+           '#title' => t('Status'),
+           '#default_value' => $node->sid,
+           '#options' => $opt,
+-          '#description' => t('Global staus of question.'),
++          '#description' => t('Global status of question.'),
+           '#prefix' => '<div id="question_status">',
+           '#suffix' => '</div>',
+         );
+Index: views/answers.views.inc
+===================================================================
+--- views/answers.views.inc	(revision 1980)
++++ views/answers.views.inc	(working copy)
+@@ -122,7 +122,7 @@
+   // Node VID field.
+   $data['answers_quests']['vid'] = array(
+     'title' => t('Question version ID'),
+-    'help' => t('Reference to nodes by vertion ID.'),
++    'help' => t('Reference to nodes by version ID.'),
+     /*
+     'relationship' => array(
+       'base' => 'node',

@@ -1,0 +1,631 @@
+<?php
+// $Id$
+
+
+/**
+ * Implementation of hook_theme().
+ */
+function drua_profile_theme() {
+  return array(
+    'drua_block_about' => array('arguments' => array('str' => NULL, 'link' => '')),
+    'drua_block_contacts' => array('arguments' => array('fields' => NULL, 'link' => '')),
+    'drua_block_avatar_block' => array('arguments' => array('user_data' => NULL)),
+    'drua_block_avatar' => array('arguments' => array('photo' => '', 'uid_profile' => FALSE, )),
+    'drua_block_medals' => array('arguments' => array('medals' => NULL)),
+    'drua_block_status' => array('arguments' => array('status' => FALSE)),
+    'drua_block_drupal_active' => array('arguments' => array('user_data' => NULL)),
+    'drua_block_domen_active' => array('arguments' => array('data' => NULL)),
+  
+    'drua_block_karma' => array(
+      'arguments' => array(
+      'karma_value' => NULL,
+      'change_karma' => FALSE 
+      )
+    ),
+    
+    'drua_block_top' => array('arguments' => array('top_value' => NULL)),
+  );
+}
+
+
+/**
+ * Implementation of hook_views_api().
+ */
+function drua_profile_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'drua_profile'),
+  );
+}
+
+
+/**
+ * Implementation of hook_block().
+ */
+function drua_profile_block($op = 'list', $delta = 0) {
+  global $user;
+  switch ($op) {
+    case 'list':
+      return array(
+        'profile_about' => array('info' => t('Profile: About')),
+        'profile_contacts' => array('info' => t('Profile: Contacts')),
+        'profile_avatar' => array('info' => t('Profile: Avatar')),
+        'profile_drupal' => array('info' => t('Profile: Drupal planet')),
+      	'profile_activity' => array('info' => t('Profile: Drupal activity')),
+        'profile_group' => array('info' => t('Profile: User groups')),
+        'profile_bookmarks' => array('info' => t('Profile: User bookmarks')),
+      );
+
+    case 'view':
+      if (arg(0) == 'user' && arg(2) != 'edit') {
+        $account = user_load(arg(1));
+      }
+      else {
+        $account = FALSE;
+      }
+      switch ($delta) {
+        case 'profile_about':
+          if ($account) {
+            $user_fields = _drua_profile_fields_load($account->uid, array('about' => '', ));
+            if ($user_fields['about'] != '' || $user->uid == $account->uid) {
+              $link = '<p class="empty-icon"><a href="'. url('user/'. $user->uid .'/edit') .'" class="icon-no-about">'.
+                t('Add information about yourself') .'</a></p>';
+              return array(
+                'subject' => t('About me'),
+                'content' => theme('drua_block_about', $user_fields['about'], $link),
+              );
+            }
+          }
+          break;
+          
+        case 'profile_contacts':
+          if (arg(0) == 'node') {
+            $node = node_load(array('nid' => arg(1)));
+            $account = user_load($node->uid);
+          }
+          if (!$account || !$account->uid) {
+            return;
+          }
+          
+          $user_fields = _drua_profile_fields_load($account->uid, array(
+            'country' => '',
+            'country_name' => '',
+            'city' => '',
+            'skype' => '',
+            'jabber' => '',
+            'icq' => '',
+            'show_email' => '',
+            'phone' => '',
+            'twitter' => '',
+            'linkedin' => '',
+            'email' => $account->mail,
+          ));
+          
+          
+          if (!$user_fields['show_email']) {
+            unset($user_fields['email']);
+          }
+          unset($user_fields['show_email']);
+
+          if ($user_fields['country'] == ''
+              || $user_fields['country_name'] == '' || $user_fields['city'] == '') {
+            unset($user_fields['city']);
+          }
+          else {
+            $user_fields['city'] = array(
+              'value' => $user_fields['country_name'] .', '. $user_fields['city'],
+              'class' => 'field-flag field-flag-'. $user_fields['country'],
+              'style' => 'background: transparent url('. base_path() .
+                drupal_get_path('theme', 'drua') .'/images/flags/ua.png) 0 0 no-repeat;',
+            );
+          }
+          unset($user_fields['country']);
+          unset($user_fields['country_name']);
+          if ((!is_array($user_fields) || !count($user_fields)) && $user->uid != $account->uid) {
+            return;
+          }
+
+          if ((is_array($user_fields) && count($user_fields)) || $user->uid == $account->uid) {
+            $link = '<p class="empty-icon"><a href="'. url('user/'. $user->uid .'/edit')
+              .'" class="icon-no-about">'. t('Add Contacts') .'</a></p>';
+            return array(
+              'subject' => t('Contacts'),
+              'content' => theme('drua_block_contacts', $user_fields, $link),
+            );
+          }
+          break;
+          
+        case 'profile_avatar':
+          if (arg(0) == 'node') {
+            $node = node_load(array('nid' => arg(1)));
+            $account = user_load($node->uid);
+          }
+          if (!$account || !$account->uid) {
+            return;
+            //TODO guest
+            
+            $user_data = array(
+              'uid' => 0,
+              'status' => 0,
+              'avatar' => theme('drua_block_avatar', '', FALSE),
+              'medals' => array(
+                'drup' => 0,
+                'doc' => 0,
+                'dev' => 0,
+                'sup' => 0,
+                'tran' => 0,
+              ),
+              'top' => 0,
+              'karma' => 0,
+              'change_karma' => 0,
+            );
+          }
+          else {
+            $user_fields = _drua_profile_fields_load($account->uid, array('avatar' => '', ));
+            
+            //TODO fix load data (karma, medals)
+            
+            $user_data = array(
+              'uid' => $account->uid,
+              'status' => (time() - $account->access) < variable_get('user_block_seconds_online', 900),
+              'avatar' => theme('drua_block_avatar', $user_fields['avatar'], $user->uid == $account->uid),
+              'medals' => array(
+                'drup' => 1,
+                'doc' => 1,
+                'dev' => 1,
+                'sup' => 1,
+                'tran' => 1,
+              ),
+              'top' => 2,
+              'karma' => -42,
+              'change_karma' => ($user->uid && $user->uid != $account->uid ? 1 : 0),
+            );
+          }
+          return array(
+            'subject' => t('Avatar'),
+            'content' => theme('drua_block_avatar_block', $user_data),
+          );
+          break;
+          
+        case 'profile_drupal':
+          if ($account) {
+            $user_fields = _drua_profile_fields_load($account->uid, array('drupal_parser' => '', ));
+            if (isset($user_fields['drupal_parser']['drupal.ru']['track']) ||
+                isset($user_fields['drupal_parser']['drupal.org']['track'])) {
+              return array(
+                'subject' => t('Drupal planet'),
+                'content' => theme('drua_block_drupal_active', $user_fields),
+              );
+            }
+          }
+          break;
+
+          case 'profile_activity':
+            if ($account) {
+              $view = views_get_view('profile_activity');
+              $view->set_display('block_1');
+              $view->set_arguments(array($account->uid));
+              $output = $view->render();
+              if (!count($view->result)) {
+                $output = '';
+              }
+
+              if (empty($output) && $user->uid == $account->uid) {
+                $output = t('Your public activity on display in this block.
+                When you write articles, comment on materials, joining groups or simply
+                add material to your bookmarks, your friends can keep up to date here.');
+              }
+              if (!empty($output)) {
+                $title = '<h3 class="pane-title">'. t('Recent activities')
+                  .' <span class="title-data">'. format_interval(time() - $account->created) . t(' on the site')
+                  .'</span></h3>';
+                return array(
+                  'subject' => check_plain($view->build_info['title']),
+                  'content' => $title . $output,
+                );
+              }
+            }
+            break;
+
+          case 'profile_group':
+            if ($account) {
+              $view = views_get_view('profile_group');
+              $view->set_display('block_1');
+              $view->set_arguments(array($account->uid));
+              $output = $view->render();
+              if (!count($view->result)) {
+                $output = '';
+              }
+
+              if (empty($output) && $user->uid == $account->uid) {
+                $output = '<div class="empty-block-group">
+  <p class="empty-text">'. t('Place of communication and collaboration of developers, translators and users.') .'</p>
+  <p class="empty-icon"><a href="/og" class="icon-no-group" alt="group list">'. t('View list of groups') .'</a></p>
+</div>';
+              }
+              if (!empty($output)) {
+                return array(
+                  'subject' => check_plain($view->build_info['title']),
+                  'content' => $output,
+                );
+              }
+            }
+            break;
+
+          case 'profile_bookmarks':
+            if ($account) {
+              $view = views_get_view('profile_bookmarks');
+              $view->set_display('block_1');
+              $view->set_arguments(array($account->uid));
+              $output = $view->render();
+              if (!count($view->result)) {
+                $output = '';
+              }
+
+              if (empty($output) && $user->uid == $account->uid) {
+                $output = t('Bookmarks help to return valuable materials later. To add material to bookmark, click the star in his signature.');
+              }
+              if (!empty($output)) {
+                return array(
+                  'subject' => check_plain($view->build_info['title']),
+                  'content' => $output,
+                );
+              }
+            }
+            break;
+      }
+      break;
+  }
+}
+
+
+/**
+ * Load the field values for the Content_profile.
+ * @param $uid
+ * 	ID user.
+ * @param $fields
+ * 	array of fields.
+ */
+function _drua_profile_fields_load($uid, $fields) {
+  static $field_social;
+  if (!$uid || !is_array($fields) || !count($fields)
+      || !($node = content_profile_load('profile', $uid))) {
+    return FALSE;
+  }
+
+  if (!isset($field_social)) {
+    $field_social = explode("\n", $node->field_social[0]['value']);
+  }
+
+  foreach ($fields as $key => $value) {
+    switch ($key) {
+      case 'field_bio':
+      case 'about':
+        $fields[$key] = check_markup($node->field_bio[0]['value'], $node->field_bio[0]['format']);
+        break;
+        
+      case 'field_skype':
+      case 'skype':
+        $fields[$key] = check_plain($node->field_skype[0]['value']);
+        break;
+        
+      case 'field_jabber':
+      case 'jabber':
+        $fields[$key] = check_plain($node->field_jabber[0]['value']);
+        break;
+        
+      case 'field_icq':
+      case 'icq':
+        $fields[$key] = check_plain($node->field_icq[0]['value']);
+        break;
+        
+      case 'field_show_email':
+      case 'show_email':
+        $fields[$key] = $node->field_show_email[0]['value'];
+        break;
+        
+      case 'field_phone':
+      case 'phone':
+        $fields[$key] = check_plain($node->field_phone[0]['value']);
+        break;
+      
+      case 'country':
+      case 'country_name':
+      case 'city':
+      case 'street':
+      case 'postal_code':
+        $fields[$key] = $node->field_location[0][$key];
+        break;
+        
+      case 'twitter':
+        if (is_array($field_social) && count($field_social)) {
+          foreach ($field_social as $social) {
+            if (($pos = strpos($social, 'twitter.com/')) !== FALSE) {
+              $link = substr($social, $pos + 12);
+              $fields[$key] = l('@'. $link, 'http://twitter.com/'. $link);
+              break;
+            }
+          }
+        }
+        break;
+        
+      case 'linkedin':
+        if (is_array($field_social) && count($field_social)) {
+          foreach ($field_social as $social) {
+            if (($pos = strpos($social, 'linkedin.com/in/')) !== FALSE) {
+              $link = substr($social, $pos + 16);
+              $fields[$key] = l($link, 'http://linkedin.com/in/'. $link);
+              break;
+            }
+          }
+        }
+        break;
+        
+      case 'field_image':
+      case 'avatar':
+        $fields[$key] = $node->field_image[0];
+        break;
+        
+      case 'drupal_parser':
+      case 'field_account':
+        $fields[$key] = $node->field_account[0]['value'];
+        break;
+    }
+  }
+  return $fields;
+}
+
+
+/**
+ * Implementation of hook_token_list().
+ */
+function drua_profile_token_list($type = 'all') {
+  $tokens = array();
+  if ($type == 'user') {
+    $tokens['user']['user-profile-title'] = t("Title for the user profile.");
+  }
+  return $tokens;
+}
+
+
+/**
+ * Implementation of hook_token_values().
+ */
+function drua_profile_token_values($type, $account = NULL, $options = array()) {
+  if ($type == 'user') {
+    if ($profile = content_profile_load('profile', $account->uid)) {
+      $user_name = '';
+      if (isset($profile->field_first_name[0]['value'])) {
+        $user_name = check_plain($profile->field_first_name[0]['value']) .' ';
+      }
+      if (isset($profile->field_last_name[0]['value'])) {
+        $user_name .= check_plain($profile->field_last_name[0]['value']);
+      }
+      $tokens['user-profile-title'] = $user_name . (!empty($user_name) ? ' aka ' : '') . $account->name;
+      return $tokens;
+    }
+  }
+}
+
+
+/**
+ * Theme functions.
+ */
+
+
+/**
+ * Return a themed block.
+ * @param $items
+ *   String from user profile.
+ * @return
+ *   A themed HTML string representing the About block.
+ */
+function theme_drua_block_about($str, $link = '') {
+  if (empty($str)) {
+    $output = '<div class="empty-block-about">
+  <p class="empty-text">'.
+    t('There may be information about you, such as profession, place of work, interests, hobbies and more. The more information you enter, the more likely to interest potential new contacts.')
+    .'</p>'. $link .'</div>';
+  }
+  else {
+    $output = '<div class="full-block-about">'. $str .'</div>';
+  }
+  return $output;
+}
+
+
+/**
+ * Theming block — Contacts.
+ */
+function theme_drua_block_contacts($fields = NULL, $link = '') {
+  if (!is_array($fields) || !count($fields)) {
+    $output = '<div class="empty-block-contacts">
+  <p class="empty-text">'.
+    t('Your contacts open the way for new people and introduce new relationships.')
+    .'</p>'. $link .'</div>';
+    return $output;
+  }
+  $output = '<div class="full-block-contact">';
+  foreach ($fields as $name => $field) {
+    if (!is_array($field)) {
+      if (!empty($field)) {
+        $output .= '<div class="field-'. $name .'">'. $field .'</div>';
+      }
+    }
+    else {
+      $class = (isset($field['class']) && !empty($field['class'])) ? $field['class'] : 'field-'. $name;
+      $style = (isset($field['style']) && !empty($field['style'])) ? ' style="'. $field['style'] .'"' : '' ;
+      $output .= '<div class="'. $class .'"'. $style .'>'. $field['value'] .'</div>';
+    }
+  }
+  $output .= '</div>';
+  return $output;
+}
+
+
+/**
+ * Theming block — Avatar.
+ */
+function theme_drua_block_avatar_block($user_data = NULL) {
+  return '
+<div class="profile-avatar-wrap-head">
+  <div class="wrap-head">
+  <div class="g-medal">'. theme('drua_block_medals', $user_data['medals']) .'</div>
+  <div class="g-avatar">
+    <div class="profile-avatar">'. $user_data['avatar'] .'</div>
+    <div class="profile-status">'. theme('drua_block_status', $user_data['status']) .'</div>
+  </div>
+</div>
+<div class="g-rating">
+  <div class="profile-top">'. theme('drua_block_top', $user_data['top']) .'</div>
+  <div class="profile-karma">'. theme('drua_block_karma', $user_data['karma'], $user_data['change_karma']) .'</div>
+</div>
+</div>
+';
+}
+
+
+/**
+ * Theming buser avatar.
+ */
+function theme_drua_block_avatar($photo = '', $uid_profile = FALSE) {
+  global $user;
+  $output = '
+<div>';
+  $path_theme = drupal_get_path('theme', 'drua');
+  if (!is_array($photo) || !isset($photo['filepath']) || !is_file($photo['filepath'])) {
+    if ($uid_profile) {
+      $output .= '<img src="/'. $path_theme .'/images/icons/avatar-no.png" alt="' .
+        check_plain(variable_get('anonymous', t('Anonymous'))) .'" width="160" height="160" />
+<div class="avatar_edit_link">'. l(' ', 'user/'. $user->uid .'/edit/profile') .'</div>';
+    }
+    else {
+      $output .= '<img src="/'. $path_theme .'/images/icons/avatar-anonim.png" alt="' .
+        check_plain(variable_get('anonymous', t('Anonymous'))) .'" width="160" height="160" />';
+    }
+  }
+  else {
+    $output .= theme('imagecache', 'avatar_panel',
+      $photo['filepath'], $photo['data']['alt'], $photo['data']['title']);
+  }
+  return $output .'
+</div>';
+}
+
+
+/**
+ * Theming user status.
+ */
+function theme_drua_block_status($status = FALSE) {
+  return '<div class="status-'. ($status ? 'online' : 'offline') .'">'.
+    ($status ? 'online' : 'offline') .'</div>';  //No t('')
+}
+
+
+/**
+ * Theming user top.
+ */
+function theme_drua_block_top($top_value = NULL) {
+  return '
+  <div class="profile-top-text">'. t('top') .'</div>
+  <div class="profile-top-count">'. ((int)$top_value) .'</div>';
+}
+
+
+/**
+ * Theming user medals.
+ */
+function theme_drua_block_medals($medals = NULL) {
+  return '
+  <div class="m-drup-'. (isset($medals['drup']) && $medals['drup'] ?'on':'off') .'">&nbsp;</div>
+  <div class="m-doc-'. (isset($medals['doc']) && $medals['doc'] ?'on':'off') .'">&nbsp;</div>
+  <div class="m-dev-'. (isset($medals['dev']) && $medals['dev'] ?'on':'off') .'">&nbsp;</div>
+  <div class="m-sup-'. (isset($medals['sup']) && $medals['sup'] ?'on':'off') .'">&nbsp;</div>
+  <div class="m-tran-'. (isset($medals['tran']) && $medals['tran'] ?'on':'off') .'">&nbsp;</div>';
+}
+
+
+/**
+ * Theming user karma.
+ */
+function theme_drua_block_karma($karma_value = NULL, $change_karma = FALSE) {
+  if ($change_karma) {
+    //TODO correct links
+    $plus = '<a class="karma-plus-on" href="#">&nbsp;</a>';
+    $minus = '<a class="karma-minus-on" href="#">&nbsp;</a>';
+  }
+  else {
+    $plus = '<a class="karma-plus-off" href="#">&nbsp;</a>';
+    $minus = '<a class="karma-minus-off" href="#">&nbsp;</a>';
+  }
+  return '
+  <div class="profile-karma-text">'. t('karma') .'</div>
+  <div class="profile-karma-count'. ($change_karma ? ' change_karma' : '') .'">'.
+    $minus .'<div>'. ((int)$karma_value) .'</div>'. $plus .'</div>';
+}
+
+
+/**
+ * Theming block — Activity.
+ */
+function theme_drua_block_drupal_active($user_data = NULL) {
+  $output = '<div class="drupal_activity">
+';
+  if (isset($user_data['drupal_parser']['drupal.ru']['track'])) {
+    $output .= theme('drua_block_domen_active',
+      array('drupal.ru' => $user_data['drupal_parser']['drupal.ru']));
+  }
+  if (isset($user_data['drupal_parser']['drupal.org']['track'])) {
+    $output .= theme('drua_block_domen_active',
+      array('drupal.org' => $user_data['drupal_parser']['drupal.org']));
+  }
+  
+  $org_project = '';
+  if (isset($user_data['drupal_parser']['drupal.org']['projects']['translations'])) {
+    foreach ($user_data['drupal_parser']['drupal.org']['projects']['translations'] as $data) {
+      $org_project .= '
+    <div class="project_trans">'. l($data['title'], $data['href'], $data) .'</div>';
+    }
+  }
+  if (isset($user_data['drupal_parser']['drupal.org']['projects']['modules'])) {
+    foreach ($user_data['drupal_parser']['drupal.org']['projects']['modules'] as $data) {
+      $org_project .= '
+    <div class="project_module">'. l($data['title'], $data['href'], $data) .'</div>';
+    }
+  }
+  if (isset($user_data['drupal_parser']['drupal.org']['projects']['themes'])) {
+    foreach ($user_data['drupal_parser']['drupal.org']['projects']['themes'] as $data) {
+      $org_project .= '
+    <div class="project_theme">'. l($data['title'], $data['href'], $data) .'</div>';
+    }
+  }
+  
+  if (!empty($org_project)) {
+    $output .= '
+  <div class="project_org_wrap">
+'. $org_project .'
+  </div>';
+  }
+  return $output .'
+</div>';
+}
+
+
+/**
+ * Theming block — Drupal Planet.
+ */
+function theme_drua_block_domen_active($data = NULL) {
+  $domen = isset($data['drupal.ru']['track']) ? 'ru' : 'org';
+  return '  <div class="domen_wrap">
+    <div class="drupal_'. $domen .' text_wrap">
+      <h4>Drupal.'. $domen .'</h4>
+      <p>'. t('Activity: ') .'<span>'.
+    _drupal_account_calculate_activity($data['drupal.'. $domen]['track'])
+    .'</span></p>
+    </div>
+  </div>
+';
+}
+
+
+

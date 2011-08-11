@@ -1,0 +1,15 @@
+div.view-fckeditor-node-embed table.views-view-grid{
+  table-layout: fixed;
+}
+
+div.view-fckeditor-node-embed table.views-view-grid td {
+  border:2px solid #c4c4c4;
+  padding:0 3px;
+  font-size:11px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.item-list .pager li { padding: 0px; color: #336699;}
+
+.active-cell { border: 2px solid green; background-color: #b7ffc0; }

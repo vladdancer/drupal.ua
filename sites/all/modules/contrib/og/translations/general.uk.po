@@ -1,0 +1,124 @@
+# Ukrainian translation of og (6.x-2.1)
+# Copyright (c) 2010 by the Ukrainian translation team
+# Generated from files:
+#  og.pages.inc,v 1.1.2.5 2010/03/14 07:57:59 amitaibu
+#  og_notifications.module,v 1.24.4.24 2010/02/07 13:36:25 amitaibu
+#  og.admin.inc,v 1.15.4.2 2009/06/22 15:59:27 weitzman
+#  og_notifications.pages.inc,v 1.1.2.2 2010/02/07 13:36:25 amitaibu
+#  og.module,v 1.628.4.34 2010/02/21 17:32:35 amitaibu
+#  og/modules/og_views/includes/og_views_handler_field_og_subscribe.inc: n/a
+#  og/og.info: n/a
+#  og/modules/og_access/og_access.info: n/a
+#  og_actions.info,v 1.2.4.1 2009/05/29 00:45:31 weitzman
+#  og_notifications.info,v 1.7 2008/10/29 19:59:23 dww
+#  og_views.views.inc,v 1.13.4.11 2010/03/04 07:28:59 amitaibu
+#  og_views.info,v 1.3 2008/10/29 19:59:39 dww
+#  og_access.module,v 1.32.4.6 2010/02/22 10:46:16 amitaibu
+#  og_actions.module,v 1.9.4.2 2009/06/09 01:04:44 weitzman
+#  node-og-group-post.tpl.php,v 1.3 2008/11/09 17:17:54 weitzman
+#  og/modules/og_views/includes/og_views_handler_field_boolean_og_private.inc: n/a
+#  og_views.module,v 1.18.4.4 2009/06/09 11:42:46 weitzman
+#  og.install,v 1.71.4.6 2009/09/17 12:52:42 weitzman
+#  og/modules/og_views/includes/og_views_handler_field_og_is_manager.inc: n/a
+#  og.rules.inc,v 1.4.4.3 2010/03/14 08:24:16 amitaibu
+#  og/modules/og_views/includes/og_views_handler_field_og_invite.inc: n/a
+#  og/modules/og_views/includes/og_views_handler_field_og_managelinkmy.inc: n/a
+#  og.js,v 1.9.2.3 2010/01/24 14:44:56 amitaibu
+#  og/modules/og_views/includes/og_views_handler_filter_og_type_all.inc: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: og (6.x-2.1)\n"
+"POT-Creation-Date: 2010-06-08 19:30+0400\n"
+"PO-Revision-Date: 2009-06-01 14:27+0400\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: og.pages.inc:25; modules/og_notifications/og_notifications.module:216
+msgid "Subject"
+msgstr "Тема"
+
+#: includes/og.admin.inc:21; modules/og_notifications/og_notifications.pages.inc:58,149
+msgid "Type"
+msgstr "Тип"
+
+#: og.pages.inc:33; og.module:1429; modules/og_notifications/og_notifications.module:218
+msgid "Body"
+msgstr "Тіло"
+
+#: og.module:1012; modules/og_views/includes/og_views_handler_field_og_subscribe.inc:23
+msgid "Closed"
+msgstr "Завершене"
+
+#: og.pages.inc:197; og.module:113
+msgid "Send invitation"
+msgstr "Надіслати запрошення"
+
+#: og.module:1522,136; og.info:0; modules/og_access/og_access.info:0; modules/og_actions/og_actions.info:0; modules/og_notifications/og_notifications.info:0; modules/og_views/og_views.views.inc:153,298,354,383,534; modules/og_views/og_views.info:0
+msgid "Organic groups"
+msgstr "Органічні групи"
+
+#: og.module:1254,1463,1976,2009; modules/og_access/og_access.module:238; modules/og_actions/og_actions.module:154,204,253,302; modules/og_views/og_views.views.inc:307; theme/node-og-group-post.tpl.php:77
+msgid "Groups"
+msgstr "Групи"
+
+#: modules/og_access/og_access.module:219,228; modules/og_views/og_views.views.inc:370; modules/og_views/includes/og_views_handler_field_boolean_og_private.inc:35
+msgid "Public"
+msgstr ""
+
+#: og.module:2119; includes/og.admin.inc:37
+msgid "Group details"
+msgstr "Подробиці Груп"
+
+#: modules/og_notifications/og_notifications.module:29; modules/og_views/og_views.module:119
+msgid "Group notifications"
+msgstr "Повідомлення в групі"
+
+#: modules/og_views/og_views.views.inc:216; modules/og_views/includes/og_views_handler_field_boolean_og_private.inc:35
+msgid "Private"
+msgstr "Приватне"
+
+#: og.install:492; modules/og_access/og_access.info:0
+msgid "Organic groups access control"
+msgstr ""
+
+#: og.module:1011; modules/og_views/includes/og_views_handler_field_og_subscribe.inc:25
+msgid "Invite only"
+msgstr ""
+
+#: og.pages.inc:441,441; modules/og_views/includes/og_views_handler_field_og_is_manager.inc:19,19
+msgid "Manager"
+msgstr "Менеджер"
+
+#: includes/og.rules.inc:56,56,245,245,256,256; modules/og_actions/og_actions.module:351,351,399,399,447,447,494,494; modules/og_notifications/og_notifications.pages.inc:58,58,148,148; modules/og_notifications/og_notifications.module:332,332; modules/og_views/og_views.views.inc:395,395
+msgid "Group"
+msgstr "Група"
+
+#: og.pages.inc:331; og.module:2318
+msgid "Join"
+msgstr "Приєднатися"
+
+#: modules/og_views/includes/og_views_handler_field_og_invite.inc:28; modules/og_views/includes/og_views_handler_field_og_managelinkmy.inc:13
+msgid "Text to display"
+msgstr "Текст для відображення"
+
+#: og.module:2058; og.js:0; modules/og_views/og_views.views.inc:406
+msgid "Group node"
+msgstr ""
+"Нода Органічної групи (створює нову "
+"групу)."
+
+#: og.module:2059; og.js:0
+msgid "May not be posted into a group."
+msgstr "Не може публікуватись до груп."
+
+#: og.install:485; modules/og_views/includes/og_views_handler_filter_og_type_all.inc:11
+msgid ""
+"You have no node types which are acting as groups. See the notes "
+"section of the !readme_file and the content types fieldset at top of "
+"<a href=\"!settings\">OG settings</a>."
+msgstr ""
+

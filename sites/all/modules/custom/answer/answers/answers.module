@@ -1,0 +1,602 @@
+<?php
+
+include_once('answers.features.inc');
+
+/**
+ * Implementation of hook_theme().
+ */
+function answers_theme() {
+  return array(
+    'answers_search_results' => array(
+      'arguments' => array('search_text' => NULL, 'search_results' => NULL),
+      'template' => 'answers_search_results',
+    ),
+    'answer_out_comments' => array(
+      'arguments' => array('node' => NULL, 'comments' => NULL, 'orders_index' => NULL),
+    ),
+    'answers_possible_questions' => array(
+      'arguments' => array('items' => NULL),
+    ),
+  );
+}
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function answers_menu() {
+  $items = array();
+
+  $items['answers/search/js'] = array(
+    'page callback' => 'answers_search_js',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'answers.search.inc',
+  );
+  $items['answers/autocomplete'] = array(
+    'page callback' => 'answers_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'answers.search.inc',
+  );
+  $items['question/autocomplete'] = array(
+    'page callback' => 'answers_autocomplete_question',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'answers.search.inc',
+  );
+  $items['admin/settings/answers'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('answers_admin'),
+    'title' => 'Answers settings',
+    'description' => 'Configure Answers service settings',
+    'access arguments'   => array('administer answers'),
+    'file' => 'answers.admin.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implementation of hook_perm().
+ */
+function answers_perm() {
+  return array(
+    'moderate Best answer',
+    'moderate Answer dublicate'
+  );
+}
+
+
+/**
+ * Implementation of hook_init().
+ */
+function answers_init() {
+  if (arg(0) == 'questions') {
+    drupal_set_breadcrumb(array(
+      l(t('Home'), NULL),
+      l(t('Q&A'), 'questions')
+    ));
+    drupal_add_css(drupal_get_path('module', 'answers') .'/answers.css');
+  }
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'question') {
+    drupal_add_js(drupal_get_path('module', 'answers') .'/answers.question.js');
+    drupal_add_css(drupal_get_path('module', 'answers') .'/answers.css');
+  }
+}
+
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function answers_nodeapi(&$node, $op, $teaser, $page) {
+  if (arg(0) == 'node' && $node->nid == arg(1) && !arg(2) && $op == 'alter') {
+    if ($node->type == 'question') {
+      drupal_set_breadcrumb(array(
+        l(t('Home'), NULL),
+        l(t('Q&A'), 'questions')
+      ));
+      drupal_add_js(drupal_get_path('module', 'answers') .'/answers.js');
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function answers_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'question_node_form') {
+    if (isset($_GET['search'])) {
+      $form['title']['#default_value'] = urldecode($_GET['search']);
+    }
+    $form['field_best_answer']['#access'] = FALSE;
+
+    //Set default value to Taxonomy term (Drupal Version)
+    $vocabulary_version = FALSE;
+    $vocabulares = taxonomy_get_vocabularies('question');
+    if (!empty($vocabulares)) {
+      foreach ($vocabulares as $vid => $voc_version) {
+        if ($voc_version->name == 'Drupal Version') {
+          $vocabulary_version = $voc_version;
+          break;
+        }
+      }
+    }
+    if ($vocabulary_version && isset($form['taxonomy'][$vocabulary_version->vid]['#default_value'])
+        && empty($form['taxonomy'][$vocabulary_version->vid]['#default_value'])) {
+      $terms = taxonomy_get_term_by_name('All');
+      foreach ($terms as $term) {
+        if ($term->vid == $vocabulary_version->vid) {
+          $form['taxonomy'][$vocabulary_version->vid]['#default_value'][0] = $term->tid;
+        }
+      }
+    }
+    
+    //Hide Dublicate field
+    if (!user_access('moderate Answer dublicate')) {
+      $form['field_dublicate']['#access'] = FALSE;
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_link_alter().
+ */
+function answers_link_alter($links, $node, $comment = NULL) {
+  // Get rid of comments links in question nodes and paste answer links instead.
+  if (isset($node->type) && $node->type == 'question' && arg(0) != 'node') {
+    if (isset($links['comment_comments']) || isset($links['comment_add'])) {
+      unset($links['comment_comments']);
+      unset($links['comment_new_comments']);
+      unset($links['comment_add']);
+      $counts = get_answers_count($node);
+
+      if ($counts['best_answers']) {
+        $links_new['best_answers'] = array(
+          'title' => $counts['best_answers'],
+          'href' => "node/$node->nid",
+          'attributes' => array(
+            'title' => t('Jump to the first best-answer of this question.'),
+            'class' => 'link-best-answers',
+          ),
+          'fragment' => 'comments',
+        );
+      }
+
+      if ($counts['answers']) {
+        $links_new['answers'] = array(
+          'title' => $counts['answers'],
+          'href' => "node/$node->nid",
+          'attributes' => array(
+            'title' => t('Jump to the first answer of this question.'),
+            'class' => 'link-answers',
+          ),
+          'fragment' => 'comments',
+        );
+        if ($new = comment_num_new($node->nid)) {
+          $links_new['answers']['title'] .= '<sup class="new">'. $new .'</sup>';
+          $links_new['answers']['attributes']['title'] = t('Jump to the first new comment.');
+          $links_new['answers']['fragment'] = 'new';
+          $links_new['answers']['html'] = TRUE;
+        }
+      }
+      else {
+        $links_new['add_answer'] = array(
+          'title' => t('Answer!'),
+          'href' => "node/$node->nid",
+          'attributes' => array(
+            'title' => t('Jump to the answer form.'),
+            'class' => 'link-add-answer',
+          ),
+          'fragment' => 'comment-form',
+        );
+      }
+
+      $links = array_merge($links_new, $links);
+    }
+  }
+  
+  // Only first level comments could be marked as best answer.
+  if (isset($comment->pid)) {
+    if (isset($links['flag-best_answer']) && $comment->pid) {
+      unset($links['flag-best_answer']);
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_flag_access().
+ */
+function answers_flag_access($flag, $content_id, $action, $account) {
+  if ($flag->content_type == 'comment' && $flag->name == 'best_answer') {
+    if (user_access('moderate Best answer', $account)) {
+      return TRUE;
+    }
+    
+    $comment = _comment_load($content_id);
+    $node = node_load($comment->nid);
+    $matched_roles = array_intersect($flag->roles[$action], array_keys($account->roles));
+    if ($node->uid == $account->uid && !empty($matched_roles)) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+}
+
+
+/**
+ * Implementation of hook_block().
+ * Returns one quciktab block, which contains the same comment trees
+ * sorted in 3 different ways.
+ */
+function answers_block($op = 'list', $delta = '', $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks = array(
+        'list_comments' => array(
+          'info' => t('Answers'),
+        ),
+        'answers_search' => array(
+          'info' => t('Search for Answers'),
+        ),
+      );
+      return $blocks;
+
+    case 'view':
+      switch ($delta) {
+        case 'list_comments':
+          if (arg(0) == 'node' && is_numeric(arg(1)) && user_access('access comments')) {
+            $node = node_load(arg(1));
+            $comments = answers_load_comments($node);
+
+            $count = count($comments);
+            get_answers_count($node, $count);
+            
+            if ($count) {
+              $orders_index = array();
+              $answer_tabs = array();
+              
+              $order_comments = $comments;
+              uasort($order_comments, '_cmp_votes');
+              $orders_index[] = array(
+              	'link_id' => 'answer_tab_id_0',
+                'link_title' => t('Most voted'),
+                'index' => array_keys($order_comments)
+              );
+              $answer_tabs['most_voted'] = array(
+                'title' => t('Most voted'),
+                'href' => $_GET['q'],
+                'attributes' => array('id' => 'answer_tab_id_0'),
+                'fragment' => 'most_voted',
+              );
+              
+              $order_comments = $comments;
+              uasort($order_comments, '_cmp_newest');
+              $orders_index[] = array(
+              	'link_id' => 'answer_tab_id_1',
+                'link_title' => t('Newest'),
+                'index' => array_keys($order_comments)
+              );
+              $answer_tabs['newest'] = array(
+                'title' => t('Newest'),
+                'href' => $_GET['q'],
+                'attributes' => array('id' => 'answer_tab_id_1'),
+                'fragment' => 'newest',
+              );
+              
+              $order_comments = $comments;
+              uasort($order_comments, '_cmp_last_activity');
+              $orders_index[] = array(
+                'link_id' => 'answer_tab_id_2',
+                'link_title' => t('Most active'),
+                'index' => array_keys($order_comments)
+              );
+              $answer_tabs['most_active'] = array(
+                'title' => t('Most active'),
+                'href' => $_GET['q'],
+                'attributes' => array('id' => 'answer_tab_id_2'),
+                'fragment' => 'most_active',
+              );
+
+              unset($order_comments);
+
+              drupal_add_js(array(
+                  'orders_index' => $orders_index,
+                  'current' => 0
+                ), 'setting'
+              );
+              drupal_add_css(drupal_get_path('module', 'comment') .'/comment.css');
+              drupal_add_css(drupal_get_path('module', 'answers') .'/answers.css');
+              drupal_add_js(drupal_get_path('module', 'answers') .'/answers_tabs.js');
+              
+              $block['subject'] = format_plural($count, '1 Answer', '@count Answers');
+              $block['content'] = theme('links', $answer_tabs) .
+                theme('answer_out_comments', $node, $comments, $orders_index);
+              return $block;
+            }
+          }
+          break;
+
+        case 'answers_search':
+          module_load_include('inc', 'answers', 'answers.search');
+          $block['subject'] = t('Search for Answers');
+          $block['content'] = drupal_get_form('answers_search_question_form');
+          return $block;
+      }
+    break;
+  }
+}
+
+
+/**
+ * Aditional function: load comments.
+ */
+function answers_load_comments($node) {
+  $comments = array();
+  $query = 'SELECT c.cid as cid, c.pid, c.nid, c.subject, c.comment, c.format,
+      c.timestamp, c.name, c.mail, c.homepage, u.uid, u.name AS registered_name,
+      u.signature, u.signature_format, u.picture, u.data, c.thread, c.status,
+      COALESCE(vc.value, 0) as votes, COALESCE(fc.count, 0) as best_answer
+    FROM {comments} c
+    INNER JOIN {users} u ON c.uid = u.uid
+    LEFT JOIN {flag_counts} fc ON (fc.content_id = c.cid AND fc.content_type = "comment")
+    LEFT JOIN {flags} f ON (f.fid = fc.fid AND f.name = "best_answer")
+    LEFT JOIN {votingapi_cache} vc ON (vc.content_id = c.cid AND vc.content_type = "comment"
+      AND vc.function = "sum" AND vc.tag = "vote" AND vc.value_type = "points")
+    WHERE c.nid = %d ';
+  
+  $query_args = array($node->nid);
+  if (!user_access('administer comments')) {
+    $query .= ' AND c.status = %d';
+    $query_args[] = COMMENT_PUBLISHED;
+  }
+  $query .= ' ORDER BY c.thread DESC';
+
+  $query = db_rewrite_sql($query, 'c', 'cid');
+  $result = db_query($query, $query_args);
+
+  while ($comment = db_fetch_object($result)) {
+    $comment = drupal_unpack($comment);
+    $comment->name = $comment->uid ? $comment->registered_name : $comment->name;
+    $comment->depth = count(explode('.', $comment->thread)) - 1;
+    $comment->last_activity = $comment->timestamp;
+    $comments[$comment->cid] = $comment;
+  }
+
+  // Build tree-like array (second level is always flat).
+  $comments = array_reverse($comments, TRUE);
+  $stack = array();
+  foreach ($comments as $cid => $comment) {
+    if ($comment->pid) {
+      if ($comment->last_activity > $comments[$comment->pid]->last_activity) {
+        $comments[$comment->pid]->last_activity = $comment->last_activity;
+      }
+      $stack[$cid] = $comment;
+      unset($comments[$cid]);
+    }
+    else {
+      $stack = array_reverse($stack, TRUE);
+      $comments[$cid]->children = $stack;
+      $stack = array();
+    }
+  }
+  return $comments;
+}
+
+
+/**
+ * Helper comparsion functions to sort comments.
+ */
+function _cmp_last_activity($a, $b) {
+  if ($a->last_activity == $b->last_activity) {
+    return 0;
+  }
+  return ($a->last_activity > $b->last_activity) ? -1 : 1;
+}
+
+function _cmp_newest($a, $b) {
+  if ($a->timestamp == $b->timestamp) {
+    return 0;
+  }
+  return ($a->timestamp > $b->timestamp) ? -1 : 1;
+}
+
+function _cmp_votes($a, $b) {
+  if ($a->best_answer == $b->best_answer && $a->votes == $b->votes && $a->timestamp == $b->timestamp) {
+    return 0;
+  }
+  return ($a->best_answer > $b->best_answer ||
+    ($a->best_answer == $b->best_answer && $a->votes > $b->votes) ||
+    ($a->best_answer == $b->best_answer && $a->votes == $b->votes && $a->timestamp < $b->timestamp)) ? -1 : 1;
+}
+
+
+/**
+ * Answers count differs from comment count, as it's only first level of comments.
+ */
+function get_answers_count($node, $set = FALSE) {
+  static $counts = array();
+  if ($set !== FALSE) {
+    $counts[$node->nid] = $set;
+  }
+  elseif (!isset($counts[$node->nid])) {
+    $sql = 'SELECT COUNT(c.cid) as answers, SUM(fc.count) as best_answers
+      FROM {comments} c
+      INNER JOIN {users} u ON c.uid = u.uid
+      LEFT JOIN {flag_counts} fc ON (fc.content_id = c.cid AND fc.content_type = "comment")
+      LEFT JOIN {flags} f ON (f.fid = fc.fid AND f.name = "best_answer")
+      WHERE c.nid = %d AND c.pid = 0
+      GROUP BY c.nid';
+    $result = db_query($sql, $node->nid);
+    $counts[$node->nid] = db_fetch_array($result);
+  }
+  return $counts[$node->nid];
+}
+
+
+/**
+ * Output 3 tabs and comments.
+ * Render tree into HTML.
+ */
+function theme_answer_out_comments($node, $comments, $orders_index) {
+  $output = '<a id="comments"></a>
+<div id="answer_conteiner">
+';
+  foreach ($orders_index[0]['index'] as $cid) {
+    $output .= _answers_render_thread($comments[$cid], $node);
+  }
+  return $output .'</div>';
+}
+
+
+/**
+ * Helper function to render comment thread.
+ */
+function _answers_render_thread($comment, $node) {
+  $comments = $comment->depth == 0 ? '<div id="answer_cid_'. $comment->cid .'">' : '';
+  $comments .= theme('comment_thread_expanded', $comment, $node);
+
+  if (!empty($comment->children)) {
+    $comments .= '<div class="indented">';
+    foreach ($comment->children as $child) {
+      $comments .= _answers_render_thread($child, $node);
+    }
+    $comments .= "\n</div>";
+  }
+  if ($comment->depth == 0) {
+    $comments .= "\n</div>";
+  }
+  return $comments;
+}
+
+
+/**
+ * Override or insert variables into the comment templates.
+ */
+function answers_preprocess_comment(&$variables) {
+  $node = $variables['node'];
+  $comment = $variables['comment'];
+  if ($node->type == 'question') {
+    if (!$comment->pid) {
+      $variables['template_files'][] = 'answer';
+      
+      if (arg(0) == 'comment') {
+        drupal_set_title(t('Comment the answer'));
+      }
+
+      // Prepare voting widget.
+      $tag = variable_get('vud_tag', 'vote');
+      $widget = variable_get('vud_comment_widget', 'plain');
+      $can_edit = user_access('use vote up/down on nodes');
+      $variables['voting_widget'] = theme('vud_widget', $comment->cid, 'comment',
+        $tag, $widget, !$can_edit);
+
+      // Determine if this is a best answer.
+      $flag = flag_get_flag('best_answer');
+      $content_id = $flag->get_content_id($comment);
+      if ($flag->get_count($content_id)) {
+        $variables['best_answer'] = TRUE;
+      }
+    }
+    else {
+      $variables['template_files'][] = 'answer-reply';
+    }
+  }
+}
+
+
+/**
+ * Override or insert variables into the comment templates.
+ */
+function answers_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  if ($node->type == 'question') {
+    $counts = get_answers_count($node);
+    $variables['best_answers'] = $counts['best_answers'];
+  }
+}
+
+function template_preprocess_answers_search_results(&$vars) {
+  $vars['search_text'] = urlencode($vars['search_text']);
+
+  $search_result_list_items = array();
+  foreach ($vars['search_results'] as $search_result) {
+    $search_result_list_items[] = l($search_result['title'], $search_result['link']) .'<br>'. $search_result['snippet'];
+  }
+  $vars['search_results_themed'] = theme('item_list', $search_result_list_items);
+
+  $vars['new_question_link'] = l(t('Ask your question!'), 'node/add/question', array('query' => 'search='. $vars['search_text']));
+
+  $vars['pager'] = theme('pager', array(), variable_get('answers_search_limit_nodes', 10));
+}
+
+/**
+ * Copy of pager_query() function. Added offset from POST or GET instead of only from GET.
+ */
+function answers_pager_query($query, $limit = 10, $element = 0, $count_query = NULL) {
+  global $pager_page_array, $pager_total, $pager_total_items;
+  $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
+
+  // Substitute in query arguments.
+  $args = func_get_args();
+  $args = array_slice($args, 4);
+  // Alternative syntax for '...'
+  if (isset($args[0]) && is_array($args[0])) {
+    $args = $args[0];
+  }
+
+  // Construct a count query if none was given.
+  if (!isset($count_query)) {
+    $count_query = preg_replace(array('/SELECT.*?FROM /As', '/ORDER BY .*/'), array('SELECT COUNT(*) FROM ', ''), $query);
+  }
+
+  // Convert comma-separated $page to an array, used by other functions.
+  $pager_page_array = explode(',', $page);
+
+  // We calculate the total of pages as ceil(items / limit).
+  $pager_total_items[$element] = db_result(db_query($count_query, $args));
+  $pager_total[$element] = ceil($pager_total_items[$element] / $limit);
+  $pager_page_array[$element] = max(0, min((int)$pager_page_array[$element], ((int)$pager_total[$element]) - 1));
+  return db_query_range($query, $args, $pager_page_array[$element] * $limit, $limit);
+}
+
+/**
+ * Compute pager options and invoke theme pager.
+ *
+ * @param int $total_results
+ *   The total number of returned search results.
+ * @param int $results_per_page
+ *   The number of query results to display per page.
+ * @param int $pager_element
+ *   An optional integer to distinguish between multiple pagers on one page.
+ *
+ * @return string
+ */
+function theme_answers_pager($total_results, $results_per_page, $pager_element = 0) {
+  $offset = (isset($_REQUEST['page'])) ? $_REQUEST['page']: '';
+  $GLOBALS['pager_page_array'] = explode(',', $offset);
+  $GLOBALS['pager_total_items'][$pager_element] = $total_results;
+  $GLOBALS['pager_total'][$pager_element] = ceil($total_results / $results_per_page);
+  $GLOBALS['pager_page_array'][$pager_element] = max(0, min((int)$GLOBALS['pager_page_array'][$pager_element], ((int)$GLOBALS['pager_total'][$pager_element]) - 1));
+  return theme('pager', array(), $results_per_page, $pager_element);
+}
+
+/**
+ * AJAX callback. Used in the question autocomplete.
+ */
+function theme_answers_possible_questions($items) {
+  if (empty($items)) {
+    return '';
+  }
+
+  $output = '<div id="answers-possible-questions">';
+  $output .= '<h2>'. t('Possible questions') .'</h2>';
+  $output .= theme('item_list', $items);
+  $output .= '</div>';
+
+  return $output;
+}

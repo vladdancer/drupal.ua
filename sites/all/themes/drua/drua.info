@@ -1,0 +1,47 @@
+name = Drupal Ukraine
+description = Drupal Ukraine Theme
+core = 6.x
+engine = phptemplate
+base theme = ninesixty
+screenshot = screenshot.jpg
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; ------------- REGIONS -------------- ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+regions[header_left] = Header left
+regions[header_right] = Header right
+regions[featured] = Featured content
+regions[page_top] = Page top
+regions[left] = Left sidebar
+regions[page_bottom] = Page bottom
+regions[footer] = Footer
+regions[copyrights] = Footer message
+regions[content] = Content
+regions[pre_content] = Pre Content
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; ------------- STYLESHEETS ---------- ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+stylesheets[all][] = styles/grid.css
+stylesheets[all][] = styles/styles.css
+stylesheets[all][] = views/views-view-answers.css
+stylesheets[all][] = styles/groups-page.css
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; ------------- SCRIPTS -------------- ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+scripts[] = scripts/jquery.cycle.all.min.js
+scripts[] = scripts/scripts.js
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; ------------- PLUGINS -------------- ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Load Panel Layouts
+plugins[panels][layouts] = panels/layouts
+
+
+plugins[vud][widgets] = widgets

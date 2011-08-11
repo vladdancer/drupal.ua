@@ -1,0 +1,1 @@
+<iframe src="http://webchat.freenode.net?nick=nung.&channels=drupal.ua%2Ciflug&uio=d4" width="647" height="400"></iframe>

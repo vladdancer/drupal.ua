@@ -1,0 +1,88 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function webform_simplenews_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'webform_node_form') {
+    $form['webform_simplenews'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Subscribe simplenews'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+      '#weight' => 11,
+    );
+
+    $tree = taxonomy_get_tree(variable_get('simplenews_vid', ''));
+    $options = array();
+    if ($tree) {
+      foreach ($tree as $term) {
+        $options[$term->tid] = $term->name;
+      }
+    }
+    
+    $default_value = array();
+    if (isset($form['nid']['#value']) && isset($form['vid']['#value'])) {
+      $result = db_query("SELECT tid FROM {webform_simplenews}
+        WHERE nid = %d AND vid = %d", $form['nid']['#value'], $form['vid']['#value']);
+      while ($tid = db_result($result)) {
+        $default_value[$tid] = $tid;
+      }
+    }
+    
+    $form['webform_simplenews']['simplenews'] = array(
+      '#type' => 'select',
+      '#title' => t('Newsletter'),
+      '#description' => t('Choose a subscription that you want to sign the user after submitting a webform.'),
+      '#default_value' => $default_value,
+      '#options' => $options,
+      '#multiple' => TRUE,
+      '#size' => min(5, count($options)),
+    );
+  }
+}
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function webform_simplenews_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  switch ($op) {
+    case 'insert':
+    case 'update':
+      db_query('DELETE FROM {webform_simplenews} WHERE nid = %d AND vid = %d',
+        $node->nid, $node->vid);
+      if (count($node->simplenews)) {
+        $term = new stdClass();
+        $term->nid = $node->nid;
+        $term->vid = $node->vid;
+        foreach ($node->simplenews as $tid) {
+          $term->tid = $tid;
+          drupal_write_record('webform_simplenews', $term);
+        }
+      }
+      break;
+    case 'delete':
+      db_query('DELETE FROM {webform_simplenews} WHERE nid = %d AND vid = %d',
+        $node->nid, $node->vid);
+      break;
+  }
+}
+
+
+/**
+ * Implementation of hook_webform_submission_insert().
+ */
+function webform_simplenews_webform_submission_insert($node, $submission) {
+  global $user;
+  if (!$user->uid) {
+    return;
+  }
+  
+  $result = db_query("SELECT tid FROM {webform_simplenews}
+    WHERE nid = %d AND vid = %d", $node->nid, $node->vid);
+  while ($tid = db_result($result)) {
+    simplenews_subscribe_user($user->mail, $tid, FALSE);
+  }
+}

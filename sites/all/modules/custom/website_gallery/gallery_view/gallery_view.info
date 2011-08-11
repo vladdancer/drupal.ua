@@ -1,0 +1,7 @@
+; $Id$
+
+name = gallery_view Export Module
+description = Exports some views of gallery_view
+dependencies[] = views
+package = Custom
+core = 6.x

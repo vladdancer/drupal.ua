@@ -1,0 +1,10 @@
+name = Comments Bonus API
+description = "Improves standard comments API."
+core = 6.x
+dependencies[] = comment
+; Information added by drupal.org packaging script on 2010-03-14
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "comment_bonus_api"
+datestamp = "1268568207"
+

@@ -1,0 +1,6 @@
+; $Id$
+
+name = User statistics
+description = Advansed user statistics.
+package = Statistics
+core = 6.x

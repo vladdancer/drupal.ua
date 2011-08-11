@@ -1,0 +1,39 @@
+# Ukrainian translation of og (6.x-2.1)
+# Copyright (c) 2010 by the Ukrainian translation team
+# Generated from files:
+#  og.install,v 1.71.4.6 2009/09/17 12:52:42 weitzman
+#  og/modules/og_access/og_access.info: n/a
+#  og/modules/og_views/includes/og_views_handler_filter_og_type_all.inc: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: og (6.x-2.1)\n"
+"POT-Creation-Date: 2010-06-08 19:30+0400\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: og.install:484
+msgid "Organic groups group type"
+msgstr ""
+
+#: og.install:492; modules/og_access/og_access.info:0
+msgid "Organic groups access control"
+msgstr ""
+
+#: og.install:485; modules/og_views/includes/og_views_handler_filter_og_type_all.inc:11
+msgid ""
+"You have no node types which are acting as groups. See the notes "
+"section of the !readme_file and the content types fieldset at top of "
+"<a href=\"!settings\">OG settings</a>."
+msgstr ""
+
+#: og.install:493
+msgid ""
+"Organic groups access control module is disabled. See the <a "
+"href=\"@modules\">modules page</a>."
+msgstr ""
+

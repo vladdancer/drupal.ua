@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * Filter of posts in the group.
+ */
+function groups_post_filter_form($form_state) {
+  $form['name'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show posts from my groups only?'),
+  '#default_value' => get_flag()
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+  '#value' => t('Apply')
+  );
+  
+  return $form;
+}
+
+/**
+ * Save settings to profile.
+ */
+function groups_post_filter_form_submit($form, &$form_state) {
+  global $user;
+  if (($user) && ($user->uid != 0)) {
+    $flag = $form_state['values']['name'];
+
+    $profile_node = content_profile_load('profile', $user->uid);
+    $profile_node->field_show_groups[0]['value'] = $flag;
+
+    node_save($profile_node);
+  }
+}
+
+/**
+ * Load filter value from the profile.
+ */
+function get_flag() {
+  global $user;
+  $flag = 0;
+  if (($user) && ($user->uid != 0)) {
+    $profile_node = content_profile_load('profile', $user->uid);
+  $flag = $profile_node->field_show_groups[0]['value'];
+  }
+  return $flag;
+}
+
+/**
+ * Implementation of hook_block();
+ */
+function groups_post_filter_block($op='list', $delta=0) {
+  if ($op == 'list') {
+    $block = array();
+  $block[0]['info'] = t('Recent posts in groups');
+  return $block;
+  }
+  elseif ($op == 'view') {
+    drupal_add_js(drupal_get_path('module', 'groups_post_filter') .'/js/hide_submit.js', 'module');
+
+    $block['subject'] = t('Recent posts in groups');
+    $block['content'] .= drupal_get_form('groups_post_filter_form');
+
+    if (get_flag() == 1) {
+      $view = views_get_view('og_posts_list');
+      if (!empty($view)) {
+        $view_args = array();
+        $display_id = 'default';
+        $block['content'] .= $view->execute_display($display_id , $view_args);
+      }
+    }
+    else {
+      $view = views_get_view('og_posts_list_all');
+      if (!empty($view)) {
+        $view_args = array();
+        $display_id = 'default';
+        $block['content'] .= $view->execute_display($display_id , $view_args);
+      }
+    }
+    
+    return $block;
+  }
+}

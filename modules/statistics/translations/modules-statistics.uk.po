@@ -1,0 +1,254 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-03 20:18+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Enable access log"
+msgstr "Увімкнути журнал доступу"
+
+msgid "Discard access logs older than"
+msgstr "Позбутися протоколів доступу давніших ніж"
+
+msgid "Url"
+msgstr "Url"
+
+msgid "Top pages"
+msgstr "Популярні сторінки"
+
+msgid "Recent hits"
+msgstr "Останні хіти"
+
+msgid "Average page generation time"
+msgstr "Середній час генерування сторінки"
+
+msgid "How many content items to display in \"day\" list."
+msgstr "Скільки елементів показувати у списку \"за день\"."
+
+msgid "Number of day's top views to display"
+msgstr "Число найбільш популярних переглядів за день"
+
+msgid "Number of all time views to display"
+msgstr "Показати кількість переглядів за ввесь час"
+
+msgid "Number of most recent views to display"
+msgstr "Число найбільш нових переглядів для відображення"
+
+msgid "Hits"
+msgstr "Перегляди"
+
+msgid "Last visit"
+msgstr "Останнє відвідування"
+
+msgid "1 read"
+msgid_plural "@count reads"
+msgstr[0] "@count перегляд"
+msgstr[1] "@count перегляди"
+msgstr[2] "@count переглядів"
+
+msgid "access statistics"
+msgstr "доступ до статистики"
+
+msgid "view post access counter"
+msgstr "перегляд лічильника відвідувань"
+
+msgid "Total page generation time"
+msgstr "Загальний час генерації сторінки"
+
+msgid "%time ms"
+msgstr "%time мсек"
+
+msgid "Top pages in the past %interval"
+msgstr "Найбільш відвідувані сторінки за останні %interval"
+
+msgid "unban"
+msgstr "розблокувати"
+
+msgid "ban"
+msgstr "заблокувати"
+
+msgid "Top visitors in the past %interval"
+msgstr "Найкращі відвідувачі за останні %interval"
+
+msgid "Top referrers in the past %interval"
+msgstr "Найкращі джерела за %interval"
+
+msgid "Log each page access. Required for referrer statistics."
+msgstr ""
+"Записувати кожниий запит сторінки. Необхідно для статистики джерел "
+"користувачів."
+
+msgid ""
+"Older access log entries (including referrer statistics) will be "
+"automatically discarded. (Requires a correctly configured <a href=\"@cron"
+"\">cron maintenance task</a>.)"
+msgstr ""
+
+msgid "Content viewing counter settings"
+msgstr "Налаштування лічильника кількості переглядів вмісту"
+
+msgid "Count content views"
+msgstr "Рахувати кількість переглядів"
+
+msgid "Increment a counter each time content is viewed."
+msgstr "Збільшувати значення лічильника при кожному перегляді."
+
+msgid ""
+"The statistics module keeps track of numerous site usage statistics, "
+"including the number of times, and from where, each of your posts is viewed. "
+"These statistics are useful in determining how users are interacting with "
+"each other and with your site, and are required for the display of some "
+"Drupal blocks."
+msgstr ""
+
+msgid "The statistics module provides:"
+msgstr ""
+
+msgid ""
+"a counter for each post on your site that increments each time the post is "
+"viewed. (Enable <em>Count content views</em> on the <a href=\"@accesslog"
+"\">access log settings page</a>, and determine if the post access counters "
+"should be visible to any user roles on the <a href=\"@permissions"
+"\">permissions page</a>.)"
+msgstr ""
+
+msgid ""
+"a <a href=\"@recent-hits\">recent hits</a> log that displays information "
+"about the latest activity on your site, including the URL and title of the "
+"page accessed, the user name (if available) and IP address of the accessing "
+"party."
+msgstr ""
+
+msgid ""
+"a <a href=\"@top-referrers\">top referrers</a> log that displays the "
+"referring parties for your site visits (where your visitors came from)."
+msgstr ""
+
+msgid ""
+"a <a href=\"@top-pages\">top pages</a> log that displays site content in "
+"descending order by number of views."
+msgstr ""
+
+msgid ""
+"a <a href=\"@top-visitors\">top visitors</a> log that displays the most "
+"active users on your site."
+msgstr ""
+
+msgid ""
+"a <em>Popular content</em> block that displays the day's most viewed "
+"content, the all-time most viewed content, and the last content viewed. "
+"(Enable the <em>Popular content</em> block on the <a href=\"@blocks\">blocks "
+"administration page</a>.)"
+msgstr ""
+
+msgid "Configuring the statistics module"
+msgstr ""
+
+msgid ""
+"When the <em>Enable access log</em> setting on the <a href=\"@accesslog"
+"\">access log settings page</a> is enabled, data about every page accessed "
+"(including the remote host's IP address, referrer, node accessed, and user "
+"name) is stored in the access log. The access log must be enabled for the <a "
+"href=\"@recent-hits\">recent hits</a>, <a href=\"@top-referrers\">top "
+"referrers</a>, <a href=\"@top-pages\">top pages</a>, and <a href=\"@top-"
+"visitors\">top visitors</a> log pages to function. Enabling the access log "
+"adds one additional database call per page displayed by Drupal."
+msgstr ""
+
+msgid ""
+"The <em>Discard access logs older than</em> setting on the <a href="
+"\"@accesslog\">access log settings page</a> specifies the length of time "
+"entries are retained in the access log before they are deleted. Automatic "
+"access log entry deletion requires a correctly configured <a href=\"@cron"
+"\">cron maintenance task</a>."
+msgstr ""
+
+msgid ""
+"The <em>Count content views</em> setting on the <a href=\"@accesslog"
+"\">access log settings page</a> enables a counter for each post on your site "
+"that increments each time the post is viewed. This option must be enabled to "
+"provide post-specific access counts. Enabling this option adds one "
+"additional database call per each post displayed by Drupal."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@statistics"
+"\">Statistics module</a>."
+msgstr ""
+
+msgid ""
+"Settings for the statistical information that Drupal will keep about the "
+"site. See <a href=\"@statistics\">site statistics</a> for the actual "
+"information."
+msgstr ""
+"Налаштування статистичної інформації про сайт. Див. <a href=\"@statistics"
+"\">статистика сайту</a> для отримання актуальної інформации."
+
+msgid "This page displays the site's most recent hits."
+msgstr ""
+
+msgid ""
+"This page displays all external referrers, or external references to your "
+"website."
+msgstr ""
+
+msgid ""
+"When you ban a visitor, you prevent the visitor's IP address from accessing "
+"your site. Unlike blocking a user, banning a visitor works even for "
+"anonymous users. This is most commonly used to block resource-intensive bots "
+"or web crawlers."
+msgstr ""
+
+msgid "Popular content"
+msgstr "Популярний вміст"
+
+msgid "How many content items to display in \"all time\" list."
+msgstr "Скільки елементів показувати у списку \"впродовж усього часу\"."
+
+msgid "How many content items to display in \"recently viewed\" list."
+msgstr "Скільки елементів вмісту відображати у списку \"останні перегляди\"."
+
+msgid "Today's:"
+msgstr "Сьогодні:"
+
+msgid "All time:"
+msgstr "За весь час:"
+
+msgid "Last viewed:"
+msgstr "Останнє переглянуте:"
+
+msgid "View pages that have recently been visited."
+msgstr "Список недавно відвіданих сторінок."
+
+msgid "View pages that have been hit frequently."
+msgstr "Список часто відвідуваних сторінок."
+
+msgid "Top visitors"
+msgstr "Активні відвідувачі"
+
+msgid "View visitors that hit many pages."
+msgstr "Перегляд відвідувачів, що відвідали багато сторінок сайту."
+
+msgid "Top referrers"
+msgstr "Найкращі джерела відвідувань"
+
+msgid "View top referrers."
+msgstr "Перегляд списку найкращих джерел відвідувань."
+
+msgid "View access log."
+msgstr "Переглянути системний журнал відвідувань."
+
+msgid "Control details about what and how your site logs."
+msgstr "Визначення, що і як вносити у системний журнал сайту."
+
+msgid "Track page visits"
+msgstr "Відвідувані сторінки"

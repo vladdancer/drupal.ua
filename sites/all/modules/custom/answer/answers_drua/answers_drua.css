@@ -1,0 +1,17 @@
+#dublicate_url {
+  float: right;
+}
+#question_status {
+  float: left;
+}
+
+#dublicate_url #autocomplete {
+  background-color: #FFFFFF;
+}
+#dublicate_url #autocomplete {
+  margin-left: 100px !important;
+  margin-top: 0 !important;
+}
+#dublicate_url #autocomplete li {
+  padding-left: 5px;
+}

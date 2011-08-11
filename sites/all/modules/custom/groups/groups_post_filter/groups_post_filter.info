@@ -1,0 +1,8 @@
+; $Id$
+
+name = Groups post filtering
+description = Filtering groups posts by membership.
+package = Custom
+dependencies[] = og
+dependencies[] = og_views
+core = 6.x

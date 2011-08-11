@@ -1,0 +1,8 @@
+; $Id$
+
+name = Webform simplenews
+description = Signs the user on a simplenews.
+dependencies[] = simplenews
+dependencies[] = webform
+package = Mail
+core = 6.x

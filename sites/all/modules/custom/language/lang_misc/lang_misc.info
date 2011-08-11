@@ -1,0 +1,5 @@
+name = Fix internationalization
+description = Makes some things with internationalization.
+package = Custom
+dependencies[] = i18n
+core = 6.x

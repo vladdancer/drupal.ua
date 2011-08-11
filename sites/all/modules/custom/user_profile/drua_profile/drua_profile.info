@@ -1,0 +1,8 @@
+; $Id$
+
+name = User profile
+description = User Profile for Drupal.ua
+dependencies[] = views
+dependencies[] = content_profile
+package = Custom
+core = 6.x

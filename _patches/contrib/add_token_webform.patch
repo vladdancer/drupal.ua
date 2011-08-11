@@ -1,0 +1,113 @@
+Index: sites/all/modules/contrib/webform/webform.module
+===================================================================
+--- sites/all/modules/contrib/webform/webform.module	(revision 2032)
++++ sites/all/modules/contrib/webform/webform.module	(working copy)
+@@ -2594,6 +2594,45 @@
+     ),
+   );
+ 
++  if (!isset($replacements['content_profile'])) {
++    $replacements['content_profile'] = TRUE;
++    if (module_exists('content_profile') && $user->uid) {
++      foreach (content_profile_get_types('names') as $type => $type_name) {
++        $content_profile = content_profile_load($type, $user->uid);
++        $content_profile_type = content_types($type);
++        
++        if ($content_profile->page_title) {
++          $replacements['safe']['%'. $type .'_title'] = $content_profile->title;
++        }
++        if ($content_profile_type['has_body']) {
++          $replacements['safe']['%'. $type .'_body'] = $content_profile->body;
++        }
++        
++        foreach ($content_profile_type['fields'] as $field_id => $field) {
++          switch ($field['widget']['type']) {
++            case 'text_textarea':
++              $replacements['safe']['%'. $type .'_'. $field['field_name']] = check_markup(
++                $content_profile->{$field['field_name']}[0]['value'],
++                $content_profile->{$field['field_name']}[0]['format'],
++                FALSE
++              );
++              break;
++            case 'text_textfield':
++            case 'optionwidgets_select':
++              $replacements['safe']['%'. $type .'_'. $field['field_name']] =
++                check_plain($content_profile->{$field['field_name']}[0]['value']);
++              break;
++            case 'imagefield_widget':
++              $replacements['safe']['%'. $type .'_'. $field['field_name']] =
++                $content_profile->{$field['field_name']}[0]['filepath'];
++              break;
++            //ignore: 'optionwidgets_onoff', 'location'
++          }
++        }
++      }
++    }
++  }
++  
+   // Replacements of global variable tokens.
+   if (!isset($replacements['specials_set'])) {
+     $replacements['specials_set'] = TRUE;
+@@ -2728,6 +2767,7 @@
+ }
+ 
+ function theme_webform_token_help($node = NULL) {
++  global $user;
+   $basic_tokens = array(
+     '%username',
+     '%useremail',
+@@ -2735,7 +2775,41 @@
+     '%site',
+     '%date',
+   );
+-
++  
++  $token_content_profile = array();
++  if (module_exists('content_profile')) {
++    foreach (content_profile_get_types('names') as $type => $type_name) {
++      $content_profile = content_profile_load($type, $user->uid);
++      $content_profile_type = content_types($type);
++      
++      if ($content_profile->page_title) {
++        $token_content_profile['%'. $type .'_title'] = '%'. $type .'_title — '. $content_profile->title_label;
++      }
++      if ($content_profile_type['has_body']) {
++        $token_content_profile['%'. $type .'_body'] = '%'. $type .'_body — '. $content_profile->body_label;
++      }
++      
++      foreach ($content_profile_type['fields'] as $field_id => $field) {
++        switch ($field['widget']['type']) {
++          case 'text_textarea':
++            $token_content_profile['%'. $type .'_'. $field['field_name']] =
++              '%'. $type .'_'. $field['field_name'] .' — '. t($field['widget']['label']);
++            break;
++          case 'text_textfield':
++          case 'optionwidgets_select':
++            $token_content_profile['%'. $type .'_'. $field['field_name']] =
++              '%'. $type .'_'. $field['field_name'] .' — '. t($field['widget']['label']);
++            break;
++          case 'imagefield_widget':
++            $token_content_profile['%'. $type .'_'. $field['field_name']] =
++              '%'. $type .'_'. $field['field_name'] .' — '. t($field['widget']['label']);
++            break;
++          //ignore: 'optionwidgets_onoff', 'location'
++        }
++      }
++    }
++  }
++  
+   $special_tokens = array(
+     '%profile[' . t('key') . ']',
+     '%server[' . t('key') . ']',
+@@ -2763,6 +2837,11 @@
+ 
+   $output .= theme('item_list', $basic_tokens, t('Basic variables'));
+   $output .= theme('item_list', $special_tokens, t('Special variables'));
++  
++  if (count($token_content_profile)) {
++    $output .= theme('item_list', $token_content_profile, t('Content profile'));
++  }
++  
+   $output .= '<p>' . t('You can use %server[key] to add any of the special PHP <a href="http://www.php.net/reserved.variables#reserved.variables.server">$_SERVER</a> variables, %session[key] to add any of the special PHP <a href="http://www.php.net/reserved.variables#reserved.variables.session">$_SESSION</a> variables and %get[key] to create prefilled forms from the <a href="http://www.php.net/reserved.variables#reserved.variables.get">URL</a>. %cookie, %request and %post also work with their respective PHP variables. For example %server[HTTP_USER_AGENT], %session[id], or %get[q].') . '</p>';
+   if (module_exists('profile')) {
+     $output .= '<p>' . t('If you are using the Profile module, you can also access all profile data using the syntax %profile[form_name]. If you for example have a profile value named profile_city, add the variable %profile[profile_city].') . '</p>';

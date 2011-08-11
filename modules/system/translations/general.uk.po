@@ -1,0 +1,1124 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:57+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Home"
+msgstr "Головна"
+
+msgid "Title"
+msgstr "Назва"
+
+msgid "Body"
+msgstr "Тіло"
+
+msgid "user"
+msgstr "користувач"
+
+msgid "Save configuration"
+msgstr "Запам'ятати налаштування"
+
+msgid "Reset to defaults"
+msgstr "Скинути до базового"
+
+msgid "delete"
+msgstr "видалити"
+
+msgid "Status"
+msgstr "Стан"
+
+msgid "E-mail"
+msgstr "Адреса e-mail"
+
+msgid "Delete"
+msgstr "Стерти"
+
+msgid "Operations"
+msgstr "Дії"
+
+msgid "Content"
+msgstr "Вміст"
+
+msgid "Username"
+msgstr "Користувач"
+
+msgid "content"
+msgstr "вміст"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Author"
+msgstr "Автор"
+
+msgid "Replies"
+msgstr "Відповіді"
+
+msgid "List"
+msgstr "Список"
+
+msgid "Subject"
+msgstr "Тема"
+
+msgid "disabled"
+msgstr "вимкнено"
+
+msgid "Confirm"
+msgstr "Підтвердження"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Description"
+msgstr "Опис"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "RSS feed"
+msgstr "RSS потік"
+
+msgid "Disabled"
+msgstr "Вимкнено"
+
+msgid "Enabled"
+msgstr "Ввімкнено"
+
+msgid "Comments"
+msgstr "Коментарі"
+
+msgid "new"
+msgstr "нове"
+
+msgid "error"
+msgstr "помилка"
+
+msgid "Taxonomy"
+msgstr "Таксономія"
+
+msgid "Yes"
+msgstr "Так"
+
+msgid "No"
+msgstr "Ні"
+
+msgid "Blue Lagoon (Default)"
+msgstr "Блакитна Лагуна (Default)"
+
+msgid "Ash"
+msgstr "Ash"
+
+msgid "Aquamarine"
+msgstr "Aquamarine"
+
+msgid "Belgian Chocolate"
+msgstr "Belgian Chocolate"
+
+msgid "Bluemarine"
+msgstr "Bluemarine"
+
+msgid "Citrus Blast"
+msgstr "Citrus Blast"
+
+msgid "Cold Day"
+msgstr "Cold Day"
+
+msgid "Greenbeam"
+msgstr "Greenbeam"
+
+msgid "Mediterrano"
+msgstr "Mediterrano"
+
+msgid "Mercury"
+msgstr "Меркурій"
+
+msgid "Nocturnal"
+msgstr "Nocturnal"
+
+msgid "Olivia"
+msgstr "Olivia"
+
+msgid "Pink Plastic"
+msgstr "Pink Plastic"
+
+msgid "Shiny Tomato"
+msgstr "Shiny Tomato"
+
+msgid "Teal Top"
+msgstr "Teal Top"
+
+msgid "Content types"
+msgstr "Типи матеріалів"
+
+msgid "Categories"
+msgstr "Категорії"
+
+msgid "view"
+msgstr "вид"
+
+msgid "Advanced options"
+msgstr "Додаткові налаштування"
+
+msgid "Edit"
+msgstr "Редагувати"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Reset"
+msgstr "Скинути"
+
+msgid "This action cannot be undone."
+msgstr "Цю дію не можна буде скасувати."
+
+msgid "Message"
+msgstr "Повідомлення"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Weight"
+msgstr "Вага"
+
+msgid "The configuration options have been saved."
+msgstr "Налаштування запам'ятовано."
+
+msgid "Required"
+msgstr "Необхідний"
+
+msgid "root"
+msgstr "кореневий"
+
+msgid "Parent"
+msgstr "Попередник"
+
+msgid "none"
+msgstr "нічого"
+
+msgid "Category"
+msgstr "Категорія"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Add category"
+msgstr "Додати категорію"
+
+msgid "Name"
+msgstr "Ім’я"
+
+msgid "edit"
+msgstr "редагувати"
+
+msgid "Go to previous page"
+msgstr "На попередню сторінку"
+
+msgid "Go to next page"
+msgstr "На наступну сторінку"
+
+msgid "Import"
+msgstr "Імпорт"
+
+msgid "Book"
+msgstr "Книга"
+
+msgid "Export"
+msgstr "Експорт"
+
+msgid "Preview"
+msgstr "Перегляд"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Help"
+msgstr "Довідка"
+
+msgid "Default"
+msgstr "Типово"
+
+msgid "Update"
+msgstr "Оновлення"
+
+msgid "Sunday"
+msgstr "Неділя"
+
+msgid "Monday"
+msgstr "Понеділок"
+
+msgid "Tuesday"
+msgstr "Вівторок"
+
+msgid "Wednesday"
+msgstr "Середа"
+
+msgid "Thursday"
+msgstr "Четвер"
+
+msgid "Friday"
+msgstr "П'ятниця"
+
+msgid "Saturday"
+msgstr "Субота"
+
+msgid "Time"
+msgstr "Час"
+
+msgid "View"
+msgstr "Перегляд"
+
+msgid "The configuration options have been reset to their default values."
+msgstr "Налаштування повернуто до їх стандартних (default) значень."
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Path"
+msgstr "Шлях"
+
+msgid "Modules"
+msgstr "Модулі"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Core - optional"
+msgstr "Ядро - додатково"
+
+msgid "never"
+msgstr "ніколи"
+
+msgid "mail"
+msgstr "пошта"
+
+msgid "actions"
+msgstr "дії"
+
+msgid "aggregator"
+msgstr "збирач новин"
+
+msgid "read more"
+msgstr "докладніше"
+
+msgid "Screenshot for %theme theme"
+msgstr "Скріншоти для %theme дизайну"
+
+msgid "no screenshot"
+msgstr "без скріншотів"
+
+msgid "Timestamp"
+msgstr "Мітка часу"
+
+msgid "Keywords"
+msgstr "Ключові слова"
+
+msgid "Access log settings"
+msgstr "Налаштування журналу доступу"
+
+msgid "Unassign"
+msgstr "Відмінити призначення"
+
+msgid "Statistics"
+msgstr "Статистика"
+
+msgid "Settings for @role"
+msgstr "Параметри для @role"
+
+msgid "Permitted file extensions"
+msgstr "Дозволені розширення файлів"
+
+msgid ""
+"Extensions that users in this role can upload. Separate extensions with a "
+"space and do not include the leading dot."
+msgstr ""
+"Розширення, які користувачі з певною роллю можуть завантажити. Розділіть "
+"розширення пробілами і не ставте попереду крапку."
+
+msgid "n/a"
+msgstr "н/д"
+
+msgid "Upload"
+msgstr "Вивантажити"
+
+msgid "User"
+msgstr "Користувач"
+
+msgid "action"
+msgstr "дія"
+
+msgid "Configure"
+msgstr "Управління"
+
+msgid "status"
+msgstr "стан"
+
+msgid "Error"
+msgstr "Помилка"
+
+msgid "Contact"
+msgstr "Контакт"
+
+msgid "Node"
+msgstr "Матеріал"
+
+msgid "Parent item"
+msgstr "Елемент-попередник"
+
+msgid ""
+"Optional. In the menu, the heavier items will sink and the lighter items "
+"will be positioned nearer the top."
+msgstr ""
+"Необов'язково. В меню елементи з меншим значенням порядку будуть розташовані "
+"вище, з більшим --  нижче."
+
+msgid "Add child page"
+msgstr "Додати дочірню сторінку"
+
+msgid "Update options"
+msgstr "Оновити налаштування"
+
+msgid "Active"
+msgstr "Діючий"
+
+msgid "Block"
+msgstr "Блок"
+
+msgid "Page"
+msgstr "Сторінка"
+
+msgid "Site name"
+msgstr "Назва сайту"
+
+msgid "php"
+msgstr "php"
+
+msgid "Only site administrators can create new user accounts."
+msgstr ""
+"Лише адміністратори сайту можуть створювати нові реєстрації користувачів."
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Up to date"
+msgstr "Оновлено"
+
+msgid "Out of date"
+msgstr "Застаріло!!!"
+
+msgid "Update status"
+msgstr "Статус оновлення"
+
+msgid "Header"
+msgstr "Заголовок"
+
+msgid "Left sidebar"
+msgstr "Ліва панель"
+
+msgid "Right sidebar"
+msgstr "Права панель"
+
+msgid "Selected"
+msgstr "Вибране"
+
+msgid "You must enter a category."
+msgstr "Вам потрибно вказати категорію."
+
+msgid "Your name"
+msgstr "Ваше ім'я"
+
+msgid "Send e-mail"
+msgstr "Надіслати e-mail"
+
+msgid "Throttle"
+msgstr "Обмежувач"
+
+msgid "Roles"
+msgstr "Ролі"
+
+msgid "Comment"
+msgstr "Коментар"
+
+msgid "Hostname"
+msgstr "Сервер:"
+
+msgid "Published"
+msgstr "Опубліковано"
+
+msgid "Filter"
+msgstr "Фільтр"
+
+msgid "Locale"
+msgstr "Мова"
+
+msgid "Promoted to front page"
+msgstr "Розміщене на першій сторінці"
+
+msgid "Sticky at top of lists"
+msgstr "Прикріплене зверху сторінки"
+
+msgid "E-mail address"
+msgstr "Адреса електронної пошти"
+
+msgid "Vote"
+msgstr "Голос"
+
+msgid "blocked"
+msgstr "заблоковано"
+
+msgid "active"
+msgstr "активне"
+
+msgid "OPML feed"
+msgstr "Матеріал OPML"
+
+msgid "configure"
+msgstr "налаштувати"
+
+msgid "Categorize"
+msgstr "Розбити на категорії"
+
+msgid "Authored by"
+msgstr "Створено"
+
+msgid "Delete all"
+msgstr "Стерти все"
+
+msgid "Medium"
+msgstr "Середня"
+
+msgid "Details"
+msgstr "Подробиці"
+
+msgid "System"
+msgstr "Система"
+
+msgid "Unlimited"
+msgstr "Необмежено"
+
+msgid "No posts available."
+msgstr "Жодних дописів немає."
+
+msgid "security"
+msgstr "безпека"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Navigation"
+msgstr "Навіґація"
+
+msgid "Color"
+msgstr "Колір"
+
+msgid "Log in"
+msgstr "Вхід"
+
+msgid "Blog"
+msgstr "Блоґ"
+
+msgid "Users"
+msgstr "Користувачі"
+
+msgid "Referrer"
+msgstr "Джерело"
+
+msgid "1 vote"
+msgid_plural "@count votes"
+msgstr[0] "@count голос"
+msgstr[1] "@count голоса"
+msgstr[2] "@count голосів"
+
+msgid ""
+"@site is currently under maintenance. We should be back shortly. Thank you "
+"for your patience."
+msgstr ""
+"Сайт @site зараз на ремонті. Ми працюємо, щоб зробити його кращим. Він скоро "
+"почне працювати. Дякуємо за терпіння."
+
+msgid "Anonymous"
+msgstr "Гість"
+
+msgid "Uninstall"
+msgstr "Деінсталювати"
+
+msgid "Optional"
+msgstr "Необов'язкове"
+
+msgid "Profile"
+msgstr "Профіль"
+
+msgid "Save settings"
+msgstr "Зберегти налаштування"
+
+msgid "Tracker"
+msgstr "Стеження"
+
+msgid "You have to specify a valid date."
+msgstr "Треба вказати дійсну дату."
+
+msgid "1 new"
+msgid_plural "@count new"
+msgstr[0] "@count новий"
+msgstr[1] "@count нові"
+msgstr[2] "@count нових"
+
+msgid "Add rule"
+msgstr "Додати правило"
+
+msgid "Formatting guidelines"
+msgstr "Рекомендації щодо форматування"
+
+msgid "Authored on"
+msgstr "Створено"
+
+msgid "Syslog"
+msgstr "Служба Syslog"
+
+msgid "Maximum file size per upload"
+msgstr "Максимальний розмір файлу на одне завантаження"
+
+msgid "Total file size per user"
+msgstr "Загальний розмір файлів на одного користувача"
+
+msgid "Remove items"
+msgstr "Видалити пункти"
+
+msgid "Allowed HTML tags"
+msgstr "Дозволені HTML теґи"
+
+msgid "1 item"
+msgid_plural "@count items"
+msgstr[0] "1 елемент"
+msgstr[1] "@count елемента"
+msgstr[2] "@count елементів"
+
+msgid "menu"
+msgstr "меню"
+
+msgid "The update has been performed."
+msgstr "Оновлення виконано."
+
+msgid "View user profile."
+msgstr "Переглянути дані користувача."
+
+msgid "The changes have been saved."
+msgstr "Зміни запам'ятовано."
+
+msgid "Refine"
+msgstr "Відбір"
+
+msgid "Undo"
+msgstr "Вернути"
+
+msgid "Member for"
+msgstr "Зареєстрований вже"
+
+msgid "@time ago"
+msgstr "@time тому"
+
+msgid "Detected malicious attempt to alter protected user fields."
+msgstr "Виявлено зловмисну спробу змінити захищені поля користувача."
+
+msgid "Languages"
+msgstr "Мови"
+
+msgid "Create new revision"
+msgstr "Створити нову версію"
+
+msgid "Locale settings"
+msgstr "Налаштування локалей"
+
+msgid "Create new account"
+msgstr "Створити нову реєстрацію"
+
+msgid "warning"
+msgstr "попередження"
+
+msgid "No statistics available."
+msgstr "Статистичних записів нема."
+
+msgid "Site information"
+msgstr "Інформація про сайт"
+
+msgid "critical"
+msgstr "критичне"
+
+msgid "Default permitted file extensions"
+msgstr "Базово дозволені розширення файлів"
+
+msgid "Visitor"
+msgstr "Відвідувач"
+
+msgid "Forums"
+msgstr "Форуми"
+
+msgid "Track"
+msgstr "Відстежити"
+
+msgid ""
+"Allows your site to capture votes on different topics in the form of "
+"multiple choice questions."
+msgstr ""
+"Дозволяє проводити на сайті опитування на різні теми у вигляді запитання із "
+"кількома варіантами відповідей."
+
+msgid "Not published"
+msgstr "Не оприлюднено"
+
+msgid ""
+"Default extensions that users can upload. Separate extensions with a space "
+"and do not include the leading dot."
+msgstr ""
+"Базові розширення, що користувачі можуть вивантажувати. Розділяйте "
+"розширення пропусками і не включайте крапки."
+
+msgid "Default maximum file size per upload"
+msgstr "Базовий максимальний розмір файлу для вивантаження"
+
+msgid "MB"
+msgstr "MБ"
+
+msgid "Default total file size per user"
+msgstr "Базовий сумарний об'єм на користувача"
+
+msgid "Your PHP settings limit the maximum file size per upload to %size."
+msgstr ""
+"Ваші PHP параметри обмежують максимальний розмір файлу на вивантаження до %"
+"size."
+
+msgid "Menu settings"
+msgstr "Налаштування меню"
+
+msgid "details"
+msgstr "деталі"
+
+msgid "Themes"
+msgstr "Шаблони"
+
+msgid "Processing"
+msgstr "Обробка"
+
+msgid "is"
+msgstr "є"
+
+msgid "Tableless, recolorable, multi-column, fluid width theme (default)."
+msgstr ""
+"Безтабличний, із зміною кольорів, багатоколоночний, нефіксованої ширини "
+"шаблон(базовий)"
+
+msgid "Controls the boxes that are displayed around the main content."
+msgstr "Керує блоками, які розташовані навколо області з основним вмістом."
+
+msgid "Core - required"
+msgstr "Ядро - обов'язкове"
+
+msgid "Allows administrators to customize the site navigation menu."
+msgstr "Дозволяє адміністраторам видозмінювати меню навіґації сайтом."
+
+msgid "Default time zone"
+msgstr "Стандартна (default) часова зона"
+
+msgid "@module module"
+msgstr "модуль @module"
+
+msgid ""
+"The content of this field is kept private and will not be shown publicly."
+msgstr "Вміст цього поля є приватним і не буде показаний."
+
+msgid "Date - newest first"
+msgstr "За датою - спочатку нові"
+
+msgid "Date - oldest first"
+msgstr "За датаю - спочатку старі"
+
+msgid "1 comment"
+msgid_plural "@count comments"
+msgstr[0] "@count коментар"
+msgstr[1] "@count коментаря"
+msgstr[2] "@count коментарів"
+
+msgid "file system"
+msgstr "файлова система"
+
+msgid "Menu link title"
+msgstr "Назва в меню"
+
+msgid ""
+"The maximum depth for an item and all its children is fixed at !maxdepth. "
+"Some menu items may not be available as parents if selecting them would "
+"exceed this limit."
+msgstr ""
+"Максимальна глибина для публікації та всіх підлеглих сторінок встановлена в !"
+"maxdepth. Деякі пункти меню можуть бути недоступними, як батьківські, якщо "
+"вложення перевищує цей ліміт."
+
+msgid ""
+"The menu system stores system paths only, but will use the URL alias for "
+"display. %link_path has been stored as %normal_path"
+msgstr ""
+"Система меню зберігає лише системні шляхи, але буде використовувати синонім "
+"для відображення. %link_path буде збережено як %normal_path"
+
+msgid ""
+"The path '@link_path' is either invalid or you do not have access to it."
+msgstr "Шлях '@link_path' некоректний, або у Вас відсутній доступ"
+
+msgid "There was an error saving the menu link."
+msgstr ""
+
+msgid "Language neutral"
+msgstr "Нейтрально до мови"
+
+msgid "OpenID"
+msgstr "Служба OpenID"
+
+msgid "The directory %directory does not exist."
+msgstr "Каталог %directory не існує."
+
+msgid "1 user"
+msgid_plural "@count users"
+msgstr[0] "@count користувач"
+msgstr[1] "@count користувача"
+msgstr[2] "@count користувачів"
+
+msgid "Primary links"
+msgstr "Першорядні посилання"
+
+msgid "Rebuild permissions"
+msgstr "Оновити права доступу."
+
+msgid "Error saving user account."
+msgstr "ПОмилка збереження профіля користувача."
+
+msgid "- Please choose -"
+msgstr "- Оберіть будь-ласка -"
+
+msgid "Aggregator"
+msgstr "Підбірка новин"
+
+msgid "Aggregates syndicated content (RSS, RDF, and Atom feeds)."
+msgstr "Збирає докупи вміст інформаційних стрічок (RSS, RDF, або Atom)."
+
+msgid "Clean URLs"
+msgstr "Короткі URLs"
+
+msgid "Revoked!"
+msgstr "Відмовлено!"
+
+msgid ""
+"Validation error, please try again. If this error persists, please contact "
+"the site administrator."
+msgstr ""
+"Помилка при перевірці значення, будь-ласка, спробуйте ще. Якщо помилка "
+"повториться, повідомте адміністратора сайту."
+
+msgid "Error reporting"
+msgstr "Повідомлення про помилку"
+
+msgid "and"
+msgstr "і"
+
+msgid "where"
+msgstr "де"
+
+msgid "Choose an action"
+msgstr "Обрати дію"
+
+msgid ""
+"Enables actions to be fired on certain system events, such as when new "
+"content is created."
+msgstr ""
+"Надає можливість дій в результаті системних подій, таких як - створено новий "
+"матеріал"
+
+msgid "Enables the categorization of content."
+msgstr "Дозволяє впорядкувати матеріали по категоріях."
+
+msgid "You can leave a message using the contact form below."
+msgstr ""
+"Ви можете залишити повідомлення, використовуючи розташовану нижче форму "
+"контактів."
+
+msgid "Tableless, recolorable, multi-column, fixed width theme."
+msgstr ""
+"Безтабличний, із зміною кольорів, багатоколоночний, фіксованої ширини шаблон"
+
+msgid "add content to books"
+msgstr "додати матеріал до книг"
+
+msgid "administer book outlines"
+msgstr "керування підшивками"
+
+msgid "The default maximum size of all files a user can have on the site."
+msgstr ""
+"Базовий максимум розміру всіх файлів, що користувач можу мати на вебсайті."
+
+msgid "Table-based multi-column theme with a marine and ash color scheme."
+msgstr "Табличний багатоколоночний шаблон з відтінками води"
+
+msgid "Enables tracking of recent posts for users."
+msgstr "Дозволяє користувачам слідкувати за змінами на сайті."
+
+msgid "Administration theme"
+msgstr "Дизайн адміністратора"
+
+msgid ""
+"Spaces are allowed; punctuation is not allowed except for periods, hyphens, "
+"and underscores."
+msgstr ""
+"Пробіли в імені дозволяються, пунктуація не дозволяється окрім знаків "
+"крапки, дефісу та підкреслення."
+
+msgid "Secondary links"
+msgstr "Другорядні посилання"
+
+msgid ""
+"An illegal choice has been detected. Please contact the site administrator."
+msgstr ""
+"Виявлено недозволений вибір. Будь-ласка, зверніться до администратора сайта."
+
+msgid "Identification"
+msgstr "Ідентифікація"
+
+msgid "Comment: updated %subject."
+msgstr "Коментар: оновлено %subject."
+
+msgid "File system"
+msgstr "Файлова система"
+
+msgid "!name's blog"
+msgstr "блоґ %name"
+
+msgid "All languages"
+msgstr "Усі мови"
+
+msgid "Add language"
+msgstr "Додати мову"
+
+msgid "locale"
+msgstr "локаль"
+
+msgid "Currently using !item !version"
+msgstr "Зараз використовується !item !version"
+
+msgid "Trigger"
+msgstr "Тригер"
+
+msgid "Blog API"
+msgstr "API для блоґів"
+
+msgid ""
+"Allows users to post content using applications that support XML-RPC blog "
+"APIs."
+msgstr ""
+"Дозволяє користувачам публікувати матеріали на сайті за допомогою зовнішніх "
+"додатків із підтримкою API для XML-RPC."
+
+msgid "form"
+msgstr "форма"
+
+msgid "alert"
+msgstr "тривога"
+
+msgid "emergency"
+msgstr "допомога"
+
+msgid "Poll"
+msgstr "Опитування"
+
+msgid "PHP filter"
+msgstr "PHP фільтр"
+
+msgid "More information about formatting options"
+msgstr "Детальніше про опції форматування"
+
+msgid "Your server has been successfully tested to support this feature."
+msgstr "Ваш сервер вдало пройшов тест щодо підтримки цієї можливості"
+
+msgid ""
+"Your system configuration does not currently support this feature. The <a "
+"href=\"http://drupal.org/node/15365\">handbook page on Clean URLs</a> has "
+"additional troubleshooting information."
+msgstr ""
+"Конфігурація Вашої системи не підтримує дану можливість. <a href=\"http://"
+"drupal.org/node/15365\">Сторінка довідника</a> містить додаткову інформацію "
+"щодо вирішення цієї проблеми."
+
+msgid "Testing clean URLs..."
+msgstr "Тестування чистий URLs..."
+
+msgid ""
+"The <em>From</em> address in automated e-mails sent during registration and "
+"new password requests, and other notifications. (Use an address ending in "
+"your site's domain to help prevent this e-mail being flagged as spam.)"
+msgstr ""
+"<em>Від</em> адреси в автоматичних електронних листах під час реєстрації або "
+"запитів на нагадування паролів, та інших повідомленнях. (Використовуйте "
+"адресу із домену Вашого вебсайту, щоб не потрапити в спам.)"
+
+msgid ""
+"This option makes Drupal emit \"clean\" URLs (i.e. without <code>?q=</code> "
+"in the URL)."
+msgstr ""
+"Ця опція дозволяє Друпалові використовувати \"чисті\" URL-адреси (наприклад "
+"без <code>?q=</code> у адресі.)"
+
+msgid "Update notifications"
+msgstr "Повідомлення про оновлення"
+
+msgid "MySQL database"
+msgstr "База даних MySQL"
+
+msgid "Your MySQL Server is too old. Drupal requires at least MySQL %version."
+msgstr ""
+"Ваш сервер MySQL застарів. Drupal потребує щонайменше MySQL версії %version."
+
+msgid "Illegal choice %choice in %name element."
+msgstr "Недопустимий вибір %choice в елементі %name."
+
+msgid "Enables keeping easily and regularly updated user web pages or blogs."
+msgstr ""
+"Дозволяє просто і регулярно оновлювати сайти і блоґи користувачів з Вашого "
+"сайту."
+
+msgid "Allows users to structure site pages in a hierarchy or outline."
+msgstr ""
+"Дозволити користувачам структурувати сторінки вебсайту ієрархічно або "
+"книгами."
+
+msgid "Allows the user to change the color scheme of certain themes."
+msgstr "Дозволяє користувачам змінювати кольрові схеми певних шаблонів."
+
+msgid "Allows users to comment on and discuss published content."
+msgstr ""
+"Дає користувачеві змогу прокоментувати та обговорити опублікований матеріал."
+
+msgid "Enables the use of both personal and site-wide contact forms."
+msgstr ""
+"Дозволяє використовувати контактні форми, як персональні так і загальні для "
+"сайту."
+
+msgid "Database logging"
+msgstr "Журнал Баз Даних"
+
+msgid "Logs and records system events to the database."
+msgstr "Зберігає системні повідомлення до бази даних."
+
+msgid "Add input format"
+msgstr "Додати формат вводу"
+
+msgid "Handles the filtering of content in preparation for display."
+msgstr "Фільтрує вміст перед тим, як відобразити його."
+
+msgid "Enables threaded discussions about general topics."
+msgstr "Дозволяє проводити обговорення на загальні теми."
+
+msgid "Manages the display of online help."
+msgstr "Керує показом довідки он-лайн."
+
+msgid ""
+"Adds language handling functionality and enables the translation of the user "
+"interface to languages other than English."
+msgstr ""
+"Додає можливість обробки мови і дозволяє переклад користувацького інтерфейсу "
+"на інші мови крім Англійської"
+
+msgid "Allows content to be submitted to the site and displayed on pages."
+msgstr "Дозволяє додавати матеріали на сайт і відображати їх на сторінках."
+
+msgid "Allows users to log into your site using OpenID."
+msgstr "Дозволяє користувачам входити на сайт з використанням OpenID"
+
+msgid "Allows users to rename URLs."
+msgstr "Дозволяє перейменовувати посилання."
+
+msgid "Allows embedded PHP code/snippets to be evaluated."
+msgstr "Дозволяє вбудовувати PHP код"
+
+msgid "Ping"
+msgstr "Пінг"
+
+msgid "Alerts other sites when your site has been updated."
+msgstr "Сповіщає інші сайти, коли на вашому сайті відбувається оновлення."
+
+msgid "Total votes: @votes"
+msgstr "Загальна кількість голосів: @votes"
+
+msgid "User list"
+msgstr "Список користувачів"
+
+msgid "Supports configurable user profiles."
+msgstr "Підтримує анкетні дані (профілі) користувачів, що налаштовуються."
+
+msgid "Enables site-wide keyword searching."
+msgstr "Дозволяє проводити на сайті пошук за ключовими словами."
+
+msgid "Logs access statistics for your site."
+msgstr "Фіксує статистику доступу на вашому сайті."
+
+msgid "Logs and records system events to syslog."
+msgstr "Зберігає системні повідомлення до syslog."
+
+msgid "Handles general site configuration for administrators."
+msgstr "Управляє загальними налаштуваннями сайту для адміністраторів."
+
+msgid "Handles the auto-throttling mechanism, to control site congestion."
+msgstr "Підтримує механізм авто-регулятора для контролю навантаження на сайт."
+
+msgid "Content translation"
+msgstr "Переклад наповнення."
+
+msgid "Allows content to be translated into different languages."
+msgstr "Дозволяє перекладати матеріали на різні мови"
+
+msgid ""
+"Checks the status of available updates for Drupal and your installed modules "
+"and themes."
+msgstr ""
+"Перевірка статусу доступних оновлень для Drupal та проінстальованих модулів "
+"і шаблонів оформлення."
+
+msgid "Allows users to upload and attach files to content."
+msgstr ""
+"Дозволяє користувачам завантажувати і прикріплювати файли до матеріалів "
+"сайту."
+
+msgid "Manages the user registration and login system."
+msgstr "Керує реєстрацією і авторизацією на сайті."
+
+msgid "Chameleon"
+msgstr "Хамелеон"
+
+msgid "Minimalist tabled theme with light colors."
+msgstr "Мінімалістичний шаблон з світлими кольорами"
+
+msgid "Marvin"
+msgstr "Марвін"
+
+msgid "Boxy tabled theme in all grays."
+msgstr "Табличний, квадратний шаблон в сірих тонах"
+
+msgid "Garland"
+msgstr "Гарланд"
+
+msgid "Minnelli"
+msgstr "Мінеллі"
+
+msgid "Pushbutton"
+msgstr "Пушбаттон"
+
+msgid "Tabled, multi-column theme in blue and orange tones."
+msgstr "Табличний, багатоколоночний шаблон в блакитних і помаранчевих тонах"

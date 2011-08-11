@@ -1,0 +1,6 @@
+; $Id$
+name = Group Breadcrumb
+description = Custom breadcrumbs for groups
+dependencies[] = og
+core = 6.x
+package = Custom

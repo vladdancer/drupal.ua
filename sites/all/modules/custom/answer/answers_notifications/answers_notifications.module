@@ -1,0 +1,164 @@
+<?php
+// $Id$
+
+
+/**
+ * Implementation of hook_comment().
+ */
+function answers_notifications_comment(&$a1, $op) {
+  if ($op == 'insert' && empty($a1['pid'])) {
+    $node = node_load($a1['nid']);
+    if ($node->type == 'question' && $node->uid != $a1['uid']) {
+      $user_node = user_load($node->uid);
+      $account_change = user_load($a1['uid']);
+      $params = array();
+      $params['account'] = $user_node;
+      $params['message_tokens'] = array(
+      	'!uid' => $user_node->uid,
+        '!username' => $user_node->name,
+        '!username_themed' => strip_tags(theme('username', $user_node, array('plain' => TRUE))),
+        '!username_change' => $account_change->name,
+      	'!username_themed_change' => strip_tags(theme('username', $account_change, array('plain' => TRUE))),
+        '!action' => 'answer',
+        '!node_title' => check_plain($node->title),
+        '!node_title_url' => l($node->title, 'node/'. $node->nid),
+      );
+      drupal_mail('answers_notifications', 'add_answer', $user_node->mail,
+        user_preferred_language($user_node), $params
+      );
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_flag().
+ */
+function answers_notifications_flag($action, $flag, $content_id, $account) {
+  global $user;
+  if ($flag->name == 'best_answer') {
+    $comment = _comment_load($content_id);
+    $node = node_load($comment->nid);
+    if ($node->uid != $account->uid) {
+      $user_node = user_load($node->uid);
+      $params['account'] = $user_node;
+      $params['message_tokens'] = array(
+      	'!uid' => $user_node->uid,
+        '!username' => $user_node->name,
+        '!username_themed' => strip_tags(theme('username', $user_node, array('plain' => TRUE))),
+        '!username_change' => $account->name,
+      	'!username_themed_change' => strip_tags(theme('username', $account, array('plain' => TRUE))),
+        '!action' => 'answer',
+        '!node_title' => check_plain($node->title),
+        '!node_title_url' => l($node->title, 'node/'. $node->nid),
+      );
+      drupal_mail('answers_notifications', 'change_flag', $user_node->mail,
+        user_preferred_language($user_node), $params
+      );
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_mail().
+ */
+function answers_notifications_mail($key, &$message, $params) {
+  $language = $message['language'];
+  $variables = user_mail_tokens($params['account'], $language);
+  
+  switch($key) {
+    case 'change_flag':
+      $message['subject'] = t('Notification from !site', $variables, $language->language);
+      $message['body'] = t("Dear !username\n\nYour question changed the status of 'Best answer'.",
+        $variables, $language->language);
+      break;
+    case 'add_answer':
+      $message['subject'] = t('Notification from !site', $variables, $language->language);
+      $message['body'] = t("Dear !username\n\nTo answer your question added.",
+        $variables, $language->language);
+      break;
+  }
+}
+
+
+/**
+ * Implementation of hook_mailkeys().
+ */
+function answers_notifications_mailkeys() {
+  return array(
+    'change_flag' => t("Changed the status of 'Best answer'."),
+    'add_answer' => t('To answer added.'),
+  );
+}
+
+
+/**
+ * Implementation of hook_mail_edit_tokens_list().
+ */
+function answers_notifications_mail_edit_tokens_list($mailkey, $options = array()) {
+  $tokens = array();
+  switch ($mailkey) {
+    case 'change_flag':
+    case 'add_answer':
+      $tokens['!username'] = "User's username";
+      $tokens['!username_themed'] = "User's username (themed)";
+      $tokens['!site'] = 'Site name';
+      $tokens['!uri'] = "Website's URL";
+      $tokens['!uri_brief']= "Website's URL without the leading http://";
+      $tokens['!date'] = "Date and time when this email is sent";
+
+      $tokens['!username_change'] = 'User name that caused the message to be sent';
+      $tokens['!username_themed_change'] = 'User name that caused the message to be sent (themed)';
+      $tokens['!action'] = 'Action (flag/unflag/answer)';
+      $tokens['!node_title'] = 'Title node question';
+      $tokens['!node_title_url'] = 'Link to node question';
+      break;
+  }
+  return $tokens;
+}
+
+
+/**
+ * Implementation of hook_mail_edit_tokens_value().
+ */
+function answers_notifications_mail_edit_tokens_value($mailkey, $mail, $options = array()) {
+  $tokens = $mail['params']['message_tokens'];  //messaging_mail_edit_send_msg();
+  $language = $mail['language'];
+  $tokens['!site'] = variable_get('site_name', 'Drupal');
+  $tokens['!date'] = format_date(time(), 'medium', '', NULL, $language->language);
+  $tokens['!uri'] = url('', array('absolute' => TRUE, 'language' => $language));
+  $tokens['!uri_brief'] = preg_replace('!^https?://!', '', $vars['!uri']);
+  return $tokens;
+}
+
+
+/**
+ * Implementation of hook_mail_edit_text().
+ */
+function answers_notifications_mail_edit_text($mailkey, $language) {
+  $output = array();
+  $variables = answers_notifications_mail_edit_tokens_value($mailkey);
+  
+  $output['subject'] = t('Notification from !site', $variables, $language->language);
+  switch ($mailkey) {
+    case 'change_flag':
+      $output['body'] = t("Dear !username\n\nYour question changed the status of 'Best answer'.",
+        $variables, $language->language);
+    case 'add_answer':
+      $output['body'] = t("Dear !username\n\nTo answer your question added.",
+        $variables, $language->language);
+  }
+  return $output;
+}
+
+
+
+
+
+
+
+
+
+
+

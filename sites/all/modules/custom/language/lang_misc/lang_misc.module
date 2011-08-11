@@ -1,0 +1,30 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_init().
+ */
+function lang_misc_link_alter(&$links, $node) {
+  global $language;
+  if ($node->type == 'group' && count($links)) {
+    reset($links);
+    list($key, $val) = each($links);
+    if (strpos($key, 'taxonomy_term_') === 0) {
+      if (!empty($node->taxonomy)) {
+        $links = array();
+        foreach ($node->taxonomy as $term) {
+          if (is_object($term)) {
+            $links['taxonomy_term_'. $term->tid] = array(
+              'title' => tt('taxonomy:term:'. $term->tid .':name', $term->name, $language->language),
+              'href' => taxonomy_term_path($term),
+              'attributes' => array('rel' => 'tag',
+              	'title' => strip_tags(tt('taxonomy:term:'. $term->tid .':description',
+                $term->description, $language->language)))
+            );
+          }
+        }
+      }
+    }
+  }
+}
+

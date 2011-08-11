@@ -1,0 +1,1194 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:32+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Create a new user account."
+msgstr "Створити нову реєстрацію користувача."
+
+msgid "Request new password via e-mail."
+msgstr "Просити новий пароль електронною поштою."
+
+msgid "deny"
+msgstr "заборонити"
+
+msgid "Available variables are:"
+msgstr "Наявні змінні:"
+
+msgid "Session opened for %name."
+msgstr "Відкрито сеанс для %name."
+
+msgid "username"
+msgstr "користувач"
+
+msgid "High"
+msgstr "Високий"
+
+msgid "Low"
+msgstr "Низьке"
+
+msgid "History"
+msgstr "Історія"
+
+msgid "Picture"
+msgstr "Зображення"
+
+msgid "User settings"
+msgstr "Установки користувача"
+
+msgid "Public registrations"
+msgstr "Відкриті реєстрації"
+
+msgid "Host"
+msgstr "Хост"
+
+msgid "Signature"
+msgstr "Підпис"
+
+msgid "Role name"
+msgstr "Назва ролі"
+
+msgid "Last access"
+msgstr "Останній вхід"
+
+msgid "Add a role to the selected users"
+msgstr "Додати роль позначеним користувачам"
+
+msgid "Remove a role from the selected users"
+msgstr "Видалити роль для позначених користувачів"
+
+msgid "Allow"
+msgstr "Дозволити"
+
+msgid "Deny"
+msgstr "Заборонено"
+
+msgid "Signatures"
+msgstr "Підписи"
+
+msgid "User login"
+msgstr "Вхід"
+
+msgid "Session closed for %name."
+msgstr "Сеанс для %name завершено."
+
+msgid "The name %name is a reserved username."
+msgstr "Ім'я %name є зарезервованим."
+
+msgid "Delete rule"
+msgstr "Видалити правило"
+
+msgid "Add user"
+msgstr "Додати користувача"
+
+msgid ""
+"A valid e-mail address. All e-mails from the system will be sent to this "
+"address. The e-mail address is not made public and will only be used if you "
+"wish to receive a new password or wish to receive certain news or "
+"notifications by e-mail."
+msgstr ""
+"Існуюча адреса електронної пошти. Усі повідомлення з сайта будуть "
+"надсилатися на цю адресу. Електронну адресу не буде опубліковано та буде "
+"використано лише за Вашим бажанням: для отримання нового паролю або для "
+"отримання новин чи повідомлень електронною поштою."
+
+msgid ""
+"The e-mail address %email is already registered. <a href=\"@password\">Have "
+"you forgotten your password?</a>"
+msgstr ""
+"Адреса електронної пошти %email вже зареєстрована. <a href=\"@password"
+"\">Забули свій пароль?</a>"
+
+msgid "The e-mail address %email has been denied access."
+msgstr "Адресі електронної пошти %email у доступі відмовлено."
+
+msgid "locked"
+msgstr "блоковано"
+
+msgid "Upload picture"
+msgstr "Завантажити аватар"
+
+msgid "Show only users where"
+msgstr "Відобразити тих користувачів, у яких"
+
+msgid "No users available."
+msgstr "Користувачі відсутні."
+
+msgid "No users selected."
+msgstr "Користувачів не позначено."
+
+msgid "Request new password"
+msgstr "Просити новий пароль"
+
+msgid "Visitors can create accounts and no administrator approval is required."
+msgstr "Відвідувачі можуть створювати реєстрації без схвалення адміністратора."
+
+msgid "Log out"
+msgstr "Вихід"
+
+msgid "role"
+msgstr "роль"
+
+msgid "Blocked"
+msgstr "Заблоковано"
+
+msgid "User management"
+msgstr "Керування користувачами"
+
+msgid "Permissions"
+msgstr "Права доступу"
+
+msgid "e-mail"
+msgstr "ел.адреса"
+
+msgid "permission"
+msgstr "дозвіл"
+
+msgid ""
+"Your password and further instructions have been sent to your e-mail address."
+msgstr ""
+"Ваш пароль та подальші вказівки було надіслано на вашу адресу електронної "
+"пошти."
+
+msgid "The username %name has not been activated or is blocked."
+msgstr "Ім'я користувача %name ще не активовано або заблоковано."
+
+msgid "Login attempt failed for %user."
+msgstr "Помилка входу до системи користувача %user."
+
+msgid "Reset password"
+msgstr "Скинути пароль"
+
+msgid "Password strength:"
+msgstr "Рівень якості паролю:"
+
+msgid ""
+"It is recommended to choose a password that contains at least six "
+"characters. It should include numbers, punctuation, and both upper and "
+"lowercase letters."
+msgstr ""
+"Рекомендуємо обрати пароль, що містить не менш ніж шість символів, включаючи "
+"номери, пунктуацію, літери нижнього та верхнього регістрів."
+
+msgid "The password does not include enough variation to be secure. Try:"
+msgstr ""
+"Цей пароль не містить достатньо ознак, аби вважатись безпечним. Спробуйте:"
+
+msgid "Adding both upper and lowercase letters."
+msgstr "Додати літери як нижньго, так і верхнього регістру."
+
+msgid "Adding numbers."
+msgstr "Додати цифри."
+
+msgid "Adding punctuation."
+msgstr "Додати пунктуацію."
+
+msgid "It is recommended to choose a password different from the username."
+msgstr "Рекомендуємо обрати пароль, відмінний від реєстраційного імені."
+
+msgid "Passwords match:"
+msgstr "Пароль співпав:"
+
+msgid "Delete role"
+msgstr "Стерти роль"
+
+msgid "Permission"
+msgstr "Повноваження"
+
+msgid "Your signature will be publicly displayed at the end of your comments."
+msgstr "Ваш підпис буде розміщено в кінці усіх ваших коментарів."
+
+msgid "Save role"
+msgstr "Запам'ятати роль"
+
+msgid "Number of users to display"
+msgstr "Кількість користувачів для відображення"
+
+msgid "@user's picture"
+msgstr "Зображення користувача @user."
+
+msgid "List, add, and edit users."
+msgstr "Реєстр, додавання і зміна користувачів."
+
+msgid "The name %name is already taken."
+msgstr "Логін %name вже існує."
+
+msgid "Add role"
+msgstr "Додати роль"
+
+msgid "You must specify a valid role name."
+msgstr "Треба вказати чинну назву ролі."
+
+msgid "The role has been added."
+msgstr "Роль додано."
+
+msgid "Account settings"
+msgstr "Налаштування облікового запису"
+
+msgid "My account"
+msgstr "Мій профіль"
+
+msgid "Pictures"
+msgstr "Аватари"
+
+msgid "User activity"
+msgstr "Активність користувача"
+
+msgid ""
+"A user is considered online for this long after they have last viewed a page."
+msgstr ""
+"Користувач вважається присутнім такий відтинок часу після того, як він "
+"переглянув сторінку."
+
+msgid "Maximum number of currently online users to display."
+msgstr "Максимальна кількість присутніх користувачів, яка відображатиметься."
+
+msgid "There is currently %members and %visitors online."
+msgstr "Зараз присутній %members та %visitors."
+
+msgid "There are currently %members and %visitors online."
+msgstr "Зараз присутні %members та %visitors."
+
+msgid "1 guest"
+msgid_plural "@count guests"
+msgstr[0] "@count гість"
+msgstr[1] "@count гостя"
+msgstr[2] "@count гостей"
+
+msgid "Edit rule"
+msgstr "Редагувати правило"
+
+msgid "Password reset instructions mailed to %name at %email."
+msgstr ""
+"Інструкції по зміні паролю надіслано користувачу %name на адресу %email."
+
+msgid "Account information"
+msgstr "Інформація про реєстрацію"
+
+msgid "The e-mail address %mail is not valid."
+msgstr "Адреса електронної пошти %mail недійсна."
+
+msgid "Account"
+msgstr "Обліковий запис"
+
+msgid "authenticated user"
+msgstr "зареєстрований користувач"
+
+msgid "Check e-mail"
+msgstr "Перевірити електрону пошту"
+
+msgid "Default picture"
+msgstr "Стандартний (default) аватар"
+
+msgid ""
+"URL of picture to display for users with no custom picture selected. Leave "
+"blank for none."
+msgstr ""
+"URL зображення, яке відображатиметься для користувачів, що не вибрали "
+"жодного аватару. Залишити порожнім, якщо зображення не потрібне."
+
+msgid ""
+"Sorry, unrecognized username or password. <a href=\"@password\">Have you "
+"forgotten your password?</a>"
+msgstr ""
+"Вибачте, не впізнано ім'я користувача або пароль. <a href=\"@password"
+"\">Забули пароль?</a>"
+
+msgid "Block current user"
+msgstr ""
+
+msgid "Ban IP address of current user"
+msgstr ""
+
+msgid "After a user account has been created"
+msgstr "Після того як запис користувача був створений"
+
+msgid "After a user's profile has been updated"
+msgstr "Після оновлення профілю користувача"
+
+msgid "After a user has been deleted"
+msgstr "Після видалення користувача"
+
+msgid "After a user has logged in"
+msgstr "Після входу користувача"
+
+msgid "After a user has logged out"
+msgstr "Після виходу користувача"
+
+msgid "When a user's profile is being viewed"
+msgstr "Коли переглядається профіль користувача"
+
+msgid "Blocked user %name."
+msgstr ""
+
+msgid "Banned IP address %ip"
+msgstr ""
+
+msgid "Save rule"
+msgstr "Запам'ятати правило"
+
+msgid "anonymous user"
+msgstr "анонімний відвідувач"
+
+msgid "Save permissions"
+msgstr "Запам'ятати повноваження"
+
+msgid "The name %name has been denied access."
+msgstr "Користувачеві %name у доступі відмовлено."
+
+msgid "edit permissions"
+msgstr "змінити права"
+
+msgid "User account"
+msgstr "Профіль користувача"
+
+msgid ""
+"Failed to upload the picture image; the %directory directory doesn't exist "
+"or is not writable."
+msgstr ""
+"Помилка завантаженя зображення, каталогу %directory не існує або він "
+"закритий для запису."
+
+msgid "List, edit, or add user roles."
+msgstr "Реєстр, додавання і зміна ролей користувачів."
+
+msgid "edit role"
+msgstr "редагувати роль"
+
+msgid "Check username"
+msgstr "Перевірити логін"
+
+msgid ""
+"Thank you for applying for an account. Your account is currently pending "
+"approval by the site administrator.<br />In the meantime, a welcome message "
+"with further instructions has been sent to your e-mail address."
+msgstr ""
+
+msgid "host"
+msgstr "хост"
+
+msgid "Notify user of new account"
+msgstr "Повідомити користувача про створення облікового запису"
+
+msgid "Access type"
+msgstr "Тип доступу"
+
+msgid "Enter your @s username."
+msgstr "Вкажіть Ваше ім'я на сайті @s."
+
+msgid ""
+"Your virtual face or picture. Maximum dimensions are %dimensions and the "
+"maximum size is %size kB."
+msgstr ""
+"Ваше віртуальне обличчя або зображення. Максимальні розміри %dimensions та "
+"об'єм %size Кб."
+
+msgid "Picture image path"
+msgstr "Шлях до файла зображення"
+
+msgid "Manage your site's users, groups and access to site features."
+msgstr "Керує користувачами, групами та доступом до можливостей сайту."
+
+msgid ""
+"You have tried to use a one-time login for an account which has been blocked."
+msgstr ""
+
+msgid "User %name used one-time login link at time %timestamp."
+msgstr ""
+"Користувач %name використав %timestamp одноразове посилання для входу на "
+"сайт."
+
+msgid ""
+"Created a new user account for <a href=\"@url\">%name</a>. No e-mail has "
+"been sent."
+msgstr ""
+
+msgid "Registration successful. You are now logged in."
+msgstr ""
+
+msgid ""
+"Password and further instructions have been e-mailed to the new user <a href="
+"\"@url\">%name</a>."
+msgstr ""
+
+msgid "New user: %name (%email)."
+msgstr "Новий користувач: %name %email."
+
+msgid ""
+"You have just used your one-time login link. It is no longer necessary to "
+"use this link to login. Please change your password."
+msgstr ""
+"Щойно Ви використали Ваше одноразове посилання для входу на сайт. "
+"Користуватись ним у подальшому немає потреби. Будь-ласка, змініть свій "
+"пароль."
+
+msgid ""
+"!username has applied for an account.\n"
+"\n"
+"!edit_uri"
+msgstr ""
+"!username звернувся про створення облікового запису.\n"
+"\n"
+"!edit_uri"
+
+msgid "Username or e-mail address"
+msgstr "Ім'я або e-mail"
+
+msgid ""
+"<em>and</em> where <strong>%property</strong> is <strong>%value</strong>"
+msgstr ""
+
+msgid "<strong>%property</strong> is <strong>%value</strong>"
+msgstr ""
+
+msgid "User autocomplete"
+msgstr "Автозаповненя користувача"
+
+msgid ""
+"To change the current user password, enter the new password in both fields."
+msgstr "Для зміни існуючого паролю вкажіть новий пароль в обидвох полях."
+
+msgid ""
+"You have already used this one-time login link. It is not necessary to use "
+"this link to login anymore. You are already logged in."
+msgstr ""
+"Ви використали посилання для одноразового входу на сайт. Немає потреби "
+"використовувати його ща раз. Ви вже увійшли на сайт."
+
+msgid ""
+"You have tried to use a one-time login link that has expired. Please request "
+"a new one using the form below."
+msgstr ""
+"Ви намагаєтесь використати одноразове посиланя для входу на сайт, термін дії "
+"якого вичерпався. Будь-ласка, отримайте нове посилання використавши форму, "
+"наведену нижче."
+
+msgid ""
+"<p>This is a one-time login for %user_name and will expire on %"
+"expiration_date.</p><p>Click on this button to login to the site and change "
+"your password.</p>"
+msgstr ""
+"<p>Це одноразовий вхід для користувача %user_name, він буде дійсний до %"
+"expiration_date</p><p>Натисніть на кнопку для входу на сайт та змініть ваш "
+"пароль.</p>"
+
+msgid "This login can be used only once."
+msgstr "Цей логін може бути використаний лише одноразово."
+
+msgid ""
+"You have tried to use a one-time login link which has either been used or is "
+"no longer valid. Please request a new one using the form below."
+msgstr ""
+"Ви намагаєтесь використати одноразове посиланя для входу на сайт, яке вже "
+"було використане або термін дії якого вичерпався. Будь-ласка, отримайте нове "
+"посилання використавши форму, наведену нижче."
+
+msgid "Provide a password for the new account in both fields."
+msgstr "Вкажіть пароль для нового облікового запису в обидвох полях."
+
+msgid "Account details for !username at !site"
+msgstr "Облікові дані користувача !username на сайті !site"
+
+msgid ""
+"!username,\n"
+"\n"
+"Thank you for registering at !site. You may now log in to !login_uri using "
+"the following username and password:\n"
+"\n"
+"username: !username\n"
+"password: !password\n"
+"\n"
+"You may also log in by clicking on this link or copying and pasting it in "
+"your browser:\n"
+"\n"
+"!login_url\n"
+"\n"
+"This is a one-time login, so it can be used only once.\n"
+"\n"
+"After logging in, you will be redirected to !edit_uri so you can change your "
+"password.\n"
+"\n"
+"\n"
+"--  !site team"
+msgstr ""
+"!username,\r\n"
+"\r\n"
+"Дякуємо за реєстрацію на !site. Тепер Ви можете увійти до !login_uri "
+"використавши наступні ім'я та пароль:\r\n"
+"\r\n"
+"username: !username\r\n"
+"password: !password\r\n"
+"\r\n"
+"Також Ви можете увійти, перейшовши по цьому посиланню:\r\n"
+"\r\n"
+"!login_url\r\n"
+"\r\n"
+"Це одноразовий вхід, тому його можна використати лише раз.\r\n"
+"\r\n"
+"Після входу Вас буде перенаправлено до !edit_uri, де Ви зможете змінити "
+"власний пароль.\r\n"
+"\r\n"
+"\r\n"
+"--  команда !site"
+
+msgid "User e-mail settings"
+msgstr "Налаштунки електронної пошти користувача"
+
+msgid "Who's new"
+msgstr "Нові користувачі"
+
+msgid "Are you sure you want to delete these users?"
+msgstr "Ви дійсно хочете видалити цих користувачів?"
+
+msgid "The users have been deleted."
+msgstr "Користувачів видалено."
+
+msgid "allow"
+msgstr "дозволити"
+
+msgid "Rule type"
+msgstr "Тип правил"
+
+msgid "Mask"
+msgstr "Маска"
+
+msgid "Are you sure you want to delete the @type rule for %rule?"
+msgstr "Ви дійсно хочете видалити правило \"@type\" %rule?"
+
+msgid "The access rule has been deleted."
+msgstr "Правило доступу стерто."
+
+msgid "User registration settings"
+msgstr "Налаштування реєстрації користувача"
+
+msgid "Visitors can create accounts but administrator approval is required."
+msgstr ""
+"Відвідувачі можуть створювати реєстрації, але потрібне схвалення "
+"адміністратора."
+
+msgid "Require e-mail verification when a visitor creates an account"
+msgstr ""
+"Вимагати підтвердження електронною поштою, коли відвідувач створює обліковий "
+"запис"
+
+msgid ""
+"If this box is checked, new users will be required to validate their e-mail "
+"address prior to logging into the site, and will be assigned a system-"
+"generated password. With it unchecked, users will be logged in immediately "
+"upon registering, and may select their own passwords during registration."
+msgstr ""
+"Якщо позначено цей пункт, нові користувачі будуть зобов'язані підтверджувати "
+"правильність вказаної адреси електронної пошти  перш ніж отримати можливість "
+"входу на сайт. Пароль для них генерується сайтом. Коли пункт не позначено, "
+"користувачі зможуть входити на сайт одразу після реєстрації, а також зможуть "
+"встановлювати собі власний пароль підчас реєстрації."
+
+msgid "User registration guidelines"
+msgstr "Вказівки щодо реєстрації користувачів"
+
+msgid ""
+"This text is displayed at the top of the user registration form and is "
+"useful for helping or instructing your users."
+msgstr ""
+"Цей текст відображується зверху реєстраційної форми для допомоги "
+"користувачам у заповненні реєстраційних даних."
+
+msgid ""
+"Drupal sends emails whenever new users register on your site, and "
+"optionally, may also notify users after other account actions. Using a "
+"simple set of content templates, notification e-mails can be customized to "
+"fit the specific needs of your site."
+msgstr ""
+"Друпал надсилає електронну пошту щоразу коли новий користувач реєструється "
+"на сайті, та опціонально може повідомляти користувачів щодо інших дій над їх "
+"обліковими записами. За допомогою простенького набору зразків, повідомлення "
+"електронною поштою можуть прийняти вигляд, необхідний для потреб Вашого "
+"сайту."
+
+msgid "Welcome, new user created by administrator"
+msgstr ""
+
+msgid ""
+"Customize welcome e-mail messages sent to new member accounts created by an "
+"administrator."
+msgstr ""
+
+msgid "Welcome, no approval required"
+msgstr ""
+
+msgid ""
+"Customize welcome e-mail messages sent to new members upon registering, when "
+"no administrator approval is required."
+msgstr ""
+
+msgid "Welcome, awaiting administrator approval"
+msgstr ""
+
+msgid ""
+"Customize welcome e-mail messages sent to new members upon registering, when "
+"administrative approval is required."
+msgstr ""
+
+msgid "Password recovery email"
+msgstr ""
+
+msgid "Customize e-mail messages sent to users who request a new password."
+msgstr ""
+
+msgid "Account activation email"
+msgstr "Електронна пошта активації облікового запису"
+
+msgid ""
+"Enable and customize e-mail messages sent to users upon account activation "
+"(when an administrator activates an account of a user who has already "
+"registered, on a site where administrative approval is required)."
+msgstr ""
+
+msgid "Notify user when account is activated."
+msgstr ""
+
+msgid "Account blocked email"
+msgstr "Е-пошта блокованого рахунка"
+
+msgid ""
+"Enable and customize e-mail messages sent to users when their accounts are "
+"blocked."
+msgstr ""
+
+msgid "Notify user when account is blocked."
+msgstr ""
+
+msgid "Account deleted email"
+msgstr "Е-пошта видаленого рахунка"
+
+msgid ""
+"Enable and customize e-mail messages sent to users when their accounts are "
+"deleted."
+msgstr ""
+
+msgid "Notify user when account is deleted."
+msgstr ""
+
+msgid "Signature support"
+msgstr "Використання підпису"
+
+msgid "Picture support"
+msgstr "Пітримка аватара"
+
+msgid "Subdirectory in the directory %dir where pictures will be stored."
+msgstr ""
+"Підкаталог каталогу %dir, у якому будуть зберігатися зображення користувачів."
+
+msgid "Picture maximum dimensions"
+msgstr "Максимальні розміри аватару"
+
+msgid "Maximum dimensions for pictures, in pixels."
+msgstr "Максимальні розміри зображення, у пікселях."
+
+msgid "Picture maximum file size"
+msgstr "Максимальний розмір файлу аватару"
+
+msgid "Maximum file size for pictures, in kB."
+msgstr "Максимальний розмір файлів зображень, у kB."
+
+msgid "Picture guidelines"
+msgstr "Вказівки щодо аватару"
+
+msgid ""
+"This text is displayed at the picture upload form in addition to the default "
+"guidelines. It's useful for helping or instructing your users."
+msgstr ""
+"Цей текст відображається у формі завантаження додатково до стандартних "
+"підказок. Його можна використати для допомоги або інструкцій користувачам."
+
+msgid ""
+"The name for this role. Example: \"moderator\", \"editorial board\", \"site "
+"architect\"."
+msgstr ""
+"Назва цієї ролі. Приклад, \"модератор\", \"редакційна колегія\", \"розробник "
+"сайту\"."
+
+msgid "The role name %name already exists. Please choose another role name."
+msgstr "Ім'я ролі %name вже існує. Будь-ласка, оберіть інше ім'я."
+
+msgid "The role has been renamed."
+msgstr "Роль перейменовано."
+
+msgid "The role has been deleted."
+msgstr "Роль стерто."
+
+msgid "Matches any number of characters, even zero characters"
+msgstr "Відповідає будь-якій кількості символів, навіть 0"
+
+msgid "Matches exactly one character."
+msgstr "Відповідає точно одному символу."
+
+msgid "The access rule has been saved."
+msgstr "Правило доступу запам'ятовано."
+
+msgid "The access rule has been added."
+msgstr "Правило доступу додано."
+
+msgid "No value entered. Please enter a test string and try again."
+msgstr "Значення не введено. Будь-ласка, введить тестову строку ще раз."
+
+msgid "Enter a username to check if it will be denied or allowed."
+msgstr "Впишіть логін, щоб перевірити чи це буде дозволено чи заборонено."
+
+msgid "Enter an e-mail address to check if it will be denied or allowed."
+msgstr ""
+"Впишіть адресу електронної пошти, щоб перевірити чи це буде дозволено чи "
+"заборонено."
+
+msgid ""
+"Enter a hostname or IP address to check if it will be denied or allowed."
+msgstr "Введіть hostname або IP адресу для перевірки, дозволені вони чи ні."
+
+msgid "Check hostname"
+msgstr "Перевірити hostname"
+
+msgid "The username %name is not allowed."
+msgstr "Логін %name не дозволено."
+
+msgid "The username %name is allowed."
+msgstr "Логін %name дозволено."
+
+msgid "The e-mail address %mail is not allowed."
+msgstr "Адреса електронної пошти %mail не дозволена."
+
+msgid "The e-mail address %mail is allowed."
+msgstr "Адреса електронної пошти %mail дозволена."
+
+msgid "The hostname %host is not allowed."
+msgstr "Хост %host не дозволено."
+
+msgid "The hostname %host is allowed."
+msgstr "Хост %host дозволено."
+
+msgid "There are currently no access rules."
+msgstr "Жодних правил доступу у даний час немає."
+
+msgid "E-mail new password"
+msgstr "Надіслати новий пароль електронною поштою"
+
+msgid "%name is not allowed to request a new password."
+msgstr ""
+
+msgid "Sorry, %name is not recognized as a user name or an e-mail address."
+msgstr ""
+
+msgid "Further instructions have been sent to your e-mail address."
+msgstr "Подальші інструкції надіслано на Вашу адресу електронної пошти."
+
+msgid "Are you sure you want to delete the account %name?"
+msgstr "Ви дійсно бажаєте стерти реєстрацію %name?"
+
+msgid ""
+"All submissions made by this user will be attributed to the anonymous "
+"account. This action cannot be undone."
+msgstr ""
+"Усі повідомлення цього користувача будуть вважатися анонімними. Цю дію буде "
+"неможливо відмінити."
+
+msgid "%name has been deleted."
+msgstr "%name було видалено."
+
+msgid "You must enter a username."
+msgstr "Треба вписати логін."
+
+msgid "The username cannot begin with a space."
+msgstr "Логін не може починатися  з пробілу."
+
+msgid "The username cannot end with a space."
+msgstr "Логін не може закінчуватись пробілом."
+
+msgid "The username cannot contain multiple spaces in a row."
+msgstr "Логін не може містити кілька пробілів поспіль."
+
+msgid "The username contains an illegal character."
+msgstr "Логін містить недозволений символ."
+
+msgid "The username is not a valid authentication ID."
+msgstr "Логін не є чинним ідентифікатором."
+
+msgid "The username %name is too long: it must be %max characters or less."
+msgstr ""
+"Ім'я користувача %name занадто довге: воно повинне бути коротше за %max "
+"символів."
+
+msgid "You must enter an e-mail address."
+msgstr "Треба вписати адресу електронної пошти."
+
+msgid "Who's online"
+msgstr "Зараз присутні"
+
+msgid "User list length"
+msgstr "Довжина списку користувачів"
+
+msgid "Online users"
+msgstr "Користувачі online"
+
+msgid "Enter the password that accompanies your username."
+msgstr "Впишіть пароль, який відповідає вашому логінові."
+
+msgid ""
+"The name %name is registered using a reserved e-mail address and therefore "
+"could not be logged in."
+msgstr ""
+
+msgid "Signature settings"
+msgstr "Настройки підпису"
+
+msgid ""
+"The signature input format has been set to a format you don't have access "
+"to. It will be changed to a format you have access to when you save this "
+"page."
+msgstr ""
+
+msgid "Delete picture"
+msgstr "Стерти аватар"
+
+msgid "Check this box to delete your current picture."
+msgstr "Поставте позначку тут, щоб стерти ваш теперішній аватар."
+
+msgid "An administrator created an account for you at !site"
+msgstr "Адміністратор створив для Вас обліковий запис на сайті !site"
+
+msgid ""
+"!username,\n"
+"\n"
+"A site administrator at !site has created an account for you. You may now "
+"log in to !login_uri using the following username and password:\n"
+"\n"
+"username: !username\n"
+"password: !password\n"
+"\n"
+"You may also log in by clicking on this link or copying and pasting it in "
+"your browser:\n"
+"\n"
+"!login_url\n"
+"\n"
+"This is a one-time login, so it can be used only once.\n"
+"\n"
+"After logging in, you will be redirected to !edit_uri so you can change your "
+"password.\n"
+"\n"
+"\n"
+"--  !site team"
+msgstr ""
+"!username,\n"
+"\n"
+"Адміністратор сайту !site створив для вас запис. Ви можете увійти на сайт !"
+"login_uri використовуючи наступні ім'я та пароль:\n"
+"\n"
+"ім'я користувача: !username\n"
+"пароль: !password\n"
+"\n"
+"Також ви можете увійти, натиснувши на наступне посилання  чи скопіювавши "
+"його у адресну стрічку вашого браузера:\n"
+"\n"
+"!login_url\n"
+"\n"
+"Це одноразовий вхід, його можна використати лише один раз. Після входу на "
+"сайт вас буде перенаправлено на !edit_uri, де ви зможете змінити свій "
+"пароль.\n"
+"\n"
+"\n"
+"-- !site team"
+
+msgid "Account details for !username at !site (pending admin approval)"
+msgstr ""
+"Облікові дані користувача !username на сайті !site (в очікуванні рішення "
+"адміна)"
+
+msgid ""
+"!username,\n"
+"\n"
+"Thank you for registering at !site. Your application for an account is "
+"currently pending approval. Once it has been approved, you will receive "
+"another e-mail containing information about how to log in, set your "
+"password, and other details.\n"
+"\n"
+"\n"
+"--  !site team"
+msgstr ""
+"!username, дякуємо Вас за реєстрацію на !site. Ваш запит на реєстрацію зараз "
+"очікує розгляду. Як тільки буде надано дозвіл, Ви одержите ще одного листа, "
+"що містить інфромацію про порядок входу на сайт, зміну Вашого пароля та інші "
+"подробиці.-- Адміністрація !site"
+
+msgid "Replacement login information for !username at !site"
+msgstr "Зміна облікового запису користувача !username на сайті !site"
+
+msgid ""
+"!username,\n"
+"\n"
+"A request to reset the password for your account has been made at !site.\n"
+"\n"
+"You may now log in to !uri_brief by clicking on this link or copying and "
+"pasting it in your browser:\n"
+"\n"
+"!login_url\n"
+"\n"
+"This is a one-time login, so it can be used only once. It expires after one "
+"day and nothing will happen if it's not used.\n"
+"\n"
+"After logging in, you will be redirected to !edit_uri so you can change your "
+"password."
+msgstr ""
+"!username,\n"
+"\n"
+"На !site було прохання змінити пароль для вашого рахунку.\n"
+"\n"
+"Зараз ви можете залогуватися на !uri_brief, перейшовши за цим лінком або "
+"скопіювавши його у свій браузер:\n"
+"\n"
+"!login_url\n"
+"\n"
+"Це тимчасовий логін, який можна використати лише один раз. Він перестає бути "
+"дійсним через один день, і нічого не трапиться, якщо його не використати.\n"
+"\n"
+"Після того, як ви залогуєтеся, вас перенаправить на !edit_uri, щоб ви змогли "
+"змінити свій пароль."
+
+msgid "Account details for !username at !site (approved)"
+msgstr "Деталі облікового запису для !username на !site (приймається)"
+
+msgid ""
+"!username,\n"
+"\n"
+"Your account at !site has been activated.\n"
+"\n"
+"You may now log in by clicking on this link or copying and pasting it in "
+"your browser:\n"
+"\n"
+"!login_url\n"
+"\n"
+"This is a one-time login, so it can be used only once.\n"
+"\n"
+"After logging in, you will be redirected to !edit_uri so you can change your "
+"password.\n"
+"\n"
+"Once you have set your own password, you will be able to log in to !"
+"login_uri in the future using:\n"
+"\n"
+"username: !username\n"
+msgstr ""
+"!username, Ваш обліковий запис на !site було активовано. Тепер Ви маєте "
+"можливість зайти на сайт, натиснувши на це посилання або скопіювавши його до "
+"поля адреси Вашого веб-браузера: !login_url \n"
+"Це одноразовий вхід до сайту, тож відразу після відвідування сайту Ви будете "
+"перенаправлені на сторінку !edit_uri , де є можливість змініити власний "
+"пароль. Після того, як Ви змінете власний пароль, то матимете можливість в "
+"подальшому заходити на сайт !login_uri користуючись Вашим обліковим "
+"записом: !username\n"
+
+msgid "Account details for !username at !site (blocked)"
+msgstr "Подробиці акаунту для !username (заблокований) на сайті !site"
+
+msgid ""
+"!username,\n"
+"\n"
+"Your account on !site has been blocked."
+msgstr "!username, Ваш обліковий запис на !site було заблоковано."
+
+msgid "Account details for !username at !site (deleted)"
+msgstr ""
+
+msgid ""
+"!username,\n"
+"\n"
+"Your account on !site has been deleted."
+msgstr "!username, Ваш обліковий запис на !site було видалено."
+
+msgid "Unblock the selected users"
+msgstr "Розблокувати позначених користувачів"
+
+msgid "Block the selected users"
+msgstr "Заблокувати позначених користувачів"
+
+msgid "Delete the selected users"
+msgstr "Видалити позначених користувачів"
+
+msgid ""
+"The user module allows users to register, login, and log out. Users benefit "
+"from being able to sign on because it associates content they create with "
+"their account and allows various permissions to be set for their roles. The "
+"user module supports user roles which establish fine grained permissions "
+"allowing each role to do only what the administrator wants them to. Each "
+"user is assigned to one or more roles. By default there are two roles "
+"<em>anonymous</em> - a user who has not logged in, and <em>authenticated</"
+"em> a user who has signed up and who has been authorized."
+msgstr ""
+
+msgid ""
+"Users can use their own name or handle and can specify personal "
+"configuration settings through their individual <em>My account</em> page. "
+"Users must authenticate by supplying a local username and password or "
+"through their OpenID, an optional and secure method for logging into many "
+"websites with a single username and password. In some configurations, users "
+"may authenticate using a username and password from another Drupal site, or "
+"through some other site-specific mechanism."
+msgstr ""
+
+msgid ""
+"A visitor accessing your website is assigned a unique ID, or session ID, "
+"which is stored in a cookie. The cookie does not contain personal "
+"information, but acts as a key to retrieve information from your site. Users "
+"should have cookies enabled in their web browser when using your site."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@user"
+"\">User module</a>."
+msgstr ""
+
+msgid ""
+"Drupal allows users to register, login, log out, maintain user profiles, "
+"etc. Users of the site may not use their own names to post content until "
+"they have signed up for a user account."
+msgstr ""
+"Drupal озволяє користувачам реєструватися, заходити та виходити, "
+"супроводжувати профілі ористувачів та інше. Відвідувачі сайту можуть, якщо "
+"це дозволено, не використовувати власні імена для публікацій доки вони не "
+"зареєструються."
+
+msgid ""
+"This web page allows administrators to register new users. Users' e-mail "
+"addresses and usernames must be unique."
+msgstr ""
+"Ця сторінка дозволяє адміністраторам власноруч зареєструвати нових "
+"користуавчів. Обов'язково потрібно ввести унікальні реєстраційне ім'я "
+"(логін) та електронну пошту (е-мейл) нового користувача."
+
+msgid ""
+"Set up username and e-mail address access rules for new <em>and</em> "
+"existing accounts (currently logged in accounts will not be logged out). If "
+"a username or e-mail address for an account matches any deny rule, but not "
+"an allow rule, then the account will not be allowed to be created or to log "
+"in. A host rule is effective for every page view, not just registrations."
+msgstr ""
+"Встановіть правила доступу для імен користувачів та адрес електронної пошти "
+"для нових <em>та</em> існуючих рахунків (для рахунків, які зараз увійшли, не "
+"буде здійснено виходу). Якщо ім'я користувача або адреса пошти для рахунку "
+"підпадає під правило заборони, але не правило дозволу, тоді такий рахунок не "
+"зможе бути створено або виконано ним входу. Правило хосту діє для кожного "
+"перегляду сторінки, не лише для реєстрацій."
+
+msgid ""
+"Permissions let you control what users can do on your site. Each user role "
+"(defined on the <a href=\"@role\">user roles page</a>) has its own set of "
+"permissions. For example, you could give users classified as \"Administrators"
+"\" permission to \"administer nodes\" but deny this power to ordinary, "
+"\"authenticated\" users. You can use permissions to reveal new features to "
+"privileged users (those with subscriptions, for example). Permissions also "
+"allow trusted users to share the administrative burden of running a busy "
+"site."
+msgstr ""
+"Дозволи дозволяють Вам контролювати дії, які користувачі можуть виконувати "
+"на Вашому сайті. Кожна роль, призначена для користувача (визначається на <a "
+"href=\"@role\">сторінці ролей користувачів</a>) має свій власний набір "
+"дозволів. Наприклад, Ви можете надати користувачам, що класифікуютсья як "
+"\"Адміністратори\" дозвіл \"адмініструвати ноди\", але заборонити цю "
+"можливість звичайним, \"аутентифікованим\" користувачам. Ви можете "
+"використовувати дозволи щоб відкривати нові можливості привілейованим "
+"користувачам (наприклад тим, що підписались на розсилки). Дозволи також "
+"дозволяють довіреним користувачам допомагати у адмініструванні сайту з "
+"великою відвідуваністю."
+
+msgid ""
+"<p>Roles allow you to fine tune the security and administration of Drupal. A "
+"role defines a group of users that have certain privileges as defined in <a "
+"href=\"@permissions\">user permissions</a>. Examples of roles include: "
+"anonymous user, authenticated user, moderator, administrator and so on. In "
+"this area you will define the <em>role names</em> of the various roles. To "
+"delete a role choose \"edit\".</p><p>By default, Drupal comes with two user "
+"roles:</p>\n"
+"      <ul>\n"
+"      <li>Anonymous user: this role is used for users that don't have a user "
+"account or that are not authenticated.</li>\n"
+"      <li>Authenticated user: this role is automatically granted to all "
+"logged in users.</li>\n"
+"      </ul>"
+msgstr ""
+"<p>Ролі дозволяють Вам здійснювати тонке налаштування безпеки та "
+"адміністрування Drupal. Роль задає список користувачів, які отримують певні "
+"привілеї згідно з <a href=\"@permissions\">правами доступу користувачів</a>. "
+"Приклади ролей: анонімні користувачі, авторизовані користувачі, модератори, "
+"адміністратори і так далі. У цій секції ви зможете задати <em>назви ролей</"
+"em>. Для того, щоб видалити роль, натисніть \"редагувати\".</p><p>За "
+"замовчуванням, Drupal містить дві ролі користувачів:</p> <ul> <li>Анонімні "
+"користувачі: ця роль призначена для незареєстрованих або неавторизованих "
+"користувачів.</li>\r\n"
+"      <li>Авторизовані користувачі: ця роль автоматично надається усім "
+"користувачам, які здійснили вхід.</li> </ul>"
+
+msgid ""
+"Enter a simple pattern (\"*\" may be used as a wildcard match) to search for "
+"a username or e-mail address. For example, one may search for \"br\" and "
+"Drupal might return \"brian\", \"brad\", and \"brenda@example.com\"."
+msgstr ""
+
+msgid ""
+"Welcome to Drupal. You are now logged in as user #1, which gives you full "
+"control over your website."
+msgstr ""
+
+msgid ""
+"</p><p> Your password is <strong>%pass</strong>. You may change your "
+"password below.</p>"
+msgstr ""
+
+msgid "New external user: %name using module %module."
+msgstr ""
+
+msgid "Deleted user: %name %email."
+msgstr "Видалено користувача: %name %email."
+
+msgid "administer permissions"
+msgstr "адмініструвати дозволи"
+
+msgid "administer users"
+msgstr "керувати користувачами"
+
+msgid "access user profiles"
+msgstr "доступ до профілів користувачів"
+
+msgid "change own username"
+msgstr "змінити власне ім'я користувача"
+
+msgid ""
+"Configure default behavior of users, including registration requirements, e-"
+"mails, and user pictures."
+msgstr ""
+"Конфігурує стандартну поведінку користувачів, включно із вимогами для "
+"реєстрації, e-mail адреси та зображення користувачів."
+
+msgid "Determine access to features by selecting permissions for roles."
+msgstr "Встановленя доступу до модулів шляхом вибору прав для ролей."
+
+msgid "Edit role"
+msgstr "Змінити роль"
+
+msgid "Access rules"
+msgstr "Правила доступу"
+
+msgid ""
+"List and create rules to disallow usernames, e-mail addresses, and IP "
+"addresses."
+msgstr ""
+"Перелік та створення шаблонів небажаних імен користувачів, адрес електронної "
+"пошти та IP адрес."
+
+msgid "Check rules"
+msgstr "Перевірити правила"

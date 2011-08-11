@@ -1,0 +1,362 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 12:28+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Tags"
+msgstr "Теґи"
+
+msgid "- None -"
+msgstr "- Немає -"
+
+msgid "There are currently no posts in this category."
+msgstr "На даний момент жодних дописів в обраній категорії немає."
+
+msgid "Help text"
+msgstr "Довідковий текст"
+
+msgid "Related terms"
+msgstr "Пов'язані терміни"
+
+msgid "Synonyms"
+msgstr "Синоніми"
+
+msgid "Multiple select"
+msgstr "Множинний вибір"
+
+msgid "Parents"
+msgstr "Попередники"
+
+msgid "Taxonomy term"
+msgstr "Термін таксономії"
+
+msgid "Vocabularies"
+msgstr "Словники"
+
+msgid "Add term"
+msgstr "Додати термін"
+
+msgid "Vocabulary name"
+msgstr "Назва словника"
+
+msgid "Term name"
+msgstr "Назва терміну"
+
+msgid "No terms available."
+msgstr "Терміни відсутні."
+
+msgid "Edit term"
+msgstr "Редагувати термін"
+
+msgid "Autocomplete taxonomy"
+msgstr "Автозаповнення таксономії"
+
+msgid "list terms"
+msgstr "список термінів"
+
+msgid "add terms"
+msgstr "додати терміни"
+
+msgid "Created new term %term."
+msgstr "Створено новий терм %term."
+
+msgid "Are you sure you want to delete the term %title?"
+msgstr "Ви дійсно бажаєте стерти терм %title?"
+
+msgid "Deleted term %name."
+msgstr "Стертий терм \"%name\"."
+
+msgid "List terms"
+msgstr "Список термінів"
+
+msgid ""
+"Deleting a term will delete all its children if there are any. This action "
+"cannot be undone."
+msgstr ""
+"Знищення терміну потягне за собою видалення всіх дочірніх термінів у ньому. "
+"Цю дію не можна відмінити."
+
+msgid "Parent terms"
+msgstr "Терми-попередники"
+
+msgid "administer taxonomy"
+msgstr "керування класифікацією"
+
+msgid "Add vocabulary"
+msgstr "Додати словник"
+
+msgid "Edit vocabulary"
+msgstr "Редагувати словник"
+
+msgid "edit vocabulary"
+msgstr "редагувати словник"
+
+msgid "Description of the vocabulary; can be used by modules."
+msgstr "Опис словника; може бути використаний модулями."
+
+msgid "Created new vocabulary %name."
+msgstr "Створено новий словник %name."
+
+msgid "Updated vocabulary %name."
+msgstr "Поновлено словник %name."
+
+msgid "Are you sure you want to delete the vocabulary %title?"
+msgstr "Ви дійсно хочете видалити словник %title?"
+
+msgid ""
+"Deleting a vocabulary will delete all the terms in it. This action cannot be "
+"undone."
+msgstr ""
+"Стирання словника знищить всі його терми. Ця дія незворотня, її не можна "
+"скасувати."
+
+msgid "Deleted vocabulary %name."
+msgstr "Видалено словник %name."
+
+msgid "The name of this term."
+msgstr "Назва цього терміну."
+
+msgid ""
+"A comma-separated list of terms describing this content. Example: funny, "
+"bungee jumping, \"Company, Inc.\"."
+msgstr ""
+"Перелік розділених комами термінів, що описують матеріал. Наприклад: "
+"відпочинок, дайвінг, \"Компанія ТзОВ.\"."
+
+msgid "The %name vocabulary can not be modified in this way."
+msgstr "Словник %name неможна змінити таким чином."
+
+msgid "taxonomy"
+msgstr "класифікація"
+
+msgid "Updated term %term."
+msgstr "Оновлено термін %term."
+
+msgid "- None selected -"
+msgstr "- Не обрано -"
+
+msgid "After saving a new term to the database"
+msgstr "Після додавання нового терміну в базу"
+
+msgid "After saving an updated term to the database"
+msgstr "Після оновлення терміну в базі"
+
+msgid "After deleting a term"
+msgstr "Після видалення терміну"
+
+msgid "No vocabularies available."
+msgstr "Нема жодного словника."
+
+msgid ""
+"The taxonomy module allows you to categorize content using various systems "
+"of classification. Free-tagging vocabularies are created by users on the fly "
+"when they submit posts (as commonly found in blogs and social bookmarking "
+"applications). Controlled vocabularies allow for administrator-defined short "
+"lists of terms as well as complex hierarchies with multiple relationships "
+"between different terms. These methods can be applied to different content "
+"types and combined together to create a powerful and flexible method of "
+"classifying and presenting your content."
+msgstr ""
+
+msgid ""
+"For example, when creating a recipe site, you might want to classify posts "
+"by both the type of meal and preparation time. A vocabulary for each allows "
+"you to categorize using each criteria independently instead of creating a "
+"tag for every possible combination."
+msgstr ""
+
+msgid "Type of Meal: <em>Appetizer, Main Course, Salad, Dessert</em>"
+msgstr ""
+
+msgid "Preparation Time: <em>0-30mins, 30-60mins, 1-2 hrs, 2hrs+</em>"
+msgstr ""
+
+msgid ""
+"Each taxonomy term (often called a 'category' or 'tag' in other systems) "
+"automatically provides lists of posts and a corresponding RSS feed. These "
+"taxonomy/term URLs can be manipulated to generate AND and OR lists of posts "
+"classified with terms. In our recipe site example, it then becomes easy to "
+"create pages displaying 'Main courses', '30 minute recipes', or '30 minute "
+"main courses and appetizers' by using terms on their own or in combination "
+"with others. There are a significant number of contributed modules which you "
+"to alter and extend the behavior of the core module for both display and "
+"organization of terms."
+msgstr ""
+
+msgid ""
+"Terms can also be organized in parent/child relationships from the admin "
+"interface. An example would be a vocabulary grouping countries under their "
+"parent geo-political regions. The taxonomy module also enables advanced "
+"implementations of hierarchy, for example placing Turkey in both the 'Middle "
+"East' and 'Europe'."
+msgstr ""
+
+msgid ""
+"The taxonomy module supports the use of both synonyms and related terms, but "
+"does not directly use this functionality. However, optional contributed or "
+"custom modules may make full use of these advanced features."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@taxonomy"
+"\">Taxonomy module</a>."
+msgstr ""
+
+msgid ""
+"The taxonomy module allows you to categorize your content using both tags "
+"and administrator defined terms. It is a flexible tool for classifying "
+"content with many advanced features. To begin, create a 'Vocabulary' to hold "
+"one set of terms or tags. You can create one free-tagging vocabulary for "
+"everything, or separate controlled vocabularies to define the various "
+"properties of your content, for example 'Countries' or 'Colors'."
+msgstr ""
+
+msgid ""
+"Use the list below to configure and review the vocabularies defined on your "
+"site, or to list and manage the terms (tags) they contain. A vocabulary may "
+"(optionally) be tied to specific content types as shown in the <em>Type</em> "
+"column and, if so, will be displayed when creating or editing posts of that "
+"type. Multiple vocabularies tied to the same content type will be displayed "
+"in the order shown below. To change the order of a vocabulary, grab a drag-"
+"and-drop handle under the <em>Name</em> column and drag it to a new location "
+"in the list. (Grab a handle by clicking and holding the mouse while hovering "
+"over a handle icon.) Remember that your changes will not be saved until you "
+"click the <em>Save</em> button at the bottom of the page."
+msgstr ""
+
+msgid ""
+"%capital_name is a free-tagging vocabulary. To change the name or "
+"description of a term, click the <em>edit</em> link next to the term."
+msgstr ""
+
+msgid ""
+"%capital_name is a flat vocabulary. You may organize the terms in the %name "
+"vocabulary by using the handles on the left side of the table. To change the "
+"name or description of a term, click the <em>edit</em> link next to the term."
+msgstr ""
+
+msgid ""
+"%capital_name is a single hierarchy vocabulary. You may organize the terms "
+"in the %name vocabulary by using the handles on the left side of the table. "
+"To change the name or description of a term, click the <em>edit</em> link "
+"next to the term."
+msgstr ""
+
+msgid ""
+"%capital_name is a multiple hierarchy vocabulary. To change the name or "
+"description of a term, click the <em>edit</em> link next to the term. Drag "
+"and drop of multiple hierarchies is not supported, but you can re-enable "
+"drag and drop support by editing each term to include only a single parent."
+msgstr ""
+
+msgid ""
+"Define how your vocabulary will be presented to administrators and users, "
+"and which content types to categorize with it. Tags allows users to create "
+"terms when submitting posts by typing a comma separated list. Otherwise "
+"terms are chosen from a select list and can only be created by users with "
+"the \"administer taxonomy\" permission."
+msgstr ""
+
+msgid "Manage tagging, categorization, and classification of your content."
+msgstr "Керування теґуванням, категоризацією і класифікацією Ваших матеріалів"
+
+msgid "Terms in %vocabulary"
+msgstr "Терміни в словнику %vocabulary"
+
+msgid "The name for this vocabulary, e.g., <em>\"Tags\"</em>."
+msgstr "Назва цього словника, наприклад <em>\"Позначки\"</em>."
+
+msgid ""
+"Instructions to present to the user when selecting terms, e.g., <em>\"Enter "
+"a comma separated list of words\"</em>."
+msgstr ""
+"Пояснення, як користувач має обирати записи зі словника, наприклад <em>"
+"\"Введіть одне або декілька слів, розмежених комою\"</em>."
+
+msgid "Select content types to categorize using this vocabulary."
+msgstr "Оберіть типи матеріалу для категоризації за допомогою цього словника."
+
+msgid ""
+"Terms are created by users when submitting posts by typing a comma separated "
+"list."
+msgstr ""
+"Позначки це вільний список розділених комою слів або фраз, які лишають "
+"користувачі, коли зберігають власні повідомлення."
+
+msgid ""
+"Allows posts to have more than one term from this vocabulary (always true "
+"for tags)."
+msgstr ""
+"Ця опція дозволяє користувачам залишати або обирати декілька записів із "
+"словника (опція завжди дійсна, якщо обрано \"Позначки\")."
+
+msgid ""
+"At least one term in this vocabulary must be selected when submitting a post."
+msgstr ""
+"Принаймні один запис зі словника повинен бути обраним, аби створити "
+"публікацію."
+
+msgid "Vocabularies are displayed in ascending order by weight."
+msgstr "Словники відображаються у порядку збільшення ваги."
+
+msgid "Reset to alphabetical"
+msgstr ""
+
+msgid "Add term to %vocabulary"
+msgstr "Додати термін до словника %vocabulary"
+
+msgid ""
+"A description of the term. To be displayed on taxonomy/term pages and RSS "
+"feeds."
+msgstr ""
+"Опис терміну, що буде відображатись на сторінках таксономії та термінів."
+
+msgid "Synonyms of this term, one synonym per line."
+msgstr "Синоніми цього терміну, по одному в рядок."
+
+msgid "Terms are displayed in ascending order by weight."
+msgstr "Терміни будуть відображуватись в порядку збільшення ваги."
+
+msgid "Weight value must be numeric."
+msgstr ""
+
+msgid "Set multiple term parents?"
+msgstr ""
+
+msgid ""
+"Adding multiple parents to a term will cause the %vocabulary vocabulary to "
+"look for multiple parents on every term. Because multiple parents are not "
+"supported when using the drag and drop outline interface, drag and drop will "
+"be disabled if you enable this option. If you choose to have multiple "
+"parents, you will only be able to set parents by using the term edit form."
+msgstr ""
+
+msgid ""
+"You may re-enable the drag and drop interface at any time by reducing "
+"multiple parents to a single parent for the terms in this vocabulary."
+msgstr ""
+
+msgid "Set multiple parents"
+msgstr ""
+
+msgid ""
+"Are you sure you want to reset the vocabulary %title to alphabetical order?"
+msgstr ""
+
+msgid ""
+"Resetting a vocabulary will discard all custom ordering and sort items "
+"alphabetically."
+msgstr ""
+
+msgid "Reset vocabulary %name to alphabetical order."
+msgstr ""

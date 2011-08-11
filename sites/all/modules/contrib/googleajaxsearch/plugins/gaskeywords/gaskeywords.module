@@ -1,0 +1,81 @@
+<?php
+// $Id: gaskeywords.module,v 1.1.2.1 2009/09/30 12:02:27 macperlinski Exp $
+
+/**
+ * @file
+ * Example plugin for Google Ajax Search.
+ * 
+ * This plugin lets Google Ajax Search to automatically use terms from nodes as default keywords for searcher.
+ * It happens only if either vocabulary selected for search block and node is same.
+ */
+
+
+/**
+ * Implementation of hook_googleajaxsearch_info
+ * 
+ * @return
+ *   array with keys: settings_form, execute and plugin_name. First two contain names of functions to call. The last one contains title to display in settings form
+ */
+function gaskeywords_googleajaxsearch_info() {
+  $info['gaskeywords'] = array(
+    'settings_form' => 'gaskeywords_settings_form',
+    'execute' => 'gaskeywords_execute',
+    'title' => 'Google Ajax Search Keywords',
+  );
+  return $info;
+}
+
+/**
+ * Returns additional form with specific settings for plugin
+ * 
+ * @param mixed $delta
+ *   selects block which keywords should be returned
+ * @return
+ *   
+ */
+function gaskeywords_settings_form($settings) {
+  $options[''] = t('None');
+  $voc = taxonomy_get_vocabularies();
+  
+  foreach ($voc as $key => $value) {
+    $options[$value->vid] = $value->name;
+  }
+  
+  $form[$field = 'vocabulary_keywords'] = array(
+    '#type' => 'select',
+    '#title' => t('Vocabulary for keywords'),
+    '#default_value' => $settings[$field],
+    '#options' => $options,
+    '#description' => t('Default keywords'),
+    
+  );
+  
+  return $form;
+}
+
+/**
+ * Returns string of OR separated keywords. Keywords will be returned only if either blocks and nodes vocabulary are same.
+ * 
+ * @param mixed $settings
+ *   block settings
+ * @return
+ *   string with keywords.
+ */
+function gaskeywords_execute($settings) {
+  $voc_id = $settings['vocabulary_keywords'];
+  $keywords = "";
+  
+  if ((arg(0) == 'node') && is_numeric(arg(1))) {
+    $node = node_load(arg(1));
+    foreach ($node->taxonomy as $key => $value) {
+      if ($voc_id == $value->vid) {
+        $keywords[] = "$value->name";
+      }
+    }
+  }
+  
+  if (is_array($keywords) && !empty($keywords)) {
+    $keywords = implode(" OR ", $keywords);
+  }
+  return $keywords;
+}

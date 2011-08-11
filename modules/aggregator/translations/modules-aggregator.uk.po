@@ -1,0 +1,368 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:57+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "More"
+msgstr "Ще"
+
+msgid "Update interval"
+msgstr "Періодичність оновлення"
+
+msgid "The fully-qualified URL of the feed."
+msgstr "Повний URL потоку новин."
+
+msgid "Save categories"
+msgstr "Зберегти категорії"
+
+msgid "Number of news items in block"
+msgstr "Кількість новин у блоці"
+
+msgid "View this feed's recent news."
+msgstr "Переглянути останні новини цього потоку."
+
+msgid "View this category's recent news."
+msgstr "Переглянути останні новини цієї категорії."
+
+msgid "Feed overview"
+msgstr "Огляд потоку"
+
+msgid "Items"
+msgstr "Елементи"
+
+msgid "Last update"
+msgstr "Останнє оновлення"
+
+msgid "Next update"
+msgstr "Наступне оновлення"
+
+msgid "%time left"
+msgstr "залишилось %time"
+
+msgid "remove items"
+msgstr "видалити елементи"
+
+msgid "update items"
+msgstr "оновити елементи"
+
+msgid "Category overview"
+msgstr "Огляд категорій"
+
+msgid "You are not allowed to categorize this feed item."
+msgstr "Ви не можете визначати категорію цієї новини."
+
+msgid "The categories have been saved."
+msgstr "Категорії збережені."
+
+msgid "URL:"
+msgstr "URL:"
+
+msgid "Updated:"
+msgstr "Оновлене:"
+
+msgid "blog it"
+msgstr "помістити у мережевий журнал"
+
+msgid "Comment on this news item in your personal blog."
+msgstr "Прокоментувати цю новину у вашому особистому мережевому журналі."
+
+msgid "%age old"
+msgstr "%age тому"
+
+msgid "%ago ago"
+msgstr "%ago тому"
+
+msgid "Items shown in sources and categories pages"
+msgstr "Елементи, показані на сторінках джерел і категорій"
+
+msgid "A feed with this URL %url already exists. Please enter a unique URL."
+msgstr "Потік з адреси %url вже існує. Вкажіть унікальну адресу."
+
+msgid "The feed %feed has been updated."
+msgstr "Потік %feed було оновлено."
+
+msgid "Feed %feed deleted."
+msgstr "Потік %feed видалено."
+
+msgid "The feed %feed has been deleted."
+msgstr "Було видалено потік %feed."
+
+msgid "Feed %feed added."
+msgstr "Потік %feed додано."
+
+msgid "The feed %feed has been added."
+msgstr "Було додано потік %feed."
+
+msgid "The news items from %site have been removed."
+msgstr "Новини з сайту %site було видалено."
+
+msgid "administer news feeds"
+msgstr "адмініструвати потоки новин"
+
+msgid "access news feeds"
+msgstr "доступ до потоків новин"
+
+msgid "Updated URL for feed %title to %url."
+msgstr "Оновлено URL для потоку %title на %url."
+
+msgid "Sources"
+msgstr "Джерела"
+
+msgid "!title category latest items"
+msgstr "Останні новини в категорії !title"
+
+msgid "!title feed latest items"
+msgstr "Останні новини у стрічці !title"
+
+msgid "A category named %category already exists. Please enter a unique title."
+msgstr "Категорія %category вже існує. Будь-ласка, введіть іншу назву."
+
+msgid "The category %category has been updated."
+msgstr "Категорію %category було поновлено."
+
+msgid "Category %category deleted."
+msgstr "Категорію %category видалено."
+
+msgid "The category %category has been deleted."
+msgstr "Категорія %category видалена."
+
+msgid "Category %category added."
+msgstr "Категорію %category додано."
+
+msgid "The category %category has been added."
+msgstr "Категорія %category додана."
+
+msgid "aggregator - @title"
+msgstr "підбірка - @title"
+
+msgid ""
+"The feed from %site seems to be broken, due to an error \"%error\" on line %"
+"line."
+msgstr ""
+"Неможливо опрацювати RSS-потік із сайту %site через помилку \"%error\" на "
+"рядку %line."
+
+msgid ""
+"The feed from %site seems to be broken, because of error \"%error\" on line %"
+"line."
+msgstr ""
+"Неможливо опрацювати RSS-потік із сайту %site через помилку \"%error\" на "
+"рядку %line."
+
+msgid "Discard items older than"
+msgstr "Викидати елементи старіші за"
+
+msgid ""
+"The length of time to retain feed items before discarding. (Requires a "
+"correctly configured <a href=\"@cron\">cron maintenance task</a>.)"
+msgstr ""
+"Період часу, через який видаляти елементи потоку. (Вимагає коректності "
+"налагодження <a href=\"@cron\">завдань планувальника</a>)"
+
+msgid "Number of feed items displayed in feed and category summary pages."
+msgstr ""
+"Кількість елементів потоку, відображених на сторінках потоку і категорій"
+
+msgid "@site_name - aggregated feeds in category @title"
+msgstr "@site_name - зібрані потоки в категорію @title"
+
+msgid "@site_name - aggregated feeds"
+msgstr "@site_name - зібрані потоки"
+
+msgid "@site_name aggregator"
+msgstr "@site_name збиральник"
+
+msgid "!title feed"
+msgstr "!title потік"
+
+msgid ""
+"The aggregator is a powerful on-site syndicator and news reader that gathers "
+"fresh content from RSS-, RDF-, and Atom-based feeds made available across "
+"the web. Thousands of sites (particularly news sites and blogs) publish "
+"their latest headlines and posts in feeds, using a number of standardized "
+"XML-based formats. Formats supported by the aggregator include <a href=\"@rss"
+"\">RSS</a>, <a href=\"@rdf\">RDF</a>, and <a href=\"@atom\">Atom</a>."
+msgstr ""
+"Збиральник - потужний інструмент консолідації інформації і збору новин, що "
+"отримує свіжий матеріал з RSS-, RDF-, і Atom-основаних потоків, доступних в "
+"інтернеті. Тисячі сайтів(в основному новинні та блоги) публікують свій "
+"матеріал і видають потоки, використовуючи певні стандартизовані формати. "
+"Формати, які підтримується Збиральником - <a href=\"@rss\">RSS</a>, <a href="
+"\"@rdf\">RDF</a>, та <a href=\"@atom\">Atom</a>."
+
+msgid ""
+"Feeds contain feed items, or individual posts published by the site "
+"providing the feed. Feeds may be grouped in categories, generally by topic. "
+"Users view feed items in the <a href=\"@aggregator\">main aggregator "
+"display</a> or by <a href=\"@aggregator-sources\">their source</a>. "
+"Administrators can <a href=\"@feededit\">add, edit and delete feeds</a> and "
+"choose how often to check each feed for newly updated items. The most recent "
+"items in either a feed or category can be displayed as a block through the "
+"<a href=\"@admin-block\">blocks administration page</a>. A <a href="
+"\"@aggregator-opml\">machine-readable OPML file</a> of all feeds is "
+"available. A correctly configured <a href=\"@cron\">cron maintenance task</"
+"a> is required to update feeds automatically."
+msgstr ""
+"Потоки складаються з елементів, або індивідуальних повідомлень, що "
+"публікуються сайтом, який надає потік. Потоки можуть бути згруповані в "
+"категорії, в основному за тематиками. Користувачі переглядають елементи "
+"потоку на <a href=\"@aggregator\">головній сторінці збиральника</a> або <a "
+"href=\"@aggregator-sources\">їхньому джерелі</a>. Адміністратори можуть <a "
+"href=\"@feededit\">додавати, редагувати та видаляти потоки</a> і обирати "
+"частоту оновлень кожного з них. Найбільш свіжі елементи можуть відображатись "
+"в вигляді блоків через <a href=\"@admin-block\">сторінку налагодження "
+"блоків</a>. Також доступний A <a href=\"@aggregator-opml\">файл OPML</a> для "
+"всіх доступних потоків. Вимагає коректності налагодження <a href=\"@cron"
+"\">завдань планувальника</a>"
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@aggregator"
+"\">Aggregator module</a>."
+msgstr ""
+"Для додаткової інформації читайте онлайн підручник для <a href=\"@aggregator"
+"\">модуля Збиральник</a>."
+
+msgid "The feed from %site seems to be broken, because of error \"%error\"."
+msgstr ""
+"Неможливо опрацювати RSS-потік із сайту %site через помилку: \"%error\"."
+
+msgid "There is no new syndicated content from %site."
+msgstr "Немає нового RSS-матеріалу із %site."
+
+msgid "There is new syndicated content from %site."
+msgstr "Новий RSS-матеріал із %site."
+
+msgid "The feed from %site seems to be broken, due to \"%error\"."
+msgstr ""
+"Неможливо опрацювати RSS-потік із сайту %site, через помилку: \"%error\"."
+
+msgid "Feed aggregator"
+msgstr "Збиральник"
+
+msgid ""
+"The length of time between feed updates. (Requires a correctly configured <a "
+"href=\"@cron\">cron maintenance task</a>.)"
+msgstr ""
+"Інтервал часу між оновленнями. (Вимагає коректності налагодження <a href="
+"\"@cron\">завдань планувальника</a>)"
+
+msgid "New feed items are automatically filed in the checked categories."
+msgstr "Нові елементи потоку автоматично заповнюють обрані категорії"
+
+msgid ""
+"The URL %url is invalid. Please enter a fully-qualified URL, such as http://"
+"www.example.com/feed.xml."
+msgstr ""
+"Помилка адреси %url. Прохання внести коректну адресу, для прикладу - http://"
+"my.ukrweb.info/rss.xml"
+
+msgid "Add feed"
+msgstr "Додати потік"
+
+msgid "Edit category"
+msgstr "Змінити категорію"
+
+msgid "The name of the feed (or the name of the website providing the feed)."
+msgstr "Назва потоку (або назва вебсайту, що надає потік)"
+
+msgid "Categorize news items"
+msgstr "Віднести до категорії"
+
+msgid "A feed named %feed already exists. Please enter a unique title."
+msgstr ""
+"Вже існує потік з назвою %feed. Будь ласка введіть унікальний заголовок."
+
+msgid "Are you sure you want to remove all items from the feed %feed?"
+msgstr "Ви впевнені, що хочете видалити всі елементи з потоку %feed?"
+
+msgid ""
+"A space-separated list of HTML tags allowed in the content of feed items. "
+"(Tags in this list are not removed by Drupal.)"
+msgstr ""
+"Список HTML тегів, розділених пропусками, що дозволені в матеріалах потоку. "
+"(Теги в списку не видаляються Друпалом)"
+
+msgid "Category selection type"
+msgstr "Тип відбору категорії"
+
+msgid "checkboxes"
+msgstr "прапорці"
+
+msgid "multiple selector"
+msgstr "ви можете вибрати один або більше пунктів"
+
+msgid ""
+"The type of category selection widget displayed on categorization pages. "
+"(For a small number of categories, checkboxes are easier to use, while a "
+"multiple selector work well with large numbers of categories.)"
+msgstr ""
+"Тип інтерфейсу для вибору категорії, що відображатиметься на сторінках "
+"категоризації. (Для малої кількості категорій, найлегшими є чекбокси, в той "
+"час як мультивибір полегшує роботу при великій кількості)"
+
+msgid ""
+"Thousands of sites (particularly news sites and blogs) publish their latest "
+"headlines and posts in feeds, using a number of standardized XML-based "
+"formats. Formats supported by the aggregator include <a href=\"@rss\">RSS</"
+"a>, <a href=\"@rdf\">RDF</a>, and <a href=\"@atom\">Atom</a>."
+msgstr ""
+"Тисячі сайтів(в основному новинні та блоги) публікують свій матеріал і "
+"видають потоки, використовуючи певні стандартизовані формати. Формати, які "
+"підтримується Збиральником - <a href=\"@rss\">RSS</a>, <a href=\"@rdf\">RDF</"
+"a>, та <a href=\"@atom\">Atom</a>."
+
+msgid ""
+"Current feeds are listed below, and <a href=\"@addfeed\">new feeds may be "
+"added</a>. For each feed or feed category, the <em>latest items</em> block "
+"may be enabled at the <a href=\"@block\">blocks administration page</a>."
+msgstr ""
+"Доступні потоки наведені нижче і <a href=\"@addfeed\">нові можуть бути "
+"додані</a>. Для кожного потоку або категорії може бути використано блок "
+"<em>останні елементи</em> на <a href=\"@block\">сторінці керування блоками</"
+"a>."
+
+msgid "Add a feed in RSS, RDF or Atom format. A feed may only have one entry."
+msgstr ""
+"Додавання потоку в форматі  RSS, RDF або Atom. Потік може містити лише один "
+"елемент"
+
+msgid ""
+"Categories allow feed items from different feeds to be grouped together. For "
+"example, several sport-related feeds may belong to a category named "
+"<em>Sports</em>. Feed items may be grouped automatically (by selecting a "
+"category when creating or editing a feed) or manually (via the "
+"<em>Categorize</em> page available from feed item listings). Each category "
+"provides its own feed page and block."
+msgstr ""
+"Категорії дозволяють групувати різноманітні потоки. Для прикладу, деякі "
+"спортивно орієнтовані потоки можуть з легкістю бути об'єднаними в категорію "
+"<em>Спорт</em>. Елементи потоку можуть бути згруповані автоматично(виборомо "
+"категорії при створенні або редагуванні потоку) або вручну (через сторінку "
+"<em>Категорії</em>, доступну з списка елементів потоку). Кожна категорія "
+"надає свою власну сторінку і блок."
+
+msgid "feed not parseable"
+msgstr "потік не читається"
+
+msgid ""
+"Configure which content your site aggregates from other sites, how often it "
+"polls them, and how they're categorized."
+msgstr ""
+"Налаштування збору інформації з інших сайтів, перевірки частоти оновлення і "
+"способи її систематизації."
+
+msgid "Update items"
+msgstr "Поновити вміст"
+
+msgid "Edit feed"
+msgstr "Змінити потік"

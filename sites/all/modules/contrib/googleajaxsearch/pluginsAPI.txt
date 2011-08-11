@@ -1,0 +1,78 @@
+Google Ajax Search module for Drupal (GAS module)
+Plugins API Reference
+
+
+gas_get_settings($arguments = array());
+
+Description
+-----------
+
+This is a function used in GAS module. This function is required to get settings for all blocks, actual block, or concrete parameter.
+It is called to determine block settings.
+
+Parameters
+----------
+
+$arguments - optional array with two parameters: delta and param. 
+             Delta tells which block settings should be returned.
+             Param tells which exactly parameter value have to be returned.
+
+Return value
+------------
+
+If array $arguments is empty returns array with settings for all blocks.
+If array $arguments have delta, settings for block specified by delta, are returned.
+   e.g. $arguments = array('key' => 0);
+If array $arguments have delta and param, setting specified by param which belongs to block specified by delta, is returned.
+   e.g. $arguments = array('key' => 0, 'param' => 'results_display');
+
+
+
+
+hook_googleajaxsearch_info();
+
+Description
+-----------
+
+This is a hook used by GAS module. This hook is required to define one or more plugins. It is called to determine plugin title and which functions to call.
+
+Parameters
+----------
+
+There are no available parameters for this function.
+
+
+Return value
+------------
+
+An array of information on the plugins functions and plugin title.
+The array contains a sub-array for each plugin, with the machine-readable type name as the key. Each sub-array has 3 attributes:
+
+    * "settings_form": a string telling which function to call to get settings form with options for this plugin. 
+      This string is the name of the function. Required.
+    * "execute": a string telling which function to call to execute plugin.
+      This string is the name of the function. Required.
+    * "title": the human-readable name of the plugin. It will be displayed in configuration form. Required.
+
+
+Example
+-------
+function gaskeywords_googleajaxsearch_info() {
+  $info['gaskeywords'] = array(
+    'settings_form' => 'gaskeywords_settings_form',
+    'execute' => 'gaskeywords_execute',
+    'title' => 'Google Ajax Search Keywords',
+  );
+  return $info;
+}
+
+
+
+Following above example:
+Function that creates settings form for plugin is named: 'gaskeywords_settings_form'.
+It takes one argument: settings for actual block. Return value for it, is form.
+
+Function which will be called to add keywords for block is named: 'gaskeywords_execute'.
+It takes one argument: settings for actual block. Return value for it are keywords which will be added to default search.
+
+Name by which you recognize plugin in settings form is: 'Google Ajax Search Keywords'.

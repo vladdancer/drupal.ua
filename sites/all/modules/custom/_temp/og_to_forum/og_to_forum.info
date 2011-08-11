@@ -1,0 +1,8 @@
+; $Id$
+
+name = OG to Forum
+description = Convert OG to Forum.
+dependencies[] = forum
+dependencies[] = path_redirect
+package = Custom
+core = 6.x

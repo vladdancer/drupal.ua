@@ -1,0 +1,8 @@
+; $Id$
+
+name = Webform create user
+description = Create a user account to send web forms.
+dependencies[] = webform
+dependencies[] = legal
+package = Webform
+core = 6.x

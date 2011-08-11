@@ -1,0 +1,73 @@
+<?php
+// $Id: ajax_comments.install,v 1.1.2.1 2009/09/14 16:36:38 neochief Exp $
+
+/**
+ * Implementaton of hook_install
+ */
+function answers_badges_install() {
+  $query = "INSERT INTO {vocabulary}
+    (vid, name, description, relations, hierarchy, multiple, required, tags, module, weight)
+    VALUES (30001, 'Badges', 'Badges for answerer', 1, 0, 1, 0, 0, 'taxonomy', 0)";
+  $result = db_query($query);
+
+  $query = "INSERT INTO {vocabulary_node_types} VALUE (30001, 'profile')";
+  $result = db_query($query);
+
+  $answerer_badges[BADGE_ANOUNCER] = array('title' => 'Anouncer', 'description' => 'Shared a link to a question that was visited by 50 page views');
+  $answerer_badges[BADGE_COMMENTATOR] = array('title' => 'Commentator', 'description' => 'Left 10 comments');
+  $answerer_badges[BADGE_ANSWERER] = array('title' => 'Answerer', 'description' => 'Left 10 answers');
+  $answerer_badges[BADGE_CRITIC] = array('title' => 'Critic', 'description' => 'First down vote');
+  $answerer_badges[BADGE_DISCIPLINED] = array('title' => 'Disciplined', 'description' => 'Deleted own post with score of 3 or higher');
+  $answerer_badges[BADGE_EDITOR] = array('title' => 'Editor', 'description' => 'First edit');
+  $answerer_badges[BADGE_MORTARBOARD] = array('title' => 'Mortarboard', 'description' => 'Hit the daily reputation cap for the first time');
+  $answerer_badges[BADGE_NICE_ANSWER] = array('title' => 'Nice Answer', 'description' => 'Answer score of 10 or more');
+  $answerer_badges[BADGE_NICE_QUESTION] = array('title' => 'Nice Question', 'description' => 'Question score of 10 or more');
+  $answerer_badges[BADGE_PEER_PRESSURE] = array('title' => 'Peer Pressure', 'description' => 'Deleted own post with score of -3 or lower');
+  $answerer_badges[BADGE_POPULAR_QUESTION] = array('title' => 'Popular Question', 'description' => 'Asked a question with 1,000 views');
+  $answerer_badges[BADGE_REVIVAL] = array('title' => 'Revival', 'description' => 'Answered more than 30 days later as first answer scoring 2 or more');
+  $answerer_badges[BADGE_SCHOLAR] = array('title' => 'Scholar', 'description' => 'Asked a question and accepted an answer');
+  $answerer_badges[BADGE_SELF_LEARNER] = array('title' => 'Self-Learner', 'description' => 'Answered your own question with score of 3 or more');
+  $answerer_badges[BADGE_STUDENT] = array('title' => 'Student', 'description' => 'Asked first question with at least one up vote');
+  $answerer_badges[BADGE_SUFFRAGE] = array('title' => 'Suffrage', 'description' => 'Used all 30 votes in a day');
+  $answerer_badges[BADGE_SUPPORTER] = array('title' => 'Supporter', 'description' => 'First up vote');
+  $answerer_badges[BADGE_TALKATIVE] = array('title' => 'Talkative', 'description' => 'Posted 10 messages, with 1 or more starred, in <a href="http://chat.stackoverflow.com">chat</a>');
+  $answerer_badges[BADGE_TEACHER] = array('title' => 'Teacher', 'description' => 'Answered first question with score of 1 or more');
+  $answerer_badges[BADGE_TUMBLEWEED] = array('title' => 'Tumbleweed', 'description' => 'Asked a question with no votes, no answers, no comments, and low views for a week');
+  $answerer_badges[BADGE_BOOSTER] = array('title' => 'Booster', 'description' => 'Shared a link to a question that was visited by 300 unique IP addresses in 4 days');
+  $answerer_badges[BADGE_CIVIC_DUTY] = array('title' => 'Civic Duty', 'description' => 'Voted 300 or more times');
+  $answerer_badges[BADGE_ENLIGHTENED] = array('title' => 'Enlightened', 'description' => 'First answer was accepted with score of 10 or more');
+  $answerer_badges[BADGE_ENTHUSIAST] = array('title' => 'Enthusiast', 'description' => 'Visited the site each day for 30 consecutive days');
+  $answerer_badges[BADGE_EPIC] = array('title' => 'Epic', 'description' => 'Hit the daily reputation cap on 50 days');
+  $answerer_badges[BADGE_FAVORITE_QUESTION] = array('title' => 'Favorite Question', 'description' => 'Question favorited by 25 users');
+  $answerer_badges[BADGE_GENERALIST] = array('title' => 'Generalist', 'description' => 'Provided non-wiki answers of 15 total score in 20 of top 40 tags');
+  $answerer_badges[BADGE_GOOD_ANSWER] = array('title' => 'Good Answer', 'description' => 'Answer score of 25 or more');
+  $answerer_badges[BADGE_GOOD_QUESTION] = array('title' => 'Good Question', 'description' => 'Question score of 25 or more');
+  $answerer_badges[BADGE_GURU] = array('title' => 'Guru', 'description' => 'Accepted answer and score of 40 or more');
+  $answerer_badges[BADGE_NECROMANCER] = array('title' => 'Necromancer', 'description' => 'Answered a question more than 60 days later with score of 5 or more');
+  $answerer_badges[BADGE_NOTABLE_QUESTION] = array('title' => 'Notable Question', 'description' => 'Asked a question with 2,500 views');
+  $answerer_badges[BADGE_PUNDIT] = array('title' => 'Pundit', 'description' => 'Left 10 comments with score of 5 or more');
+  $answerer_badges[BADGE_SPORTSMANSHIP] = array('title' => 'Sportsmanship', 'description' => 'Up voted 100 answers');
+  $answerer_badges[BADGE_STRUNK_AND_WHITE] = array('title' => 'Strunk & White', 'description' => 'Edited 100 entries');
+  $answerer_badges[BADGE_TENACIOUS] = array('title' => 'Tenacious', 'description' => 'Zero score accepted answers: more than 5 and 20% of total');
+  $answerer_badges[BADGE_YEARLING] = array('title' => 'Yearling', 'description' => 'Active member for a year, earning at least 200 reputation');
+  $answerer_badges[BADGE_ELECTORATE] = array('title' => 'Electorate', 'description' => 'Voted on 600 questions and 25% or more of total votes are on questions');
+  $answerer_badges[BADGE_FAMOUS_QUESTION] = array('title' => 'Famous Question', 'description' => 'Asked a question with 10,000 views');
+  $answerer_badges[BADGE_FANATIC] = array('title' => 'Fanatic', 'description' => 'Visited the site each day for 100 consecutive days');
+  $answerer_badges[BADGE_GREAT_ANSWER] = array('title' => 'Great Answer', 'description' => 'Answer score of 100 or more');
+  $answerer_badges[BADGE_GREAT_QUESTION] = array('title' => 'Great Question', 'description' => 'Question score of 100 or more');
+  $answerer_badges[BADGE_LEGENDARY] = array('title' => 'Legendary', 'description' => 'Hit the daily reputation cap on 150 days');
+  $answerer_badges[BADGE_POPULIST] = array('title' => 'Populist', 'description' => 'Answer outscored an accepted answer with score of more than 10 by more than 2x');
+  $answerer_badges[BADGE_PUBLICIST] = array('title' => 'Publicist', 'description' => 'Shared a link to a question that was visited by 1000 unique IP addresses in 5 days');
+  $answerer_badges[BADGE_STELLAR_QUESTION] = array('title' => 'Stellar Question', 'description' => 'Question favorited by 100 users');
+  $answerer_badges[BADGE_UNSUNG_HERO] = array('title' => 'Unsung Hero', 'description' => 'Zero score accepted answers: more than 10 and 25% of total');
+  
+  $count = 30001;
+  foreach ($answerer_badges as $key => $value) {
+    $query = "INSERT INTO {term_data} (tid, vid, name, description, weight)
+      VALUE (". $count .", 30001, '". $value['title'] ."', '". $value['description'] ."', 0)";
+    $result = db_query($query);
+    $query = "INSERT INTO {term_hierarchy} VALUE (". $count .", 0)";
+    $result = db_query($query);
+    $count++;
+  }
+}

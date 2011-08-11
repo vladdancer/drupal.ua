@@ -1,0 +1,78 @@
+Index: sites/all/modules/contrib/simplenews/simplenews.module
+===================================================================
+--- sites/all/modules/contrib/simplenews/simplenews.module	(revision 32)
++++ sites/all/modules/contrib/simplenews/simplenews.module	(working copy)
+@@ -1039,7 +1039,9 @@
+     $params['from'] = _simplenews_set_from();
+     $params['context']['newsletter'] = taxonomy_get_term($tid);
+     $params['context']['account'] = $subscription;
+-    drupal_mail('simplenews', 'subscribe', $mail, $subscription->language, $params, $params['from']['address']);
++    $mailkey = simplenews_user_is_subscribed($subscription->mail, $tid)
++      ? 'subscribe_subscribed' : 'subscribe_unsubscribed';
++    drupal_mail('simplenews', $mailkey, $mail, $subscription->language, $params, $params['from']['address']);
+   }
+   elseif (!isset($subscription->tids[$tid])) {
+     // OR add user to newsletter relationship if not already subscribed.
+@@ -1083,7 +1085,9 @@
+     $params['from'] = _simplenews_set_from();
+     $params['context']['newsletter'] = $newsletter;
+     $params['context']['account'] = $subscription;
+-    drupal_mail('simplenews', 'unsubscribe', $mail, $subscription->language, $params, $params['from']['address']);
++    $mailkey = simplenews_user_is_subscribed($subscription->mail, $tid)
++      ? 'unsubscribe_subscribed' : 'unsubscribe_unsubscribed';
++    drupal_mail('simplenews', $mailkey, $mail, $subscription->language, $params, $params['from']['address']);
+   }
+   elseif (isset($subscription->tids[$tid])) {
+     // OR remove the user from the newsletter.
+@@ -1639,31 +1643,37 @@
+       $message['headers']['List-Unsubscribe'] = strtr('<!confirm_unsubscribe_url>', $variables);
+ 
+       break;
+-    case 'subscribe':
++    case 'subscribe_subscribed':
+       // Use formatted from address "name" <mail_address>
+       $message['headers']['From'] = $params['from']['formatted'];
+ 
+       $variables =  simplenews_mail_tokens($context['account'], $context, is_object($context['account']->language) ? $context['account']->language : language_default());
+       $message['subject'] = _simplenews_subscription_confirmation_text('subscribe_subject', $context['account']->language, $variables);
+-      if (simplenews_user_is_subscribed($context['account']->mail, $context['newsletter']->tid)) {
+-        $message['body'] = _simplenews_subscription_confirmation_text('subscribe_subscribed', $context['account']->language, $variables);
+-      }
+-      else {
+-        $message['body'] = _simplenews_subscription_confirmation_text('subscribe_unsubscribed', $context['account']->language, $variables);
+-      }
++      $message['body'] = _simplenews_subscription_confirmation_text('subscribe_subscribed', $context['account']->language, $variables);
+       break;
+-    case 'unsubscribe':
++    case 'subscribe_unsubscribed':
+       // Use formatted from address "name" <mail_address>
+       $message['headers']['From'] = $params['from']['formatted'];
+ 
+       $variables =  simplenews_mail_tokens($context['account'], $context, is_object($context['account']->language) ? $context['account']->language : language_default());
+       $message['subject'] = _simplenews_subscription_confirmation_text('subscribe_subject', $context['account']->language, $variables);
+-      if (simplenews_user_is_subscribed($context['account']->mail, $context['newsletter']->tid)) {
+-        $message['body'] = _simplenews_subscription_confirmation_text('unsubscribe_subscribed', $context['account']->language, $variables);
+-      }
+-      else {
+-        $message['body'] = _simplenews_subscription_confirmation_text('unsubscribe_unsubscribed', $context['account']->language, $variables);
+-      }
++      $message['body'] = _simplenews_subscription_confirmation_text('subscribe_unsubscribed', $context['account']->language, $variables);
++      break;
++    case 'unsubscribe_subscribed':
++      // Use formatted from address "name" <mail_address>
++      $message['headers']['From'] = $params['from']['formatted'];
++
++      $variables =  simplenews_mail_tokens($context['account'], $context, is_object($context['account']->language) ? $context['account']->language : language_default());
++      $message['subject'] = _simplenews_subscription_confirmation_text('subscribe_subject', $context['account']->language, $variables);
++      $message['body'] = _simplenews_subscription_confirmation_text('unsubscribe_subscribed', $context['account']->language, $variables);
++      break;
++    case 'unsubscribe_unsubscribed':
++      // Use formatted from address "name" <mail_address>
++      $message['headers']['From'] = $params['from']['formatted'];
++
++      $variables =  simplenews_mail_tokens($context['account'], $context, is_object($context['account']->language) ? $context['account']->language : language_default());
++      $message['subject'] = _simplenews_subscription_confirmation_text('subscribe_subject', $context['account']->language, $variables);
++      $message['body'] = _simplenews_subscription_confirmation_text('unsubscribe_unsubscribed', $context['account']->language, $variables);
+       break;
+   }
+ 

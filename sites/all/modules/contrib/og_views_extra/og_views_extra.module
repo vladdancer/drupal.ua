@@ -1,0 +1,46 @@
+<?php
+// $Id: og_views_extra.module,v 1.1 2009/10/09 23:47:49 kscheirer Exp $
+/**
+ * @file
+ *   Additional integration plugins for views and OG
+ *
+ *   Currently only include extra access options for
+ *     - is group member
+ *     - is group member or site admin
+ *     - is NOT group member
+ */
+
+define('OG_VIEWSX_NOTMEMBER', 0);
+define('OG_VIEWSX_MEMBER_OR_ADMIN', 1);
+define('OG_VIEWSX_MEMBERS_ONLY', 2);
+
+/**
+ * Implementation of hook_views_api().
+ */
+function og_views_extra_views_api() {
+  return array(
+    'api' => 2,
+  );
+}
+
+/**
+ * Access helper function.
+ *
+ * @return Is the current user an admin or member of the current group context
+ */
+function og_views_extra_is_group_member($membership) {
+    $group = og_get_group_context();
+
+    if (!$group) {
+      return FALSE;
+    }
+
+    // count site admins as group members unless specifically excluded
+    $admin_ok = ($membership != OG_VIEWSX_MEMBERS_ONLY);
+
+    // get membership status in this group
+    $member = og_is_group_member($group, $admin_ok);
+
+    // are we asserting user is a member or non-member?
+    return $membership ? $member : !$member;
+  }

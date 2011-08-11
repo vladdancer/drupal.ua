@@ -1,0 +1,187 @@
+<?php 
+// $Id: node_embed.module,v 1.5 2010/09/08 02:11:40 jec006 Exp $
+
+/**
+ * This module defines an input filter for taking an embed code syntax ([[nid: ###]])
+ * and removing the embed code and replacing with a rendered node view at that position
+ * in the text field. *
+ */
+/**
+ * @file module code to define the input filter for node embedding.
+ */
+
+/**
+ * Implementation of hook_filter()
+ */
+function node_embed_filter($op, $delta = 0, $format = -1, $text = '') {
+  switch ($op) {
+  case 'list':
+    return array(0 => t('Insert node'));
+
+  case 'description':
+    return t('By including the syntax [[nid:(node_id)]], this filter will embed the node with given NID');
+
+  case 'prepare':
+    return $text;
+
+  case 'no cache':
+    return TRUE;
+
+  case "process":
+    // replace on [[nid: ###]]
+    return preg_replace_callback('/\[\[nid:(\d+)\]\]/', '_node_make_replacements', $text);
+  }
+}
+
+/**
+ * Implementation of hook_filter_tips()
+ */
+function node_embed_filter_tips($delta, $format, $long = FALSE) {
+  return t('[[nid:123]] - insert a node content');
+}
+
+/**
+ * Implementation of hook_preprocess_node()
+ */
+function node_embed_preprocess_node(&$vars) {
+  if ($vars['node_embedded']) { 
+    $vars['template_files'][] = "node-embed--default";
+    $vars['template_files'][] = 'node-embed--' . $vars['type'];
+  }
+}
+  
+/**
+ * Provides the replacement html to be rendered in place of the embed code.
+ * Does not handle nested embeds.
+ *
+ * @param $matches
+ *    numeric node id that has been captured by preg_replace_callback
+ * @return
+ *    The rendered HTML replacing the embed code
+ */ 
+function _node_make_replacements($matches) {
+  if (is_numeric($matches[1])) {
+    $node = node_load($matches[1]);
+    $node->node_embedded = TRUE;
+    
+    if (!$node->status || !node_access('view', $node)) {
+      return '';
+    }
+  }
+  else {
+    return '';
+  }
+
+  $output = node_view($node);
+  return $output;
+}
+
+/**
+ * Implementation of hook_theme_registry_alter
+ * This is where we add our default template for the fckeditor view page template.
+ * We want our path suggestion for the module to be overridden by the theme, so 
+ * some re-ordering is needed.
+ */  
+function node_embed_theme_registry_alter(&$theme_registry) {  
+  $paths = $theme_registry['page']['theme paths'];
+  $theme = $theme_registry['page']['theme path'];
+  
+  $key = array_search($theme, $paths);
+  
+  if ($key === FALSE) {
+    $theme_registry['page']['theme paths'][] = drupal_get_path('module', 'node_embed') ."/theme";
+  }
+  else {
+    unset($theme_registry['page']['theme paths'][$key]);
+    $theme_registry['page']['theme paths'][] = drupal_get_path('module', 'node_embed') ."/theme";
+    $theme_registry['page']['theme paths'][] = $theme_registry['page']['theme path'];
+    // reset the keys
+    $theme_registry['page']['theme paths'] = array_values($theme_registry['page']['theme paths']);
+  }
+}
+
+/**
+ * make compatible with views 2 for default view.
+ */
+function node_embed_views_api() {
+  return array('api' => 2.0);
+}
+  
+/**
+ * Implementation of hook_views_default_views().
+ */
+function node_embed_views_default_views() {
+  $views = array();
+  
+  if (module_exists('fckeditor')) {
+    $pathFK = drupal_get_path('module', "node_embed") ."/fckeditor/fckeditor_node_embed.view.inc";
+    include_once($pathFK);
+    $views[$view->name] = $view;
+  }
+  
+  $view = null;
+  
+  if (module_exists('ckeditor')||module_exists('wysiwyg')) {
+    $pathCK = drupal_get_path('module', "node_embed") ."/ckeditor/ckeditor_node_embed.view.inc";
+    include_once($pathCK);
+    $views[$view->name] = $view;
+  }
+  
+  return $views;
+}
+
+/**
+ * Implement hook_form_alter()
+ * add a validation handler to nodes with node_embed.
+ *
+ */
+function node_embed_form_alter(&$form, $form_state, $form_id) {
+  $form['#validate'][] = 'node_embed_validate';
+}
+
+/**
+ * validation for the node_embed filter.
+ * we do not allow nodes to embed in themselves.
+ * results in segment fault.
+ */
+function node_embed_validate($form, &$form_state) {
+  $nid = $form['nid']['#value'];  
+  if ($nid) {
+    $needle = "[[nid:$nid]]";
+    $found = strpos($form['#post']['body'], $needle);
+    if ($found === FALSE) {
+      // nothing found
+    }
+    else {
+      form_set_error('edit-body', t('A node is not allowed to embed in itself.'));
+    }
+  }
+}
+
+/**
+* Implementing the Wysiwyg API
+ * Register a directory containing Wysiwyg plugins.
+ *
+ * @param $type
+ *   The type of objects being collected: either 'plugins' or 'editors'.
+ * @return
+ *   A sub-directory of the implementing module that contains the corresponding
+ *   plugin files. This directory must only contain integration files for
+ *   Wysiwyg module.
+ */
+function node_embed_wysiwyg_include_directory($type) {
+  switch ($type) {
+    case 'plugins':
+      // You can just return $type, if you place your Wysiwyg plugins into a
+      // sub-directory named 'plugins'.
+      return $type;
+  }
+}
+
+/*
+ *  Implementation of hook_init - attach the needed css files if we're on a form page
+ */
+
+function node_embed_init () {
+	drupal_add_css(drupal_get_path('module', 'node_embed').'/plugins/node_embed/node_embed.css');	
+}

@@ -1,0 +1,116 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:09+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "No log messages available."
+msgstr "Нічого не зафіксовано."
+
+msgid "Location"
+msgstr "Адреса"
+
+msgid "Severity"
+msgstr "Серйозність"
+
+msgid "Count"
+msgstr "Кількість"
+
+msgid "Filter log messages"
+msgstr "Фільтрувати журнальні повідомлення"
+
+msgid "You must select something to filter by."
+msgstr "Вам потрібно вибрати щось для фільтрації."
+
+msgid "Discard log entries above the following row limit"
+msgstr "Відкинути елементи журнала, що перевищують наступне обмеження рядків"
+
+msgid ""
+"The maximum number of rows to keep in the database log. Older entries will "
+"be automatically discarded. (Requires a correctly configured <a href=\"@cron"
+"\">cron maintenance task</a>.)"
+msgstr ""
+"Максимальна кількість рядків, які зберігати в базі даних журналів. Старіші "
+"елементи будуть автоматично відкинуті. (Необхідно коректно налагодити <a "
+"href=\"@cron\">завдання планувальника cron</a>.)"
+
+msgid ""
+"The dblog module monitors your system, capturing system events in a log to "
+"be reviewed by an authorized individual at a later time. This is useful for "
+"site administrators who want a quick overview of activities on their site. "
+"The logs also record the sequence of events, so it can be useful for "
+"debugging site errors."
+msgstr ""
+"Модуль dblog спостерігає за Вашою системою, збирає системні повідомлення в "
+"журнали для перегляду індивідуально пізніше. Це корисно адміністраторам "
+"сайту, що потребують швидкого аналізу активності всієї системи. Журнали "
+"також записують послідовність подій, що може бути корисно для відладки "
+"помилок на сайті."
+
+msgid ""
+"The dblog log is simply a list of recorded events containing usage data, "
+"performance data, errors, warnings and operational information. "
+"Administrators should check the dblog report on a regular basis to ensure "
+"their site is working properly."
+msgstr ""
+"Dblog журнал - це просто список запам'ятованих подій, що містить дані "
+"використання, швидкодії, помилок, попереджень і спеціальної інформації. "
+"Адміністратори можуть регулярно перевіряти звіти модуля dblog для "
+"впевненості коректності роботи їхнього вебсайту."
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@dblog"
+"\">Dblog module</a>."
+msgstr ""
+"Для додаткової інформації читайте онлайновий підручник для <a href=\"@dblog"
+"\">Dblog модуля</a>."
+
+msgid ""
+"The dblog module monitors your website, capturing system events in a log to "
+"be reviewed by an authorized individual at a later time. The dblog log is "
+"simply a list of recorded events containing usage data, performance data, "
+"errors, warnings and operational information. It is vital to check the dblog "
+"report on a regular basis as it is often the only way to tell what is going "
+"on."
+msgstr ""
+"Модуль dblog спостерігає за Вашим вебсайтом, збирає системні повідомлення в "
+"журнали для перегляду індивідуально пізніше. dblog журнал - це просто список "
+"запам'ятованих подій, що містить дані використання, швидкодії, помилок, "
+"попереджень і спеціальної інформації. Важливо регулярно перевіряти звіти "
+"модуля dblog для впевненості коректності роботи їхнього вебсайту."
+
+msgid ""
+"Settings for logging to the Drupal database logs. This is the most common "
+"method for small to medium sites on shared hosting. The logs are viewable "
+"from the admin pages."
+msgstr ""
+"Параметри для журналювання до Бази Даних Друпалу. Це найбільш загальний "
+"метод для малих та середніх вебсайтів на віртуальному хостінгу. Журнали "
+"доступні з адміністративних сторінок."
+
+msgid "Recent log entries"
+msgstr "Останні записи в журналі подій"
+
+msgid "View events that have recently been logged."
+msgstr "Передивитися останні записані події."
+
+msgid "Top 'page not found' errors"
+msgstr "Найчастіші 'page not found' помилки"
+
+msgid "View 'page not found' errors (404s)."
+msgstr "Перешлянути 'page not found' помилки (404ті)."
+
+msgid "Top 'access denied' errors"
+msgstr "Найчастіші 'access denied' помилки"
+
+msgid "View 'access denied' errors (403s)."
+msgstr "Преглянути 'access denied' помилки (403ті)."

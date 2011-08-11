@@ -1,0 +1,45 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Contains install and update functions for drupal_account module.
+ */
+
+
+/**
+ * Implementation of hook_install()
+ */
+function drupal_account_install() {
+  drupal_load('module', 'content');
+  content_notify('install', 'drupal_account');
+  variable_set('drupal_account_grab_time', NULL);
+}
+
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function drupal_account_uninstall() {
+  drupal_load('module', 'content');
+  content_notify('uninstall', 'drupal_account');
+  variable_del('drupal_account_grab_time');
+}
+
+
+/**
+ * Implementation of hook_enable()
+ */
+function drupal_account_enable() {
+  drupal_load('module', 'content');
+  content_notify('enable', 'drupal_account');
+}
+
+
+/**
+ * Implementation of hook_disable()
+ */
+function drupal_account_disable() {
+  drupal_load('module', 'content');
+  content_notify('disable', 'drupal_account');
+}

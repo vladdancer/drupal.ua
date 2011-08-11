@@ -1,0 +1,815 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: 2009-10-07 16:24+0000\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Read more"
+msgstr "Дізнатися більше"
+
+msgid "Log"
+msgstr "Журнал"
+
+msgid "Explanation or submission guidelines"
+msgstr "Пояснення або вказівки щодо подання"
+
+msgid "category"
+msgstr "категорія"
+
+msgid "The username %name does not exist."
+msgstr "Ім'я користувача %name не існує."
+
+msgid "Advanced search"
+msgstr "Розширений пошук"
+
+msgid "type"
+msgstr "тип"
+
+msgid "Are you sure you want to delete %title?"
+msgstr "Ви дійсно бажаєте стерти %title?"
+
+msgid "RSS"
+msgstr "RSS"
+
+msgid "Title field label"
+msgstr "Назва поля заголовку"
+
+msgid "Body field label"
+msgstr "Назва поля тескту"
+
+msgid "Revisions"
+msgstr "Зміни"
+
+msgid "Log message"
+msgstr "Повідомлення в системний журнал"
+
+msgid "node"
+msgstr "вузол"
+
+msgid "access content"
+msgstr "доступ до матеріалів сайту"
+
+msgid "Create content"
+msgstr "Створити матеріал"
+
+msgid "Authoring information"
+msgstr "Інформація про створення"
+
+msgid "Format: %time. Leave blank to use the time of form submission."
+msgstr "Формат: %time. Залишіть пустим щоб використати час затвердження форми."
+
+msgid "Leave blank for %anonymous."
+msgstr "Залиште пустим для %anonymous."
+
+msgid "Are you sure you want to delete these items?"
+msgstr "Ви дійсно бажаєте стерти ці елементи?"
+
+msgid "The items have been deleted."
+msgstr "Елементи видалено."
+
+msgid "No items selected."
+msgstr "Не обрано елементів."
+
+msgid "published"
+msgstr "оприлюденений"
+
+msgid "Publishing options"
+msgstr "Опції публікування"
+
+msgid "Revert"
+msgstr "Відновити"
+
+msgid "Syndicate"
+msgstr "Синдикація"
+
+msgid "view revisions"
+msgstr "переглянути версії"
+
+msgid "Revisions for %title"
+msgstr "Зміни для %title"
+
+msgid "!date by !username"
+msgstr "!date від !username"
+
+msgid "revert"
+msgstr "повернути"
+
+msgid "Revision"
+msgstr "Версія"
+
+msgid "current revision"
+msgstr "поточна версія"
+
+msgid "Length of trimmed posts"
+msgstr "Довжина скорочених дописів"
+
+msgid "200 characters"
+msgstr "200 знаків"
+
+msgid "400 characters"
+msgstr "400 знаків"
+
+msgid "600 characters"
+msgstr "600 знаків"
+
+msgid "800 characters"
+msgstr "800 знаків"
+
+msgid "1000 characters"
+msgstr "1000 знаків"
+
+msgid "1200 characters"
+msgstr "1200 знаків"
+
+msgid "1400 characters"
+msgstr "1400 знаків"
+
+msgid "1600 characters"
+msgstr "1600 знаків"
+
+msgid "1800 characters"
+msgstr "1800 знаків"
+
+msgid "2000 characters"
+msgstr "2000 знаків"
+
+msgid ""
+"The maximum number of characters used in the trimmed version of a post. "
+"Drupal will use this setting to determine at which offset long posts should "
+"be trimmed. The trimmed version of a post is typically used as a teaser when "
+"displaying the post on the main page, in XML feeds, etc. To disable teasers, "
+"set to 'Unlimited'. Note that this setting will only affect new or updated "
+"content and will not affect existing teasers."
+msgstr ""
+"Максимальное число знаков в усеченной версии материала. Drupal использует "
+"эту настройку, чтобы отрезать определенное  количество знаков в начале "
+"текста для усеченного варианта, который обычно используется как анонс "
+"основной страницы, XML-лент и т.п. Для отключения анонсов, установите "
+"'Неограничено'. Обратите внимание, что это изменение будет касаться только "
+"новых или обновленных материалов и не повлияет на существующие анонсы."
+
+msgid "@type: deleted %title."
+msgstr "@type: видалено %title."
+
+msgid "Revision of %title from %date"
+msgstr "Версія %title від %date"
+
+msgid "The username of the user to which you would like to assign ownership."
+msgstr ""
+
+msgid "Please enter a valid username."
+msgstr ""
+
+msgid "administer nodes"
+msgstr "керувати матеріалами"
+
+msgid "not published"
+msgstr "не оприлюднений"
+
+msgid "not sticky"
+msgstr "не прикріплене"
+
+msgid "sticky"
+msgstr "прикріплене"
+
+msgid "not promoted"
+msgstr "не розміщено на першій сторінці"
+
+msgid "promoted"
+msgstr "розміщено на першій сторінці"
+
+msgid "Default options"
+msgstr "Типові опції"
+
+msgid "No content types available."
+msgstr "Немає доступних типів матеріалів."
+
+msgid "The update has encountered an error."
+msgstr "Оновлення викликало помилку"
+
+msgid "1 item successfully processed:"
+msgid_plural "@count items successfully processed:"
+msgstr[0] "вдало оброблено @count елемент:"
+msgstr[1] "вдало оброблено @count елементи:"
+msgstr[2] "вдало оброблено @count елементів:"
+
+msgid "Publish"
+msgstr "Публікувати"
+
+msgid "Unpublish"
+msgstr "Не публікувати"
+
+msgid "Save content type"
+msgstr "Зберегти тип матеріалу."
+
+msgid "Are you sure you want to revert to the revision from %revision-date?"
+msgstr "Ви дійсно бажаєте повернути версію за %revision-date?"
+
+msgid "Are you sure you want to delete the revision from %revision-date?"
+msgstr "Ви дійсно бажаєте видалити версію від %revision-date?"
+
+msgid "revert revisions"
+msgstr "повернути до попередньої весії"
+
+msgid "@type: deleted %title revision %revision."
+msgstr "@type: %title знищена версія %revision."
+
+msgid "Preview trimmed version"
+msgstr "Переглянути скорочену версію"
+
+msgid "Preview full version"
+msgstr "Переглянути повну версію"
+
+msgid "The body of your @type is too short. You need at least %words words."
+msgstr "Текст @type дуже короткий. Потрібно як мінімум %words слів."
+
+msgid ""
+"This content has been modified by another user, changes cannot be saved."
+msgstr "Вміст був змінений іншим користувачем, зміни не вдалося зберегти."
+
+msgid "Show only items where"
+msgstr "Показувати тільки ті елементи, де"
+
+msgid "@type: updated %title."
+msgstr "@type: поновлено %title."
+
+msgid "@type: added %title."
+msgstr "@type: додано %title."
+
+msgid "The content type %name has been deleted."
+msgstr "Тип матеріалу %name знищено."
+
+msgid "Deleted content type %name."
+msgstr "Знищено тип матеріалу %name."
+
+msgid "Promote to front page"
+msgstr "Розмістити на головній"
+
+msgid "Containing any of the words"
+msgstr "Містить одне із слів"
+
+msgid "Containing the phrase"
+msgstr "Містить фразу"
+
+msgid "Containing none of the words"
+msgstr "Не містить жодного із слів"
+
+msgid "Only in the category(s)"
+msgstr "Лише у категорії(-ях)"
+
+msgid "Only of the type(s)"
+msgstr "Лише для типу(-ів)"
+
+msgid "Content ranking"
+msgstr "Рейтинг вмісту."
+
+msgid ""
+"The following numbers control which properties the content search should "
+"favor when ordering the results. Higher numbers mean more influence, zero "
+"means the property is ignored. Changing these numbers does not require the "
+"search index to be rebuilt. Changes take effect immediately."
+msgstr ""
+"Наступні номери керують, якими властивостями матеріалу пошук повинен "
+"переважати, коли видавати результати.Вищі значення надають більшої "
+"вагомості, нуль - ігнорування. Зміна цих значень не вимагає перебудови "
+"пошукового індексу. Зміни вступають в силу одразу."
+
+msgid "Keyword relevance"
+msgstr "Релевантність ключового слова"
+
+msgid "Recently posted"
+msgstr "Нещодавно надіслані"
+
+msgid "Number of comments"
+msgstr "Кількість коментарів"
+
+msgid "Number of views"
+msgstr "Кількість переглядів"
+
+msgid "Factor"
+msgstr "Фактор"
+
+msgid "The content access permissions have been rebuilt."
+msgstr ""
+
+msgid "When either saving a new post or updating an existing post"
+msgstr "Коли зберігається або змінюється існуючий допис"
+
+msgid "After saving a new post"
+msgstr "Після додавання нового допису"
+
+msgid "After saving an updated post"
+msgstr "Після оновлення допису"
+
+msgid "After deleting a post"
+msgstr "Після видалення допису"
+
+msgid "When content is viewed by an authenticated user"
+msgstr "Коли матеріал переглянуто зареєстрованим користувачем"
+
+msgid "Publish post"
+msgstr ""
+
+msgid "Unpublish post"
+msgstr ""
+
+msgid "Make post sticky"
+msgstr ""
+
+msgid "Make post unsticky"
+msgstr ""
+
+msgid "Promote post to front page"
+msgstr ""
+
+msgid "Remove post from front page"
+msgstr ""
+
+msgid "Change the author of a post"
+msgstr ""
+
+msgid "Save post"
+msgstr ""
+
+msgid "Unpublish post containing keyword(s)"
+msgstr ""
+
+msgid "Set @type %title to published."
+msgstr ""
+
+msgid "Set @type %title to unpublished."
+msgstr ""
+
+msgid "Set @type %title to sticky."
+msgstr ""
+
+msgid "Set @type %title to unsticky."
+msgstr ""
+
+msgid "Promoted @type %title to front page."
+msgstr ""
+
+msgid "Removed @type %title from front page."
+msgstr ""
+
+msgid "Saved @type %title"
+msgstr ""
+
+msgid "Changed owner of @type %title to uid %name."
+msgstr ""
+
+msgid ""
+"The post will be unpublished if it contains any of the character sequences "
+"above. Use a comma-separated list of character sequences. Example: funny, "
+"bungee jumping, \"Company, Inc.\". Character sequences are case-sensitive."
+msgstr ""
+
+msgid "Up to date translation"
+msgstr "Оновлений перекладу"
+
+msgid "Outdated translation"
+msgstr "Застарілий переклад"
+
+msgid "<em>and</em> where <strong>%a</strong> is <strong>%b</strong>"
+msgstr "<em>and</em> where <strong>%a</strong> is <strong>%b</strong>"
+
+msgid "<strong>%a</strong> is <strong>%b</strong>"
+msgstr "<strong>%a</strong> is <strong>%b</strong>"
+
+msgid "Create @name"
+msgstr "Створити @name"
+
+msgid "@type %title has been deleted."
+msgstr "@type %title було видалено."
+
+msgid "Delete content type"
+msgstr "Видалити тип матеріалу"
+
+msgid "Minimum number of words"
+msgstr "Мінімальна кількість слів"
+
+msgid "Revision information"
+msgstr "Інформація про зміни"
+
+msgid "@type %title has been created."
+msgstr "@type %title оновлено."
+
+msgid "@type %title has been updated."
+msgstr "Публікацію %title типу @type було оновлено."
+
+msgid "The post could not be saved."
+msgstr ""
+
+msgid ""
+"For more information, please refer to the <a href=\"@help\">help section</"
+"a>, or the <a href=\"@handbook\">online Drupal handbooks</a>. You may also "
+"post at the <a href=\"@forum\">Drupal forum</a>, or view the wide range of "
+"<a href=\"@support\">other support options</a> available."
+msgstr ""
+"За повнішою інформацією зверніться до <a href=\"@help\">секції допомоги</a>, "
+"або до <a href=\"@handbook\">онлайн підручників Друпалу</a>. Також Ви можете "
+"звернутись за допомогою на <a href=\"@forum\">форумі Друпалу</a>, або "
+"переглянути велику кількість <a href=\"@support\">інших можливостей "
+"підтримки</a>."
+
+msgid "Submitted by !username on @datetime"
+msgstr "Опубліковано !username @datetime"
+
+msgid "Preview post"
+msgstr "Перегляд матеріалу"
+
+msgid "Must users preview posts before submitting?"
+msgstr "Чи обов'язково переглядати матеріал перед відправкою?"
+
+msgid ""
+"An explanation of the additions or updates being made to help other authors "
+"understand your motivations."
+msgstr ""
+"Пояснення до ваших оновлень та додатків, щоб допомогти іншим авторам "
+"зрозуміти суть ваших дій."
+
+msgid ""
+"The minimum number of words for the body field to be considered valid for "
+"this content type. This can be useful to rule out submissions that do not "
+"meet the site's standards, such as short test posts."
+msgstr ""
+"Мінімальна кількість слів для поля тексту цього типу матеріалів. Може бути "
+"використане для відхилення матеріалів, що не узгоджуються зі стандартами "
+"сайту, наприклад , для занадто коротких пробних повідомлень."
+
+msgid "The content type %name has been updated."
+msgstr "Тип матеріалу %name було оновлено."
+
+msgid "The content type %name has been added."
+msgstr "Тип материалів %name додано."
+
+msgid ""
+"The human-readable name of this content type. This text will be displayed as "
+"part of the list on the <em>create content</em> page. It is recommended that "
+"this name begin with a capital letter and contain only letters, numbers, and "
+"<strong>spaces</strong>. This name must be unique."
+msgstr ""
+
+msgid ""
+"The machine-readable name of this content type. This text will be used for "
+"constructing the URL of the <em>create content</em> page for this content "
+"type. This name must contain only lowercase letters, numbers, and "
+"underscores. Underscores will be converted into hyphens when constructing "
+"the URL of the <em>create content</em> page. This name must be unique."
+msgstr ""
+
+msgid ""
+"The machine-readable name of this content type. This field cannot be "
+"modified for system-defined content types."
+msgstr ""
+"Машинна назва такого типу вмісту. Це поле не можна змінити для "
+"перевстановлених сиситемою типів вмісту."
+
+msgid ""
+"A brief description of this content type. This text will be displayed as "
+"part of the list on the <em>create content</em> page."
+msgstr ""
+"Короткий опис цього типу матеріалів. Цей текст буде показаний як частина "
+"списку на сторінці <em>створити вміст</em>."
+
+msgid "Submission form settings"
+msgstr ""
+
+msgid "This content type does not have a title field."
+msgstr "Назва для поля заголовку цього типу матеріалів."
+
+msgid ""
+"To omit the body field for this content type, remove any text and leave this "
+"field blank."
+msgstr ""
+"Щоб пропустити поле текст для цього типу матеріалів, видаліть весь текст і "
+"залиште поле пустим."
+
+msgid ""
+"This text will be displayed at the top of the submission form for this "
+"content type. It is useful for helping or instructing your users."
+msgstr ""
+"Цей текст буде відображений зверху форми матеріалів цього типу. Зручно "
+"використовувати для розміщення інструкцій і допомоги користувачам."
+
+msgid "Workflow settings"
+msgstr ""
+
+msgid ""
+"Users with the <em>administer nodes</em> permission will be able to override "
+"these options."
+msgstr ""
+"Користувачі з повноваженнями <em>адмініструвати вузли</em> зможуть змінити "
+"ці опції."
+
+msgid "The machine-readable name %type is already taken."
+msgstr "Машинна назва %type вже існує."
+
+msgid ""
+"The machine-readable name must contain only lowercase letters, numbers, and "
+"underscores."
+msgstr ""
+
+msgid "Invalid machine-readable name. Please enter a name other than %invalid."
+msgstr ""
+
+msgid "The human-readable name %name is already taken."
+msgstr "Ім'я %name уже зайняте."
+
+msgid "The content type %name has been reset to its default values."
+msgstr ""
+"Налаштування типу матеріалів %name були скинуті до налаштувань за "
+"замовчуванням."
+
+msgid "Are you sure you want to delete the content type %type?"
+msgstr "Ви дійсно хочете знищити тип матеріалу %type?"
+
+msgid "Added content type %name."
+msgstr "Додано тип матеріалів %name."
+
+msgid "Changed the content type of 1 post from %old-type to %type."
+msgid_plural ""
+"Changed the content type of @count posts from %old-type to %type."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid ""
+"<strong>Warning:</strong> there is currently 1 %type post on your site. It "
+"may not be able to be displayed or edited correctly, once you have removed "
+"this content type."
+msgid_plural ""
+"<strong>Warning:</strong> there are currently @count %type posts on your "
+"site. They may not be able to be displayed or edited correctly, once you "
+"have removed this content type."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid ""
+"If the site is experiencing problems with permissions to content, you may "
+"have to rebuild the permissions cache. Possible causes for permission "
+"problems are disabling modules or configuration changes to permissions. "
+"Rebuilding will remove all privileges to posts, and replace them with "
+"permissions based on the current modules and settings."
+msgstr ""
+"Если сайт испытывает проблемы с правами на содержимое, вам может "
+"понадобиться пересоздать кеш прав доступа. Возможные причины для проблем с "
+"правами - это выключение модулей или изменения в конфигурации прав доступа. "
+"Пересоздание удалит все настройки правд для сообщений и заменит их правами, "
+"основанными на действующих модулях и настройках."
+
+msgid ""
+"Rebuilding may take some time if there is a lot of content or complex "
+"permission settings. After rebuilding has completed posts will automatically "
+"use the new permissions."
+msgstr ""
+"Пересоздание может занять некоторое время, если содержимого много или задана "
+"сложная комбинация прав доступа. После того, как пересоздание будет "
+"завершено, сообщения автоматически получают новые права доступа."
+
+msgid "Node access status"
+msgstr "Стан доступу до матеріалу"
+
+msgid "Number of posts on main page"
+msgstr "Кількість матеріалів на головній сторінці."
+
+msgid ""
+"The default maximum number of posts to display per page on overview pages "
+"such as the main page."
+msgstr ""
+"Стандартна (default) кількість дописів для відображення на сторінках "
+"перегляду, як-то на головній сторінці."
+
+msgid "Are you sure you want to rebuild the permissions on site content?"
+msgstr ""
+
+msgid ""
+"This action rebuilds all permissions on site content, and may be a lengthy "
+"process. This action cannot be undone."
+msgstr ""
+
+msgid "Demote from front page"
+msgstr "Вилучити з головної"
+
+msgid "Make sticky"
+msgstr "Закріпити вгорі"
+
+msgid "Remove stickiness"
+msgstr "Не закріпляти вгорі"
+
+msgid "language"
+msgstr "мова"
+
+msgid "An error occurred and processing did not complete."
+msgstr ""
+
+msgid "Show summary in full view"
+msgstr "Показати при повному перегляді"
+
+msgid ""
+"The trimmed version of your post shows what your post looks like when "
+"promoted to the main page or when exported for syndication.<span class=\"no-"
+"js\"> You can insert the delimiter \"&lt;!--break--&gt;\" (without the "
+"quotes) to fine-tune where your post gets split.</span>"
+msgstr ""
+"Мала частина Вашого допису відображатиметься на головній сторінці, а також "
+"буде експортована в RSS потоки.<span class=\"no-js\"> Ви можете вписати "
+"розділювач \"&lt;!--break--&gt;\" (без лапОк) для точного розділення.</span>"
+
+msgid "Copy of the revision from %date."
+msgstr "Копія версії від %date."
+
+msgid ""
+"@type %title has been reverted back to the revision from %revision-date."
+msgstr ""
+
+msgid "Revision from %revision-date of @type %title has been deleted."
+msgstr ""
+
+msgid "@type: reverted %title revision %revision."
+msgstr "@type: %title повернений до версії %revision."
+
+msgid "The content access permissions need to be rebuilt."
+msgstr ""
+
+msgid ""
+"The content access permissions need to be rebuilt. Please visit <a href="
+"\"@node_access_rebuild\">this page</a>."
+msgstr ""
+
+msgid ""
+"The node module manages content on your site, and stores all posts "
+"(regardless of type) as a \"node\". In addition to basic publishing "
+"settings, including whether the post has been published, promoted to the "
+"site front page, or should remain present (or sticky) at the top of lists, "
+"the node module also records basic information about the author of a post. "
+"Optional revision control over edits is available. For additional "
+"functionality, the node module is often extended by other modules."
+msgstr ""
+
+msgid ""
+"Though each post on your site is a node, each post is also of a particular "
+"<a href=\"@content-type\">content type</a>. <a href=\"@content-type"
+"\">Content types</a> are used to define the characteristics of a post, "
+"including the title and description of the fields displayed on its add and "
+"edit pages. Each content type may have different default settings for "
+"<em>Publishing options</em> and other workflow controls. By default, the two "
+"content types in a standard Drupal installation are <em>Page</em> and "
+"<em>Story</em>. Use the <a href=\"@content-type\">content types page</a> to "
+"add new or edit existing content types. Additional content types also become "
+"available as you enable additional core, contributed and custom modules."
+msgstr ""
+
+msgid ""
+"The administrative <a href=\"@content\">content page</a> allows you to "
+"review and manage your site content. The <a href=\"@post-settings\">post "
+"settings page</a> sets certain options for the display of posts. The node "
+"module makes a number of permissions available for each content type, which "
+"may be set by role on the <a href=\"@permissions\">permissions page</a>."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@node"
+"\">Node module</a>."
+msgstr ""
+
+msgid ""
+"Below is a list of all the content types on your site. All posts that exist "
+"on your site are instances of one of these content types."
+msgstr ""
+"Нижче наведено список типів матеріалів на вашому сайті. Всі повідомлення на "
+"вашому сайті є представниками одного з цих типів."
+
+msgid ""
+"To create a new content type, enter the human-readable name, the machine-"
+"readable name, and all other relevant fields that are on this page. Once "
+"created, users of your site will be able to create posts that are instances "
+"of this content type."
+msgstr ""
+"Для створення нового типу матеріалів, введіть людино-читаєме ім'я, машино-"
+"читаєме ім'я і інші поля, що вказані на сторінці. Як тільки створено, "
+"користувачі Вашого вебсайту будуть спроможні створювати дописи і версії "
+"даного типу матеріалів."
+
+msgid ""
+"The revisions let you track differences between multiple versions of a post."
+msgstr ""
+"Версії дозволяють вам слідкувати за змінами у різних версіях повідомлень."
+
+msgid ""
+"You specified that the summary should not be shown when this post is "
+"displayed in full view. This setting is ignored when the summary is empty."
+msgstr ""
+
+msgid ""
+"You specified that the summary should not be shown when this post is "
+"displayed in full view. This setting has been ignored since you have not "
+"defined a summary for the post. (To define a summary, insert the delimiter "
+"\"&lt;!--break--&gt;\" (without the quotes) in the Body of the post to "
+"indicate the end of the summary and the start of the main content.)"
+msgstr ""
+"Ви вказали, щоб аннотація не відображалась, коли допис в режимі повного "
+"перегляду. Даний параметр буде проігноровано через її відсутність. (для "
+"вказування аннотації вставле розділювач \"&lt;!--break--&gt;\" (без лапОк) в "
+"Тіло допису для вказування кінця аннотації.)"
+
+msgid "Read the rest of !title."
+msgstr "Прочитати решту !title."
+
+msgid ""
+"<h1 class=\"title\">Welcome to your new Drupal website!</h1><p>Please follow "
+"these steps to set up and start using your website:</p>"
+msgstr ""
+"<h1 class=\"title\">Вітаю на Вашому новому сайті!</h1><p>Будь ласка, зробіть "
+"наступні кроки для настройки і початку використання Вашого сайту:</p>"
+
+msgid ""
+"<strong>Configure your website</strong> Once logged in, visit the <a href="
+"\"@admin\">administration section</a>, where you can <a href=\"@config"
+"\">customize and configure</a> all aspects of your website."
+msgstr ""
+"<strong>Настройте Ваш сайт</strong> Зайшовши перший раз відвідайте <a href="
+"\"@admin\">секцію адміністрування</a>, де Ви можете <a href=\"@config"
+"\">настроїти під свої вимоги</a> усі аспекти Вашого сайту."
+
+msgid ""
+"<strong>Enable additional functionality</strong> Next, visit the <a href="
+"\"@modules\">module list</a> and enable features which suit your specific "
+"needs. You can find additional modules in the <a href=\"@download_modules"
+"\">Drupal modules download section</a>."
+msgstr ""
+"<strong>Включіть додаткову функціональність</strong> Далі, продивіться <a "
+"href=\"@modules\">список модулів</a> і включіть можливості, які відповідають "
+"Вашим специфічним вимогам. Ви можете знайти додаткові модулі на <a href="
+"\"@download_modules\">сторінці завантаження модулів Друпалу</a>."
+
+msgid ""
+"<strong>Customize your website design</strong> To change the \"look and feel"
+"\" of your website, visit the <a href=\"@themes\">themes section</a>. You "
+"may choose from one of the included themes or download additional themes "
+"from the <a href=\"@download_themes\">Drupal themes download section</a>."
+msgstr ""
+"<strong>Налагодьте дизайн Вашого сайту</strong> Щоб змінити \"вигляд та "
+"механіку\" Вашого сайту, прогляньте <a href=\"@themes\">секцію тем</a>. Ви "
+"можете обрати одну з існуючих тем дизайну або завантажити додаткові теми з "
+"<a href=\"@download_themes\">секції завантаження тем Друпалу</a>."
+
+msgid ""
+"<strong>Start posting content</strong> Finally, you can <a href=\"@content"
+"\">create content</a> for your website. This message will disappear once you "
+"have promoted a post to the front page."
+msgstr ""
+"<strong>Почніть публікувати наповнення</strong> Нарешті Ви зможете <a href="
+"\"@content\">створювати наповнення</a> для Вашого сайту. Це повідомлення "
+"зникне після появи першої публікації на головній сторінці."
+
+msgid "Rebuilding content access permissions"
+msgstr ""
+
+msgid "Content permissions have been rebuilt."
+msgstr ""
+
+msgid "The content access permissions have not been properly rebuilt."
+msgstr ""
+
+msgid "administer content types"
+msgstr "адмініструвати типи наповнення"
+
+msgid "View, edit, and delete your site's content."
+msgstr "Перегляд, редагування і видалення матеріалів сайту."
+
+msgid "Post settings"
+msgstr "Параметри публікування"
+
+msgid ""
+"Control posting behavior, such as teaser length, requiring previews before "
+"posting, and the number of posts on the front page."
+msgstr ""
+"Контролює механізм публікування, довжину анонсу публікації, попередній "
+"перегляд перед публікуванням та кількість публікацій на головній сторінці."
+
+msgid ""
+"Manage posts by content type, including default status, front page "
+"promotion, etc."
+msgstr ""
+"Керує публікаціями за типами наповнення, стандартний статус публікації, "
+"розміщення на головній та ін."
+
+msgid "Add content type"
+msgstr "Додати тип наповнення"
+
+msgid "Revert to earlier revision"
+msgstr ""
+
+msgid "Delete earlier revision"
+msgstr ""

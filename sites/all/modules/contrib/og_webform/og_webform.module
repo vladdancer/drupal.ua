@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ *  Enables organic group administrators to modify webforms within their groups.
+ */
+
+/**
+ * Implementation of hook_init().
+ */
+function og_webform_init() {
+  // Set the group context for Webform and Results tabs.
+  if (!og_get_group_context()) {
+    $node = menu_get_object('webform_menu');
+    if (isset($node->nid) && ($group_node = og_determine_context_get_group($node))) {
+      og_set_group_context($group_node);
+    }
+  }
+}
+ 
+/**
+ * Implementation of hook_menu_access().
+ */
+function og_webform_menu_alter(&$items) {
+  // Set the Webform tab access callback to use OG.
+  foreach ($items as $key => $item) {
+    if (strpos($key, 'node/%webform_menu') === 0 && $item['access callback'] == 'node_access' && $item['access arguments'][0] == 'update') {
+      $items[$key]['access callback'] = 'og_menu_access_node_edit';
+      $items[$key]['access arguments'] = array(1);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_webform_submission_access().
+ */
+function og_webform_webform_submission_access($node, $submission, $op = 'view', $account = NULL) {
+  switch ($op) {
+    case 'view':
+    case 'list':
+      return user_access('access own webform results', $account) && og_menu_access_node_edit($node);
+    case 'edit':
+      return user_access('edit all webform submissions', $account) && og_menu_access_node_edit($node);
+    case 'delete':
+      return user_access('delete all webform submissions', $account) && og_menu_access_node_edit($node);
+  }
+}
+
+/**
+ * Implementation of hook_webform_results_access().
+ */
+function og_webform_webform_results_access($node, $account = NULL) {
+  return user_access('access own webform results', $account) && og_menu_access_node_edit($node);
+}
+
+/**
+ * Implementation of hook_webform_results_clear_access().
+ */
+function og_webform_webform_results_clear_access($node, $account = NULL) {
+  return user_access('delete all webform submissions', $account) && og_webform_webform_results_access($node, $account);
+}

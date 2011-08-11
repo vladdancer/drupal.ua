@@ -1,0 +1,65 @@
+# $Id$
+#
+# Ukrainian translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  webform_user.module: n/a
+#  webform_user.info: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2010-11-24 17:00+0200\n"
+"PO-Revision-Date: 2010-11-24 17:00+0200\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Ukrainian <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=0; plural=;\n"
+
+#: webform_user.module:24
+msgid "You can use %WEBFORM% token to put the form somewhere inside body."
+msgstr "Ви можете використати %WEBFORM% маркер щоб поставити вебформу десь всередині матеріалу."
+
+#: webform_user.module:57
+msgid "Registration"
+msgstr "Реєстрація"
+
+#: webform_user.module:73
+msgid "Select the action after sending a webform"
+msgstr "Виберіть дію після відправки веб-форми"
+
+#: webform_user.module:75
+msgid "To register, users need to form such a field \"email\" - email address, \"name\" - user name, \"last\" - last name (and also \"about\" - about yourself, \"phone\" - phone)."
+msgstr "Для регистрации пользователей на форме нужны такие поля \"email\" - электронный адрес, \"name\"  - имя пользователя, \"last\" - фамилия пользователя (а також \"about\" - о себе, \"phone\" - телефон)."
+
+#: webform_user.module:77
+msgid "Do not register"
+msgstr "Не реєструвати"
+
+#: webform_user.module:78
+msgid "Create Account"
+msgstr "Створити обліковий запис"
+
+#: webform_user.module:79
+msgid "Ask for confirmation, but the register by default"
+msgstr "Запитати підтвердження, але зареєструватися за замовчуванням"
+
+#: webform_user.module:80
+msgid "Ask for confirmation, and do not register by default"
+msgstr "Запитати підтвердження, і не реєструють за замовчуванням"
+
+#: webform_user.module:94
+msgid "Create an account on site for me"
+msgstr "Створити обліковий запис на сайті для мене"
+
+#: webform_user.info:0
+msgid "Create a user account to send web forms."
+msgstr "Створення облікового запису користувача після відсилання веб-форми."
+
+#: webform_user.info:0
+msgid "Webform"
+msgstr "Форма"
+

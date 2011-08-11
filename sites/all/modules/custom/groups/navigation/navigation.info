@@ -1,0 +1,4 @@
+name = Group navigation
+description = Drupal.ua Group navigation.
+package = Custom
+core = 6.x

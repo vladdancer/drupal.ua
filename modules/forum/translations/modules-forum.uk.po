@@ -1,0 +1,319 @@
+# Ukrainian translation of Drupal (6.14)
+# Copyright (c) 2009 by the Ukrainian translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal (6.14)\n"
+"POT-Creation-Date: 2009-10-07 17:31+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)"
+">=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+msgid "Add container"
+msgstr "Додати контейнер"
+
+msgid "edit container"
+msgstr "редагувати контейнер"
+
+msgid "edit forum"
+msgstr "редагувати форум"
+
+msgid "Forum name"
+msgstr "Назва форуму"
+
+msgid "forum"
+msgstr "форум"
+
+msgid "Are you sure you want to delete the forum %name?"
+msgstr "Ви дійсно бажаєте стерти форум %name?"
+
+msgid ""
+"The forum %term and all sub-forums and associated posts have been deleted."
+msgstr "Форум %term, а також всі підфоруми і пов'язані повідомлення видалено."
+
+msgid "forum: deleted %term and all its sub-forums and associated posts."
+msgstr "форум: знищено %term, а також всі підфоруми і пов'язані повідомлення."
+
+msgid "Add forum"
+msgstr "Додати форум"
+
+msgid "Created"
+msgstr "Створено"
+
+msgid "Last post"
+msgstr "Останнє повідомлення"
+
+msgid "Last reply"
+msgstr "Остання відповідь"
+
+msgid "Topics"
+msgstr "Теми"
+
+msgid "Topic"
+msgstr "Тема"
+
+msgid "Posts"
+msgstr "Дописи"
+
+msgid "No forums defined"
+msgstr "Жодних форумів не створено"
+
+msgid "This topic has been moved"
+msgstr "Цю тему було перенесено"
+
+msgid "Go to previous forum topic"
+msgstr "До попередньої теми"
+
+msgid "Go to next forum topic"
+msgstr "До наступної теми"
+
+msgid "Edit container"
+msgstr "Змітини контейнер"
+
+msgid "Hot topic threshold"
+msgstr "Поріг \"гарячих тем\""
+
+msgid "Topics per page"
+msgstr "Тем на сторінці"
+
+msgid "Posts - most active first"
+msgstr "Дописи - з найбільш активних"
+
+msgid "Posts - least active first"
+msgstr "Дописи - з найменш активних"
+
+msgid "New forum topics"
+msgstr "Нові теми на форумі"
+
+msgid "Number of topics"
+msgstr "Кількість тем"
+
+msgid "Active forum topics"
+msgstr "Активні теми на форумі"
+
+msgid "Read the latest forum topics."
+msgstr "Читати останні теми на форумі."
+
+msgid "Control forums and their hierarchy and change forum settings."
+msgstr "Керування ієрархією форумів і іх налаштування."
+
+msgid "Edit forum"
+msgstr "Редагувати форум"
+
+msgid "Default order"
+msgstr "Стандартний (default) порядок"
+
+msgid ""
+"This is the designated forum vocabulary. Some of the normal vocabulary "
+"options have been removed."
+msgstr ""
+"Цей словник потрібний для форумів. Деякі стандартні для словників можливості "
+"недоступні."
+
+msgid ""
+"The item %forum is only a container for forums. Please select one of the "
+"forums below it."
+msgstr ""
+"Елемент %forum є тільки контейнером для форумів. Будь-ласка, оберіть один з "
+"форумів нижче."
+
+msgid "Leave shadow copy"
+msgstr "Зробити резервну копію"
+
+msgid ""
+"If you move this topic, you can leave a link in the old forum to the new "
+"forum."
+msgstr ""
+"Якщо ви перенесете цю тему, ви можете лишити посилання у старому форумі на "
+"новий."
+
+msgid "Container name"
+msgstr "Назва контейнера"
+
+msgid "forum container"
+msgstr "контейнер форумів"
+
+msgid "Created new @type %term."
+msgstr "Створений новий  @type %term."
+
+msgid "The @type %term has been updated."
+msgstr "@type %term оновлено."
+
+msgid "@time ago<br />by !author"
+msgstr "@time тому<br />від !author"
+
+msgid "create forum topics"
+msgstr "створити теми на форумі"
+
+msgid "edit own forum topics"
+msgstr "редагувати власні теми на форумі"
+
+msgid "administer forums"
+msgstr "адмініструвати форуми"
+
+msgid "Post new @node_type"
+msgstr "Створити @node_type"
+
+msgid "Short but meaningful name for this collection of threaded discussions."
+msgstr ""
+
+msgid "Description and guidelines for discussions within this forum."
+msgstr ""
+
+msgid ""
+"Forums are displayed in ascending order by weight (forums with equal weights "
+"are displayed alphabetically)."
+msgstr ""
+
+msgid "Short but meaningful name for this collection of related forums."
+msgstr ""
+
+msgid "Description and guidelines for forums within this container."
+msgstr ""
+
+msgid ""
+"Containers are displayed in ascending order by weight (containers with equal "
+"weights are displayed alphabetically)."
+msgstr ""
+
+msgid ""
+"Deleting a forum or container will also delete its sub-forums, if any. To "
+"delete posts in this forum, visit <a href=\"@content\">content "
+"administration</a> first. This action cannot be undone."
+msgstr ""
+
+msgid "The number of posts a topic must have to be considered \"hot\"."
+msgstr ""
+"Кількість повідомлень в обговоренні, необхідне для визнання його \"гарячим\"."
+
+msgid "Default number of forum topics displayed per page."
+msgstr ""
+
+msgid "Default display order for topics."
+msgstr "Стандартне (default) відображення тем."
+
+msgid ""
+"There are no existing containers or forums. Containers and forums may be "
+"added using the <a href=\"@container\">add container</a> and <a href=\"@forum"
+"\">add forum</a> pages."
+msgstr ""
+
+msgid ""
+"Containers are usually placed at the top (root) level, but may also be "
+"placed inside another container or forum."
+msgstr ""
+
+msgid ""
+"Forums may be placed at the top (root) level, or inside another container or "
+"forum."
+msgstr ""
+
+msgid ""
+"The forum module lets you create threaded discussion forums with "
+"functionality similar to other message board systems. Forums are useful "
+"because they allow community members to discuss topics with one another "
+"while ensuring those conversations are archived for later reference. The <a "
+"href=\"@create-topic\">forum topic</a> menu item (under <em>Create content</"
+"em> on the Navigation menu) creates the initial post of a new threaded "
+"discussion, or thread."
+msgstr ""
+
+msgid ""
+"A threaded discussion occurs as people leave comments on a forum topic (or "
+"on other comments within that topic). A forum topic is contained within a "
+"forum, which may hold many similar or related forum topics. Forums are "
+"(optionally) nested within a container, which may hold many similar or "
+"related forums. Both containers and forums may be nested within other "
+"containers and forums, and provide structure for your message board. By "
+"carefully planning this structure, you make it easier for users to find and "
+"comment on a specific forum topic."
+msgstr ""
+
+msgid "When administering a forum, note that:"
+msgstr ""
+
+msgid ""
+"a forum topic (and all of its comments) may be moved between forums by "
+"selecting a different forum while editing a forum topic."
+msgstr ""
+
+msgid ""
+"when moving a forum topic between forums, the <em>Leave shadow copy</em> "
+"option creates a link in the original forum pointing to the new location."
+msgstr ""
+
+msgid ""
+"selecting <em>Read only</em> under <em>Comment settings</em> while editing a "
+"forum topic will lock (prevent new comments) on the thread."
+msgstr ""
+
+msgid ""
+"selecting <em>Disabled</em> under <em>Comment settings</em> while editing a "
+"forum topic will hide all existing comments on the thread, and prevent new "
+"ones."
+msgstr ""
+
+msgid ""
+"For more information, see the online handbook entry for <a href=\"@forum"
+"\">Forum module</a>."
+msgstr ""
+
+msgid ""
+"This page displays a list of existing forums and containers. Containers "
+"(optionally) hold forums, and forums hold forum topics (a forum topic is the "
+"initial post to a threaded discussion). To provide structure, both "
+"containers and forums may be placed inside other containers and forums. To "
+"rearrange forums and containers, grab a drag-and-drop handle under the "
+"<em>Name</em> column and drag the forum or container to a new location in "
+"the list. (Grab a handle by clicking and holding the mouse while hovering "
+"over a handle icon.) Remember that your changes will not be saved until you "
+"click the <em>Save</em> button at the bottom of the page."
+msgstr ""
+
+msgid ""
+"By grouping related or similar forums, containers help organize forums. For "
+"example, a container named \"Food\" may hold two forums named \"Fruit\" and "
+"\"Vegetables\", respectively."
+msgstr ""
+
+msgid ""
+"A forum holds related or similar forum topics (a forum topic is the initial "
+"post to a threaded discussion). For example, a forum named \"Fruit\" may "
+"contain forum topics titled \"Apples\" and \"Bananas\", respectively."
+msgstr ""
+
+msgid ""
+"These settings allow you to adjust the display of your forum topics. The "
+"content types available for use within a forum may be selected by editing "
+"the <em>Content types</em> on the <a href=\"@forum-vocabulary\">forum "
+"vocabulary page</a>."
+msgstr ""
+
+msgid "Forum topic"
+msgstr "Тема для форуму"
+
+msgid ""
+"A <em>forum topic</em> is the initial post to a new discussion thread within "
+"a forum."
+msgstr ""
+"<em>Тема форуму</em> це перша публікація для організації нової дискусії на "
+"форумі."
+
+msgid "You are not allowed to post new content in the forum."
+msgstr ""
+
+msgid "<a href=\"@login\">Login</a> to post new content in the forum."
+msgstr ""
+
+msgid "delete own forum topics"
+msgstr ""
+
+msgid "delete any forum topic"
+msgstr ""
+
+msgid "edit any forum topic"
+msgstr ""

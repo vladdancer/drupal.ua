@@ -1,0 +1,89 @@
+#block-groups-info {
+  border-radius:10px;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border:1px solid #CCC;
+  background: #eee url(../images/gray-gradient.png) repeat-x 0 0; /* for non-css3 browsers */
+  margin:0 -10px 21px;
+  padding:10px 20px;
+  vertical-align:middle;
+}
+#block-groups-info .pane-content {
+	vertical-align: middle;
+}
+
+#block-groups-info > h3{
+	width: 140px;
+	float: left;
+	margin: 15px 10px 0 0;
+	font-weight:bold;
+  font-size:36px;
+  color:#444;
+  text-shadow:1px 1px 1px #fff;
+}
+
+#block-groups-info .groups-block-info {
+	float: left;
+	width:550px;
+}
+
+#block-groups-info .groups-block-links {
+	float: right;
+	text-align: right;
+	margin-top: 10px;
+}
+#block-groups-info .list-of-groups {
+  padding-top: 4px;
+  font-size: 11px;
+  line-height: 140%;
+  text-align: center;
+}
+
+#block-groups-info .groups-block-links a.add-post-button{
+	padding: 5px 10px 5px 10px;
+	border: 1px solid gray;
+	margin-bottom: 10px;
+}
+
+#block-groups-categories ul {
+  padding: 0;
+  margin: 0 0 0.75em;
+}
+#front_group ul.links  {
+  margin:0;
+  padding:0;
+}
+
+#block-groups-categories .views-field-title {
+	margin-right: 0px;
+}
+
+#block-groups-categories .views-field-title {
+	display: inline;
+}
+
+#block-groups-categories .views-field-members-count, #block-groups-categories .views-field-posts-count,
+#block-groups-new .views-field-posts-count, #block-groups-new .views-field-members-count {
+	display: inline-block;
+}
+
+#block-groups-categories .views-field-posts-count, #block-groups-new .views-field-posts-count {
+	margin-left: -3px;
+}
+
+#block-groups-new .views-field-title {
+	display: inline;
+}
+
+#block-groups-new .views-field-member-count {
+	margin-left: -5px;
+}
+
+#panel-groups-page .inside h3.pane-title,
+#front_group #block-groups-categories h3.pane-title {
+	margin-bottom: 5px;
+}
+
+#groups-post-filter-form  .form-item {
+	margin-top: 5px;
+}

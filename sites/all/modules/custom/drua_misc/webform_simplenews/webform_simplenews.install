@@ -1,0 +1,63 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Contains install and update functions for webform_simplenews module.
+ */
+
+
+/**
+ * Implementation of hook_install().
+ */
+function webform_simplenews_install() {
+  db_query("UPDATE {system} SET weight = 11 WHERE name = 'webform_simplenews'");
+  drupal_install_schema('webform_simplenews');
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function webform_simplenews_uninstall() {
+  drupal_uninstall_schema('webform_simplenews');
+}
+
+
+/**
+ * Implementation of hook_schema().
+ */
+function webform_simplenews_schema() {
+  $schema['webform_simplenews'] = array(
+    'description' => 'Stores the relationship of simplenews to webform.',
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Primary Key: The {node}.nid of the webform.',
+      ),
+      'vid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Primary Key: The {node}.vid of the webform.',
+      ),
+      'tid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Primary Key: The {term_data}.tid of a simplenews assigned to the webform.',
+      ),
+    ),
+    'indexes' => array(
+      'vid' => array('vid'),
+      'nid' => array('nid'),
+    ),
+    'primary key' => array('tid', 'vid'),
+  );
+  return $schema;
+}

@@ -1,0 +1,11 @@
+; $Id: gaskeywords.info,v 1.1.2.1 2009/09/30 12:02:27 macperlinski Exp $
+name = gaskeywords
+description = Google Ajax Search Keywords
+
+dependencies[] = googleajaxsearch
+; Information added by drupal.org packaging script on 2009-09-30
+version = "6.x-1.2"
+core = "6.x"
+project = "googleajaxsearch"
+datestamp = "1254313245"
+
