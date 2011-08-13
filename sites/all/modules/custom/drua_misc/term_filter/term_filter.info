@@ -1,7 +1,14 @@
 ; $Id$
-name = "Term filter"
-description = "Taxonomy term filter."
+name = Taxonomy term filter
+description = "Navigation block with a dictionary of terms."
 core = "6.x"
 package = "Filters"
 dependencies[] = "taxonomy"
+
+
+; Information added by drupal.org packaging script on 2011-08-13
+version = "6.x-1.1"
+core = "6.x"
+project = "term_filter"
+datestamp = "1313217200"
 
