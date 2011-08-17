@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-08-16 21:05+0300\n"
+"POT-Creation-Date: 2011-08-17 13:40+0300\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -19,48 +19,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: term_filter.module:29
+#: term_filter.module:28
 msgid "When you turn on dictionaries, will activate the blocks with the contents of the dictionary."
 msgstr ""
 
-#: term_filter.module:53
+#: term_filter.module:52
 msgid "Create block — !name"
 msgstr ""
 
-#: term_filter.module:56
+#: term_filter.module:55
 msgid "Vocabulary used in: !types"
 msgstr ""
 
-#: term_filter.module:64
+#: term_filter.module:63
 msgid "Select or expanded select box?"
 msgstr ""
 
-#: term_filter.module:65
+#: term_filter.module:64
 msgid "Expanded list will have a size of 5 rows."
 msgstr ""
 
-#: term_filter.module:71
+#: term_filter.module:70
 msgid "Title select"
 msgstr ""
 
-#: term_filter.module:79;203
+#: term_filter.module:78;213
 msgid "Submit"
 msgstr ""
 
-#: term_filter.module:90
+#: term_filter.module:89
 msgid "Preferences have been saved"
 msgstr ""
 
-#: term_filter.module:133
+#: term_filter.module:140
 msgid "Term filter"
 msgstr ""
 
-#: term_filter.module:13
+#: term_filter.module:161
+msgid "- Not select -"
+msgstr ""
+
+#: term_filter.module:12
 msgid "Term filter settings"
 msgstr ""
 
-#: term_filter.module:14
+#: term_filter.module:13
 msgid "Configure Term filter module"
 msgstr ""
 
+#: term_filter.module:0
+msgid "term_filter"
+msgstr ""
+
+#: term_filter.info:0
+msgid "Taxonomy term filter"
+msgstr ""
+
+#: term_filter.info:0
+msgid "Navigation block with a dictionary of terms."
+msgstr ""
+
+#: term_filter.info:0
+msgid "Filters"
+msgstr ""
 
