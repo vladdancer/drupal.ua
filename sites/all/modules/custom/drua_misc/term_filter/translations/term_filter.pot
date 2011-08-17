@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-08-13 08:57+0300\n"
+"POT-Creation-Date: 2011-08-16 21:05+0300\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -23,31 +23,35 @@ msgstr ""
 msgid "When you turn on dictionaries, will activate the blocks with the contents of the dictionary."
 msgstr ""
 
-#: term_filter.module:51
+#: term_filter.module:53
 msgid "Create block — !name"
 msgstr ""
 
-#: term_filter.module:54
+#: term_filter.module:56
 msgid "Vocabulary used in: !types"
 msgstr ""
 
-#: term_filter.module:62
+#: term_filter.module:64
 msgid "Select or expanded select box?"
 msgstr ""
 
-#: term_filter.module:63
+#: term_filter.module:65
 msgid "Expanded list will have a size of 5 rows."
 msgstr ""
 
-#: term_filter.module:70;183
+#: term_filter.module:71
+msgid "Title select"
+msgstr ""
+
+#: term_filter.module:79;203
 msgid "Submit"
 msgstr ""
 
-#: term_filter.module:81
+#: term_filter.module:90
 msgid "Preferences have been saved"
 msgstr ""
 
-#: term_filter.module:121
+#: term_filter.module:133
 msgid "Term filter"
 msgstr ""
 
@@ -59,11 +63,4 @@ msgstr ""
 msgid "Configure Term filter module"
 msgstr ""
 
-#: term_filter.info:0
-msgid "Navigation block with a dictionary of terms."
-msgstr ""
-
-#: term_filter.info:0
-msgid "Filters"
-msgstr ""
 

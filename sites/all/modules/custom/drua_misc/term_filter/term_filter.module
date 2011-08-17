@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id:$
 
 
 /**
@@ -12,7 +12,7 @@ function term_filter_menu() {
     'page arguments' => array('term_filter_settings_form'),
     'title' => 'Term filter settings',
     'description' => 'Configure Term filter module',
-    'access arguments'   => array('administer site configuration'),
+    'access arguments' => array('administer site configuration'),
   );
   return $items;
 }
@@ -36,9 +36,11 @@ function term_filter_settings_form($form_state) {
     if (isset($term_filter_blocks[$vid])) {
       $status = $term_filter_blocks[$vid]['status'];
       $select = $term_filter_blocks[$vid]['select'];
+      $title = check_plain($term_filter_blocks[$vid]['title']);
     }
     else {
       $status = $select = FALSE;
+      $title = '';
     }
     
     $form['block_'. $vid] = array(
@@ -62,6 +64,13 @@ function term_filter_settings_form($form_state) {
       '#title' => t('Select or expanded select box?'),
       '#description' => t('Expanded list will have a size of 5 rows.'),
       '#default_value' => $select,
+    );
+    
+    $form['block_'. $vid]['title_'. $vid] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title select'),
+      '#default_value' => $title,
+      '#maxlength' => 128,
     );
   }
   
@@ -89,6 +98,17 @@ function term_filter_settings_form_submit($form, &$form_state) {
     $term_filter_blocks[$vid]['select'] =
       isset($form_state['values']['select_'. $vid])
       ? $form_state['values']['select_'. $vid] : 0;
+    $term_filter_blocks[$vid]['title'] =
+      isset($form_state['values']['title_'. $vid])
+      ? $form_state['values']['title_'. $vid] : '';
+    if (module_exists('i18nstrings')) {
+      if ($term_filter_blocks[$vid]['status']) {
+        i18nstrings_update('term_filter:vocabulary:'. $vid .':title', $term_filter_blocks[$vid]['title']);
+      }
+      else {
+        i18nstrings_remove('term_filter:vocabulary:'. $vid .':title');
+      }
+    }
   }
   variable_set('term_filter_blocks', $term_filter_blocks);
 }
@@ -139,14 +159,25 @@ function term_filter_switch_form($form_state, $vid = FALSE) {
     $current_term = term_filter_parse_term();
     $default_value = 0;
     $options = array();
-    $options[] = '- Not select -';
+    $options[] = t('- Not select -');
     foreach ($terms as $key => $term) {
-      $options[$term->tid] = $term->name;
+      $options[$term->tid] = check_plain($term->name);
       if ($term->tid == $current_term) {
         $default_value = $current_term;
       }
     }
 
+    if (!empty($term_filter_blocks[$vid]['title'])) {
+      $title = module_exists('i18nstrings') ?
+        i18nstrings('term_filter:vocabulary:'. $vid .':title', $term_filter_blocks[$vid]['title'])
+        : check_plain($term_filter_blocks[$vid]['title']);
+      $form['contact_information'] = array(
+        '#prefix' => '<h3 class="term-filter-title term-filter-title-'. $vid .'">',
+        '#suffix' => '</h3>',
+        '#value' => $title,
+      );
+    }
+    
     if ($default_value && !$term_filter_blocks[$vid]['select']) {
       $default_value = array(
         $default_value => $default_value,

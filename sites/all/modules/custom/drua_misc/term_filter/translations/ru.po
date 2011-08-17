@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-08-13 08:57+0300\n"
-"PO-Revision-Date: 2011-08-13 08:57+0300\n"
+"POT-Creation-Date: 2011-08-16 21:06+0300\n"
+"PO-Revision-Date: 2011-08-16 21:06+0300\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -21,50 +21,62 @@ msgstr ""
 
 #: term_filter.module:29
 msgid "When you turn on dictionaries, will activate the blocks with the contents of the dictionary."
-msgstr "Когда вы включаете словари, будут созданы соответствующие блоки с содержимым словаря."
+msgstr ""
 
-#: term_filter.module:51
+#: term_filter.module:53
 msgid "Create block — !name"
-msgstr "Создать блок — !name"
+msgstr ""
 
-#: term_filter.module:54
+#: term_filter.module:56
 msgid "Vocabulary used in: !types"
-msgstr "Словарь используется в: !types"
+msgstr ""
 
-#: term_filter.module:62
+#: term_filter.module:64
 msgid "Select or expanded select box?"
-msgstr "Список или Раскрытый список?"
+msgstr ""
 
-#: term_filter.module:63
+#: term_filter.module:65
 msgid "Expanded list will have a size of 5 rows."
-msgstr "Раскрытый список будет размером в 5 строк."
+msgstr ""
 
-#: term_filter.module:70;183
+#: term_filter.module:71
+msgid "Title select"
+msgstr ""
+
+#: term_filter.module:79;203
 msgid "Submit"
 msgstr "Отправить"
 
-#: term_filter.module:81
+#: term_filter.module:90
 msgid "Preferences have been saved"
-msgstr "Настройки сохранены"
+msgstr ""
 
-#: term_filter.module:121
+#: term_filter.module:133
 msgid "Term filter"
-msgstr "Фильтр терминов"
+msgstr ""
 
 #: term_filter.module:13
 msgid "Term filter settings"
-msgstr "Фильтр терминов - Настройки"
+msgstr ""
 
 #: term_filter.module:14
 msgid "Configure Term filter module"
-msgstr "Настройки модуля Фильтр терминов"
+msgstr ""
 
+#: term_filter.module:0
+msgid "term_filter"
+msgstr ""
+
+#: term_filter.info:0
+msgid "Taxonomy term filter"
+msgstr ""
 
 #: term_filter.info:0
 msgid "Navigation block with a dictionary of terms."
-msgstr "Блок навигации со словарем терминов."
+msgstr ""
 
 #: term_filter.info:0
 msgid "Filters"
 msgstr "Фильтры"
 
+<div class="dev-timer"> Page execution time was 902.78 ms. Executed 243 queries in 191.38 milliseconds.</div><div class="dev-memory-usage"><h3>Memory usage:</h3> Memory used at: devel_init()=<strong>2.11</strong> MB, devel_shutdown()=<strong>28.19</strong> MB.</div>
