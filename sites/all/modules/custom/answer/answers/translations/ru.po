@@ -80,7 +80,7 @@ msgstr "Вопросы и ответы"
 
 #: answers.search.inc:28
 msgid "Search Questions & Answers"
-msgstr "Поиск Вопросы и ответы"
+msgstr "Поиск Вопросов и Ответов"
 
 #: answers.search.inc:89
 msgid "results"
