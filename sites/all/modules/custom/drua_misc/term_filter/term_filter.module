@@ -198,19 +198,21 @@ function term_filter_switch_form($form_state, $vid = FALSE) {
         $default_value => $default_value,
       );
     }
-    
-    $size = $term_filter_blocks[$vid]['select'];
-    if (!$size) {
-      $size = count($options);
-    }
-    
+
     $form['term_'. $vid] = array(
       '#type' => 'select',
       '#default_value' => $default_value,
       '#options' => $options,
       '#multiple' => !$term_filter_blocks[$vid]['select'],
-      '#size' => !$term_filter_blocks[$vid]['select'] ? $size : 0,
     );
+    if (!$term_filter_blocks[$vid]['select']) {
+      $size = count($options);
+      if ($term_filter_blocks[$vid]['size'] > 0 && $term_filter_blocks[$vid]['size'] < $size) {
+        $size = $term_filter_blocks[$vid]['size'];
+      }
+      $form['term_'. $vid]['#size'] = $size;
+    }
+
     drupal_add_js(
   	  "Drupal.behaviors.term_filter_". $vid ." = function() {
 
