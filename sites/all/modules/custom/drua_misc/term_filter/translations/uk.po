@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-08-17 13:41+0300\n"
-"PO-Revision-Date: 2011-08-17 13:41+0300\n"
+"POT-Creation-Date: 2011-08-19 21:30+0300\n"
+"PO-Revision-Date: 2011-08-19 21:30+0300\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Ukrainian <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -23,41 +23,45 @@ msgstr ""
 msgid "When you turn on dictionaries, will activate the blocks with the contents of the dictionary."
 msgstr "Після активації словників будуть створені блоки містять терміни словників."
 
-#: term_filter.module:52
+#: term_filter.module:54
 msgid "Create block — !name"
 msgstr "Створити блок — !name"
 
-#: term_filter.module:55
+#: term_filter.module:57
 msgid "Vocabulary used in: !types"
 msgstr "Словник використовується в: !types"
 
-#: term_filter.module:63
-msgid "Select or expanded select box?"
+#: term_filter.module:65
+msgid "Select or Expanded select box?"
 msgstr "Список або Розкритий список?"
 
-#: term_filter.module:64
-msgid "Expanded list will have a size of 5 rows."
-msgstr "Розкритий список буде розміром в 5 рядків."
+#: term_filter.module:71
+msgid "Expandet select size"
+msgstr "Висота розкритого списку"
 
-#: term_filter.module:70
+#: term_filter.module:73
+msgid "Enter 0 to 100% of the height of the list."
+msgstr "Введіть 0 що б висота списку була 100%."
+
+#: term_filter.module:80
 msgid "Title select"
 msgstr "Заголовок списку"
 
-#: term_filter.module:78;213
+#: term_filter.module:88;242
 msgid "Submit"
 msgstr "Надіслати"
 
-#: term_filter.module:89
+#: term_filter.module:99
 msgid "Preferences have been saved"
 msgstr "Налаштування збережені"
 
-#: term_filter.module:140
+#: term_filter.module:154
 msgid "Term filter"
 msgstr "Фільтр термінів"
 
-#: term_filter.module:161
-msgid "- Not select -"
-msgstr "- Не вибрано -"
+#: term_filter.module:175
+msgid "- None selected -"
+msgstr "- Не обрано -"
 
 #: term_filter.module:12
 msgid "Term filter settings"
