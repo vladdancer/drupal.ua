@@ -72,3 +72,96 @@ function answers_admin() {
 
   return system_settings_form($form);
 }
+
+
+/**
+ * Answer FAQ settings form.
+ */
+function answers_admin_faq_form($form_state) {
+  $form = array();
+  
+  $faq_settings = variable_get('answers_faq_settings', array());
+  
+  $form['faq_edit'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Create/Edit page'),
+  );
+  $form['faq_edit']['edit_status'] = array(
+    '#type' => 'checkbox', 
+    '#title' => t('Status'),
+    '#default_value' => $faq_settings['edit_status'],
+  );
+  $form['faq_edit']['edit_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node nid'),
+    '#default_value' => $faq_settings['edit_nid'],
+    '#size' => 5,
+  );
+  
+  $form['faq_list'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('List page'),
+  );
+  $form['faq_list']['list_status'] = array(
+    '#type' => 'checkbox', 
+    '#title' => t('Status'),
+    '#default_value' => $faq_settings['list_status'],
+  );
+  $form['faq_list']['list_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node nid'),
+    '#default_value' => $faq_settings['list_nid'],
+    '#size' => 5,
+  );
+  
+  $form['faq_comment'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Comment page'),
+  );
+  $form['faq_comment']['comment_status'] = array(
+    '#type' => 'checkbox', 
+    '#title' => t('Status'),
+    '#default_value' => $faq_settings['comment_status'],
+  );
+  $form['faq_comment']['comment_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node nid'),
+    '#default_value' => $faq_settings['comment_nid'],
+    '#size' => 5,
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  
+  return $form;
+}
+
+
+/**
+ * Submit FAQ settings.
+ */
+function answers_admin_faq_form_submit($form, &$form_state) {
+  $settings = array();
+  
+  $settings['edit_status'] = isset($form_state['values']['edit_status'])
+    ? $form_state['values']['edit_status'] : 0;
+  $settings['edit_nid'] = isset($form_state['values']['edit_nid'])
+    ? $form_state['values']['edit_nid'] : 0;
+  
+  $settings['list_status'] = isset($form_state['values']['list_status'])
+    ? $form_state['values']['list_status'] : 0;
+  $settings['list_nid'] = isset($form_state['values']['list_nid'])
+    ? $form_state['values']['list_nid'] : 0;
+  
+  $settings['comment_status'] = isset($form_state['values']['comment_status'])
+    ? $form_state['values']['comment_status'] : 0;
+  $settings['comment_nid'] = isset($form_state['values']['comment_nid'])
+    ? $form_state['values']['comment_nid'] : 0;
+  
+  variable_set('answers_faq_settings', $settings);
+  unset($form_state['storage']);
+  drupal_set_message(t('Preferences have been saved'));
+}
+

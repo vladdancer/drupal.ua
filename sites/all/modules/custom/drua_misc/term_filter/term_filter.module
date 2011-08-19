@@ -70,7 +70,7 @@ function term_filter_settings_form($form_state) {
       '#type' => 'textfield',
       '#title' => t('Expandet select size'),
       '#default_value' => $size,
-      '#description' => t('If 0 then size = 100%.'),  //FIXME
+      '#description' => t('Enter 0 to 100% of the height of the list.'),
       '#maxlength' => 2,
       '#size' => 2,
     );
