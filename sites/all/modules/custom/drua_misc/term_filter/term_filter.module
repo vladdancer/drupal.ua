@@ -36,10 +36,12 @@ function term_filter_settings_form($form_state) {
       $status = $term_filter_blocks[$vid]['status'];
       $select = $term_filter_blocks[$vid]['select'];
       $title = check_plain($term_filter_blocks[$vid]['title']);
+      $size = $term_filter_blocks[$vid]['size'];
     }
     else {
       $status = $select = FALSE;
       $title = '';
+      $size = 0;
     }
     
     $form['block_'. $vid] = array(
@@ -61,8 +63,16 @@ function term_filter_settings_form($form_state) {
     $form['block_'. $vid]['select_'. $vid] = array(
       '#type' => 'checkbox', 
       '#title' => t('Select or expanded select box?'),
-      '#description' => t('Expanded list will have a size of 5 rows.'),
       '#default_value' => $select,
+    );
+    
+    $form['block_'. $vid]['size_'. $vid] = array(
+      '#type' => 'textfield',
+      '#title' => t('Expandet select size'),
+      '#default_value' => $size,
+      '#description' => t('If 0 then size = 100%.'),  //FIXME
+      '#maxlength' => 2,
+      '#size' => 2,
     );
     
     $form['block_'. $vid]['title_'. $vid] = array(
@@ -100,6 +110,10 @@ function term_filter_settings_form_submit($form, &$form_state) {
     $term_filter_blocks[$vid]['title'] =
       isset($form_state['values']['title_'. $vid])
       ? $form_state['values']['title_'. $vid] : '';
+    $term_filter_blocks[$vid]['size'] =
+      isset($form_state['values']['size_'. $vid])
+      ? (int)$form_state['values']['size_'. $vid] : 0;
+
     if (module_exists('i18nstrings')) {
       if ($term_filter_blocks[$vid]['status']) {
         i18nstrings_update('term_filter:vocabulary:'. $vid .':title', $term_filter_blocks[$vid]['title']);
@@ -160,7 +174,9 @@ function term_filter_switch_form($form_state, $vid = FALSE) {
     $options = array();
     $options[] = t('- Not select -');
     foreach ($terms as $key => $term) {
-      $options[$term->tid] = check_plain($term->name);
+      $options[$term->tid] = module_exists('i18nstrings') ?
+        i18nstrings('taxonomy:term:'. $term->tid .':name', $term->name)
+        : check_plain($term->name);
       if ($term->tid == $current_term) {
         $default_value = $current_term;
       }
@@ -183,12 +199,17 @@ function term_filter_switch_form($form_state, $vid = FALSE) {
       );
     }
     
+    $size = $term_filter_blocks[$vid]['select'];
+    if (!$size) {
+      $size = count($options);
+    }
+    
     $form['term_'. $vid] = array(
       '#type' => 'select',
       '#default_value' => $default_value,
       '#options' => $options,
       '#multiple' => !$term_filter_blocks[$vid]['select'],
-      '#size' => !$term_filter_blocks[$vid]['select'] ? 5 : 0,
+      '#size' => !$term_filter_blocks[$vid]['select'] ? $size : 0,
     );
     drupal_add_js(
   	  "Drupal.behaviors.term_filter_". $vid ." = function() {
@@ -212,6 +233,7 @@ function term_filter_switch_form($form_state, $vid = FALSE) {
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
+
   return $form;
 }
 
@@ -222,9 +244,9 @@ function term_filter_switch_form($form_state, $vid = FALSE) {
 function term_filter_switch_form_submit($form, &$form_state) {
   unset($form_state['storage']);
   $current_term = term_filter_parse_term();
-  
-  if (isset($form_state['values']['vid']) && isset($form_state['values']['term_'. $form_state['values']['vid']])) {
-    $new_url = $form_state['values']['term_'. $form_state['values']['vid']];
+  $form_post = $form_state['clicked_button']['#post'];
+  if (isset($form_post['vid']) && isset($form_post['term_'. $form_post['vid']])) {
+    $new_url = $form_post['term_'. $form_post['vid']];
     $new_url = is_array($new_url) ? (int)current($new_url) : (int)$new_url;
     
     $arg = arg();
