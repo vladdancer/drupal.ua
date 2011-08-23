@@ -7,7 +7,7 @@
 ?>
 
 <div>
-
+<div id="answers-search-close"></div>
   <h3 class="site-search"><?php print t('Site search'); ?>:</h3>
   <div id="site-search">
     <?php print $search_results_themed; ?>

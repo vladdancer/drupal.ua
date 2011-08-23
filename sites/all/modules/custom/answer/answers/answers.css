@@ -62,3 +62,17 @@
 .gsc-search-box {
   display:none;
 }
+#answers-search-close {
+  display: block;
+  position: absolute;
+  z-index: 99;
+  right: 7px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  background: transparent url(img/cross.gif) no-repeat scroll center center;
+  border: 1px solid #BBB;
+}
+
+
+

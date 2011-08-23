@@ -117,3 +117,9 @@ Drupal.behaviors.executeAnswersSearch = function() {
   $('#answers-search-pager a').click(DrupalUaAnswers.onPagerClick);
 
 };
+
+Drupal.behaviors.answers_close = function (context) {
+  $("#answers-search-close").click(function() {
+    $("#answers-search-contents").text('');
+  });
+};

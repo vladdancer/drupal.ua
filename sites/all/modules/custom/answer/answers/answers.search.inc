@@ -58,7 +58,6 @@ function answers_search_question_form() {
     '#type' => 'hidden',
     '#default_value' => 0,
   );
-
   return $form;
 }
 
