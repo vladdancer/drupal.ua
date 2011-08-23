@@ -2015,6 +2015,8 @@ h3.term-filter-title {
   margin-bottom: 0;
   font-size: 14px;
 }
-#term-filter-switch-form .form-item {
+#term-filter-switch-form .form-item,
+#term-filter-switch-form-1 .form-item,
+#term-filter-switch-form-2 .form-item {
   margin: 0;
 }
