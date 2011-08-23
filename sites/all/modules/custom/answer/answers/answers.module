@@ -59,15 +59,6 @@ function answers_menu() {
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => -10,
   );
-  $items['admin/settings/answers/faq'] = array(
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('answers_admin_faq_form'),
-    'title' => 'Answers FAQ',
-    'description' => 'Configure Answers FAQ',
-    'access arguments'   => array('administer answers'),
-    'type' => MENU_LOCAL_TASK,
-    'file' => 'answers.admin.inc',
-  );
 
   return $items;
 }
@@ -96,6 +87,7 @@ function answers_init() {
     ));
     drupal_add_css(drupal_get_path('module', 'answers') .'/answers.css');
   }
+  
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'question') {
     drupal_add_js(drupal_get_path('module', 'answers') .'/answers.question.js');
     drupal_add_css(drupal_get_path('module', 'answers') .'/answers.css');
@@ -259,18 +251,6 @@ function answers_block($op = 'list', $delta = '', $edit = array()) {
         'answers_search' => array(
           'info' => t('Search for Answers'),
         ),
-        'edit_faq' => array(
-          'info' => t('Answer FAQ: Create/Edit page'),
-        ),
-        'list_faq' => array(
-          'info' => t('Answer FAQ: List page'),
-        ),
-        'comment_faq' => array(
-          'info' => t('Answer FAQ: Comment page'),
-        ),
-        'join_faq' => array(
-          'info' => t('Answer FAQ: Join dinamic block'),
-        ),
       );
       return $blocks;
 
@@ -354,79 +334,9 @@ function answers_block($op = 'list', $delta = '', $edit = array()) {
           $block['subject'] = t('Search for Answers');
           $block['content'] = drupal_get_form('answers_search_question_form');
           return $block;
-          
-        case 'edit_faq':
-        case 'list_faq':
-        case 'comment_faq':
-          $content = _answers_faq_block($delta);
-          if ($content) {
-            return array(
-              'subject' => check_plain($content->title),
-              'content' => $content->body
-            );
-          }
-          break;
-          
-        case 'join_faq':
-          if (arg(0) == 'node') {
-            if (arg(2) == '') {
-              $node = node_load(arg(1));
-              if ($node && $node->type == 'question') {
-                $content = _answers_faq_block('comment_faq');
-              }
-            }
-            else {
-              if (arg(1) == 'add' && arg(2) == 'question') {
-                $content = _answers_faq_block('edit_faq');
-              }
-              elseif (arg(2) == 'edit') {
-                $node = node_load(arg(1));
-                if ($node && $node->type == 'question') {
-                  $content = _answers_faq_block('edit_faq');
-                }
-              }
-            }
-          }
-          else {
-            $content = _answers_faq_block('list_faq');
-          }
-          
-          if ($content) {
-            return array(
-              'subject' => check_plain($content->title),
-              'content' => $content->body
-            );
-          }
-          break;
       }
     break;
   }
-}
-
-
-/**
- * Aditional function: return Answers FAQ block content.
- */
-function _answers_faq_block($type) {
-  global $language;
-  $block = ($type == 'edit_faq' ? 'edit' : ($type == 'comment_faq' ? 'comment' : 'list'));
-  $faq_settings = variable_get('answers_faq_settings', array());
-  
-  if ($faq_settings["{$block}_status"] && ($node = node_load($faq_settings["{$block}_nid"]))) {
-
-    if ($node->language && $language->language != $node->language) {
-      $translation_nid = translation_node_get_translations($node->tnid);
-      if (isset($translation_nid[$language->language])) {
-        $node = node_load($translation_nid[$language->language]->nid);
-      }
-    }
-
-    $node = node_build_content($node, FALSE, FALSE);
-    $node->body = drupal_render($node->content);
-    unset($node->teaser);
-    return $node;
-  }
-  return FALSE;
 }
 
 

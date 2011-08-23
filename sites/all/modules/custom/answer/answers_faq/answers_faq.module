@@ -1,0 +1,228 @@
+<?php
+
+/**
+ * Implementation of hook_menu().
+ */
+function answers_faq_menu() {
+  $items = array();
+
+  $items['admin/settings/answers/faq'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('answers_admin_faq_form'),
+    'title' => 'Answers FAQ',
+    'description' => 'Configure Answers FAQ',
+    'access arguments'   => array('administer answers'),
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implementation of hook_block().
+ * Returns one quciktab block, which contains the same comment trees
+ * sorted in 3 different ways.
+ */
+function answers_faq_block($op = 'list', $delta = '', $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks = array(
+        'edit_faq' => array(
+          'info' => t('Answer FAQ: Create/Edit page'),
+        ),
+        'list_faq' => array(
+          'info' => t('Answer FAQ: List page'),
+        ),
+        'comment_faq' => array(
+          'info' => t('Answer FAQ: Comment page'),
+        ),
+        'join_faq' => array(
+          'info' => t('Answer FAQ: Join dinamic block'),
+        ),
+      );
+      return $blocks;
+
+    case 'view':
+      switch ($delta) {
+        case 'edit_faq':
+        case 'list_faq':
+        case 'comment_faq':
+          $content = _answers_faq_block($delta);
+          if ($content) {
+            return array(
+              'subject' => check_plain($content->title),
+              'content' => $content->body
+            );
+          }
+          break;
+          
+        case 'join_faq':
+          if (arg(0) == 'node') {
+            if (arg(2) == '') {
+              $node = node_load(arg(1));
+              if ($node && $node->type == 'question') {
+                $content = _answers_faq_block('comment_faq');
+              }
+            }
+            else {
+              if (arg(1) == 'add' && arg(2) == 'question') {
+                $content = _answers_faq_block('edit_faq');
+              }
+              elseif (arg(2) == 'edit') {
+                $node = node_load(arg(1));
+                if ($node && $node->type == 'question') {
+                  $content = _answers_faq_block('edit_faq');
+                }
+              }
+            }
+          }
+          else {
+            $content = _answers_faq_block('list_faq');
+          }
+          
+          if ($content) {
+            return array(
+              'subject' => check_plain($content->title),
+              'content' => $content->body
+            );
+          }
+          break;
+      }
+    break;
+  }
+}
+
+
+/**
+ * Aditional function: return Answers FAQ block content.
+ */
+function _answers_faq_block($type) {
+  global $language;
+  $block = ($type == 'edit_faq' ? 'edit' : ($type == 'comment_faq' ? 'comment' : 'list'));
+  $faq_settings = variable_get('answers_faq_settings', array());
+  
+  if ($faq_settings["{$block}_status"] && ($node = node_load($faq_settings["{$block}_nid"]))) {
+
+    if ($node->language && $language->language != $node->language) {
+      $translation_nid = translation_node_get_translations($node->tnid);
+      if (isset($translation_nid[$language->language])) {
+        $node = node_load($translation_nid[$language->language]->nid);
+      }
+    }
+
+    $node = node_build_content($node, FALSE, FALSE);
+    $node->body = drupal_render($node->content);
+    unset($node->teaser);
+    return $node;
+  }
+  return FALSE;
+}
+
+
+/**
+ * Answer FAQ settings form.
+ */
+function answers_admin_faq_form($form_state) {
+  $form = array();
+  
+  $faq_settings = variable_get('answers_faq_settings', array());
+  
+  $form['faq_text'] = array(
+    '#prefix' => '<div class="answers-faq-text">',
+    '#suffix' => '</div>',
+    '#value' => t('This page includes blocks with tips for the module Answers and 
+each block will display the node ID assignment on this page.
+Also on the page block is another block of the added which will 
+automatically display the required node, depending on the current page.'),
+  );
+  
+  $form['faq_edit'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Create/Edit page'),
+  );
+  $form['faq_edit']['edit_status'] = array(
+    '#type' => 'checkbox', 
+    '#title' => t('Status block with text to create or edit questions.'),
+    '#default_value' => $faq_settings['edit_status'],
+  );
+  $form['faq_edit']['edit_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node nid'),
+    '#default_value' => $faq_settings['edit_nid'],
+    '#description' => t('ID node with the text help. If the node is a translation, the unit will output the actual text.'),
+    '#size' => 5,
+  );
+  
+  $form['faq_list'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('List page'),
+  );
+  $form['faq_list']['list_status'] = array(
+    '#type' => 'checkbox', 
+    '#title' => t('Status block with the text for a page with a list of questions.'),
+    '#default_value' => $faq_settings['list_status'],
+  );
+  $form['faq_list']['list_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node nid'),
+    '#default_value' => $faq_settings['list_nid'],
+    '#description' => t('ID node with the text help. If the node is a translation, the unit will output the actual text.'),
+    '#size' => 5,
+  );
+  
+  $form['faq_comment'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Comment page'),
+  );
+  $form['faq_comment']['comment_status'] = array(
+    '#type' => 'checkbox', 
+    '#title' => t('Status block with the text for answers (page comments).'),
+    '#default_value' => $faq_settings['comment_status'],
+  );
+  $form['faq_comment']['comment_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node nid'),
+    '#default_value' => $faq_settings['comment_nid'],
+    '#description' => t('ID node with the text help. If the node is a translation, the unit will output the actual text.'),
+    '#size' => 5,
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  
+  return $form;
+}
+
+
+/**
+ * Submit FAQ settings.
+ */
+function answers_admin_faq_form_submit($form, &$form_state) {
+  $settings = array();
+  
+  $settings['edit_status'] = isset($form_state['values']['edit_status'])
+    ? $form_state['values']['edit_status'] : 0;
+  $settings['edit_nid'] = isset($form_state['values']['edit_nid'])
+    ? $form_state['values']['edit_nid'] : 0;
+  
+  $settings['list_status'] = isset($form_state['values']['list_status'])
+    ? $form_state['values']['list_status'] : 0;
+  $settings['list_nid'] = isset($form_state['values']['list_nid'])
+    ? $form_state['values']['list_nid'] : 0;
+  
+  $settings['comment_status'] = isset($form_state['values']['comment_status'])
+    ? $form_state['values']['comment_status'] : 0;
+  $settings['comment_nid'] = isset($form_state['values']['comment_nid'])
+    ? $form_state['values']['comment_nid'] : 0;
+  
+  variable_set('answers_faq_settings', $settings);
+  unset($form_state['storage']);
+  drupal_set_message(t('Preferences have been saved'));
+}
+
+
+
+

@@ -2021,3 +2021,6 @@ h3.term-filter-title {
 #term-filter-switch-form-2 .form-item {
   margin: 0;
 }
+div.answers-faq-text {
+  margin: 5px 20px 20px 20px;
+}
