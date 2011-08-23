@@ -54,19 +54,18 @@ define('BADGE_UNSUNG_HERO', 30047);
  * Implementation of hook_form_alter().
  */
 function answers_badges_form_alter(&$form, &$form_state, $form_id) {
-  // Hide badges taxonomy from profile editing form for non-admins.
-  if (!user_access('administer user') && $form_id == 'node_form') {
-    foreach ($form['taxonomy'] as $k => $taxonomy) {
-      if ($taxonomy['#title'] == 'Badges') {
-        unset($form['taxonomy'][$k]); 
-      }
-    }
-  }
-
-  // BADGE_COMMENTATOR & BADGE_ANSWERER badges.
   switch ($form_id) {
     case 'comment_form':
+      // BADGE_COMMENTATOR & BADGE_ANSWERER badges.
       $form['#submit'][] = 'commentator_answerer_finder';
+      break;
+      
+    case 'profile_node_form':
+    case 'node_form':
+      // Hide badges taxonomy from profile editing form for non-admins.
+      if (!user_access('administer answers') && isset($form['taxonomy'][30001])) {
+        $form['taxonomy'][30001]['#access'] = FALSE;
+      }
       break;
   }
 }

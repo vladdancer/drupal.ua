@@ -1,5 +1,5 @@
 <?php
-// $Id: ajax_comments.install,v 1.1.2.1 2009/09/14 16:36:38 neochief Exp $
+// $Id$
 
 /**
  * Implementaton of hook_install
