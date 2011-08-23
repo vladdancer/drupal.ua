@@ -131,10 +131,7 @@ function answers_admin_faq_form($form_state) {
   $form['faq_text'] = array(
     '#prefix' => '<div class="answers-faq-text">',
     '#suffix' => '</div>',
-    '#value' => t('This page includes blocks with tips for the module Answers and 
-each block will display the node ID assignment on this page.
-Also on the page block is another block of the added which will 
-automatically display the required node, depending on the current page.'),
+    '#value' => t('This page includes blocks with tips for the module Answers and each block will display the node ID assignment on this page. Also on the page block is another block of the added which will automatically display the required node, depending on the current page.'),
   );
   
   $form['faq_edit'] = array(
