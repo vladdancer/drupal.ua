@@ -2014,6 +2014,7 @@ fieldset.legal-fieldset-form legend, fieldset.legal-fieldset-form .legal-hide-fo
 h3.term-filter-title {
   margin-bottom: 0;
   font-size: 14px;
+  font-weight: bold;
 }
 #term-filter-switch-form .form-item,
 #term-filter-switch-form-1 .form-item,
