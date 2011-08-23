@@ -37,8 +37,7 @@ msgstr "Answer FAQ: Блок з автонастроюванням тексту"
 
 #: answers_faq.module:134
 msgid "This page includes blocks with tips for the module Answers and \neach block will display the node ID assignment on this page.\nAlso on the page block is another block of the added which will \nautomatically display the required node, depending on the current page."
-msgstr "На цій сторінці включаються блоки з підказками для модуля Answers і кожен з блоків буде виводити ноду задану ID на цій сторінці.
-Крім того на сторінці блоків буде ще один дополнтельний блок, який буде автоматично виводити необхідну ноду в залежності від поточної сторінки."
+msgstr "На цій сторінці включаються блоки з підказками для модуля Answers і кожен з блоків буде виводити ноду задану ID на цій сторінці. Крім того на сторінці блоків буде ще один дополнтельний блок, який буде автоматично виводити необхідну ноду в залежності від поточної сторінки."
 
 #: answers_faq.module:142
 msgid "Create/Edit page"
