@@ -52,7 +52,7 @@ function answers_faq_block($op = 'list', $delta = '', $edit = array()) {
           if ($content) {
             return array(
               'subject' => check_plain($content->title),
-              'content' => $content->body
+              'content' => $content->teaser
             );
           }
           break;
@@ -84,7 +84,7 @@ function answers_faq_block($op = 'list', $delta = '', $edit = array()) {
           if ($content) {
             return array(
               'subject' => check_plain($content->title),
-              'content' => $content->body
+              'content' => $content->teaser
             );
           }
           break;
@@ -111,9 +111,9 @@ function _answers_faq_block($type) {
       }
     }
 
-    $node = node_build_content($node, FALSE, FALSE);
-    $node->body = drupal_render($node->content);
-    unset($node->teaser);
+    $node = node_build_content($node, TRUE, FALSE);
+    $node->teaser = drupal_render($node->content);
+    unset($node->body);
     return $node;
   }
   return FALSE;
