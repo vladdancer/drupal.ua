@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_admin.admin.inc,v 1.1.2.10 2010/11/01 07:14:31 davereid Exp $
 
 /**
  * @file
@@ -40,7 +39,7 @@ function nodewords_admin_settings_form() {
 
   if (!empty($tags_info)) {
     foreach ($tags_info as $name => $info) {
-      $options[$name] = '';
+      $options[$name] = $info['label'];
 
       $bool = (
         (
@@ -59,35 +58,21 @@ function nodewords_admin_settings_form() {
       }
     }
 
-    $form['enabled'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Enabled meta tags'),
-      '#description' => t('These settings change the meta tags that will be output, and shown in edit forms.'),
-      '#collapsible' => TRUE,
-      '#weight' => 0,
-      '#group' => 'nodewords',
-    );
-
-    $form['enabled']['output'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Meta tags to output'),
-      '#description' => t('These settings change the meta tags that will be output. Meta tags are used in search indexes only if there are modules implementing the necessary code.'),
-      '#collapsible' => TRUE,
-      '#theme' => 'nodewords_admin_output_fieldset',
-    );
-
-    $form['enabled']['output']['nodewords_head'] = array(
+    $form['nodewords_head'] = array(
       '#type' => 'checkboxes',
+      '#title' => t('Enabled meta tags'),
       '#options' => $options,
       '#default_value' => variable_get('nodewords_head', array()),
       '#checkall' => TRUE ? 'nodewords-head-output' : FALSE,
     );
 
-    $form['enabled']['output']['nodewords_search_index'] = array(
-      '#type' => 'checkboxes',
-      '#options' => $options,
-      '#default_value' => variable_get('nodewords_search_index', array()),
-      '#checkall' => TRUE ? 'nodewords-search-index-output' : FALSE,
+    $form['enabled'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Meta tag forms'),
+      '#description' => t('These settings change which meta tags are shown in edit forms.'),
+      '#collapsible' => TRUE,
+      '#weight' => 0,
+      '#group' => 'nodewords',
     );
 
     $form['enabled']['admin'] = array(
@@ -125,11 +110,6 @@ function nodewords_admin_settings_form() {
     $form['nodewords_head'] = array(
       '#type' => 'value',
       '#value' => variable_get('nodewords_head', array()),
-    );
-
-    $form['nodewords_search_index'] = array(
-      '#type' => 'value',
-      '#value' => variable_get('nodewords_search_index', array()),
     );
 
     $form['nodewords_admin_edit'] = array(
@@ -308,7 +288,14 @@ function nodewords_admin_tags_edit_form(&$form_state, $options = array()) {
     )
   );
 
-  if (!empty($form['nodewords'])) {
+  if (empty($form['nodewords'])) {
+    $form['warning'] = array(
+      '#value' => t('You have not yet enabled any <a href="@url">meta tags for administrative settings pages</a>.', array('@url' => url('admin/content/nodewords'))),
+      '#prefix' => '<div class="messages warning">',
+      '#suffix' => '</div>',
+    );
+  }
+  else {
     $form['nodewords']['#tree'] = TRUE;
 
     $form['submit'] = array(
@@ -367,33 +354,6 @@ function theme_nodewords_admin_enabled_metatags($form) {
     'class' => (TRUE && count($rows) > 1) ? 'nodewords-enabled-metatags-admin-edit-form' : '',
   );
   $header[] = t('Use the default value');
-
-  return theme('table', $header, $rows) . drupal_render($form);
-}
-
-/**
- * Render the output settings fieldset.
- */
-function theme_nodewords_admin_output_fieldset($form) {
-  foreach (nodewords_get_possible_tags() as $name => $info) {
-    $row = array();
-
-    $row[] = $info['label'];
-    $row[] = drupal_render($form['nodewords_head'][$name]);
-    $row[] = drupal_render($form['nodewords_search_index'][$name]);
-
-    $rows[] = $row;
-  }
-
-  $header[] = t('Meta tag');
-  $header[] = array(
-    'data' => t('In HTML tag HEAD'),
-    'class' => (TRUE && count($rows) > 1) ? 'nodewords-head-output' : '',
-  );
-  $header[] = array(
-    'data' => t('In search index'),
-    'class' => (TRUE && count($rows) > 1) ? 'nodewords-search-index-output' : '',
-  );
 
   return theme('table', $header, $rows) . drupal_render($form);
 }

@@ -1,5 +1,4 @@
 <?php
-// $Id: default_settings.inc,v 1.1.2.1 2009/09/30 12:02:27 macperlinski Exp $
 
 /**
  * @file

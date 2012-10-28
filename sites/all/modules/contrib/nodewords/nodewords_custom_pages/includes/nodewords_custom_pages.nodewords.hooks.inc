@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_custom_pages.nodewords.hooks.inc,v 1.1.2.4 2010/10/30 16:51:20 davereid Exp $
 
 /**
  * @file

@@ -1,6 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Sphinx search module for Drupal 5.x
-;; $Id: README.txt,v 1.4.2.1 2008/09/12 03:36:10 markuspetrux Exp $
+;; Sphinx search module for Drupal 6.x
 ;;
 ;; Original author: markus_petrux at drupal.org (July 2008)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,8 +7,8 @@
 REQUIREMENTS
 ============
 
-  - PHP 4.4.x or PHP 5.x (PHP needs to be compiled with --enable-memory-limit).
-  - Sphinx 0.9.8 (shell access is required here).
+  - PHP needs to be compiled with --enable-memory-limit.
+  - Sphinx 0.9.8 and up (shell access is required here).
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -23,29 +22,8 @@ INSTALLATION
      on any other server of your farm, or even in the same box your web server,
      mysql or whatever is installed.
 
-     For more details, additional requirements, etc. please, read Sphinx
-     documentation. Here's just a quick start guide. You need root access
-     to the box.
-
-     # move to a temp directory.
-     cd /opt
-
-     # download and untar Sphinx source.
-     wget http://www.sphinxsearch.com/downloads/sphinx-0.9.8.tar.gz
-     tar xzf sphinx-0.9.8.tar.gz
-     cd sphinx-0.9.8
-
-     # optionally, download and untar libstemmer.
-     wget http://snowball.tartarus.org/dist/libstemmer_c.tgz
-     tar xzf libstemmer_c.tgz
-
-     # you may need to adjust file ownerships.
-     chown -R root.root *
-
-     # build, compile and install sphinx + libstemmer.
-     ./configure --with-mysql --with-libstemmer --prefix=/usr/local/sphinx
-     make
-     make install
+     For more details, additional requirements, etc. please, read the Installation
+     chapter of the Sphinx documentation.
 
 
   2) See sphinxsearch/contrib subdirectory. It contains samples for sphinx.conf
@@ -282,20 +260,3 @@ SPHINX IMPLEMENTATION DETAILS
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-TODO
-====
-
-- Provide new hooks to allow external modules extend Sphinx document attributes
-  and/or alter search user interface with additional filters.
-
-- Think about a reasonable method to implement access control to indexed data.
-  Currently, all content indexed by this module is available to anyone with
-  'use sphinxsearch' permission.
-
-- Provide a better integration / user interface to co-exist with other search
-  modules that may provide solutions for searching different kinds of content,
-  such as users, etc. Suggestions are welcome. However, I believe this is more
-  a job for Drupal search framework itself. Hopefully Sphinx search integration
-  provided with this module can be used as proof of concept of Sphinx
-  capabilities and limitations that maybe can help here in some way...

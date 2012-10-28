@@ -1,4 +1,39 @@
-$Id: CHANGELOG.txt,v 1.2.2.40.2.176.2.41.2.130 2009/11/30 16:31:20 Jeremy Exp $
+May 20th, 2012 (6.x-2.3.1)
+ - Bug #1587578 by MadOverlord: Channel selection regression.
+ - Bug #1585986 by smyleeface: hook_update_N() must return something.
+
+May 15th, 2012 (6.x-2.3)
+ - bug #797274 by tacituseu: apply modified version of tacituseu's patch to get charts to appear
+ - bug #1252536 by osopolar: fix iframe scrolling options
+ - Clean up AHAH selection of type
+ - Require a debug key to show debugging information
+
+May 29th, 2011 (6.x-2.3-beta1)
+ - general
+    o bug #1103066: missing t() on some strings passed to drupal_set_message()
+    o other minor issues
+ - ad_owners.install
+    o bug #743848: fix uninstall
+ - ad_channel.module
+    0 bug #1081730: Allow edits to ads in a channel with full inventory
+ - ad_report.module
+    o bug #802492: report actual percentage
+    o bug #1113336: fix mismatched CSV column headers, terminology
+ - ad.module
+    o bug #797794 by kingandy, John Franklin: Only serve the latest revision of an ad. 
+    o bug #807564 by kingandy: Get only the active revisions's group names.
+    o bug #664956: only display Activity tab when viewing Ad nodes
+    o bug #511200: Use variable_get() instead of adserve_variable() to fetch
+	<front> node URL.
+    o bug #101228: missing quotes around string
+    o bug #984310: Use drupal_attributes() to create the URL for the iframe tag.
+    o bug #1125008: Don't convert dates twice.
+ - ad_weight_probability.install
+    o bug #951134: Use Drupal schmea API for DB definition
+ - ad_image.module
+    o bug #699082: Explicitly set form field length
+ - Thanks to dmm_paradiso,  pumpkinkid, joachim, aidanlis, kingandy, _tychris, 
+      madmatter23, Zoltán Balo, RandalK John Franklin, and Jeremy for the patches.
 
 November 30th, 2009 (6.x-2.2)
  - ad.module

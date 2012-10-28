@@ -1,5 +1,4 @@
 <?php
-// $Id: sphinxsearch.pages.inc,v 1.4.2.2 2008/10/28 18:41:16 markuspetrux Exp $
 
 /**
  * @file
@@ -24,7 +23,7 @@ function sphinxsearch_search_page() {
   }
 
   // Parse request and build search options structure.
-  $search_options = sphinxsearch_parse_request($_GET, TRUE);
+  $search_options = sphinxsearch_parse_request($_GET);
 
   // If any error was found in request, display them and render expanded search form.
   if (!empty($search_options['errors'])) {
@@ -34,7 +33,7 @@ function sphinxsearch_search_page() {
     return drupal_get_form('sphinxsearch_search_form', $search_options, FALSE);
   }
 
-  // If no filters have specified, just render a clean collapsed search form.
+  // If no filters have been specified, just render a clean collapsed search form.
   // If form was submitted, user has already been warned from submit handler.
   if (empty($search_options['filters'])) {
     return drupal_get_form('sphinxsearch_search_form', $search_options);
@@ -90,10 +89,8 @@ function sphinxsearch_search_page() {
     }
   }
 
-  // Render search page
-  $output = theme('sphinxsearch_search_page', $search_options, $search_results);
-
-  return $output;
+  // Render the search page and quit.
+  return theme('sphinxsearch_search_page', $search_options, $search_results);
 }
 
 /**
@@ -247,7 +244,6 @@ function sphinxsearch_search_form(&$form_state, $search_options = array(), $adva
       }
     }
   }
-  
 
   // Sort options.
   $form['advanced']['sortfield'] = array(
@@ -271,7 +267,7 @@ function sphinxsearch_search_form(&$form_state, $search_options = array(), $adva
     '#title' => t('Results per page'),
     '#prefix' => '<div class="criterion">',
     '#suffix' => '</div>',
-    '#options' => drupal_map_assoc(array(10, 20, 30, 50, 100)),
+    '#options' => drupal_map_assoc(array(10, 20, 25, 30, 50, 60, 100)),
     '#default_value' => (isset($search_options['results_per_page']) ? $search_options['results_per_page'] : variable_get('sphinxsearch_results_per_page', 10)),
   );
 
@@ -311,7 +307,7 @@ function sphinxsearch_search_form_submit($form, &$form_state) {
 }
 
 /**
- * Format the search page
+ * Render the search page.
  *
  * @param array $search_options
  *   Search options structure.

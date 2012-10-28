@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_image.module,v 1.2.2.13.2.40.2.11.2.9 2009/11/23 06:45:40 Jeremy Exp $
 
 /**
  * @file
@@ -220,7 +219,7 @@ function ad_image_global_settings_submit($form, &$form_state) {
       db_query("INSERT INTO {ad_image_format} (gid, min_width, max_width, min_height, max_height, max_size) VALUES (%d, %d, %d, %d, %d, %d)", $group->tid, $form_state['values']["min-width-$group->tid"], $form_state['values']["max-width-$group->tid"], $form_state['values']["min-height-$group->tid"], $form_state['values']["max-height-$group->tid"], $form_state['values']["max-size-$group->tid"]);
     }
   }
-  drupal_set_message('Image ad global settings updated.');
+  drupal_set_message(t('Image ad global settings updated.'));
 }
 
 /**
@@ -253,7 +252,7 @@ function ad_image_adapi($op, $node) {
         // See if fid is changing -- it's okay if new images are uploaded, it's
         // just not okay if the active fid is changed.
         if ($fid != $image->fid) {
-          drupal_set_message('You do not have the necessary permissions to change the active advertisement.', 'error');
+          drupal_set_message(t('You do not have the necessary permissions to change the active advertisement.'), 'error');
           // This causes upload_save() to simply return without making any
           // changes to the files attached to this node.
           unset($node->files);
@@ -301,7 +300,7 @@ function ad_image_adapi($op, $node) {
     case 'validate':
       if (isset($node->remote_image) && !empty($node->remote_image)) {
         if (variable_get('ad_validate_url', 1) && (!valid_url($node->url, TRUE))) {
-          drupal_set_message('You must specify a valid path for your remote advertisement.', 'error');
+          drupal_set_message(t('You must specify a valid path for your remote advertisement.'), 'error');
         }
       }
       else if (!isset($node->files) || !ad_image_active_file($node->files)) {
@@ -436,7 +435,7 @@ function ad_image_validate_size($file, $nid) {
   }
   else {
     $error = TRUE;
-    drupal_set_message('Please report error: $file is not an object, bug #146147.');
+    drupal_set_message(t('Please report error: $file is not an object, bug #146147.'), 'warning');
   }
   if ($error) {
     return FALSE;
@@ -565,6 +564,7 @@ function ad_image_node_form(&$node) {
     '#type' => 'textfield',
     '#title' => t('Destination URL'),
     '#required' => FALSE,
+    '#maxlength' => 255,
     '#default_value' => isset($node->url) ? $node->url : '',
     '#description' => t('Enter the complete URL where you want people to be redirected when they click on this advertisement.  The URL must be valid and begin with http:// or https://, for example %url, unless you !disable.  If you do not enter a URL, the advertisement will not be clickable.', array('%url' => t('http://www.sample.org/'), '!disable' => l(t('disable URL validation'), 'admin/content/ad/configure', array('fragment' => 'edit-ad-validate-url-wrapper')))),
   );

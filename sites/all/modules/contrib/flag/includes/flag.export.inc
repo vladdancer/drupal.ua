@@ -1,5 +1,4 @@
 <?php
-// $Id: flag.export.inc,v 1.1.2.4 2010/08/20 15:35:43 mooffie Exp $
 
 /**
  * @file
@@ -15,15 +14,25 @@
  *   Optional. The name of the module that will be created if exporting to use
  *   in hook_flag_default_flags().
  */
-function flag_export_flags($flags = array(), $module = '') {
-  $output = array();
-  $output = '$flags = array();'. "\n";
-  foreach ($flags as $flag) {
-    if (!is_object($flag)) {
+function flag_export_flags($flags = array(), $module = '', $indent = '') {
+  module_load_include('inc', 'features', 'features.export'); // For features_var_export() (optional).
+  $output = $indent . '$flags = array();' . "\n";
+  foreach ($flags as $item) {
+    if (is_object($item)) {
+      $flag = $item;
+    }
+    else {
       // We got just the flag name, for example from the features
       // implementation.
-      $flag = flag_get_flag($flag);
+      if (!($flag = flag_load($item, TRUE))) {
+        continue;
+      }
     }
+    if (!$flag->is_compatible()) {
+      drupal_set_message(t('Could not export flag %flag-name: Your flag was created by a different version of the Flag module than is now being used.', array('%flag-name' => $flag->name)), 'error');
+      continue;
+    }
+
     $flag->api_version = FLAG_API_VERSION;
     $new_flag = (array) $flag;
 
@@ -40,11 +49,13 @@ function flag_export_flags($flags = array(), $module = '') {
 
     // Remove the flag ID.
     unset($new_flag['fid']);
+    // The name is emitted as the key for the array.
+    unset($new_flag['name']);
 
-    $output .= '// Exported flag: "'. check_plain($flag->get_title()) . '"' . ".\n";
-    $output .= '$flags[] = ' . var_export($new_flag, TRUE) . ";\n";
+    $output .= $indent . '// Exported flag: "' . check_plain($flag->get_title()) . '"' . ".\n";
+    $output .= $indent . '$flags[\'' . $flag->name . '\'] = ' . (function_exists('features_var_export') ? features_var_export($new_flag, $indent) : var_export($new_flag, TRUE)) . ";\n";
   }
-  $output .= 'return $flags;';
+  $output .= $indent . 'return $flags;' . "\n";
   return $output;
 }
 
@@ -80,13 +91,18 @@ function flag_import_form_validate($form, &$form_state) {
   ob_end_clean();
 
   if (!isset($flags) || !is_array($flags)) {
-    form_set_error('import', t('A valid list of flags could be found in the import code.'));
+    form_set_error('import', t('A valid list of flags could not be found in the import code.'));
     return;
   }
 
   // Create the flag object.
-  foreach ($flags as $config) {
-    $new_flag = flag_flag::factory_by_array($config);
+  foreach ($flags as $flag_name => $flag_info) {
+    // Backward compatibility: old exported flags have their names in $flag_info
+    // instead, so we use the += operator to not overwrite it.
+    $flag_info += array(
+      'name' => $flag_name,
+    );
+    $new_flag = flag_flag::factory_by_array($flag_info);
 
     // Give new flags with the same name a matching FID, which tells Flag to
     // update the existing flag, rather than creating a new one.
@@ -199,8 +215,8 @@ function flag_export_form_submit($form, &$form_state) {
  * Page for displaying an upgrade message and export form for Flag 1.x flags.
  */
 function flag_update_page($flag) {
-  if ($flag->api_version == FLAG_API_VERSION) {
-    drupal_set_message(t('The flag %name is already up-to-date with the latest Flag API and does not need upgrading.'));
+  if ($flag->is_compatible()) {
+    drupal_set_message(t('The flag %name is already up-to-date with the latest Flag API and does not need upgrading.'), array('%name' => $flag->name));
     drupal_goto('admin/build/flags');
   }
 

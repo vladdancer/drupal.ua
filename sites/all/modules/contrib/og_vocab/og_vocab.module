@@ -1,5 +1,4 @@
 <?php
-// $Id: og_vocab.module,v 1.18.2.22 2009/10/04 09:27:53 amitaibu Exp $
 
 /**
  * @file
@@ -51,7 +50,7 @@ function og_vocab_menu() {
     'page callback'    => 'taxonomy_admin_vocabulary_edit',
     'page arguments'   => array(6),
     'access callback'  => 'og_vocab_determine_access',
-    'access arguments' => array(1, 'edit own group vocabulary'),
+    'access arguments' => array(1, 'edit own group vocabulary', 6),
     'type'             => MENU_CALLBACK,
     'file'             => 'taxonomy.admin.inc',
     'file path'        => drupal_get_path('module', 'taxonomy'),
@@ -63,7 +62,7 @@ function og_vocab_menu() {
     'page callback'    => 'drupal_get_form',
     'page arguments'   => array('taxonomy_overview_terms', 5),
     'access callback'  => 'og_vocab_determine_access',
-    'access arguments' => array(1, 'administer own group vocabulary'),
+    'access arguments' => array(1, 'administer own group vocabulary', 5),
     'type'             => MENU_CALLBACK,
     'weight'           => -10,
     'file'             => 'taxonomy.admin.inc',
@@ -84,19 +83,19 @@ function og_vocab_menu() {
     'page callback'    => 'taxonomy_add_term_page',
     'page arguments'   => array(5),
     'access callback'  => 'og_vocab_determine_access',
-    'access arguments' => array(1, 'edit own group term'),
+    'access arguments' => array(1, 'edit own group term', 5),
     'type'             => MENU_LOCAL_TASK,
     'file'             => 'taxonomy.admin.inc',
     'file path'        => drupal_get_path('module', 'taxonomy'),
   );
 
   // Edit term.
-  $items['node/%node/og/vocab/terms/edit'] = array(
+  $items['node/%node/og/vocab/terms/edit/%'] = array(
     'title'            => 'Edit term',
     'page callback'    => 'og_vocab_taxonomy_admin_term_edit',
     'page arguments'   => array(6),
     'access callback'  => 'og_vocab_determine_access',
-    'access arguments' => array(1, 'edit own group term'),
+    'access arguments' => array(1, 'edit own group term', 6, 'term'),
     'type'             => MENU_CALLBACK,
     'file'             => 'taxonomy.admin.inc',
     'file path'        => drupal_get_path('module', 'taxonomy'),
@@ -491,11 +490,46 @@ function og_vocab_get_accessible_vocabs($account = NULL) {
 
 /**
  * Access function to determine if a user has access to the menu item.
+ *
+ * @param $node
+ *   The group node.
+ * @param $perm
+ *   The permission to check is user has.
+ * @param $id
+ *   Optional; The vocabulary or term ID, to check if belongs to the group node.
+ * @param $type
+ *   Optional; If $id is populated, then this indicates what ID it represents.
+ *   Allowed values are "vocabulary" or "term". Defaults to "vocabulary".
+ *
+ * @return
+ *   TRUE if user has access to the menu item.
  */
-function og_vocab_determine_access($node, $perm) {
-  // Group admin should have access regardless of permissions.
-  // Otherwise check the user is a member with the right permissions.
-  return (og_is_group_type($node->type) && (og_is_group_admin($node) || (og_is_group_member($node->nid) && (user_access($perm) || user_access('administer organic groups')))));
+function og_vocab_determine_access($node, $perm, $id = 0, $type = 'vocabulary') {
+  $access = TRUE;
+  if ($id) {
+    $access = FALSE;
+    if ($type == 'vocabulary') {
+      $vocab = $id;
+    }
+    else {
+      // Load the term, to get its vocabulary ID.
+      $term = taxonomy_get_term($id);
+      $vocab = taxonomy_vocabulary_load($term->tid);
+    }
+    // Make sure vocabulary ID belongs to the group node.
+    if ($group = og_vocab_get_group($vocab->vid)) {
+      $access = $node->nid == $group['nid'];
+    }
+  }
+
+  if ($access) {
+    // User with administer organic groups or group admins should have access
+    // regardless of permissions. Otherwise check the user is a member with the
+    // right permissions.
+    $access = og_is_group_admin($node) || (og_is_group_member($node->nid) && (user_access($perm))) || user_access('administer organic groups');
+  }
+
+  return $access;
 }
 
 
@@ -577,6 +611,7 @@ function og_vocab_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
     case 'list':
       $blocks[0]['info'] = t('Group categories');
+      $blocks[0]['cache'] = BLOCK_NO_CACHE;
       return $blocks;
     case 'view':
       switch ($delta) {
@@ -591,7 +626,8 @@ function og_vocab_block($op = 'list', $delta = 0, $edit = array()) {
 
 function og_vocab_block_view() {
   $group_node = og_get_group_context();
-  if ($group_node && node_access('view', $group_node)) {
+  if ($group_node && node_access('view', $group_node) && !empty($group_node->og_vocabularies)) {
+    $output = '';
     foreach ((array)$group_node->og_vocabularies as $vid => $vocab) {
 
       $tree = taxonomy_get_tree($vid);
@@ -611,25 +647,27 @@ function og_vocab_block_view() {
 
 function og_vocab_build_list_items(&$index, $tree) {
   $items = array();
-  $current_depth = $tree[$index]->depth;
-  while ($index < count($tree) && $tree[$index]->depth >= $current_depth) {
-    $term = $tree[$index];
-    $count = taxonomy_term_count_nodes($term->tid);
-    if ($count) {
-      $term_path = "taxonomy/term/$term->tid";
-      $term_link = l($term->name, $term_path, array('title' => t($term->description)));
-      $item = $term_link ." ($count)";
-      if ($tree[$index+1]->depth > $current_depth) {
-        $index++;
-        $items[] = array('data' => $item, 'children' => og_vocab_build_list_items($index, $tree));
+  if (array_key_exists($index, $tree)) {
+    $current_depth = $tree[$index]->depth;
+    while ($index < count($tree) && $tree[$index]->depth >= $current_depth) {
+      $term = $tree[$index];
+      $count = taxonomy_term_count_nodes($term->tid);
+      if ($count) {
+        $term_path = "taxonomy/term/$term->tid";
+        $term_link = l($term->name, $term_path, array('title' => t($term->description)));
+        $item = $term_link ." ($count)";
+        if (isset($tree[$index+1]) && $tree[$index+1]->depth > $current_depth) {
+          $index++;
+          $items[] = array('data' => $item, 'children' => og_vocab_build_list_items($index, $tree));
+        }
+        else {
+          $items[] = $item;
+          $index++;
+        }
       }
       else {
-        $items[] = $item;
         $index++;
       }
-    }
-    else {
-      $index++;
     }
   }
   return $items;

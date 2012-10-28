@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords.module,v 1.57.2.371 2010/11/17 22:46:55 davereid Exp $
 
 /**
  * @file
@@ -98,6 +97,11 @@ function nodewords_perm() {
  * Implements hook_preprocess_page().
  */
 function nodewords_preprocess_page(&$variables) {
+  // Do not output meta tags on administration pages.
+  if (arg(0) == 'admin') {
+    return;
+  }
+
   $output_tags = array();
 
   $head_tags = variable_get('nodewords_head', array());
@@ -778,7 +782,7 @@ function nodewords_unique_values($text, $separator = ',', $max_items = -1) {
   }
 
   if ($max_items > 0) {
-    $unique_values = array_slice($uniq_values, 0, $max_items);
+    $unique_values = array_slice($unique_values, 0, $max_items);
   }
 
   return implode($separator, $unique_values);
@@ -847,15 +851,34 @@ function _nodewords_init_tags_data($name, $options) {
 }
 
 /**
- * Load the files in the directory "includes" basing on the enabled modules.
- *
+ * Load the files in the directory "includes" based on enabled modules.
  */
 function _nodewords_load_hook_files() {
-  $dir = drupal_get_path('module', 'nodewords') . '/includes';
+  static $included = FALSE;
 
-  foreach (file_scan_directory($dir, '.*\.inc', array('.', '..', 'CVS'), 0, FALSE) as $filename => $info) {
-    if (module_exists($info->name) && !module_hook($info->name, 'nodewords_type_id')) {
-      module_load_include('inc', 'nodewords', 'includes/' . $info->name);
+  // Ensure this function only runs once.
+  if ($included) {
+    return;
+  }
+  else {
+    $included = TRUE;
+  }
+
+  $modules = array(
+    'blog',
+    'forum',
+    'image',
+    'node',
+    'taxonomy',
+    'taxonomy_menu',
+    'tracker',
+    'uc_catalog',
+    'user',
+  );
+
+  foreach ($modules as $module) {
+    if (module_exists($module) && !module_hook($module, 'nodewords_type_id')) {
+      module_load_include('inc', 'nodewords', 'includes/' . $module);
     }
   }
 

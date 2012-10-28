@@ -1,5 +1,4 @@
 <?php
-// $Id: l10n_update.admin.inc,v 1.10.2.6 2010/11/18 20:54:54 sutharsan Exp $
 
 /**
  * @file
@@ -87,8 +86,6 @@ function l10n_update_admin_import_form($form_state, $projects, $updates) {
     $form['lang']['languages'] = array(
       '#type' => 'checkboxes',
       '#options' => $languages,
-      '#default_value' => array(language_default('language')),
-
     );
     $form['mode'] = array('#type' => 'radios',
       '#title' => t('Update mode'),
@@ -131,7 +128,9 @@ function l10n_update_admin_import_form_submit($form, $form_state) {
   }
   elseif ($op == t('Refresh information')) {
     l10n_update_build_projects();
+    // Get available translation updates and update file history.
     if ($available = l10n_update_available_releases(TRUE)) {
+      l10n_update_flag_history($available);
       drupal_set_message(t('Fetched information about available updates from the server'));
     }
     else {
@@ -166,11 +165,10 @@ function l10n_update_admin_settings_form() {
     '#description' => t('Select how frequently you want to automatically check for updated translations for installed modules and themes.'),
   );
   $form['l10n_update_check_disabled'] = array(
-    '#type' => 'radios',
-    '#title' => t('Update disabled modules'),
-    '#options' => array(t('Disabled'), t('Enabled')),
+    '#type' => 'checkbox',
+    '#title' => t('Check for updates of disabled modules and themes'),
     '#default_value' => variable_get('l10n_update_check_disabled', 0),
-    '#description' => t('Enable if you want translations for disabled modules to be updated too. This comes with an important performance penalty so it is not recommended.'),
+    '#description' => t('Note that this comes with a performance penalty, so it is not recommended.'),
   );
   $form['l10n_update_download_store'] = array(
     '#title' => t('Store downloaded files'),
@@ -205,7 +203,8 @@ function l10n_update_admin_settings_form_validate($form, &$form_state) {
 function _l10n_update_admin_import_options() {
   return array(
     LOCALE_IMPORT_OVERWRITE => t('Translation updates replace existing ones, new ones are added'),
-    LOCALE_IMPORT_KEEP => t('Edited translations are kept, only default ones (previously imported) are overwritten and new translations are added')
+    LOCALE_UPDATE_OVERRIDE_DEFAULT => t('Edited translations are kept, only previously imported ones are overwritten and new translations are added'),
+    LOCALE_IMPORT_KEEP => t('All existing translations are kept, only new translations are added.'),
   );
 }
 
@@ -246,31 +245,29 @@ function theme_l10n_update_project_status($projects, $languages, $history, $avai
   $output = '';
   //$header = array(t('Project'), t('Current version'), t('Available update'), '');
   $header = $rows = array();
-
   foreach ($projects as $name => $project) {
     $row = '<div class="version-status">';
     if (empty($available[$name])) {
       // Remote information not checked
-      $class = 'unknown';
       $status = 'unknown';
+      $class = 'unknown';
     }
     elseif (empty($updates[$name])) {
       // No updates available
-      $class = 'ok';
       $status = 'ok';
+      $class = 'ok';
     }
     else {
       // Update available
-      $class = 'warning';
       $status = 'update';
+      $class = 'warning';
     }
-
     $row = theme('l10n_update_version_status', $status);
 
     $row .= "<div class=\"project $class\">";
     $title = isset($project->title) ? $project->title : $project->name;
     $row .= check_plain($title);
-    $row .= ' ' . check_plain($project->version);
+    $row .= ' ' . check_plain(isset($project->info['version']) ? $project->info['version'] : $project->version);
     if ($server = l10n_update_server($project->l10n_server)) {
       $row .= ' ' . l($server['name'], $server['link']);
     }
@@ -280,7 +277,9 @@ function theme_l10n_update_project_status($projects, $languages, $history, $avai
     $versions = array();
     foreach ($languages as $lang => $language) {
       $current = isset($history[$name][$lang]) ? $history[$name][$lang] : NULL;
+      //$installed = isset($history[$name][$lang]) ? $history[$name][$lang] : NULL;
       $update = isset($updates[$name][$lang]) ? $updates[$name][$lang] : NULL;
+
       if ($update) {
         $status = 'update';
         $class = 'warning';
@@ -297,7 +296,7 @@ function theme_l10n_update_project_status($projects, $languages, $history, $avai
         $update ? theme('l10n_update_release', $update) : '',
         theme('l10n_update_version_status', $status, $update ? $update->type : NULL),
       );
-      $versions[] = array('data' => $version, 'class' => $class);
+    $versions[] = array('data' => $version, 'class' => $class);
     }
     $row .= theme('table', array(), $versions);
     $row .= "</div>\n";
@@ -345,6 +344,7 @@ function theme_l10n_update_release($release) {
  *   HTML output.
  */
 function theme_l10n_update_version_status($status, $type = NULL) {
+  $msg = $icon = '';
   $output = '<div class="version-status">';
   switch ($status) {
     case 'ok':

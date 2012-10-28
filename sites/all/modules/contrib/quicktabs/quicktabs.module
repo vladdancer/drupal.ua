@@ -1,5 +1,4 @@
 <?php
-// $Id: quicktabs.module,v 1.10.2.80 2010/05/08 22:38:26 pasqualle Exp $
 
 /**
  * Implementation of hook_help().
@@ -268,9 +267,10 @@ function quicktabs_ajax_node($nid, $teaser, $hide_title) {
 /**
  * Ajax callback for block tabpage.
  */
-function quicktabs_ajax_block($bid, $hide_title) {
+function quicktabs_ajax_block($qtid, $bid, $hide_title) {
   $tabpage = array(
     'type' => 'block',
+    'qtid' => intval($qtid),
     'bid' => $bid,
     'hide_title' => $hide_title,
   );
@@ -336,7 +336,7 @@ function theme_quicktabs_tabs($quicktabs, $active_tab = 'none') {
     $options = _quicktabs_construct_link_options($quicktabs, $tabkey);
     // Support for translatable tab titles with i18nstrings.module.
     if (module_exists('i18nstrings')) {
-      $tab['title'] = tt("quicktabs:tab:$quicktabs[qtid]--$tabkey:title", $tab['title']);
+      $tab['title'] = i18nstrings('quicktabs:tab:' . $quicktabs['qtid'] . '--' . $tabkey . ':title', $tab['title']);
     }
     $output .= '<li'. $attributes_li .'>'. l($tab['title'], $_GET['q'], $options) .'</li>';
     $index++;
@@ -536,6 +536,29 @@ function quicktabs_render_tabpage($tab, $hide_empty = FALSE) {
 
     case 'block':
       if (isset($tab['bid'])) {
+        // Ensure the block is assigned to the requested quicktabs block. This test prevents
+        // AJAX access to blocks that have not been added to an AJAX-enabled quicktabs block.
+        // The qtid key is set only for AJAX requests.
+        if (isset($tab['qtid'])) {
+          $break = TRUE;
+          $quicktabs = quicktabs_load($tab['qtid']);
+          // Ensure AJAX is enabled for the quicktabs block.
+          if (!empty($quicktabs) && $quicktabs['ajax'] == 1) {
+            // Ensure the requested tab has been added to the quicktabs block.
+            foreach ($quicktabs['tabs'] as $quicktab) {
+              if (isset($quicktab['bid']) && ($quicktab['bid'] == $tab['bid'])) {
+                $break = FALSE;
+                break;
+              }
+            }
+          }
+          if ($break == TRUE) {
+            if (!$hide_empty) {
+              $output = theme('quicktabs_tab_access_denied', $tab);
+            }
+            break;
+          }
+        }
         $pos = strpos($tab['bid'], '_delta_');
         $blockmodule = substr($tab['bid'], 0, $pos);
         $blockdelta = substr($tab['bid'], $pos + 7);
@@ -580,7 +603,7 @@ function quicktabs_render_tabpage($tab, $hide_empty = FALSE) {
  * Helper function to determine active tab from the url.
  */
 function _quicktabs_get_active_tab($quicktabs) {
-  $active_tab = isset($quicktabs['default_tab']) ? $quicktabs['default_tab'] : key($quicktabs['tabs']);
+  $active_tab = isset($quicktabs['default_tab']) && $quicktabs['default_tab'] !== false ? $quicktabs['default_tab'] : key($quicktabs['tabs']);
   $active_tab = isset($_GET['quicktabs_'. $quicktabs['qtid']]) ? $_GET['quicktabs_'. $quicktabs['qtid']] : $active_tab;
   if (isset($active_tab) && isset($quicktabs['tabs'][$active_tab])) {
     return $active_tab;
@@ -663,7 +686,7 @@ function quicktabs_locale_refresh() {
   while ($row = db_fetch_object($result)) {
     $quicktabs = quicktabs_load($row->qtid, 'locale refresh');
     foreach ($quicktabs['tabs'] as $tabkey => $tab) {
-      tt("quicktabs:tab:$quicktabs[qtid]--$tabkey:title", $tab['title'], NULL, TRUE);
+      i18nstrings_update('quicktabs:tab:' . $quicktabs['qtid'] . '--' . $tabkey . ':title', $tab['title']);
     }
   }
   return TRUE;

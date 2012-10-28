@@ -1,5 +1,4 @@
 <?php
-// $Id: uc_catalog.inc,v 1.1.2.7 2010/11/01 01:10:38 damienmckenna Exp $
 
 /**
  * @file

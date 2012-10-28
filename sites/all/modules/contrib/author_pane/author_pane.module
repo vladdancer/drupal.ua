@@ -1,5 +1,4 @@
 <?php
-// $Id: author_pane.module,v 1.1.2.16.2.18 2010/10/04 15:33:48 michellec Exp $
 
 /**
  * @file
@@ -119,6 +118,7 @@ function author_pane_include($file) {
 
   foreach (module_list() as $module) {
     $module_path = drupal_get_path('module', $module);
+
     if (file_exists("$module_path/$module.$file")) {
       $includes[] = "./$module_path/$module.$file";
     }
@@ -193,7 +193,7 @@ function template_preprocess_author_pane(&$variables) {
     $variables['joined_ago'] = format_interval(time() - $account->created);
 
     // Online status - uses the settings for the who's online block.
-    $variables['last_active'] = format_interval(time() - $account->access);
+    $variables['last_active'] = ($account->access) ? format_interval(time() - $account->access) : t("Never");
 
     if ((time()-$account->access) < variable_get('user_block_seconds_online', 900)) {
       $variables['online_status'] = t('Online');

@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_tokens.module,v 1.1.2.22 2010/11/01 07:14:31 davereid Exp $
 
 define('NODEWORDS_DESCRIPTION_GENERATION_BODY', 1);
 define('NODEWORDS_DESCRIPTION_GENERATION_TEASER', 2);

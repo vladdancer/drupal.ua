@@ -1,14 +1,18 @@
-================================================================================
-$Id: CHANGELOG.txt,v 1.4.2.1 2008/09/12 03:36:10 markuspetrux Exp $
-================================================================================
-
 --------------------------------------------------------------------------------
-2008-09-11, tag: 6.x-1.x
+2012-03-23, tag: 6.x-1.x-dev
 
 - Ported module from D5 to D6.
 - Bugfix: undefined class method in sphinxsearch_check_connection_page().
 - Bugfix: added criterion class to taxonomy elements in advanced search form.
 - Bugfix: added support for mysqli and pgsql to _sphinxsearch_db_reconnect().
+- #331863 by neochief - Bugfix: Implementation of hook_content_build_modes().
+- #331954 by neochief - Results per page setting in search form.
+- Update Sphinx PHP library to lastest version (2.0.4).
+- Expose hook_sphinxsearch_api_alter($data, $op, $a1, $a2).
+- #918328 by Kane - Bugfix: Wrong redirect from search box on 404 error page.
+- #329509 by premanup - Bugfix: Support variable PHP integer architecture when checking IPs.
+- #332077 by neochief - Theme whole search page.
+- #366837 - Allow external modules intervene before the Sphinx query is executed.
 
 --------------------------------------------------------------------------------
 2008-09-03, tag: 5.x-1.1 release

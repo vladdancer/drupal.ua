@@ -1,5 +1,4 @@
 <?php
-// $Id: content.inc,v 1.12.2.14 2010/11/01 20:40:06 merlinofchaos Exp $
 
 /**
  * @file
@@ -60,6 +59,14 @@ function ctools_content_process(&$plugin, $info) {
     $plugin['add form'] = $function_base . 'edit_form';
   }
 
+  if (!isset($plugin['description'])) {
+    $plugin['description'] = '';
+  }
+
+  if (!isset($plugin['icon'])) {
+    $plugin['icon'] = ctools_content_admin_icon($plugin);
+  }
+
   // Another ease of use check:
   if (!isset($plugin['content types'])) {
     // If a subtype plugin exists, try to use it. Otherwise assume single.
@@ -70,7 +77,7 @@ function ctools_content_process(&$plugin, $info) {
       $type = array(
         'title' => $plugin['title'],
         'description' => $plugin['description'],
-        'icon' => $plugin['icon'],
+        'icon' => ctools_content_admin_icon($plugin),
         'category' => $plugin['category'],
       );
 
@@ -281,6 +288,9 @@ function ctools_content_render($type, $subtype, $conf, $keywords = array(), $arg
     }
 
     $content = $function($subtype, $conf, $args, $pane_context, $incoming_content);
+    if (empty($content)) {
+      return;
+    }
 
     // Set up some defaults and other massaging on the content before we hand
     // it back to the caller.

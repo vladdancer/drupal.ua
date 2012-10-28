@@ -1,6 +1,5 @@
 <?php
 
-// $Id: nodewords.api.php,v 1.1.2.24 2010/11/07 19:39:43 davereid Exp $
 
 /**
  * @file.

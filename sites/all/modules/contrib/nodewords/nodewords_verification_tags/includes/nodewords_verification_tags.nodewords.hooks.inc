@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_verification_tags.nodewords.hooks.inc,v 1.1.2.6 2010/10/30 19:19:00 damienmckenna Exp $
 
 /**
  * @file

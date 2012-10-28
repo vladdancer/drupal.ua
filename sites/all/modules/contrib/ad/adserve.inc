@@ -1,5 +1,4 @@
 <?php
-// $Id: adserve.inc,v 1.1.2.31.2.8.2.10 2009/11/23 19:12:41 Jeremy Exp $
 
 /**
  * @file
@@ -21,6 +20,10 @@
  * On a Windows server this path will be something like 'D:\path\to\web'.
  */
 //define('DRUPAL_ROOT', '/var/www/html');
+
+// If you need to enable debugging, uncomment this line and set a unique key.
+// Then, add a debug_key parameter to your GET string matching this key.
+// define('AD_DEBUG_KEY', 'CHANGE_ME_BEFORE_UNCOMMENTING');
 
 /**
  * The main adserve logic.
@@ -72,17 +75,24 @@ function adserve_variable($variable, $value = NULL) {
   if (!isset($variables->loaded) || $variable == 'variable_load') {
     if ($variable == 'variable_load' && isset($value)) {
       $values['debug'] = isset($value['debug']) ? $value['debug'] : '';
+      $values['debug_key'] = isset($value['debug_key']) ? $value['debug_key'] : '';
       $values['c'] = isset($value['adcache']) ? $value['adcache'] : '';
       $values['n'] = isset($value['nids']) ? $value['nids'] : '';
       $values['t'] = isset($value['tids']) ? $value['tids'] : '';
       $values['k'] = isset($value['hostid']) ? $value['hostid'] : '';
       $values['q'] = isset($value['quantity']) ? $value['quantity'] : 1;
       $values['m'] = isset($value['ad_display']) ? $value['ad_display'] : 0;
-      unset($value);
     }
     else {
       $values = $_GET;
     }
+
+    // Don't trust the GET parameter for 'debug' unless the debugging key
+    // matches.
+    if (!(defined('AD_DEBUG_KEY') && $values['debug_key'] == AD_DEBUG_KEY && isset($values['debug']))) {
+      $values['debug'] = '';
+    }
+    unset($value);
 
     // Don't use getcwd as path may involve symbolic links
     $variables->ad_dir = dirname($_SERVER['SCRIPT_FILENAME']);
@@ -115,7 +125,7 @@ function adserve_variable($variable, $value = NULL) {
 
     if ($variables->debug) {
       foreach ($variables as $variable => $val) {
-        echo "$variable: '$val'<br />\n";
+        echo "$variable: '" . htmlspecialchars($val) . "'<br />\n";
       }
       if ($variables->debug == 1) exit;
     }
@@ -132,7 +142,7 @@ function adserve_variable($variable, $value = NULL) {
       foreach ($conf as $var => $val) {
         $variables->$var = $val;
         if ($variables->debug) {
-          echo "Override $var: '$val'<br />\n";
+          echo "Variable $var was overridden by value in settings.php.<br />\n";
         }
       }
       $overridden = TRUE;
@@ -142,7 +152,10 @@ function adserve_variable($variable, $value = NULL) {
   if (!isset($cache_loaded[$variables->adcache])) {
     // Retrieve variables defined by cache plugin, if enabled.
     if ($variables->adcache != 'none') {
-      $includes = array($variables->ad_dir ."/cache/$variables->adcache/ad_cache_$variables->adcache.inc", $variables->ad_dir ."/../ad_$variables->adcache/ad_cache_$variables->adcache.inc");
+      $includes = array(
+        $variables->ad_dir ."/cache/$variables->adcache/ad_cache_$variables->adcache.inc", 
+        $variables->ad_dir ."/../ad_$variables->adcache/ad_cache_$variables->adcache.inc"
+      );
       foreach ($includes as $include) {
         if (file_exists($include)) {
           if ($variables->debug) {
@@ -171,7 +184,7 @@ function adserve_variable($variable, $value = NULL) {
     echo "Dumping \$variables:<br />\n";
     echo '<pre>';
     foreach ($variables as $var => $val) {
-      echo "  $var($val)<br />\n";
+      echo "  $var(" . htmlspecialchars($val) . ")<br />\n";
     }
     echo '</pre>';
   }

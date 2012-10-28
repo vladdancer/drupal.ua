@@ -1,5 +1,5 @@
 <?php
-// $Id: votingapi.views.inc,v 1.1.2.19 2010/10/10 00:55:54 eaton Exp $
+// $Id: votingapi.views.inc,v 1.1.2.18 2009/08/15 17:51:38 eaton Exp $
 
 /**
  * @file
@@ -25,10 +25,6 @@ function votingapi_views_handlers() {
       ),
       'votingapi_views_handler_relationship' => array(
         'parent' => 'views_handler_relationship',
-        'path' => drupal_get_path('module', 'votingapi') . '/views',
-      ),
-      'votingapi_views_handler_sort_nullable' => array(
-        'parent' => 'views_handler_sort',
         'path' => drupal_get_path('module', 'votingapi') . '/views',
       ),
     ),
@@ -64,7 +60,7 @@ function votingapi_views_data() {
       'allow empty' => TRUE,
     ),
     'sort' => array(
-      'handler' => 'votingapi_views_handler_sort_nullable',
+      'handler' => 'views_handler_sort',
     ),
   );
 
@@ -190,7 +186,7 @@ function votingapi_views_data() {
       'allow empty' => TRUE,
     ),
     'sort' => array(
-      'handler' => 'votingapi_views_handler_sort_nullable',
+      'handler' => 'views_handler_sort',
     ),
   );
 

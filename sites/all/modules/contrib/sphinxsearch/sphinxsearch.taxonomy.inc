@@ -1,5 +1,4 @@
 <?php
-// $Id: sphinxsearch.taxonomy.inc,v 1.3.2.2 2008/10/28 18:41:16 markuspetrux Exp $
 
 /**
  * @file

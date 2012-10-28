@@ -1,8 +1,39 @@
-$Id: CHANGELOG.txt,v 1.1.2.26.2.32 2010/10/04 15:33:48 michellec Exp $
 
 ------------------------ D6 2.x BRANCH --------------------------------------------------
 
-October 4, 2010
+December 20, 2011
+-----------------
+Issue #1376608 by dberror, Scyther: Check whether the user has access to view userpoints or not.
+by Scyther: Fixed some minor coder warnings about coding standards.
+
+September 6, 2011
+-----------------
+#1234572 by Michelle: Removed Location module integration as it is broken and will not be fixed because it is unsupported.
+
+August 19, 2011
+---------------
+#1254182 by Michelle: Added check to make sure OG group is published before adding it to variable.
+#1142226 by Patrizio: Fix for number of user badges to show.
+
+March 28, 2011
+--------------
+#1085068 by Scyther: Added check if user has admin users to allow them to see contact link even if contact form is disabled.
+NOISSUE by Michelle: Minor template changes to keep in synch with AF changes.
+
+January 12, 2011
+----------------
+NOISSUE by Michelle: Minor template changes to keep in synch with AF changes.
+
+December 20, 2010
+----------------
+#868942 by Michelle: Synch up contact module code to AF's image changes.
+
+December 5, 2010
+----------------
+#941382 by recrit: Fixed broken caching on user points.
+#985742 by carlthuringer, Michelle: Make last access 'Never' when the user has never accessed the site.
+
+October 4, 2010 -- 2.0
 ---------------
 #851656 by Michelle, gapple: Added Real Name support to the included content type.
 NOISSUE by Michelle: Coder clean up.

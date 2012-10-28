@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Example plugin for Google Ajax Search.
+ * 
+ * This plugin lets Google Ajax Search to automatically use terms from nodes as default keywords for searcher.
+ * It happens only if either vocabulary selected for search block and node is same.
+ */
+
+
+/**
+ * Implementation of hook_googleajaxsearch_info
+ * 
+ * @return
+ *   array with keys: settings_form, execute and plugin_name. First two contain names of functions to call. The last one contains title to display in settings form
+ */
+function argkeywords_googleajaxsearch_info() {
+  $info['argkeywords'] = array(
+    'settings_form' => 'argkeywords_settings_form',
+    'execute' => 'argkeywords_execute',
+    'title' => 'Google Ajax Search keywords from GET argument',
+  );
+  return $info;
+}
+
+/**
+ * Returns additional form with specific settings for plugin
+ * 
+ * @param mixed $delta
+ *   selects block which keywords should be returned
+ * @return
+ *   
+ */
+function argkeywords_settings_form($settings) {
+  $options[''] = t('None');
+  // Let user choose which argument from url he wants to pass to google searcher 
+  // I don't think someone will need more than 9
+  $options = array(0,1,2,3,4,5,6,7,8,9);
+  
+    
+  $form[$field = 'argument_keywords'] = array(
+    '#type' => 'select',
+    '#title' => t('Arguments from URL for keywords'),
+    '#default_value' => $settings[$field],
+    '#options' => $options,
+    '#description' => t('Default keywords'),
+    
+  );
+  $form['devmode'] = array(
+      '#type' => 'checkbox', 
+      '#title' => t('Developer mode'),
+      '#default_value' => $settings['devmode'],
+    );
+  
+  return $form;
+}
+
+/**
+ * Returns string of OR separated keywords. Keywords will be returned only if either blocks and nodes vocabulary are same.
+ * 
+ * @param mixed $settings
+ *   block settings
+ * @return
+ *   string with keywords.
+ */
+function argkeywords_execute($settings) {
+  $arg = $settings['argument_keywords'];
+  $keywords =arg($arg);
+  if($settings['devmode'])
+  {
+      drupal_set_message(t("Current keyword from GET argumet @arg : @keyword",array('@keyword'=>$keywords,'@arg'=>$arg)));
+  }
+  return $keywords;
+}

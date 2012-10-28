@@ -1,5 +1,4 @@
 <?php
-// $Id: sphinxsearch.admin.inc,v 1.4.2.3 2008/10/31 13:15:45 markuspetrux Exp $
 
 /**
  * @file
@@ -208,7 +207,7 @@ function sphinxsearch_settings() {
     '#type' => 'select',
     '#title' => t('Results per page'),
     '#default_value' => variable_get('sphinxsearch_results_per_page', 10),
-    '#options' => drupal_map_assoc(array(10, 20, 30, 50, 100)),
+    '#options' => drupal_map_assoc(array(10, 20, 25, 30, 50, 60, 100)),
     '#description' => t('How many items will be shown on search results page by default.'),
   );
   $form['search']['results']['sphinxsearch_log_search_keys'] = array(

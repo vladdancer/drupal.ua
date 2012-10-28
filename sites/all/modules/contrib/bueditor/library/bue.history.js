@@ -1,4 +1,3 @@
-// $Id: bue.history.js,v 1.5.2.6 2010/03/02 08:21:44 ufku Exp $
 //Introduces cross-browser editor history with two new methods. E.undo() & E.redo()
 //Requires: none
 (function(E, $) {
@@ -16,7 +15,7 @@ BUE.history = function(E) {
   H.writable= true; //dynamic allowance of state saving.
 
   //attach textarea events triggering history operations.
-  $(E.textArea).one('focus', function(){H.save()}).keyup(function(e) {
+  $(E.textArea).one('focus.bue', function(){H.save()}).bind('keyup.bue', function(e) {
     H.writable && (!H.keys || H.keys[e.keyCode]) && H.save();
   });
 

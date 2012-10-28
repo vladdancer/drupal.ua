@@ -1,4 +1,3 @@
-// $Id: flag.js,v 1.1.2.7.2.6 2010/05/10 04:05:28 quicksketch Exp $
 (function ($) {
 
 /**
@@ -112,30 +111,38 @@ Drupal.flagAnonymousLinks = function(context) {
   });
 }
 
+String.prototype.flagNameToCSS = function() {
+  return this.replace(/_/g, '-');
+}
+
 /**
  * A behavior specifically for anonymous users. Update links to the proper state.
  */
 Drupal.flagAnonymousLinkTemplates = function(context) {
   // Swap in current links. Cookies are set by PHP's setcookie() upon flagging.
 
+  var templates = Drupal.settings.flag.templates;
+
   // Build a list of user-flags.
   var userFlags = Drupal.flagCookie('flags');
   if (userFlags) {
     userFlags = userFlags.split('+');
     for (var n in userFlags) {
-      var flagInfo = userFlags[n].split('_');
-      var flagName = flagInfo[0];
-      var contentId = flagInfo[1];
+      var flagInfo = userFlags[n].match(/(\w+)_(\d+)/);
+      var flagName = flagInfo[1];
+      var contentId = flagInfo[2];
       // User flags always default to off and the JavaScript toggles them on.
-      $('.flag-' + flagName + '-' + contentId, context).after(Drupal.settings.flag.templates[flagName + '_' + contentId]).remove();
+      if (templates[flagName + '_' + contentId]) {
+        $('.flag-' + flagName.flagNameToCSS() + '-' + contentId, context).after(templates[flagName + '_' + contentId]).remove();
+      }
     }
   }
 
   // Build a list of global flags.
-  var globalFlags = document.cookie.match(/flag_global_([a-z0-9\-]+)_([0-9]+)=([01])/ig);
+  var globalFlags = document.cookie.match(/flag_global_(\w+)_(\d+)=([01])/g);
   if (globalFlags) {
     for (var n in globalFlags) {
-      var flagInfo = globalFlags[n].match(/flag_global_([a-z0-9\-]+)_([0-9]+)=([01])/i);
+      var flagInfo = globalFlags[n].match(/flag_global_(\w+)_(\d+)=([01])/);
       var flagName = flagInfo[1];
       var contentId = flagInfo[2];
       var flagState = (flagInfo[3] == '1') ? 'flag' : 'unflag';
@@ -143,11 +150,13 @@ Drupal.flagAnonymousLinkTemplates = function(context) {
       // cache. The template always contains the opposite of the current state.
       // So when checking global flag cookies, we need to make sure that we
       // don't swap out the link when it's already in the correct state.
-      $('.flag-' + flagName + '-' + contentId, context).each(function() {
-        if ($(this).find('.' + flagState + '-action').size()) {
-          $(this).after(Drupal.settings.flag.templates[flagName + '_' + contentId]).remove();
-        }
-      });
+      if (templates[flagName + '_' + contentId]) {
+        $('.flag-' + flagName.flagNameToCSS() + '-' + contentId, context).each(function() {
+          if ($(this).find('.' + flagState + '-action').size()) {
+            $(this).after(templates[flagName + '_' + contentId]).remove();
+          }
+        });
+      }
     }
   }
 }
@@ -202,16 +211,16 @@ Drupal.flagCookie = function(name, value, options) {
 };
 
 Drupal.behaviors.flagLink = function(context) {
-  // For all anonymous users, require JavaScript for flagging to prevent spiders
-  // from flagging things inadvertently.
-  if (Drupal.settings.flag && Drupal.settings.flag.anonymous) {
-    Drupal.flagAnonymousLinks(context);
-  }
-
   // For anonymous users with the page cache enabled, swap out links with their
   // current state for the user.
   if (Drupal.settings.flag && Drupal.settings.flag.templates) {
     Drupal.flagAnonymousLinkTemplates(context);
+  }
+
+  // For all anonymous users, require JavaScript for flagging to prevent spiders
+  // from flagging things inadvertently.
+  if (Drupal.settings.flag && Drupal.settings.flag.anonymous) {
+    Drupal.flagAnonymousLinks(context);
   }
 
   // On load, bind the click behavior for all links on the page.

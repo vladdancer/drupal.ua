@@ -1,5 +1,4 @@
 <?php
-// $Id: l10n_update.check.inc,v 1.3.2.9 2011/02/02 16:40:38 goba Exp $
 
 /**
  * @file
@@ -7,6 +6,14 @@
  *
  * These functions may not be safe for the installer as they use variables and report using watchdog
  */
+
+/**
+ * Threshold for timestamp comparison.
+ *
+ * Eliminates a difference between the download time
+ * (Database: l10n_update_file.timestamp) and the actual .po file timestamp.
+ */
+define('L10N_UPDATE_TIMESTAMP_THRESHOLD', 2);
 
 require_once 'l10n_update.inc';
 
@@ -22,7 +29,7 @@ require_once 'l10n_update.inc';
  */
 function l10n_update_available_releases($refresh = FALSE) {
   $frequency = variable_get('l10n_update_check_frequency', 0) * 24 * 3600;
-  if (!$refresh && ($cache = cache_get('l10n_update_available_releases')) && (!$frequency || $cache->created > time() - $frequency)) {
+  if (!$refresh && ($cache = cache_get('l10n_update_available_releases', 'cache_l10n_update')) && (!$frequency || $cache->created > time() - $frequency)) {
     return $cache->data;
   }
   else {
@@ -31,7 +38,7 @@ function l10n_update_available_releases($refresh = FALSE) {
     $local = variable_get('l10n_update_check_mode', L10N_UPDATE_CHECK_ALL) & L10N_UPDATE_CHECK_LOCAL;
     $remote = variable_get('l10n_update_check_mode', L10N_UPDATE_CHECK_ALL) & L10N_UPDATE_CHECK_REMOTE;
     $available = l10n_update_check_projects($projects, array_keys($languages), $local, $remote);
-    cache_set('l10n_update_available_releases', $available, 'cache', $frequency ? time() + $frequency : CACHE_PERMANENT);
+    cache_set('l10n_update_available_releases', $available, 'cache_l10n_update', $frequency ? time() + $frequency : CACHE_PERMANENT);
     return $available;
   }
 }
@@ -117,7 +124,7 @@ function l10n_update_check_translations($count, $before, $limit = 1) {
   if ($result) {
     $local = variable_get('l10n_update_check_mode', L10N_UPDATE_CHECK_ALL) & L10N_UPDATE_CHECK_LOCAL;
     $remote = variable_get('l10n_update_check_mode', L10N_UPDATE_CHECK_ALL) & L10N_UPDATE_CHECK_REMOTE;
-    while (($check = db_fetch_object($result)) && (count($checked) <= $limit)) {
+    while (($check = db_fetch_object($result)) && (count($updated) < $limit)) {
       $checked[] = $check;
       if (!empty($projects[$check->name])) {
         $project = $projects[$check->name];
@@ -125,7 +132,7 @@ function l10n_update_check_translations($count, $before, $limit = 1) {
         $source = l10n_update_source_build($project, $check->lang);
         $current = $check->filename ? $check : NULL;
         if ($available = l10n_update_source_check($source, $local, $remote)) {
-          if (!$current || _l10n_update_source_compare($current, $available) > 1 || $current->version != $available->version) {
+          if (!$current || _l10n_update_source_compare($current, $available) == -1 || $current->version != $available->version) {
             $update = $available;
           }
         }
@@ -304,14 +311,24 @@ function l10n_update_source_update($source, $mode) {
  * @param $mode
  *   Download mode. How to treat exising and modified translations.
  * @return boolean
- *   TRUE on success, NULL on failure.
+ *   Result array on success, FALSE on failure.
  */
 function l10n_update_source_import($source, $mode) {
-  if (!empty($source->filepath) && l10n_update_import_file($source->filepath, $source->language, $mode)) {
-    $source->last_updated = time();
-    $source->import_date = time();
-    return TRUE;
+   if (!empty($source->filepath) && $result = l10n_update_import_file($source->filepath, $source->language, $mode)) {
+    $source->last_checked = time();
+
+    // We override the file timestamp here. The default file time stamp is the
+    // release date from the l.d.o server. We change the timestamp to the
+    // creation time on the webserver. On multi sites that share a common
+    // sites/all/translations directory, the sharing sites use the local file
+    // creation date as release date. Without this correction the local
+    // file is always newer than the l.d.o. file, which results in unnecessary
+    // translation import.
+    $source->timestamp = time();
+
+    return $result;
   }
+  return FALSE;
 }
 
 /**
@@ -378,7 +395,7 @@ function l10n_update_source_history($file) {
  */
 function _l10n_update_source_compare($current, $update) {
   if ($current && $update) {
-    if ($current->timestamp == $update->timestamp) {
+    if (abs($current->timestamp - $update->timestamp) < L10N_UPDATE_TIMESTAMP_THRESHOLD) {
       return 0;
     }
     else {

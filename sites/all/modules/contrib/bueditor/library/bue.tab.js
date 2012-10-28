@@ -1,4 +1,3 @@
-// $Id: bue.tab.js,v 1.4.2.3 2010/03/03 14:00:34 ufku Exp $
 
 //Introduce indent(TAB), unindent(Shift+TAB), and auto indent(ENTER) in textareas.
 //Requires: none
@@ -11,7 +10,7 @@ BUE.preprocess.tab = function(E, $) {
     blocks: true //indent/unindent selected text blocks without overwriting.
   };
 
-  $(E.textArea).keydown(function(e) {
+  $(E.textArea).bind('keydown.bue', function(e) {
     if (e.keyCode == 9) {
       if (e.ctrlKey && e.originalEvent.altKey) {//enable-disable
         E.tabs.on = !E.tabs.on;

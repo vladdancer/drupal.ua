@@ -1,5 +1,5 @@
 <?php
-// $Id: votingapi_views_handler_field_value.inc,v 1.1.2.5 2010/10/10 01:41:38 eaton Exp $
+// $Id: votingapi_views_handler_field_value.inc,v 1.1.2.3 2009/06/21 01:10:39 eaton Exp $
 
 /**
  * @file
@@ -14,7 +14,7 @@ class votingapi_views_handler_field_value extends views_handler_field_numeric {
 
   function option_definition() {
     $options = parent::option_definition();
-    $options['appearance'] = array('default' => '');
+    $options['appearance'] = '';
     return $options;
   }
 
@@ -36,10 +36,6 @@ class votingapi_views_handler_field_value extends views_handler_field_numeric {
     }
   }
 
-  function element_type() {
-    return 'div';
-  } 
-
   function render($values) {
     $value = $values->{$this->field_alias};
     $function = $this->options['appearance'];
@@ -49,12 +45,5 @@ class votingapi_views_handler_field_value extends views_handler_field_numeric {
     else {
       return parent::render($values);
     }
-  }
-
-  /**
-   * Called to determine what to tell the clicksorter.
-   */
-  function click_sort($order) {
-    $this->query->add_orderby(NULL, "COALESCE($this->table_alias.$this->field, 0)", $order, $this->table_alias . '_' . $this->field . '_coalesced');
   }
 }

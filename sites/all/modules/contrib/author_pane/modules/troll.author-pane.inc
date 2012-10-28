@@ -1,5 +1,4 @@
 <?php
-// $Id: troll.author-pane.inc,v 1.1.2.1.2.3 2010/09/21 03:17:45 michellec Exp $
 
 /**
  * @file

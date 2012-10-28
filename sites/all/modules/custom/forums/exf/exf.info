@@ -1,7 +1,0 @@
-; $Id$
-
-name = Extended forum
-description = A new type of display forum.
-dependencies[] = forum_access
-package = Forums
-core = 6.x

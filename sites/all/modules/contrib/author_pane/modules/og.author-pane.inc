@@ -1,5 +1,4 @@
 <?php
-// $Id: og.author-pane.inc,v 1.1.2.2.2.5 2010/10/04 14:59:56 michellec Exp $
 
 /**
  * @file
@@ -35,14 +34,16 @@ function og_preprocess_author_pane(&$variables) {
       // avoid needless node loads on sites with no private gorups.
       $has_private = module_exists('og_access');
       foreach ($account->og_groups as $og_id => $og) {
-        if ($has_private) {
-          $og_node = node_load($og['nid']) ;
-          if (!$og_node->og_private) {
+        if ($og['status']) {
+          if ($has_private) {
+            $og_node = node_load($og['nid']) ;
+            if (!$og_node->og_private) {
+              $groups[] = l($og['title'], 'node/' . $og['nid']);
+            }
+          }
+          else {
             $groups[] = l($og['title'], 'node/' . $og['nid']);
           }
-        }
-        else {
-          $groups[] = l($og['title'], 'node/' . $og['nid']);
         }
       }
 

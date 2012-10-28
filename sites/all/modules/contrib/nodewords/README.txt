@@ -1,4 +1,3 @@
-; $Id: README.txt,v 1.27.2.21 2010/05/07 05:55:38 kiam Exp $
 
 This module allows you to set some meta tags for the different resources exposed
 by your site: nodes, users, views, taxonomy filters and error pages are some

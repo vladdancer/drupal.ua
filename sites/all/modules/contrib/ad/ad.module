@@ -1,5 +1,4 @@
 <?php
-// $Id: ad.module,v 1.2.2.29.2.83.2.16.2.37 2009/11/30 16:24:08 Jeremy Exp $
 
 /**
  * @file
@@ -166,16 +165,16 @@ function ad($group = FALSE, $quantity = 1, $options = array()) {
         // limits the flexibility of what can be displayed in these frames.
         // For now we'll have a global value, later we'll add per-group
         // over-rides.
-        $append = 'frameborder="'. variable_get('ad_iframe_frameborder', 0) .'" ';
-        $append .= 'scrolling="'. variable_get('ad_iframe_scroll', 'auto') .'" ';
-        $append .= 'name="'. $group .'" ';
+        $attributes['frameborder'] = variable_get('ad_iframe_frameborder', 0);
+        $attributes['scrolling'] = variable_get('ad_iframe_scroll', 'auto');
+        $attributes['name'] = $group;
         if ($height = variable_get('ad_iframe_height', '')) {
-          $append .= 'height="'. $height .'" ';
+          $attributes['height'] = $height;
         }
         if ($width = variable_get('ad_iframe_width', '')) {
-          $append .= 'width="'. $width .'" ';
+          $attributes['width'] = $width;
         }
-        $output = '<iframe src="'. htmlentities($src) ."\" $append></iframe>";
+        $output = '<iframe src="'. htmlentities($src) .'"' . drupal_attributes($attributes) . "></iframe>";
       }
       else if ($options['ad_display'] == 'jquery') {
         // The theme function uses this to generate a CSS id for jQuery to use.
@@ -300,7 +299,7 @@ function ad_rebuild_cache($verbose = FALSE) {
   $build = "ad_cache_{$cache}_build";
   if (function_exists($build)) {
     if ($verbose) {
-      drupal_set_message('Rebuilding ad cache.');
+      drupal_set_message(t('Rebuilding ad cache.'));
     }
     $build();
   }
@@ -648,14 +647,10 @@ function ad_form(&$node, &$form_state) {
       '#required' => TRUE,
       '#options' => $adtypes,
       '#default_value' => isset($node->adtype_select) ? $node->adtype_select : '',
-    );
-    $form['select']['adtype_submit'] = array(
-      '#type' => 'submit',
-      '#value' => t('Select'),
-      '#validate' => array('ad_select_adtype'),
       '#ahah' => array(
         'path' => 'node/add/ad/ahah',
         'wrapper' => 'adtype-ahah-wrapper',
+        'effect' => 'slide',
       ),
     );
   }
@@ -816,9 +811,12 @@ function ad_select_adtype(&$form, &$form_state) {
  * Ad type switch AHAH menu handler.
  */
 function ad_form_ahah() {
-  $form_state = array('storage' => NULL, 'submitted' => FALSE);
+  $form_state = array('submitted' => FALSE);
   $form_build_id = $_POST['form_build_id'];
-  $form = form_get_cache($form_build_id, $form_state);
+  if (!$form = form_get_cache($form_build_id, $form_state)) {
+    exit;
+  }
+  
   ad_form_add_adtype_elements($form, $_POST['adtype_select']);
   form_set_cache($form_build_id, $form, $form_state);
   $form += array(
@@ -827,7 +825,10 @@ function ad_form_ahah() {
   );
   // Rebuild the form.
   $form = form_builder($_POST['form_id'], $form, $form_state);
-  $output = drupal_render($form['adtype_elements']);
+  
+  $option_form = $form['adtype_elements'];
+  unset($option_form['#prefix'], $option_form['#suffix']);
+  $output = drupal_render($option_form);
   drupal_json(array(
     'status'   => TRUE,
     'data'     => $output,
@@ -943,7 +944,7 @@ function ad_nodeapi(&$node, $op, $teaser, $page) {
         if (!isset($node->maxclicks)) {
           $node->maxclicks = 0;
         }
-        db_query("INSERT INTO {ads} (aid, uid, adstatus, adtype, redirect, autoactivate, autoexpire, activated, maxviews, maxclicks) VALUES(%d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d)", $node->nid, $node->uid, $node->adstatus, $node->adtype, url('ad/redirect/'. $node->nid, array('absolute' => TRUE)), $node->autoactivate ? strtotime($node->autoactivate) : '', $node->autoexpire ? strtotime($node->autoexpire) : '', $activated, $node->maxviews, $node->maxclicks);
+        db_query("INSERT INTO {ads} (aid, uid, adstatus, adtype, redirect, autoactivate, autoexpire, activated, maxviews, maxclicks) VALUES(%d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d)", $node->nid, $node->uid, $node->adstatus, $node->adtype, url('ad/redirect/'. $node->nid, array('absolute' => TRUE)), $node->autoactivate, $node->autoexpire, $activated, $node->maxviews, $node->maxclicks);
         ad_statistics_increment($node->nid, 'create');
       }
       break;
@@ -1037,7 +1038,7 @@ function ad_nodeapi(&$node, $op, $teaser, $page) {
   // access to additional variables not available in the nodeapi hook.
   if (isset($node->adtype)) {
     $module = "ad_{$node->adtype}";
-    module_invoke("ad_{$node->adtype}", adapi, $op, $node);
+    module_invoke("ad_{$node->adtype}", 'adapi', $op, $node);
   }
   // Allow ad cache module to act on nodeapi events.
   $cache = variable_get('ad_cache', 'none');
@@ -1296,6 +1297,12 @@ function ad_block($op = 'list', $delta = 0, $edit = array()) {
 function ad_permission($aid, $string, $account = NULL) {
   global $user;
   $access = FALSE;
+
+  // See bug http://drupal.org/node/664956
+  // Using substr() as AdBard has a custom ad_adbard type.
+  if (is_object($aid) && (substr($aid->type, 0, 2) != 'ad')) {
+    return FALSE;
+  }
 
   // by default, check permission for current user
   if (!isset($account)) {
@@ -1592,7 +1599,7 @@ function _ad_get_group($nid) {
   static $groups = array();
 
   if (!isset($groups[$nid])) {
-    $result = db_query('SELECT d.name FROM {term_data} d LEFT JOIN {term_node} n ON d.tid = n.tid WHERE n.nid = %d AND d.vid = %d', $nid, _ad_get_vid());
+    $result = db_query('SELECT td.name FROM {term_data} td INNER JOIN {term_node} tn ON td.tid = tn.tid INNER JOIN {node} n ON tn.vid = n.vid WHERE tn.nid = %d AND td.vid = %d', $nid, _ad_get_vid());
     while ($term = db_fetch_object($result)) {
       $terms[] = $term->name;
     }

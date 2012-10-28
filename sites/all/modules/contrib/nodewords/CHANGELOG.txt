@@ -1,231 +1,146 @@
-# $Id: CHANGELOG.txt,v 1.1.2.258 2010/10/21 12:58:48 damienmckenna Exp $
-# All the dates reported here are referred to UTC.
 
-2010-10-21
-----------
+Nodewords v6.x-1.12-dev
+-----------------------
+By DamienMcKenna: recovered additional missing CHANGELOG.txt notices.
+By DamienMcKenna: cleaned up the CHANGELOG.txt to make it more readable (all changes since January 1st, 2010).
+#986722 by nibblebot: Fixed variable names do not match their respective form element keys.
+#974920 by jaydub: Fixed node_load() call not able to retrieve node from internal static cache.
+#948958 follow-up by Dave Reid: Fixed not all tokens displayed on default meta tags form.
+#911204 by Dave Reid | jasonabc: Standardized the taxonomy term and vocabulary meta tag editing fieldset.
+#960482 by Dave Reid, hles: Fixed dublin core date field does not perform token replacement.
+by Dave Reid: Fixed nodewords_replace_tokens() may not perform correctly with NODEWORDS_TYPE_FRONTPAGE contexts.
+by Dave Reid: Fixed nodewords_replace_tokens() may not perform correctly with NODEWORDS_TYPE_DEFAULT or NODEWORDS_TYPE_PAGER contexts.
+<a href="/node/781440">#781440> follow-up by Dave Reid: Cleaned up token and page context handling code.
+by Dave Reid: Fixed bug in _nodewords_taxonomy_object_load() when loading vocabularies.
+#948958 by Dave Reid: Cleaned up token API and related code.
+#781440 by Dave Reid: resolved PHP notices from previous commit.
+#958192 by Dave Reid: Fixed no message returned from nodewords_extra_update_6106().
+#958192 by Dave Reid: Fixed the nodewords_extra_update_last_removed() function prevented updates from running.
+#781440 by Brian294, DamienMcKenna: missing tokens.
+#881854 by volocuga, DamienMcKenna: Yandex.com search engine verification tag added.
+#927186 by Dave Reid: Removed redundant ICRA meta tag as the service has been discontinued.
+#823982 by Dave Reid, xjm, gilgabar: Added an 'edit meta tags' permission so that not everyone can edit meta tags on node or user edit forms.
+#893762 by Dave Reid, andrewsuth: Fixed missing index on {nodewords_custom}.enabled, database selection queries, and non 0/1 enabled values.
+by Dave Reid: Fixing code cleanups.
+by Dave Reid: Removed silly variables that made code harder to read.
+#929082 by Dave Reid, mikeytown2: Fixed useless function _nodewords_get_tags_data_query().
+#835172 by AlexisWilke, Dave Reid; Summit, powery: Fixed robots meta tag defaulted to noindex,nofollow when saving meta tags.
+#588716 by aether, kiamlaluno, hass: Use drupal_set_html_head() rather than directly altering the head variable in nodewords_preprocess_page().
 #939708 by AlexisWilke: Ensure WYSIWYG does not try to open on textarea fields.
-
-2010-08-05
-----------
 #905614 by AlexisWilke | eule: Fixed update error with missing third parameter with preg_match_all().
-
-2010-08-04
-----------
 #866226 by nasa51: Fixed PHP notice in _nodewords_ui_get_node_metatags_type() when creating a new node.
-
-2010-07-10
-----------
 #848088 by Gomez_in_the_South: Error in nodewords_basic.install.
-
-2010-06-30
-----------
 #774944 by kiam: Custom pages meta tags do not work.
-
-2010-06-07
-----------
 #820576 by kiam: "textarea" for Keywords.
-
-2010-06-03
-----------
 #816426 by melon: Basic meta tags module fails updating prefixed table.
-
-2010-05-31
-----------
 #813606 by kiam: Support for Alexa verification tag.
-
-2010-05-28
-----------
 #753702 by ayalon, kiam: Some meta tags are not output.
-
-2010-05-27
-----------
 #810880 by highrockmedia: Parse error: syntax error, unexpected ';'.
 #810078 by yettyn, charlie836: Syntax error.
-
-2010-05-19
-----------
 #775446 by kiam: Use again tokens for the meta tag DC.DATE.
-
-2010-05-13
-----------
 #797292 by juankvillegas: hook_taxonomy($op, $type, $array = NULL).
-
-2010-05-11
-----------
 #782792 by locomo: Meta tags fieldset is missing when editing user account.
-
-2010-05-07
-----------
 #791866 by kiam: Credits.
-
-2010-05-06
-----------
 #785654 by snorkers, kiam: Commas missing in ROBOTS tag for previously created nodes.
 #791188 by kiam: Error message when installing custom pages.
-
-2010-05-05
-----------
 #786270 by kiam: The default value for the meta tag ROBOTS is not used.
-
-2010-04-20
-----------
 #776086 by kiam: White spaces in description token.
-
-2010-04-19
-----------
 #775446 by kiam: Meta tag DC.DATE doesn't verify the entered value.
 
-2010-04-18
-----------
+Nodewords v6.x-1.12-beta9
+-------------------------
 #774350 by kiam: Fatal error: Call to undefined function nodewords_check_api().
+#753702 by kiam: Location is not shown.
+#708530 by kiam: Description & Keywords for taxonomy terms aren't getting saved.
+#660746 by kiam: Robots tag not displayed, but on <front>.
+By kiam: Corrected the descriptions given for two fieldsets.
+By kiam: Changed the identifier for the messages passed to watchdog().
+#774350 by kiam: Fatal error: Call to undefined function nodewords_check_api_version().
+By kiam: Corrected the API version number.
 
-2010-04-17
-----------
+Nodewords v6.x-1.12-beta8
+-------------------------
+By kiam: Removed extra characters.
+By kiam: Corrected the reference to a mistyped constant.
+
+Nodewords v6.x-1.12-beta7
+-------------------------
+By kiam: Corrected the return value of nodewords_admin_update_6100().
+
+Nodewords v6.x-1.12-beta6
+-------------------------
+By kiam: Updated the installation files.
+
+Nodewords v6.x-1.12-beta5
+-------------------------
 #660746 by kiam: Robots tag not displayed, but on <front>.
 #708530 by kiam: Description & Keywords for taxonomy terms aren't getting saved.
 #753702 by kiam: Location is not shown.
 #772474 by kiam: Parse error: syntax error, unexpected ')' in /sites/all/modules/nodewords/nodewords_ui/nodewords_ui.module.
-
-2010-04-14
-----------
 #771226 by kiam: README.txt contains outdated information.
-
-2010-04-11
-----------
 #767764 by kiam: Token for the front page URL should return the base URL.
 #767760 by kiam: Can't delete meta tags for custom pages.
 #767612 by TravisCarden: The link in the post-installation message is not correct.
-
-2010-04-10
-----------
 #767492 by kiam: Token is not replaced for custom pages.
 #767190 by kiam: Token [metatags-url-alias] does not return the path alias.
 #767406 by yettyn: Warning - Cannot modify header information.
-
-2010-04-08
-----------
 #665042 by kiam: If the front page is a node, meta tags fieldset should not be shown for the node.
-
-2010-04-07
-----------
 #761690 by kiam: Syntax error on line 13.
-
-2010-04-03
-----------
 #760588 by kiam: Database error after installation.
-
-2010-03-25
-----------
 #691852 by kiam: Meta tags are sometime output multiple times.
-
-2010-03-23
-----------
 #748958 by kiam: Default and specific tags are not saved.
-
-2010-03-22
-----------
 #748828 by kiam: update error | nodewords_basic.install.
 #748846 by kiam: Parse error on nodewords_tokens.module.
 
-2010-03-21
-----------
+Nodewords v6.x-1.12-beta4
+-------------------------
 #706630 by kiam: Implement the hooks necessary to add more tokens.
 #735148 by kiam: Variables not deleted after uninstall.
-
-2010-03-12
-----------
 #740520 by kiam: Change the form field for meta tags ROBOTS.
-
-2010-03-07
-----------
 #630184 by kiam: Remove verification tag checkboxes for "edit forms" since they ONLY appear on the front page.
 #644102 by kiam: Re-organize the sub-modules.
 #696652 by kiam: Meta tags that are generated should not be shown in the editing form.
 #696650 by kiam: Change the settings fields for the meta tags generation.
-
-2010-03-04
-----------
 #731664 by kiam: Put the settings to enable the meta tags, and to select the meta tags to output in the same fieldset.
-
-2010-02-24
-----------
 #672262 by Lars Pohlmann: Meta tags for "other pages" are not used.
-
-2010-02-23
-----------
 #698582 by jenlampton: Meta tags form fields are missing when adding a new taxonomy term.
 #721642 by AlexisWilke: PostgreSQL update.
-
-2010-02-18
-----------
 #717892 by maximpodorov: Parameter 2 to nodewords_form_alter() expected to be a reference, value given.
 
-2010-02-15
-----------
+Nodewords v6.x-1.12-beta3
+-------------------------
 #715170 by kiamlaluno: Warning: "Unknown column 'n.0' in 'where clause' query" during search indexing.
-
-2010-02-08
-----------
 #707722 by zxs: Custom regexp does't filter node teaser.
-
-2010-02-05
-----------
 #705128 by kiamlaluno: Improper check for node form generates PHP warning.
-
-2010-02-01
-----------
 #701248 by kiamlaluno: Show a message after the module is installed.
-
-2010-01-30
-----------
 #699904 by kiamlaluno: Change the module description.
-
-2010-01-29
-----------
 #698956 by kiamlaluno: Change the message reported from hook_reports().
-
-2010-01-28
-----------
 #695322 by kiamlaluno: Nodewords keeps logging error on the database.
-
-2010-01-20
-----------
 #690304 by kiamlaluno: It is not possible to set the value for the meta tag PICS-LABEL to use in the front page.
 
-2010-01-11
-----------
+Nodewords v6.x-1.12-beta2
+-------------------------
+#668446 by kiamlaluno: Change the options to allow setting keywords that are put before, and after all the others.
+
+Nodewords v6.x-1.12-beta1
+-------------------------
 #668446 by kiamlaluno: Change the options to allow setting keywords that are put before, and after all the others.
 #681080 by kiamlaluno: Update function changes the field id into a smallint.
-
-2010-01-10
-----------
 #672068 by suvisor, kiamlaluno: Update fails passing from 6.x-1.3 to 6.x-1.11.
 #679466 by kiamlaluno: Update from Nodewords 6.x-1.3-alpha2 to 6.x-1.11 fails because of Update #6151.
-
-2010-01-06
-----------
 #675110 by kiamlaluno: Add '#wysiwyg' => FALSE to textareas.
 #675920 by kiamlaluno: Bad rewriting of the $variables['head'] in hook_preprocess_page().
-
-2010-01-05
-----------
 #673624 by kiamlaluno: Node meta tag description does not correctly work.
-
-2010-01-03
-----------
 #673214 by kiamlaluno: Meta tags for other pages are not correctly loaded from the database.
 #672976 by kiamlaluno: Syntax error on line 322.
-
-2010-01-02
-----------
 #672096 by Summit, kiamlaluno: Meta tags are not saved for taxomony terms or vocabularies.
 #672346 by kiamlaluno: Remove the settings that have an equivalent setting for content types.
 #672262 by kiamlaluno: Meta tags for "other pages" are not used.
 #672072 by kiamlaluno: Meta tag content generation always use the node body content.
-
-2010-01-01
-----------
 #671926 by kiamlaluno: Node operations are probably not compatible with VBO.
+
+Nodewords v6.x-1.11
+-------------------
 
 2009-12-31
 ----------

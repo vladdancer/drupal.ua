@@ -1,0 +1,13 @@
+;$Id$
+name = argkeywords
+description = Google Ajax Search Keywords from GET arguments
+core = 6.x
+version = "6.x-1.3"
+package = Google Ajax Search
+dependencies[] = googleajaxsearch
+; Information added by drupal.org packaging script on 2011-08-23
+version = "6.x-1.7"
+core = "6.x"
+project = "googleajaxsearch"
+datestamp = "1314094019"
+

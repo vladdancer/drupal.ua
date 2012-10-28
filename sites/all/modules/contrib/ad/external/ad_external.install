@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_external.install,v 1.1.2.1.2.2 2009/02/16 17:06:48 jeremy Exp $
 
 /**
  * @file
@@ -45,6 +44,6 @@ function ad_external_install() {
 /**
  * Allow complete uninstallation of the ad_external module.
  */
-function ad_external() {
+function ad_external_uninstall() {
   drupal_uninstall_schema('ad_external');
 }

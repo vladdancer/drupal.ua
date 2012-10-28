@@ -1,5 +1,4 @@
 <?php
-// $Id: imageserve.inc,v 1.1.2.8.2.2.2.2 2009/07/09 21:21:38 jeremy Exp $
 
 /**
  * @file

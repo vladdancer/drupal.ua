@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_weight_probability.inc,v 1.1.4.3 2009/02/28 05:48:42 jeremy Exp $
 
 /**
  * @file

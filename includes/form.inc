@@ -1,5 +1,4 @@
 <?php
-// $Id: form.inc,v 1.265.2.34 2010/08/06 11:02:49 goba Exp $
 
 /**
  * @defgroup forms Form builder functions
@@ -42,8 +41,8 @@
  *
  * For information on the format of the structured arrays used to define forms,
  * and more detailed explanations of the Form API workflow, see the
- * @link http://api.drupal.org/api/file/developer/topics/forms_api_reference.html reference @endlink
- * and the @link http://api.drupal.org/api/file/developer/topics/forms_api.html quickstart guide. @endlink
+ * @link http://api.drupal.org/api/file/developer/topics/forms_api_reference.html/6 reference @endlink
+ * and the @link http://drupal.org/node/204270 Form API guide. @endlink
  */
 
 /**
@@ -62,7 +61,9 @@
  *   Any additional arguments are passed on to the functions called by
  *   drupal_get_form(), including the unique form constructor function.
  *   For example, the node_edit form requires that a node object be passed
- *   in here when it is called.
+ *   in here when it is called. These are available to implementations of
+ *   hook_form_alter() and hook_form_FORM_ID_alter() as the array
+ *   $form['#parameters'].
  * @return
  *   The rendered form.
  */
@@ -304,6 +305,11 @@ function drupal_execute($form_id, &$form_state) {
   
   $form = call_user_func_array('drupal_retrieve_form', $args);
   $form['#post'] = $form_state['values'];
+
+  // Reset form validation.
+  $form_state['must_validate'] = TRUE;
+  form_set_error(NULL, '', TRUE);
+
   drupal_prepare_form($form_id, $form, $form_state);
   drupal_process_form($form_id, $form, $form_state);
 }
@@ -574,7 +580,7 @@ function drupal_prepare_form($form_id, &$form, &$form_state) {
 function drupal_validate_form($form_id, $form, &$form_state) {
   static $validated_forms = array();
 
-  if (isset($validated_forms[$form_id])) {
+  if (isset($validated_forms[$form_id]) && empty($form_state['must_validate'])) {
     return;
   }
 
@@ -1719,9 +1725,9 @@ function expand_date($element) {
 /**
  * Validates the date type to stop dates like February 30, 2006.
  */
-function date_validate($form) {
-  if (!checkdate($form['#value']['month'], $form['#value']['day'], $form['#value']['year'])) {
-    form_error($form, t('The specified date is invalid.'));
+function date_validate($element) {
+  if (!checkdate($element['#value']['month'], $element['#value']['day'], $element['#value']['year'])) {
+    form_error($element, t('The specified date is invalid.'));
   }
 }
 
@@ -1991,7 +1997,7 @@ function theme_image_button($element) {
     (!empty($element['#value']) ? ('value="'. check_plain($element['#value']) .'" ') : '') .
     'id="'. $element['#id'] .'" '.
     drupal_attributes($element['#attributes']) .
-    ' src="'. base_path() . $element['#src'] .'" '.
+    ' src="'. file_create_url($element['#src']) .'" '.
     (!empty($element['#title']) ? 'alt="'. check_plain($element['#title']) .'" title="'. check_plain($element['#title']) .'" ' : '' ) .
     "/>\n";
 }
@@ -2323,8 +2329,9 @@ function form_clean_id($id = NULL, $flush = FALSE) {
  *   'file' => 'path_to_file_containing_myfunctions',
  * );
  * batch_set($batch);
- * // only needed if not inside a form _submit handler :
- * batch_process();
+ * // Only needed if not inside a form _submit handler.
+ * // Setting redirect in batch_process.
+ * batch_process('node/1');
  * @endcode
  *
  * Note: if the batch 'title', 'init_message', 'progress_message', or
@@ -2435,7 +2442,7 @@ function form_clean_id($id = NULL, $flush = FALSE) {
  * clean code independence, ensuring that several batches submitted by
  * different parts of the code (core / contrib modules) can be processed
  * correctly while not interfering or having to cope with each other. Each
- * batch set gets to specify his own UI messages, operates on its own set
+ * batch set gets to specify its own UI messages, operates on its own set
  * of operations and results, and triggers its own 'finished' callback.
  * Batch sets are processed sequentially, with the progress bar starting
  * fresh for every new set.

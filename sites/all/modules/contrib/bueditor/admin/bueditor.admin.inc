@@ -1,10 +1,11 @@
 <?php
-// $Id: bueditor.admin.inc,v 1.10.2.12 2010/03/17 22:22:10 ufku Exp $
 
 /**
  * @file
  * Serves administration pages of BUEditor.
  */
+
+include_once './' . drupal_get_path('module', 'bueditor') . '/bueditor.inc';
 
 /**
  * Admin main page.
@@ -458,7 +459,7 @@ function bueditor_button_import_form() {
  * Button import form submission.
  */
 function bueditor_button_import_submit($form, &$form_state) {
-  if ($file = file_save_upload('importcsv', array(), file_directory_temp())) {
+  if ($file = file_save_upload('importcsv', array('file_validate_extensions' => array('csv')), file_directory_temp())) {
     $_SESSION['bueimport'] = $file->filepath;
   }
   elseif ($code = $form_state['values']['importcode']) {
@@ -545,6 +546,11 @@ function bueditor_editor_import_form(&$form_state) {
     '#required' => TRUE,
     '#description' => t('Enter previously exported editor code.') .'<div class="warning">'. t('This code will be evaluated as PHP, therefore you must be sure that it is harmless and produces proper editor data.') .'</div>',
   );
+  $form['overwrite'] = array('#type' => 'select',
+    '#title' => t('Overwrite'),
+    '#options' => bueditor_editor_options(),
+    '#description' => t('You can optionally select the editor you want to overwrite. Otherwise, a new one will be created.'),
+  );
   $form['submit'] = array('#type' => 'submit', '#value' => t('Import'));
   $form['#validate'][] = 'bueditor_editor_import_validate';
   $form['#submit'][] = 'bueditor_editor_import_submit';
@@ -566,6 +572,7 @@ function bueditor_editor_import_validate($form, &$form_state) {
     }
   }
   $editor->name =  $form_state['values']['name'];
+  $editor->eid = $editor->overwrite = empty($form_state['values']['overwrite']) ? NULL : $form_state['values']['overwrite'];
   $form_state['editor'] = $editor;
 }
 
@@ -641,7 +648,14 @@ function bueditor_save_import($editor) {
   }
 
   //get rid of some unwanted or possibly big variables
-  unset($editor->eid, $editor->custom_path, $editor->buttons, $editor->library, $editor->icons);
+  unset($editor->custom_path, $editor->buttons, $editor->library, $editor->icons);
+  if (empty($editor->overwrite)) {
+    unset($editor->eid);
+  }
+  // New buttons shall replace the old ones.
+  elseif (!empty($editor->eid)) {
+    db_query("DELETE FROM {bueditor_buttons} WHERE eid = %d", $editor->eid);
+  }
 
   //save and return the editor
   return bueditor_write_editor($editor, $buttons);
@@ -794,7 +808,7 @@ function bueditor_exec_editor_code($code) {
  */
 function bueditor_write_editor($editor, $buttons = array()) {
   if (isset($editor->spriteon) && $editor->spriteon) {
-    include_once(drupal_get_path('module', 'bueditor') . '/admin/bueditor.sprite.inc');
+    include_once './' . drupal_get_path('module', 'bueditor') . '/admin/bueditor.sprite.inc';
     $editor->spritename = bueditor_sprite($editor, $buttons);
   }
   if (drupal_write_record('bueditor_editors', $editor, bueditor_isupdate($editor, 'eid'))) {
@@ -827,13 +841,12 @@ function bueditor_sorted_roles() {
     $broles = variable_get('bueditor_roles', array());
     $broles[DRUPAL_ANONYMOUS_RID]['weight'] = 12;
     $broles[DRUPAL_AUTHENTICATED_RID]['weight'] = 11;
+    $keys = array('weight', 'editor', 'alt');
     foreach ($roles as $rid => $name) {
-      $sorted[$rid] = array(
-        'name' => $name,
-        'weight' => (int) $broles[$rid]['weight'],
-        'editor' => (int) $broles[$rid]['editor'],
-        'alt' => (int) $broles[$rid]['alt']
-      );
+      $sorted[$rid]['name'] = $name;
+      foreach ($keys as $key) {
+        $sorted[$rid][$key] = empty($broles[$rid][$key]) ? 0 : (int) $broles[$rid][$key];
+      }
     }
     uasort($sorted, 'bueditor_rolesort');
   }
@@ -894,8 +907,8 @@ function bueditor_buttons_by_id($bids = array()) {
  * Sends the text to the client.
  */
 function bueditor_export_text($text, $filename) {
-  header('Content-type: text/plain; charset=utf-8');
-  header('Content-Disposition: attachment; filename='. $filename);
+  drupal_set_header('Content-type: text/plain; charset=utf-8');
+  drupal_set_header('Content-Disposition: attachment; filename='. $filename);
   print $text;
   exit();
 }

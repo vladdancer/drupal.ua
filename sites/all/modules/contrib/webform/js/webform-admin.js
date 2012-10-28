@@ -1,4 +1,3 @@
-// $Id: webform-admin.js,v 1.1.2.6 2010/10/17 18:55:11 quicksketch Exp $
 
 /**
  * Webform node form interface enhancments.
@@ -11,6 +10,8 @@ Drupal.behaviors.webformAdmin = function(context) {
   Drupal.webform.setActive(context);
   // Update the template select list upon changing a template.
   Drupal.webform.updateTemplate(context);
+  // Select all link for file extensions.
+  Drupal.webform.selectCheckboxesLink(context);
   // Enhance the normal tableselect.js file to support indentations.
   Drupal.webform.tableSelectIndentation(context);
 }
@@ -55,8 +56,8 @@ Drupal.webform.setActive = function(context) {
 
 Drupal.webform.updateTemplate = function(context) {
   var defaultTemplate = $('#edit-templates-default').val();
-  var $templateSelect = $('#webform-template-fieldset select', context);
-  var $templateTextarea = $('#webform-template-fieldset textarea', context);
+  var $templateSelect = $('#webform-template-fieldset select#edit-template-option', context);
+  var $templateTextarea = $('#webform-template-fieldset textarea:visible', context);
 
   var updateTemplateSelect = function() {
     if ($(this).val() == defaultTemplate) {
@@ -80,6 +81,20 @@ Drupal.webform.updateTemplate = function(context) {
 
   $templateTextarea.keyup(updateTemplateSelect);
   $templateSelect.change(updateTemplateText);
+}
+
+Drupal.webform.selectCheckboxesLink = function(context) {
+  function selectCheckboxes() {
+    var group = this.className.replace(/.*?webform-select-link-([^ ]*).*/, '$1');
+    var $checkboxes = $('.webform-select-group-' + group + ' input[type=checkbox]');
+    var reverseCheck = !$checkboxes[0].checked;
+    $checkboxes.each(function() {
+      this.checked = reverseCheck;
+    });
+    $checkboxes.trigger('change');
+    return false;
+  }
+  $('a.webform-select-link', context).click(selectCheckboxes);
 }
 
 Drupal.webform.tableSelectIndentation = function(context) {

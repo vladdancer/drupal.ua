@@ -1,7 +1,0 @@
-; $Id$
-
-name = Answers FAQ
-description = "Displays the text on the pages Q & A."
-dependencies[] = "answers"
-package = "Answers"
-core = 6.x

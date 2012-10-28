@@ -220,12 +220,12 @@ function adserve_cache_id($type, $id) {
       _debug_echo("adserve_cache_id: SELECT aid FROM {ads} WHERE adstatus = 'active' AND aid IN($id)");
       break;
     case 'tids':
-      $result = db_query("SELECT a.aid FROM {ads} a INNER JOIN {term_node} n ON a.aid = n.nid WHERE a.adstatus = 'active' AND n.tid IN(%s)", $id);
-      _debug_echo("adserve_cache_id: SELECT a.aid FROM {ads} a INNER JOIN {term_node} n ON a.aid = n.nid WHERE a.adstatus = 'active' AND n.tid IN($id)");
+      $result = db_query("SELECT a.aid FROM {ads} a INNER JOIN {node} n ON a.aid = n.nid INNER JOIN {term_node} tn ON n.vid = tn.vid WHERE a.adstatus = 'active' AND tn.tid IN(%s)", $id);
+      _debug_echo("adserve_cache_id: SELECT a.aid FROM {ads} a INNER JOIN {node} n ON a.aid = n.nid INNER JOIN {term_node} tn ON n.vid = tn.vid WHERE a.adstatus = 'active' AND tn.tid IN($id)");
       break;
     case 'default':
-      $result = db_query("SELECT a.aid FROM {ads} a LEFT JOIN {term_node} n ON a.aid = n.nid WHERE a.adstatus = 'active' AND n.tid IS NULL");
-      _debug_echo("adserve_cache_id: SELECT a.aid FROM {ads} a LEFT JOIN {term_node} n ON a.aid = n.nid WHERE a.adstatus = 'active' AND n.tid IS NULL");
+      $result = db_query("SELECT a.aid FROM {ads} a INNER JOIN {node} n ON a.aid = n.nid LEFT JOIN {term_node} tn ON n.vid = tn.vid WHERE a.adstatus = 'active' AND tn.tid IS NULL");
+      _debug_echo("SELECT a.aid FROM {ads} a INNER JOIN {node} n ON a.aid = n.nid LEFT JOIN {term_node} tn ON n.vid = tn.vid WHERE a.adstatus = 'active' AND tn.tid IS NULL");
       break;
     default:
       _debug_echo("adserve_cache_id: unsupported type '$type'.");

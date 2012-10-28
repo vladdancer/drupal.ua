@@ -1,5 +1,4 @@
 <?php
-// $Id: user.inc,v 1.1.4.12 2010/11/07 19:39:43 davereid Exp $
 
 /**
  * @file

@@ -28,13 +28,15 @@ Written by:
 Meant4.pl development team:
 Maciej Perlinski, Adam Ludwinski
 Rafał Długołęcki, Tomasz Trzciński
-http://www.meant4.pl
+http://www.meant4.com
 
 Sugestions&Questions 
 --------------------
-
+- D7 version
+- plugin for passing keywords from GET argument to google ajax search searcher
 
 History
 -------
 
 2006-10-26 - Initial release
+2011-08-18 - Plugin update

@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_weight_percent.install,v 1.1.2.2.2.2 2009/02/16 17:06:50 jeremy Exp $
 
 /**
  * Ad weight percent module database schema.
@@ -31,6 +30,6 @@ function ad_weight_percent_uninstall() {
   // Remove tables.
   drupal_uninstall_schema('ad_weight_percent');
 
-  drupal_set_message('The ad_weight_percent module has been completely uninstalled.');
+  drupal_set_message(t('The ad_weight_percent module has been completely uninstalled.'));
 }
 

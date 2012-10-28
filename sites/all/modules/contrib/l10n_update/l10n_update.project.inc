@@ -1,5 +1,4 @@
 <?php
-// $Id: l10n_update.project.inc,v 1.2.2.3 2010/11/18 21:30:57 sutharsan Exp $
 
 /**
  * @file
@@ -37,7 +36,34 @@ function l10n_update_build_projects() {
   // Mark all previous projects as disabled and store new project data
   db_query("UPDATE {l10n_update_project} SET status = 0");
   $default_server = l10n_update_default_server();
+
+  if (module_exists('update')) {
+    $projects_info = update_get_available(TRUE);
+  }
   foreach ($projects as $name => $data) {
+    if (isset($projects_info[$name]['releases']) && $projects_info[$name]['project_status'] != 'not-fetched') {
+      // Find out if a dev version is installed.
+      if (preg_match("/^[0-9]+\.x-([0-9]+)\..*-dev$/", $data['info']['version'], $matches)) {
+        foreach ($projects_info[$name]['releases'] as $project_release) {
+          if ($project_release['version_major'] == $matches[1] &&
+              (!isset($project_release['version_extra']) || $project_release['version_extra'] != 'dev')) {
+            $release = $project_release;
+            break;
+          }
+        }
+      }
+      elseif ($name == "drupal" || preg_match("/HEAD/", $data['info']['version'], $matches)) {
+        // Pick latest available release.
+        $release = array_shift($projects_info[$name]['releases']);
+      }
+
+      if (!empty($release['version'])) {
+        $data['info']['version'] = $release['version'];
+      }
+
+      unset($release);
+    }
+
     $data += array(
       'version' => isset($data['info']['version']) ? $data['info']['version'] : '',
       'core' => isset($data['info']['core']) ? $data['info']['core'] : DRUPAL_CORE_COMPATIBILITY,
@@ -84,7 +110,7 @@ function l10n_update_project_list() {
   _l10n_update_project_info_list($projects, module_rebuild_cache(), 'module', $disabled);
   _l10n_update_project_info_list($projects, system_theme_data(), 'theme', $disabled);
   // Allow other modules to alter projects before fetching and comparing.
-  drupal_alter('update_projects', $projects);
+  drupal_alter('l10n_update_projects', $projects);
   return $projects;
 }
 

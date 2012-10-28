@@ -1,7 +1,5 @@
 <?php
-// $Id: googleajaxsearch.module,v 1.8.2.1 2009/09/30 12:02:27 macperlinski Exp $
-
-
+// $Id$
 require_once("default_settings.inc");
 require_once("googleajaxsearch.inc");
 

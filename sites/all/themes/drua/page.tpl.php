@@ -12,17 +12,7 @@
 <body class="<?php print $body_classes; ?> sshow-grid">
   <div class="body-wrapper">
     <div id="page" class="page container-12 clear-block">
-        <div id="branding" class="clear-block">
-        <?php if ($linked_logo_img): ?>
-          <span id="logo" class="logo grid-1"><?php print $linked_logo_img; ?></span>
-        <?php endif; ?>
-        <?php if ($linked_site_name): ?>
-          <h1 id="site-name" class="site-name grid-3"><?php print $linked_site_name; ?></h1>
-        <?php endif; ?>
-        <?php if ($site_slogan): ?>
-          <div id="site-slogan" class="site-slogan grid-3"><?php print $site_slogan; ?></div>
-        <?php endif; ?>
-        </div>
+        
 
       <div id="site-header" class="site-header clear-block">
         <div id="site-menu" class="site-menu grid-8">
@@ -35,38 +25,55 @@
         </div>
       </div>
 
+      <?php if ($header_banner): ?>
+        <div id="header_banner"><?php print $header_banner; ?></div>
+      <?php endif; ?>
 
-      <div id="site-subheader" class="site-subheader clear-block">
-      <?php if ($mission): ?>
-        <div id="mission" class="<?php print ns('grid-12', $header, 7); ?>">
-          <?php print $mission; ?>
-        </div>
-      <?php endif; ?>
-      
-      <?php if ($main_menu_links): ?>
-        <div class="top-box <?php print(($secondary_menu_links || $featured) ? '' : 'single-menu'); ?> grid-12">
-          <?php print $main_menu_links; ?>
-          <div class="clear-block"></div>
-          <?php if ($secondary_menu_links || $featured): ?>
-            <?php print $secondary_menu_links; ?>
+      <div id="wrap_branding">
+        <div id="branding" class="clear-block">
+          <?php if ($logo): ?>
+            <span id="logo" class="logo grid-1"><a href="/"><?php print $logo; ?></a></span>
           <?php endif; ?>
-          <div class="clear-block"></div>
-          <?php if ($featured): ?>
-            <?php print $featured; ?>
+          <?php if ($linked_site_name): ?>
+            <h1 id="site-name" class="site-name grid-3"><?php print $linked_site_name; ?></h1>
           <?php endif; ?>
-          <?php if ($secondary_menu_links || $featured): ?>
-            <div class="top-box-bottom"></div>
+          <?php if ($site_slogan): ?>
+            <div id="site-slogan" class="site-slogan grid-3"><?php print $site_slogan; ?></div>
           <?php endif; ?>
+          </div>
+
+
+        <div id="site-subheader" class="site-subheader clear-block">
+        <?php if ($mission): ?>
+          <div id="mission" class="<?php print ns('grid-12', $header, 7); ?>">
+            <?php print $mission; ?>
+          </div>
+        <?php endif; ?>
+        
+        <?php if ($main_menu_links): ?>
+          <div class="top-box <?php print(($secondary_menu_links || $featured) ? '' : 'single-menu'); ?> grid-12">
+            <?php print $main_menu_links; ?>
+            <div class="clear-block"></div>
+            <?php if ($secondary_menu_links || $featured): ?>
+              <?php print $secondary_menu_links; ?>
+            <?php endif; ?>
+            <div class="clear-block"></div>
+            <?php if ($featured): ?>
+              <?php print $featured; ?>
+            <?php endif; ?>
+            <?php if ($secondary_menu_links || $featured): ?>
+              <div class="top-box-bottom"></div>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
+        <?php if ($page_top): ?>
+          <div id="page-top" class="grid-12 clear-block">
+            <?php print $page_top; ?>
+          </div>
+        <?php endif; ?>
+        <div class="clear-block"></div>
         </div>
-      <?php endif; ?>
-      <?php if ($page_top): ?>
-        <div id="page-top" class="grid-12 clear-block">
-          <?php print $page_top; ?>
-        </div>
-      <?php endif; ?>
-      <div class="clear-block"></div>
       </div>
-
 
       <div id="main" class="column <?php print ns('', $left, 3, $right, 3) . ' ' . ns('push-3', !$left, 3); ?>">
         <div class="page-controls grid-12">
@@ -104,7 +111,7 @@
       <div id="page-bottom" class="grid-12 clear-block">
         <?php print $page_bottom; ?>
       </div>
-    <?php endif; ?>
+    <?php endif; ?> 
     </div>
   </div>
   <div id="footer" class="prefix-1 suffix-1 footer">
@@ -114,6 +121,19 @@
           <?php print $footer; ?>
           <div class="clear-block"></div>
         </div>
+        <script type="text/javascript">
+          total = 0;
+          $('#footer .content > ul.menu > li').each(function(){
+            if (!$(this).is('.first')) {
+              total += $(this).width();
+            }
+          });
+          diff = 960 - total;
+          count = $('#footer .content > ul.menu > li').length - 2;
+          margin = diff / ( count == 0 ? diff : count);
+          $('#footer .content > ul.menu > li').css('marginRight', margin);
+          $('#footer .content > ul.menu > li.last').css('marginRight', 0);
+        </script>
       <?php endif; ?>
 
       <?php if ($copyrights): ?>

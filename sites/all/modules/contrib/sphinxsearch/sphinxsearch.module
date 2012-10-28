@@ -1,5 +1,4 @@
 <?php
-// $Id: sphinxsearch.module,v 1.5.2.4 2008/10/31 15:57:13 markuspetrux Exp $
 
 /**
  * @file
@@ -311,6 +310,15 @@ function sphinxsearch_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
 }
 
 /**
+ * Implementation of hook_content_build_modes().
+ */
+function sphinxsearch_content_build_modes() {
+  if (!module_exists('search')) {
+    return search_content_build_modes();
+  }
+}
+
+/**
  * Delete a node from Sphinx indexes.
  *
  * Sphinx document deletions are updated in realtime using UpdateAttributes()
@@ -474,10 +482,4 @@ function sphinxsearch_get_enabled_node_types_condition($table_alias = '') {
     return '';
   }
   return (!empty($table_alias) ? $table_alias .'.' : '') .'type '. $condition;
-}
-
-function sphinxsearch_content_build_modes() {
-  if ((module_exists('content')) && (!module_exists('search'))) {
-    return search_content_build_modes();
-  }
 }

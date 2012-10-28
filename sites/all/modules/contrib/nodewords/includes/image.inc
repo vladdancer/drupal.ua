@@ -1,5 +1,4 @@
 <?php
-// $Id: image.inc,v 1.1.4.8 2010/11/01 01:10:38 damienmckenna Exp $
 
 /**
  * @file

@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>My Map Set Name</title>
+    <style type="text/css">
+      html, body, #basicMap {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+      }
+    </style>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script>
+      function init() {
+        map = new OpenLayers.Map("basicMap");
+        var newLayer = new OpenLayers.Layer.OSM("New Layer", "http://drupal.ua/sites/drupal.ua/nav/${z}/${x}/${y}.png", {numZoomLevels: 14});
+		map.addLayer(newLayer);
+		map.setCenter(new OpenLayers.LonLat(31.28906249999961600,48.49824353800725900) // Center of the map
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
+          ), 9 // Zoom level
+        );
+      }
+    </script>
+  </head>
+  <body onload="init();">
+    <div id="basicMap"></div>
+  </body>
+</html>
+

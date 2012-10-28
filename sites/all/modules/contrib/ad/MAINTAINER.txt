@@ -2,3 +2,4 @@ Written by Jeremy Andrews (1/2006)
 Maintainers:
  - Jeremy Andrews <jeremy@tag1consulting.com>
  - Alexandr Shvets <neochief@drupaldance.com>
+ - John Franklin <franklin@sentaidigital.com>

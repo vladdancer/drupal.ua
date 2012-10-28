@@ -1,5 +1,5 @@
 <?php
-// $Id: geshifilter.module,v 1.43 2009/01/04 17:17:47 soxofaan Exp $
+// $Id: geshifilter.module,v 1.49 2010/04/20 00:15:13 soxofaan Exp $
 
 /**
  * @file
@@ -17,14 +17,18 @@ define('GESHIFILTER_CSS_CLASSES_AUTOMATIC', 2);
 // Only add CSS classes to markup, admin/themer is responsible for defining the CSS rules
 define('GESHIFILTER_CSS_CLASSES_ONLY', 3);
 
-define('GESHIFILTER_ATTRIBUTES_LANGUAGE', 'type lang language');
+define('GESHIFILTER_ATTRIBUTES_LANGUAGE', 'type lang language class');
 define('GESHIFILTER_ATTRIBUTE_LINE_NUMBERING', 'linenumbers');
 define('GESHIFILTER_ATTRIBUTE_LINE_NUMBERING_START', 'start');
 define('GESHIFILTER_ATTRIBUTE_FANCY_N', 'fancy');
+define('GESHIFILTER_ATTRIBUTE_TITLE', 'title');
 
 define('GESHIFILTER_BRACKETS_ANGLE', 1);
 define('GESHIFILTER_BRACKETS_SQUARE', 2);
-define('GESHIFILTER_BRACKETS_BOTH', 3);
+define('GESHIFILTER_BRACKETS_BOTH', 3); // Deprecated, only used in upgrade path.
+define('GESHIFILTER_BRACKETS_DOUBLESQUARE', 4);
+define('GESHIFILTER_BRACKETS_PHPBLOCK', 8);
+
 
 define('GESHIFILTER_LINE_NUMBERS_DEFAULT_NONE', 0);
 define('GESHIFILTER_LINE_NUMBERS_DEFAULT_NORMAL', 1);
@@ -130,20 +134,13 @@ function geshifilter_menu() {
     'type' => MENU_LOCAL_TASK,
     'weight' => 6,
   );
-  // clear available languages cache
-  $items['geshifilter/clearavailablelanguagescache'] = array(
-    'title' => 'Clear available languages cache',
-    'file' => 'geshifilter.admin.inc',
-    'page callback' => 'geshifilter_clear_available_languages_cache',
-    'access arguments' => array('administer site configuration'),
-    'type' => MENU_CALLBACK,
-  );
-  // callback for generating CSS rules
+  // Callback for generating CSS rules.
   $items['admin/settings/geshifilter/generate_css'] = array(
     'page callback' => 'geshifilter_generate_language_css_rules',
     'access arguments' => array('administer site configuration'),
     'type' => MENU_CALLBACK,
   );
+
   return $items;
 }
 
@@ -155,9 +152,7 @@ function geshifilter_init() {
   // Since the filtered content is cached, it is not possible to know on which
   // pages the css file is actually needed. Thus it is included on all pages.
   if (variable_get('geshifilter_css_mode', GESHIFILTER_CSS_INLINE) == GESHIFILTER_CSS_CLASSES_AUTOMATIC) {
-    if ($stylesheet_file = variable_get('geshifilter_languages_css', NULL)) {
-      drupal_add_css($stylesheet_file);
-    }
+    drupal_add_css(file_directory_path() .'/geshifilter-languages.css');
   }
   drupal_add_css(drupal_get_path('module', 'geshifilter') .'/geshifilter.css');
 }
@@ -225,8 +220,8 @@ function geshifilter_requirements($phase) {
       $requirements[] = array(
         'title' => 'GeSHi filter',
         'value' => t('GeSHi library not found.'),
-        'description' => t('You should install the GeSHi library and set its path in the !geshisettings.',
-          array('!geshisettings' => l('GeSHi settings', 'admin/settings/geshifilter'))),
+        'description' => t('You should install the GeSHi library and set its path in the <a href="!geshisettings">GeSHi settings</a>.',
+          array('!geshisettings' => url('admin/settings/geshifilter'))),
         'severity' => REQUIREMENT_ERROR,
       );
     }

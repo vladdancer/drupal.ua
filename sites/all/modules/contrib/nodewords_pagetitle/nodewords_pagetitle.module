@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_pagetitle.module,v 1.5 2010/11/15 14:14:43 brian294 Exp $
 /**
  * @file
  * Set the page title using nodewords custom pages.
@@ -26,7 +25,12 @@
  *     placed.
  */
 function nodewords_pagetitle_nodewords_api() {
-  return array('api' => '1.14', 'path' => '');
+  if (function_exists('_nodewords_detect_type_and_id')) {
+    return array('api' => '1.12', 'path' => '');
+  }
+  if (function_exists('nodewords_detect_type_id')) {
+    return array('api' => '1.14', 'path' => '');
+  }
 }
 
 /**
@@ -92,15 +96,30 @@ function nodewords_pagetitle_page_title_form(&$form, $content, $options) {
  * Implements hook_page_title_alter().
  */
 function nodewords_pagetitle_page_title_alter(&$title) {
-  if (!function_exists('nodewords_detect_type_id') && !function_exists('nodewords_custom_pages_load')) {
-    return;
-  }
-
-  $options = nodewords_detect_type_id();
-  if ($options['type'] == NODEWORDS_TYPE_PAGE && $page = nodewords_custom_pages_load($options['id'])) {
-    $page_title = $page->tags['page.title']['value'];
-    if (drupal_strlen($page_title) > 0) {
-      $title = t($page_title);
-    }
+  // Try to guess the $type and $id by looking at $_GET['q'].
+  // Private function borrowed from nodewords module.
+  $nodewords_api = nodewords_pagetitle_nodewords_api();  
+  switch($nodewords_api['api']) {
+    case "1.12":
+      $options = _nodewords_detect_type_and_id();
+        if ($options['type'] == NODEWORDS_TYPE_PAGE && $page = _nodewords_custom_pages_load_data($options['id'])) {
+          // Load the page meta tags data from the database.
+          $page_title = $page->tags['page.title']['value'];
+          if (drupal_strlen($page_title) > 0) {
+            $title = t($page_title);
+          }
+        }
+      break;
+    case "1.14":
+      $options = nodewords_detect_type_id();
+      if ($options['type'] == NODEWORDS_TYPE_PAGE && $page = nodewords_custom_pages_load($options['id'])) {
+        $page_title = $page->tags['page.title']['value'];
+          if (drupal_strlen($page_title) > 0) {
+            $title = t($page_title);
+          }
+      }  
+      break;
+    default:
+      return;
   }
 }

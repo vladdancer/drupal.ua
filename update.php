@@ -1,5 +1,4 @@
 <?php
-// $Id: update.php,v 1.252.2.3 2009/03/30 11:15:11 goba Exp $
 
 /**
  * @file
@@ -346,8 +345,8 @@ function update_results_page() {
           if (!count($queries)) {
             $output .= '<li class="none">No queries</li>';
           }
+          $output .= '</ul>';
         }
-        $output .= '</ul>';
       }
     }
     $output .= '</div>';
@@ -369,7 +368,7 @@ function update_info_page() {
   update_task_list('info');
   drupal_set_title('Drupal database update');
   $token = drupal_get_token('update');
-  $output = '<p>Use this utility to update your database whenever a new release of Drupal or a module is installed.</p><p>For more detailed information, see the <a href="http://drupal.org/node/258">Installation and upgrading handbook</a>. If you are unsure what these terms mean you should probably contact your hosting provider.</p>';
+  $output = '<p>Use this utility to update your database whenever a new release of Drupal or a module is installed.</p><p>For more detailed information, see the <a href="http://drupal.org/upgrade">upgrading handbook</a>. If you are unsure what these terms mean you should probably contact your hosting provider.</p>';
   $output .= "<ol>\n";
   $output .= "<li><strong>Back up your database</strong>. This process will change your database values and in case of emergency you may need to revert to a backup.</li>\n";
   $output .= "<li><strong>Back up your code</strong>. Hint: when backing up module code, do not leave that backup in the 'modules' or 'sites/*/modules' directories as this may confuse Drupal's auto-discovery mechanism.</li>\n";
@@ -517,6 +516,31 @@ function update_fix_d6_requirements() {
       'primary key' => array('cid'),
     );
     db_create_table($ret, 'cache_block', $schema['cache_block']);
+
+    // Create the semaphore table now -- the menu system after 6.15 depends on
+    // this table, and menu code runs in updates prior to the table being
+    // created in its original update function, system_update_6054().
+    $schema['semaphore'] = array(
+      'fields' => array(
+        'name' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+          'default' => ''),
+        'value' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+          'default' => ''),
+        'expire' => array(
+          'type' => 'float',
+          'size' => 'big',
+          'not null' => TRUE),
+        ),
+      'indexes' => array('expire' => array('expire')),
+      'primary key' => array('name'),
+    );
+    db_create_table($ret, 'semaphore', $schema['semaphore']);
   }
 
   return $ret;

@@ -1,0 +1,113 @@
+diff --git a/webform.module b/webform.module
+index 7b3f51e..e807f5b 100644
+--- a/webform.module
++++ b/webform.module
+@@ -2838,6 +2838,48 @@ function _webform_filter_values($string, $node = NULL, $submission = NULL, $emai
+     ),
+   );
+ 
++  if (!isset($replacements['content_profile'])) {
++    $replacements['content_profile'] = TRUE;
++    if (module_exists('content_profile')) {
++      foreach (content_profile_get_types('names') as $type => $type_name) {
++        if ($user->uid) {
++          $content_profile = content_profile_load($type, $user->uid);
++        }
++        $content_profile_type = content_types($type);
++        
++        if ($content_profile->page_title) {
++          $replacements['safe']['%'. $type .'_title'] = $user->uid ? $content_profile->title : '';
++        }
++        if ($content_profile_type['has_body']) {
++          $replacements['safe']['%'. $type .'_body'] = $user->uid ? $content_profile->body : '';
++        }
++        
++        foreach ($content_profile_type['fields'] as $field_id => $field) {
++          switch ($field['widget']['type']) {
++            case 'text_textarea':
++              $replacements['safe']['%'. $type .'_'. $field['field_name']] =
++                $user->uid ? check_markup(
++                $content_profile->{$field['field_name']}[0]['value'],
++                $content_profile->{$field['field_name']}[0]['format'],
++                FALSE
++              ) : '';
++              break;
++            case 'text_textfield':
++            case 'optionwidgets_select':
++              $replacements['safe']['%'. $type .'_'. $field['field_name']] = $user->uid ?
++                check_plain($content_profile->{$field['field_name']}[0]['value']) : '';
++              break;
++            case 'imagefield_widget':
++              $replacements['safe']['%'. $type .'_'. $field['field_name']] = $user->uid ?
++                $content_profile->{$field['field_name']}[0]['filepath'] : '';
++              break;
++            //ignore: 'optionwidgets_onoff', 'location'
++          }
++        }
++      }
++    }
++  }
++
+   // Replacements of global variable tokens.
+   if (!isset($replacements['specials_set'])) {
+     $replacements['specials_set'] = TRUE;
+@@ -3028,6 +3070,7 @@ function webform_variable_get($variable) {
+ }
+ 
+ function theme_webform_token_help($groups = array()) {
++  global $user;
+   $groups = empty($groups) ? array('basic', 'node', 'special') : $groups;
+ 
+   static $tokens = array();
+@@ -3044,6 +3087,40 @@ function theme_webform_token_help($groups = array()) {
+       ),
+     );
+ 
++    $token_content_profile = array();
++    if (module_exists('content_profile')) {
++      foreach (content_profile_get_types('names') as $type => $type_name) {
++        $content_profile = content_profile_load($type, $user->uid);
++        $content_profile_type = content_types($type);
++        
++        if ($content_profile->page_title) {
++          $token_content_profile['%'. $type .'_title'] = '%'. $type .'_title — '. $content_profile->title_label;
++        }
++        if ($content_profile_type['has_body']) {
++          $token_content_profile['%'. $type .'_body'] = '%'. $type .'_body — '. $content_profile->body_label;
++        }
++        
++        foreach ($content_profile_type['fields'] as $field_id => $field) {
++          switch ($field['widget']['type']) {
++            case 'text_textarea':
++              $token_content_profile['%'. $type .'_'. $field['field_name']] =
++                '%'. $type .'_'. $field['field_name'] .' — '. t($field['widget']['label']);
++              break;
++            case 'text_textfield':
++            case 'optionwidgets_select':
++              $token_content_profile['%'. $type .'_'. $field['field_name']] =
++                '%'. $type .'_'. $field['field_name'] .' — '. t($field['widget']['label']);
++              break;
++            case 'imagefield_widget':
++              $token_content_profile['%'. $type .'_'. $field['field_name']] =
++                '%'. $type .'_'. $field['field_name'] .' — '. t($field['widget']['label']);
++              break;
++            //ignore: 'optionwidgets_onoff', 'location'
++          }
++        }
++      }
++    }
++  
+     $tokens['node'] = array(
+       'title' => t('Node tokens'),
+       'tokens' => array(
+@@ -3094,6 +3171,10 @@ function theme_webform_token_help($groups = array()) {
+     }
+   }
+ 
++  if (count($token_content_profile)) {
++    $output .= theme('item_list', $token_content_profile, t('Content profile'));
++  }
++
+   $fieldset = array(
+     '#title' => t('Token values'),
+     '#type' => 'fieldset',

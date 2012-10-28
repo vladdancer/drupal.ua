@@ -1,4 +1,3 @@
-// $Id: bue.autocomplete.js,v 1.3.2.5 2010/03/03 06:56:04 ufku Exp $
 
 //Autocomplete user defined phrases as they are typed in the editor.
 //Requires: none
@@ -22,7 +21,7 @@ BUE.preprocess.autocomplete = function(E, $) {
   E.ACAdd({'<!--': '-->', '<?php': '?>', '>': BUE.ACTag, ']': BUE.ACTag});
 
   //register keypress
-  $(E.textArea).keypress(function(e) {
+  $(E.textArea).bind('keypress.bue', function(e) {
     var code = e.charCode === undefined ? e.keyCode : e.charCode;
     //disable keycodes that have multi-meaning in opera. 39: hypen-right, 40: parenthesis-down.
     //extend 37:percentage-left, 38:ampersand-up, 33:exclamation-pageup, 34:double quote-pagedown...

@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_owners.install,v 1.1.2.2.2.1 2009/02/23 22:39:04 jeremy Exp $
 
 /**
  * @file
@@ -122,7 +121,8 @@ function ad_owners_install() {
 
 /**
  * Allow complete uninstallation of the ad_external module.
+ * Implementation of hook_uninstall
  */
-function ad_owners() {
+function ad_owners_uninstall() {
   drupal_uninstall_schema('ad_owners');
 }
