@@ -1,5 +1,4 @@
 <?php
-// $Id: install.php,v 1.113.2.12 2010/05/09 14:13:31 dries Exp $
 
 require_once './includes/install.inc';
 
@@ -19,14 +18,6 @@ define('MAINTENANCE_MODE', 'install');
 function install_main() {
   require_once './includes/bootstrap.inc';
   drupal_bootstrap(DRUPAL_BOOTSTRAP_CONFIGURATION);
-
-  // The user agent header is used to pass a database prefix in the request when
-  // running tests. However, for security reasons, it is imperative that no
-  // installation be permitted using such a prefix.
-  if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "simpletest") !== FALSE) {
-    header($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden');
-    exit;
-  }
 
   // This must go after drupal_bootstrap(), which unsets globals!
   global $profile, $install_locale, $conf;
@@ -139,6 +130,12 @@ function install_main() {
     if (!$verify) {
       install_change_settings($profile, $install_locale);
     }
+    // The default lock implementation uses a database table,
+    // so we cannot use it for install, but we still need
+    // the API functions available.
+    require_once './includes/lock-install.inc';
+    $conf['lock_inc'] = './includes/lock-install.inc';
+    lock_init();
 
     // Install system.module.
     drupal_install_system();
@@ -537,7 +534,7 @@ function install_select_locale($profilename) {
       drupal_set_title(st('Choose language'));
       if (!empty($_GET['localize'])) {
         $output = '<p>'. st('With the addition of an appropriate translation package, this installer is capable of proceeding in another language of your choice. To install and use Drupal in a language other than English:') .'</p>';
-        $output .= '<ul><li>'. st('Determine if <a href="@translations" target="_blank">a translation of this Drupal version</a> is available in your language of choice. A translation is provided via a translation package; each translation package enables the display of a specific version of Drupal in a specific language. Not all languages are available for every version of Drupal.', array('@translations' => 'http://drupal.org/project/translations')) .'</li>';
+        $output .= '<ul><li>'. st('Determine if <a href="@translations" target="_blank">a translation of this Drupal version</a> is available in your language of choice. A translation is provided via a translation package; each translation package enables the display of a specific version of Drupal in a specific language. Not all languages are available for every version of Drupal.', array('@translations' => 'http://localize.drupal.org')) .'</li>';
         $output .= '<li>'. st('If an alternative translation package of your choice is available, download and extract its contents to your Drupal root directory.') .'</li>';
         $output .= '<li>'. st('Return to choose language using the second link below and select your desired language from the displayed list. Reloading the page allows the list to automatically adjust to the presence of new translation packages.') .'</li>';
         $output .= '</ul><p>'. st('Alternatively, to install and use Drupal in English, or to defer the selection of an alternative language until after installation, select the first link below.') .'</p>';

@@ -1,4 +1,3 @@
-// $Id: pathauto.js,v 1.5.2.1 2010/02/10 21:47:40 greggles Exp $
 if (Drupal.jsEnabled) {
   $(document).ready(function() {
     if ($("#edit-pathauto-perform-alias").size() && $("#edit-pathauto-perform-alias").attr("checked")) {

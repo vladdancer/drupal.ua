@@ -1,4 +1,5 @@
 <div class="question node<?php if (!$status) { print ' node-unpublished'; } ?>">
+  <?php print $voting_widget; ?>
   <div class="content">
     <?php if ($page == 0): ?>
       <h2 class="title<?php print $best_answers ? ' answered' : ''; ?>"><a class="node-title" href="<?php print $node_url ?>"><?php print $title; ?><?php print $best_answers ? '&nbsp;<sup>['. t('resolved') .']</sup>' : ''; ?></a></h2>

@@ -1,5 +1,4 @@
 <?php
-// $Id: ad.install,v 1.2.2.4.2.27.2.7.2.8 2009/10/20 23:31:22 jeremy Exp $
 
 /**
  * @file
@@ -173,7 +172,7 @@ function ad_schema() {
         'length' => 32,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Host from which acion was made.',
+        'description' => 'Host from which action was made.',
       ),
       'count' => array(
         'type' => 'int',
@@ -187,7 +186,7 @@ function ad_schema() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Alow add-on modules to provide additional statistics granularity.',
+        'description' => 'Allow add-on modules to provide additional statistics granularity.',
       ),
     ),
     'primary key' => array('sid'),
@@ -242,7 +241,7 @@ function ad_schema() {
         'length' => 128,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Host from which acion was made.',
+        'description' => 'Host from which action was made.',
       ),
       'user_agent' => array(
         'type' => 'varchar',
@@ -263,7 +262,7 @@ function ad_schema() {
         'length' => 32,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Host from which acion was made.',
+        'description' => 'Host from which action was made.',
       ),
       'url' => array(
         'type' => 'varchar',
@@ -284,7 +283,7 @@ function ad_schema() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Alow add-on modules to provide additional statistics granularity.',
+        'description' => 'Allow add-on modules to provide additional statistics granularity.',
       ),
     ),
     'primary key' => array('cid'),
@@ -334,7 +333,7 @@ function ad_uninstall() {
 }
 
 /**
- * Convert some things from absolete dev. schema to new schema API
+ * Convert some things from obsolete dev. schema to new schema API
  */
 function ad_update_6001() {
   $ret = array();
@@ -377,7 +376,7 @@ function ad_update_6001() {
         'length' => 32,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Host from which acion was made.',
+        'description' => 'Host from which action was made.',
       ),
       array('indexes' => array(
         'hostid' => array('hostid'),
@@ -392,7 +391,7 @@ function ad_update_6001() {
         'length' => 32,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Host from which acion was made.',
+        'description' => 'Host from which action was made.',
       ),
       array('indexes' => array(
         'hostid' => array('hostid'),
@@ -430,7 +429,7 @@ function ad_update_6004() {
       'length' => 255,
       'not null' => TRUE,
       'default' => '',
-      'description' => 'Alow add-on modules to provide additional statistics granularity.',
+      'description' => 'Allow add-on modules to provide additional statistics granularity.',
     ),
     array('indexes' => array(
       'extra' => array('extra'))
@@ -441,7 +440,7 @@ function ad_update_6004() {
       'length' => 255,
       'not null' => TRUE,
       'default' => '',
-      'description' => 'Alow add-on modules to provide additional statistics granularity.',
+      'description' => 'Allow add-on modules to provide additional statistics granularity.',
     ),
     array('indexes' => array(
       'extra' => array('extra'))
@@ -484,3 +483,19 @@ function ad_update_6008() {
   $ret[] = update_sql("UPDATE {blocks} SET cache = ". BLOCK_CACHE_PER_PAGE ." WHERE module = 'ad'");
   return $ret;
 }
+
+/**
+ * Value of iframe scrolling should be yes/no instead of on/off.
+ */
+function ad_update_6009() {
+  $scrolling = variable_get('ad_iframe_scroll', 'auto');
+  if ('on' == $scrolling) {
+    variable_set('ad_iframe_scroll', 'yes');
+  }
+  else if ('off' == $scrolling) {
+    variable_set('ad_iframe_scroll', 'no');
+  }
+  return array();
+}
+
+

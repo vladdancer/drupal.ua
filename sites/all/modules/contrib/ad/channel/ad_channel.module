@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_channel.module,v 1.1.4.34 2009/11/23 05:13:15 Jeremy Exp $
 
 /**
  * @file
@@ -146,15 +145,6 @@ function ad_channel_form_alter(&$form, &$form_state, $form_id) {
           }
           else {
             $default_value = 0;
-          }
-          if (!$default_value) {
-            $channel = _ad_channel_get_channels($channel->chid);
-            if (isset($channel->inventory) && $channel->inventory > 0) {
-              $num_ads = _ad_channel_get_channel_active_ad_count($channel->chid);
-              if($num_ads + 1 > $channel->inventory) {
-                 $disabled = TRUE;
-              }
-            }
           }
           $form['channel'][$container->conid]["channel-$channel->chid"] = array(
             '#type' => 'checkbox',
@@ -679,16 +669,25 @@ function _ad_channel_view_node($node) {
   }
 }
 
+/** 
+ * Return array of current channels for node
+ */
+function _ad_channel_load_nid_channels($nid) {
+  $result = db_query('SELECT chid FROM {ad_channel_node} WHERE nid = %d', $nid);
+  $output = array();
+  while ($chid = db_fetch_object($result)) {
+    $output[$chid->chid] = $chid->chid;
+  }
+
+  return $output;
+}
+
 /**
  * Load channels associated with specified node.
  */
 function _ad_channel_load_node($node) {
-  $result = db_query('SELECT chid FROM {ad_channel_node} WHERE nid = %d', $node->nid);
-  $output['channel'] = array();
-  while ($chid = db_fetch_object($result)) {
-    $output['channel'][$chid->chid] = $chid->chid;
-  }
   // currently 0 or 1, with one being a 'premiere' advertisement.
+  $output['channel'] = _ad_channel_load_nid_channels($node->nid);
   $output['premiere'] = (int)db_result(db_query('SELECT priority FROM {ad_priority} WHERE aid = %d', $node->nid));
   $output['remnant'] = (int)db_result(db_query('SELECT remnant FROM {ad_channel_remnant} WHERE aid = %d', $node->nid));
   return $output;
@@ -732,12 +731,23 @@ function _ad_channel_delete_node($node) {
 function _ad_channel_validate_nodes($node) {
   $channels = _ad_channel_get_enabled($node);
 
+/* We need to get the prior state to know if this is added as an active ad
+ * to the channel or if the ad has been set to active. The limit is on the
+ * number of *active* advertisements in a channel. */
+
+  $channels_preedit = _ad_channel_load_nid_channels($node->nid);
+  $adstatus_preedit = db_result(db_query("SELECT adstatus FROM {ads} WHERE aid = %d", $node->aid));
+  $transitioned_to_active = (($node->adstatus == 'active') && ($adstatus_preedit != 'active'));
+
   foreach ($channels as $chid) {
-    $channel = _ad_channel_get_channels($chid);
-    if(isset($channel->inventory) && $channel->inventory > 0) {
-      $num_ads = _ad_channel_get_channel_active_ad_count($chid);
-      if ($num_ads + 1 > $channel->inventory) {
-        form_set_error("channel[$channel->conid][channel-$chid]", t('You may not assign more than !inventory to %name.', array('!inventory' => format_plural($channel->inventory, '1 advertisement', '@count advertisements'),  '%name' => $channel->name)));
+    $channel_added_active = !in_array($chid, $channels_preedit) && ($node->adstatus == 'active');
+    if ($channel_added_active || $transitioned_to_active) {
+      $channel = _ad_channel_get_channels($chid);
+      if(isset($channel->inventory) && $channel->inventory > 0) {
+        $num_ads = _ad_channel_get_channel_active_ad_count($chid);
+        if ($num_ads + 1 > $channel->inventory) {
+          form_set_error("channel[$channel->conid][channel-$chid]", t('You may not assign more than !inventory to %name.', array('!inventory' => format_plural($channel->inventory, '1 active advertisement', '@count active advertisements'),  '%name' => $channel->name)));
+        }
       }
     }
   }

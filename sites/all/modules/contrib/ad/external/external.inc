@@ -1,5 +1,4 @@
 <?php
-// $Id: external.inc,v 1.1.2.1.2.2 2009/02/16 17:06:48 jeremy Exp $
 
 /**
  * @file

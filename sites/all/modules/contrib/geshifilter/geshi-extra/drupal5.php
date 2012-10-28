@@ -634,8 +634,8 @@ $language_data = array (
     2 => '',
     3 => 'http://www.php.net/{FNAME}',
     4 => '',
-    5 => 'http://api.drupal.ru/api/function/{FNAME}/5',
-    6 => 'http://api.drupal.ru/api/constant/{FNAME}/5',
+    5 => 'http://api.drupal.org/api/function/{FNAME}/5',
+    6 => 'http://api.drupal.org/api/constant/{FNAME}/5',
   ),
   'OOLANG' => true,
   'OBJECT_SPLITTERS' => array(

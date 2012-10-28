@@ -1,5 +1,4 @@
 <?php
-// $Id: ad.admin.inc,v 1.1.2.9.2.7 2009/11/23 06:40:02 Jeremy Exp $
 
 /**
  * @file
@@ -585,7 +584,7 @@ function ad_admin_configure_settings($form_state) {
     '#type' => 'radios',
     '#title' => t('Scrolling'),
     '#default_value' => variable_get('ad_iframe_scroll', 'auto'),
-    '#options' => array('auto' => 'auto', 'on' => 'on', 'off' => 'off'),
+    '#options' => array('auto' => t('auto'), 'yes' => t('on'), 'no' => t('off')),
     '#description' => t('Define whether or not scroll bars should be enabled for the ad IFrame.'),
   );
   $form['iframe']['ad_iframe_width'] = array(

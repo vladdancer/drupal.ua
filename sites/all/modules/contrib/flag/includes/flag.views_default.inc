@@ -1,5 +1,4 @@
 <?php
-// $Id: flag.views_default.inc,v 1.1.2.5.2.3 2010/10/24 00:39:21 mooffie Exp $
 
 /**
  * @file
@@ -7,14 +6,14 @@
  */
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function flag_views_default_views() {
   // Only setup views for the "bookmarks" flag.
   // If it's been deleted, don't create any views.
   $flag = flag_get_flag('bookmarks');
   if (!$flag) {
-    return;
+    return array();
   }
 
   // Set up properties that are used for both views.
@@ -38,6 +37,7 @@ function flag_views_default_views() {
       'id' => 'name',
       'table' => 'users',
       'field' => 'name',
+      'relationship' => 'uid_1',
     ),
   );
 
@@ -98,6 +98,13 @@ function flag_views_default_views() {
       'override' => array(
         'button' => 'Override',
       ),
+    ),
+    'uid_1' => array(
+      'label' => 'author',
+      'required' => 0,
+      'id' => 'uid_1',
+      'table' => 'node',
+      'field' => 'uid',
     ),
   );
 
@@ -241,7 +248,7 @@ function flag_views_default_views() {
   );
 
   $view = new view;
-  $view->name = 'flag_'. $flag->name;
+  $view->name = 'flag_' . $flag->name;
   $view->description = 'A page listing the current user\'s bookmarks at /bookmarks.';
   $view->tag = 'flag';
   $view->view_php = '';

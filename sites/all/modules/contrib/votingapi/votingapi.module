@@ -1,5 +1,5 @@
 <?php
-// $Id: votingapi.module,v 1.46.2.25 2010/10/10 00:55:54 eaton Exp $
+// $Id: votingapi.module,v 1.46.2.24 2009/07/08 16:09:45 eaton Exp $
 
 /**
  * @file
@@ -507,7 +507,7 @@ function _votingapi_get_standard_results($content_type, $content_id) {
  * Retrieve the value of the first vote matching the criteria passed in.
  */
 function votingapi_select_single_vote_value($criteria = array()) {
-  if ($votes = votingapi_select_votes($criteria, 1)) {
+  if ($votes = votingapi_select_votes($criteria)) {
     return $votes[0]['value'];
   }
 }
@@ -516,7 +516,7 @@ function votingapi_select_single_vote_value($criteria = array()) {
  * Retrieve the value of the first result matching the criteria passed in.
  */
 function votingapi_select_single_result_value($criteria = array()) {
-  if ($results = votingapi_select_results($criteria, 1)) {
+  if ($results = votingapi_select_results($criteria)) {
     return $results[0]['value'];
   }
 }

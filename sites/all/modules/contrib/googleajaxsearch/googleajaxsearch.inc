@@ -1,5 +1,5 @@
 <?php
-// $Id: googleajaxsearch.inc,v 1.1.2.3 2009/09/30 12:02:27 macperlinski Exp $
+// $Id$
 require_once("default_settings.inc");
 
 
@@ -19,15 +19,15 @@ function googleajaxsearch_settings() {
     '#default_value' => variable_get('block_count', GAS_BLOCKS_NUMBER_DEFAULT),
     '#size' => 60,
     '#maxlength' => 64,
-//    '#description' => t('Description'),
+
   );
   $form['api_key'] = array(
     '#type' => 'textfield',
     '#title' => t('Google Ajax Search Api Key'),
     '#default_value' => variable_get('api_key', GAS_API_KEY_DEFAULT),
     '#size' => 60,
-    '#maxlength' => 64,
-//    '#description' => t('Description'),
+    '#maxlength' => 256,
+
   );
   
   return system_settings_form($form);
@@ -116,6 +116,18 @@ function gas_block_form($delta) {
       'DRAW_MODE_LINEAR' => t('inline'), 
       'DRAW_MODE_TABBED' => t('tabbed')),
     '#description' => t('How the results should be displayed.'),
+  );
+  
+//expansion mode
+    $form[$field = 'expansion_mode'] = array(
+    '#type' => 'select',
+    '#title' => t('Expansion mode'),
+    '#default_value' => gas_get_settings(array('delta' => $delta, 'param' => $field)),
+    '#options' => array(
+      'google.search.SearchControl.EXPAND_MODE_OPEN' => 'EXPAND_MODE_OPEN',
+      'google.search.SearchControl.EXPAND_MODE_CLOSED' => 'EXPAND_MODE_CLOSED', 
+      'google.search.SearchControl.EXPAND_MODE_PARTIAL' => 'EXPAND_MODE_PARTIAL'), 
+    '#description' => t('How the results should be displayed [OPEN|CLOSE|PARTIAL].'),
   );
 //place for results
   $form[$field = 'results_place'] = array(
@@ -579,10 +591,25 @@ function gas_add_settings($delta) {
     $added = true;
   }
   
+   
+  
   foreach ($settings['gas'] as $key => $value) {
+    //Passing keyword to searcher
+    $default_keyword = $value['keywords'];
+    $plugin_keyword = gas_get_plugin_keywords($key);
+    
+    //If we don't receive keyword from plugin than we use default keyword;
+    if(empty($plugin_keyword))
+    {
+        $keyword = $default_keyword;
+    }else
+    {
+        $keyword = $plugin_keyword;
+    }
     $settings['gas']['api_key'] = variable_get('api_key', GAS_API_KEY_DEFAULT);
     $settings['gas']['current_block'] = $delta;
-    $settings['gas'][$key]['keywords'] = gas_get_plugin_keywords($key);
+    $settings['gas'][$key]['keywords'] = $keyword;
+    
   }
   drupal_add_js($settings, 'setting');
 }

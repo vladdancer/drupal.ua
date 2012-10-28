@@ -1,0 +1,81 @@
+--- includes/locale.inc
++++ includes/locale.inc
+@@ -893,7 +893,7 @@
+   $form['original'] = array(
+     '#type'  => 'item',
+     '#title' => t('Original text'),
+-    '#markup' => check_plain(wordwrap($source->source, 0)),
++    '#markup' => check_plain(drupal_wordwrap($source->source, 0)),
+   );
+   if (!empty($source->context)) {
+     $form['context'] = array(
+--- includes/mail.inc
++++ includes/mail.inc
+@@ -422,9 +422,9 @@
+  */
+ function _drupal_wrap_mail_line(&$line, $key, $values) {
+   // Use soft-breaks only for purely quoted or unindented text.
+-  $line = wordwrap($line, 77 - $values['length'], $values['soft'] ? "  \n" : "\n");
++  $line = drupal_wordwrap($line, 77 - $values['length'], $values['soft'] ? "  \n" : "\n");
+   // Break really long words at the maximum width allowed.
+-  $line = wordwrap($line, 996 - $values['length'], $values['soft'] ? " \n" : "\n");
++  $line = drupal_wordwrap($line, 996 - $values['length'], $values['soft'] ? " \n" : "\n");
+ }
+ 
+ /**
+--- includes/unicode.inc
++++ includes/unicode.inc
+@@ -546,4 +546,41 @@
+   }
+ }
+ 
++/**
++ * Wraps a UTF-8 string to a given number of characters using a string break character.
++ */
++function drupal_wordwrap($str, $width = 75, $break = "\n", $cut = FALSE) {
++  if ($cut) {
++    while ($len = drupal_strlen($str)) {
++      $chunk = drupal_substr($str, 0, $width);
++      $return .= $chunk;
++      $str = ltrim(drupal_substr($str, $width, $len - $width));
++      if (drupal_strlen($str) > 0) {
++        $return .= $break;
++      }
++    }
++  }
++  else {
++    if (version_compare(phpversion(), '5.2.3') > 0) {
++      $str = preg_split('#\h+#u', $str);
++    }
++    else {
++      $str = preg_split('# +#u', $str);
++    }
+ 
++    $len = 0;
++    foreach ($str as $val) {
++      $val .= ' ';
++      $tmp = drupal_strlen($val);
++      $len += $tmp;
++      if ($len >= $width) {
++        $return .= $break . $val;
++        $len = $tmp;
++      }
++      else {
++        $return .= $val;
++      }
++    }
++  }
++  return $return;
++}
+\ No newline at end of file
+--- modules/simpletest/simpletest.install
++++ modules/simpletest/simpletest.install
+@@ -76,7 +76,7 @@
+         break;
+     }
+   }
+-  $text = wordwrap($text, $width - 1, "\n", TRUE) . "\n"; // Add \n for symetrical file.
++  $text = drupal_wordwrap($text, $width - 1, "\n", TRUE) . "\n"; // Add \n for symetrical file.
+ 
+   // Create filename.
+   $path = file_directory_path() . '/simpletest/';

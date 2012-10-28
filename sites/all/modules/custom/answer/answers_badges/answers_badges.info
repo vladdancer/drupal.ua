@@ -1,5 +1,0 @@
-core = "6.x"
-description = "Badges for Answerer."
-name = "Answers_badges"
-package = "Answers"
-version = "6.x-1.0"

@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_basic.nodewords.tags.inc,v 1.1.2.15 2010/12/01 23:50:34 davereid Exp $
 
 /**
  * @file

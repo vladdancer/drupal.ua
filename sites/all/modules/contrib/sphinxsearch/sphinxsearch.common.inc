@@ -1,5 +1,4 @@
 <?php
-// $Id: sphinxsearch.common.inc,v 1.3.2.4 2008/10/31 15:57:13 markuspetrux Exp $
 
 /**
  * @file
@@ -81,6 +80,7 @@ function sphinxsearch_goto_search($query = NULL) {
   if (isset($query) && is_array($query)) {
     $query = (!empty($query) ? drupal_query_string_encode($query) : NULL);
   }
+  unset($_REQUEST['destination'], $_REQUEST['edit']['destination']);
   drupal_goto(sphinxsearch_get_search_path(), $query);
 }
 
@@ -162,20 +162,21 @@ function sphinxsearch_check_connection() {
  *   The returned value of the invoked hooks.
  */
 function sphinxsearch_invoke_api($op, $a1 = NULL, $a2 = NULL) {
-  $return = array();
+  $data = array();
   foreach (module_implements('sphinxsearch_api') as $module) {
     $function = $module .'_sphinxsearch_api';
     $result = $function($op, $a1, $a2);
     if (isset($result)) {
       if (is_array($result)) {
-        $return = array_merge($return, $result);
+        $data = array_merge($data, $result);
       }
       else {
-        $return[] = $result;
+        $data[] = $result;
       }
     }
   }
-  return $return;
+  drupal_alter('sphinxsearch_api', $data, $op, $a1, $a2);
+  return $data;
 }
 
 /**
@@ -336,7 +337,9 @@ function sphinxsearch_get_query_string($search_options) {
   if (!empty($search_options['sortdir']) && $search_options['sortdir'] == 'ASC') {
     $query['sortdir'] = 'ASC';
   }
-  if (!empty($search_options['results_per_page'])) {
+
+  // Results per page.
+  if (!empty($search_options['results_per_page']) && $search_options['results_per_page'] != variable_get('sphinxsearch_results_per_page', 10)) {
     $query['results_per_page'] = $search_options['results_per_page'];
   }
 
@@ -348,14 +351,13 @@ function sphinxsearch_get_query_string($search_options) {
  *
  * @param array $request_options
  *   Requested search options.
- * @param $is_parsing_get
- *   Is function used for parsing GET params or for validation purposes
  * @return array
  *   Search options structure.
  */
-function sphinxsearch_parse_request($request_options = array(), $is_parsing_get = FALSE) {
+function sphinxsearch_parse_request($request_options = array()) {
   $search_options = array(
     'matchmode' => SPHINXSEARCH_MATCH_ALL,
+    'results_per_page' => (int)variable_get('sphinxsearch_results_per_page', 10),
     'excerpts_limit' => (int)variable_get('sphinxsearch_excerpts_limit', 256),
     'excerpts_around' => (int)variable_get('sphinxsearch_excerpts_around', 5),
     'excerpts_single_passage' => (int)variable_get('sphinxsearch_excerpts_single_passage', 0),
@@ -428,24 +430,12 @@ function sphinxsearch_parse_request($request_options = array(), $is_parsing_get 
     foreach (sphinxsearch_get_enabled_vocabularies() as $vid => $vocabulary) {
       $terms_key = 'terms'. $vid;
       if (!empty($request_options[$terms_key])) {
-
-        // Terms are comming here from two places: GET and validation stage
-        // In case of get we always have a string with term names, so as with
-        // tag vocabulary. So we can handlw those cases simultaneously
-        if (($is_parsing_get) || ($vocabulary->tags)) {
-          $terms = sphinxsearch_taxonomy_decode_typed_terms($vid, $request_options[$terms_key]);
+        // Terms may come as an array of tids (from non-freetagging form elements), or as a string of "typed terms".
+        if (is_array($request_options[$terms_key])) {
+          $terms = sphinxsearch_taxonomy_get_terms($vid, array_filter(array_map('intval', array_keys($request_options[$terms_key]))));
         }
-        // But if data comes from non-taged values from validation, we should treat
-        // in a special way
         else {
-          // One for multiple-select terms list
-          if (is_array($request_options[$terms_key])) {
-            $terms = sphinxsearch_taxonomy_get_terms($vid, array_filter(array_map('intval', array_keys($request_options[$terms_key]))));
-          } else {
-            // And another one for simple term combo-box
-            $tid = $request_options[$terms_key];
-            $terms = array($tid => taxonomy_get_term($tid));
-          }
+          $terms = sphinxsearch_taxonomy_decode_typed_terms($vid, $request_options[$terms_key]);
         }
 
         // Check if we got not found terms.
@@ -476,8 +466,11 @@ function sphinxsearch_parse_request($request_options = array(), $is_parsing_get 
   if (!empty($request_options['sortdir'])) {
     $search_options['sortdir'] = $request_options['sortdir'];
   }
-  
-  $search_options['results_per_page'] = (isset($request_options['results_per_page']) ? $request_options['results_per_page'] : variable_get('sphinxsearch_results_per_page', 10));
+
+  // Results per page.
+  if (!empty($request_options['results_per_page']) && is_numeric($request_options['results_per_page'])) {
+    $search_options['results_per_page'] = (int)$request_options['results_per_page'];
+  }
 
   return $search_options;
 }
@@ -523,8 +516,7 @@ function sphinxsearch_execute_query($search_options) {
   if (!isset($search_options['results_per_page']) || $search_options['results_per_page'] <= 0) {
     $search_options['results_per_page'] = variable_get('sphinxsearch_results_per_page', 10);
   }
-  $search_options['results_per_page'] = (int)$search_options['results_per_page'];
-  
+
   // Quit if no search filter has been specified.
   if (empty($search_options['filters']) && empty($search_options['group_by'])) {
     return $search_results;
@@ -592,8 +584,9 @@ function sphinxsearch_execute_query($search_options) {
     $sphinxsearch->SetArrayResult(TRUE);
     $sphinxsearch->SetGroupBy($search_options['group_by'], SPH_GROUPBY_ATTR, '@count DESC, @weight DESC');
   }
-  
-  sphinxsearch_invoke_api('execute_query', $sphinxsearch, $search_options);
+
+  // Allow external modules intervene before the Sphinx query is executed.
+  sphinxsearch_invoke_api('pre_query', $sphinxsearch, $search_options);
 
   // Send query to Sphinx.
   $sphinx_results = $sphinxsearch->Query(implode(' ', $sphinx_query_keywords), $sphinxsearch_query_index);

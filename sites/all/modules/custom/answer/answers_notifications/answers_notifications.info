@@ -1,8 +1,0 @@
-; $Id$
-
-name = Answers Notifications
-description = Answers Notifications.
-dependencies[] = "answers"
-dependencies[] = "mail_edit"
-package = "Answers"
-core = 6.x

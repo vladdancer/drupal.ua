@@ -1,9 +1,8 @@
-// $Id: bueditor.js,v 1.41.2.12 2010/03/03 05:36:33 ufku Exp $
 (function($) {
 
 var BUE = window.BUE = window.BUE || {preset: {}, templates: {}, instances: [], preprocess: {}, postprocess: {}};
 
-//Get editor settings from Drupal.settings and process preset textareas.
+// Get editor settings from Drupal.settings and process preset textareas.
 BUE.behavior = function(context) {
   var set = Drupal.settings.BUE || null, tpls = BUE.templates, pset = BUE.preset;
   if (set) {
@@ -17,25 +16,25 @@ BUE.behavior = function(context) {
   $.each(pset, function (tid, tplid) {
     BUE.processTextarea($('#'+ tid, context).get(0), tplid);
   });
-  //fix enter key on textfields triggering button click.
-  $('input:text', context).keydown(function(e) {e.keyCode == 13 && (BUE.enterKeyTime = new Date())});
+  // Fix enter key on textfields triggering button click.
+  $('input:text', context).bind('keydown.bue', BUE.eFixEnter);
 };
 
-//integrate editor template into textarea T
+// Integrate editor template into textarea T
 BUE.processTextarea = function (T, tplid) {
   if (!T || !BUE.templates[tplid] || !(T = $(T).filter('textarea')[0])) return false;
-  //check visibility on the element-level only.
+  // Check visibility on the element-level only.
   if (T.style.display == 'none' || T.style.visibility == 'hidden') return false;
   if (T.bue) return T.bue;
   var E = new BUE.instance(T, tplid);
   !BUE.active || BUE.active.textArea.disabled ? E.activate() : E.accesskeys(false);
-  //pre&post process.
+  // Pre&post process.
   for (var i in BUE.preprocess) BUE.preprocess[i](E, $);
   for (var i in BUE.postprocess) BUE.postprocess[i](E, $);
   return E;
 };
 
-//create an editor instance
+// Create an editor instance
 BUE.instance = function (T, tplid) {
   var i = BUE.instances.length, E = T.bue = BUE.instances[i] = this;
   E.index = i;
@@ -44,17 +43,15 @@ BUE.instance = function (T, tplid) {
   E.tpl = BUE.templates[tplid];
   E.bindex = null;
   E.safeToPreview = T.value.indexOf('<') == -1;
-  E.UI = BUE.$html(BUE.theme(tplid).replace(/\%n/g, i)).insertBefore(T);
+  E.UI = BUE.$html(BUE.theme(tplid).replace(/\%n/g, i)).insertBefore(T).bind('keydown.bue', BUE.eUIKeydown);
   E.buttons = $('.bue-button', E.UI).each(function(i, B) {
     var arr = B.id.split('-');
-    $($.extend(B, {eindex: arr[1], bid: arr[3], bindex: i})).click(function() {
-      return !(BUE.enterKeyTime && new Date() - BUE.enterKeyTime < 500) && BUE.buttonClick(B.eindex, B.bindex);
-    });
+    $($.extend(B, {eindex: arr[1], bid: arr[3], bindex: i})).bind('click.bue', BUE.eButtonClick);
   }).get();
-  $(T).focus(function() {!T.bue.dialog.esp && T.bue.activate()});
+  $(T).bind('focus.bue', BUE.eTextareaFocus);
 };
 
-//execute button's click event
+// Execute button's click event
 BUE.buttonClick = function (eindex, bindex) { try {
   var E = BUE.instances[eindex].activate();
   var domB = E.buttons[bindex];
@@ -62,10 +59,10 @@ BUE.buttonClick = function (eindex, bindex) { try {
   var content = tplB[1];
   E.bindex = bindex;
   E.dialog.close();
-  if (tplB[4]) {//execute button script.
+  if (tplB[4]) {
     tplB[4](E, $);
   }
-  else if (content) {//or insert content
+  else if (content) {
     var arr = content.split('%TEXT%');
     if (arr.length == 2) E.tagSelection(arr[0], arr[1]);
     else E.replaceSelection(arr.length == 1 ? content : arr.join(E.getSelection()), 'end');
@@ -75,60 +72,65 @@ BUE.buttonClick = function (eindex, bindex) { try {
   return false;
 };
 
-//return html for editor templates.
+// Return html for editor templates.
 BUE.theme = function (tplid) {
   var tpl = BUE.templates[tplid] || {html: ''}, html = '', sprite;
   if (typeof tpl.html == 'string') return tpl.html;
-  //load sprite
+  // Load sprite
   if (sprite = tpl.sprite) {
     var surl = (new Image()).src = sprite.url, sunit = sprite.unit, sx1 = sprite.x1;
     $(document.body).append('<style type="text/css" media="all">.bue-'+ tplid +' .bue-sprite-button {background-image: url('+ surl +'); width: '+ sunit +'px; height: '+ sunit +'px;}</style>');
   }
-  var access = $.browser.mozilla && 'Shift + Alt' || $.browser.msie && 'Alt', title, content, icon, key, func;
-  //create html for buttons. B(0-title, 1-content, 2-icon or caption, 3-accesskey) and 4-function for js buttons
-  for (var B, isimg, src, type, btype, attr, i = 0, s = 0; B = tpl.buttons[i]; i++) {
-    //empty button.
+  var access = $.browser.mozilla && 'Shift + Alt' || ($.browser.msie || window.chrome) && 'Alt', title, content, icon, key, func;
+  // Create html for buttons. B(0-title, 1-content, 2-icon or caption, 3-accesskey) and 4-function for js buttons
+  for (var B, isimg, src, type, btype, attr, alt, i = 0, s = 0; B = tpl.buttons[i]; i++) {
+    // Empty button.
     if (B.length == 0) {
       s++;
       continue;
     }
     title = B[0], content = B[1], icon = B[2], key = B[3], func = null;
-    //set button function
+    // Set button function
     if (content.substr(0, 3) == 'js:') {
       func = B[4] = new Function('E', '$', content.substr(3));
     }
     isimg = (/\.(png|gif|jpg)$/i).test(icon);
-    //theme button.
+    // Theme button.
     if (title.substr(0, 4) == 'tpl:') {
       html += func ? (func(null, $) || '') : content;
       html += icon ? ('<span class="separator">'+ (isimg ? '<img src="'+ tpl.iconpath +'/'+ icon +'" />' : icon) +'</span>') : '';
       continue;
     }
-    if (!isimg) {//text button
+    // Text button
+    if (!isimg) {
       type = 'button', btype = 'text', attr = 'value="'+ icon +'"';
     }
     else {
-      type = 'image', attr = 'alt="'+ icon +'"';
-      if (sprite) {//sprite button
-        btype = 'sprite', attr += ' src="'+ sx1 +'" style="background-position: -'+ (s * sunit) +'px 0;"';
+      type = 'image';
+      // Sprite button
+      if (sprite) {
+        btype = 'sprite', attr = 'src="'+ sx1 +'" style="background-position: -'+ (s * sunit) +'px 0;"';
         s++;
       }
-      else {//image button
-        btype = 'image', attr += ' src="'+ tpl.iconpath +'/'+ icon +'"';
+      // Image button
+      else {
+        btype = 'image', attr = 'src="'+ tpl.iconpath +'/'+ icon +'"';
       }
     }
-    html += '<input type="'+ type +'" title="'+ title + (access && key ? ' ('+ access +' + '+ key +')' : '') +'" accesskey="'+ key +'" id="bue-%n-button-'+ i +'" class="bue-button bue-'+ btype +'-button editor-'+ btype +'-button" '+ attr +' tabindex="-1" />';
+    alt = title + (key ? '('+ key +')' : '');
+    title += access && key ? ' ('+ access +' + '+ key +')' : '';
+    html += '<input type="'+ type +'" alt="'+ alt +'" title="'+ title +'" accesskey="'+ key +'" id="bue-%n-button-'+ i +'" class="bue-button bue-'+ btype +'-button editor-'+ btype +'-button" '+ attr +' tabindex="'+ (i ? -1 : 0) +'" />';
   }
-  return tpl.html = '<div class="bue-ui bue-'+ tplid +' editor-container clear-block" id="bue-ui-%n">'+ html +'</div>';
+  return tpl.html = '<div class="bue-ui bue-'+ tplid +' editor-container clear-block" id="bue-ui-%n" role="toolbar">'+ html +'</div>';
 };
 
-//Cross browser selection handling. 0-1=All, 2=IE, 3=Opera
+// Cross browser selection handling. 0-1=All, 2=IE, 3=Opera
 BUE.mode = (window.getSelection || document.getSelection) ? ($.browser.opera ? 3 : 1) : (document.selection && document.selection.createRange ? 2 : 0 );
 
-//New line standardization. At least make them represented by a single char.
+// New line standardization. At least make them represented by a single char.
 BUE.text = BUE.processText = BUE.mode < 2 ? function (s) {return s.toString()} : function (s) {return s.toString().replace(/\r\n/g, '\n')};
 
-//Create selection in a textarea
+// Create selection in a textarea
 BUE.selMake = BUE.mode == 2 ? function (T, start, end) {
   range = T.createTextRange();
   range.collapse();
@@ -144,7 +146,7 @@ function (T, start, end) {
   T.setSelectionRange(start, end);
 };
 
-//Return the selection coordinates in a textarea
+// Return the selection coordinates in a textarea
 BUE.selPos = BUE.mode == 2 ? function (T) {
   T.focus();
   var orange = document.selection.createRange(), range = orange.duplicate();
@@ -172,32 +174,64 @@ function (T) {
   return {start: T.selectionStart || 0, end: T.selectionEnd || 0}
 };
 
-//html 2 jquery. way faster than $(html)
-BUE.$html = function(s){return $(document.createElement('div')).html(s).children()};
-//not to break old button scripts.
+// Enter key fixer for text fields
+BUE.eFixEnter = function(e) {
+  e.keyCode == 13 && (BUE.enterKeyTime = new Date());
+};
+
+// Button click handler
+BUE.eButtonClick = function(e) {
+  return !(BUE.enterKeyTime && new Date() - BUE.enterKeyTime < 500) && BUE.buttonClick(this.eindex, this.bindex);
+};
+
+// Textarea focus handler
+BUE.eTextareaFocus = function(e) {
+  this.bue && !this.bue.dialog.esp && this.bue.activate();
+};
+
+// UI keydown handler
+BUE.eUIKeydown = function(e) {
+  if (e.keyCode != 37 && e.keyCode != 39) return;
+  var len, E = BUE.instances[this.id.split('-').pop()];
+  if (E && (len = E.buttons.length)) {
+    var A = document.activeElement, i = Math.max(-1, (A && A.eindex == E.index ? A.bindex : -1) + e.keyCode - 38) + len;
+    E.buttons[i % len].focus();
+  }
+};
+
+// Html 2 jquery. Faster than $(html)
+BUE.$html = function(s){
+  var div = document.createElement('div');
+  div.innerHTML = s;
+  return $(div.childNodes);
+};
+
+// Backward compatibility.
 window.editor = window.editor || BUE;
-//initiate bueditor
+
+// Initiate bueditor
 $(document).ready(function () {
-  (Drupal.behaviors.BUE = BUE.behavior)(document);//set drupal behavior.
+  (Drupal.behaviors.BUE = BUE.behavior)(document);
 });
 
 })(jQuery);
 
-//Bueditor instance methods
+
+// Bueditor instance methods
 (function(E) {
 
-//focus on editor textarea.
+// Focus on editor textarea.
 E.focus = function () {
   this.textArea.focus();
   return this;
 };
 
-//return textarea content
+// Return textarea content
 E.getContent = function () {
   return BUE.text(this.textArea.value);
 };
 
-//set textarea content
+// Set textarea content
 E.setContent = function (content) {
   var T = this.textArea, st = T.scrollTop;
   T.value = content;
@@ -205,13 +239,13 @@ E.setContent = function (content) {
   return this;
 };
 
-//return selected text
+// Return selected text
 E.getSelection = function () {
   var pos = this.posSelection();
   return this.getContent().substring(pos.start, pos.end);
 };
 
-//replace selected text
+// Replace selected text
 E.replaceSelection = function (txt, cursor) {
   var E = this, pos = E.posSelection(), content = E.getContent(), txt = BUE.text(txt);
   var end = cursor == 'start' ? pos.start : pos.start+txt.length, start = cursor == 'end' ? end : pos.start;
@@ -219,7 +253,7 @@ E.replaceSelection = function (txt, cursor) {
   return E.makeSelection(start, end);
 };
 
-//wrap selected text.
+// Wrap selected text.
 E.tagSelection = function (left, right, cursor) {
   var E = this, pos = E.posSelection(), content = E.getContent();
   var left = BUE.text(left), right = BUE.text(right), llen = left.length;
@@ -228,7 +262,7 @@ E.tagSelection = function (left, right, cursor) {
   return E.makeSelection(start, end);
 };
 
-//make a new selection
+// Make a new selection
 E.makeSelection = function (start, end) {
   var E = this;
   if (end === undefined || end < start) end = start;
@@ -237,12 +271,12 @@ E.makeSelection = function (start, end) {
   return E;
 };
 
-//return selection coordinates.
+// Return selection coordinates.
 E.posSelection = function () {
   return this.dialog.esp || BUE.selPos(this.textArea);
 };
 
-//enable/disable editor buttons
+// Enable/disable editor buttons
 E.buttonsDisabled = function (state, bindex) {
   for (var B, i=0; B = this.buttons[i]; i++) {
     B.disabled = i == bindex ? !state : state;
@@ -250,14 +284,14 @@ E.buttonsDisabled = function (state, bindex) {
   return this;
 };
 
-//make active/custom button stay clicked
+// Make active/custom button stay clicked
 E.stayClicked = function (state, bindex) {
   var B = this.buttons[bindex === undefined ? this.bindex : bindex];
   B && jQuery(B)[state ? 'addClass' : 'removeClass']('stay-clicked') && (B.stayClicked = state || false);
   return this;
 };
 
-//enable/disable button accesskeys
+// Enable/disable button accesskeys
 E.accesskeys = function (state) {
   for (var B, i=0; B = this.buttons[i]; i++) {
     B.accessKey = state ? this.tpl.buttons[B.bid][3] : '';
@@ -265,7 +299,7 @@ E.accesskeys = function (state) {
   return this;
 };
 
-//activate editor and make it BUE.active
+// Activate editor and make it BUE.active
 E.activate = function() {
   var E = this, A = BUE.active || null;
   if (E == A) return E;
@@ -273,7 +307,7 @@ E.activate = function() {
   return BUE.active = E;
 };
 
-//reserve dialog and quickpop
+// Reserve dialog and quickPop
 var pop = E.dialog = E.quickPop = BUE.dialog = BUE.quickPop = {};
 pop.open = pop.close = function(){};
 

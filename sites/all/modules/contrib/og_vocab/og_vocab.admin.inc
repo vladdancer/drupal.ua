@@ -1,5 +1,4 @@
 <?php
-// $Id: og_vocab.admin.inc,v 1.1.2.6 2009/11/03 13:17:24 amitaibu Exp $
 
 /**
  * @file
@@ -39,7 +38,7 @@ function og_vocab_admin_overview_vocabularies($form_state, $groupnode) {
     }
     $rows[] = $row;
   }
-  if (!$rows) {
+  if (empty($rows)) {
     $rows[] = array(array('data' => t('No categories'), 'colspan' => 5));
   }
   $header = array(t('Name'), t('Type'), array('data' => t('Operations'), 'colspan' => 3));

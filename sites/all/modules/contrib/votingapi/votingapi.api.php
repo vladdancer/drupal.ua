@@ -1,5 +1,5 @@
 <?php
-// $Id: votingapi.api.php,v 1.1.2.2 2010/10/10 00:55:54 eaton Exp $
+// $Id: votingapi.api.php,v 1.1.2.1 2009/06/24 18:57:26 eaton Exp $
 
 /**
  * @file
@@ -21,8 +21,8 @@
  * piece of content, a catch-all "vote" value should still be calculated for use
  * on summary screens, etc.
  *
- * @param $vote_results
- *   An alterable array of aggregate vote results.
+ * @param $results
+ *   An alterable array of aggregatre vote results.
  * @param $content_type
  *   A string identifying the type of content being rated. Node, comment,
  *   aggregator item, etc.
@@ -31,7 +31,7 @@
  *
  * @see votingapi_recalculate_results()
  */
-function hook_votingapi_results_alter(&$vote_results, $content_type, $content_id) {
+function hook_votingapi_results_alter(&$results, $content_type, $content_id) {
   // We're using a MySQLism (STDDEV isn't ANSI SQL), but it's OK because this is
   // an example. And no one would ever base real code on sample code. Ever. Never.
   
@@ -40,13 +40,13 @@ function hook_votingapi_results_alter(&$vote_results, $content_type, $content_id
   $sql .= "WHERE v.content_type = '%s' AND v.content_id = %d AND v.value_type = 'percent' ";
   $sql .= "GROUP BY v.tag";
 
-  $aggregates = db_query($sql, $content_type, $content_id);
+  $results = db_query($sql, $content_type, $content_id);
 
   // VotingAPI wants the data in the following format:
-  // $vote_results[$tag][$value_type][$aggregate_function] = $value;
+  // $cache[$tag][$value_type][$aggregate_function] = $value;
   
-  while ($aggregate = db_fetch_array($aggregates)) {
-    $vote_results[$result['tag']]['percent']['standard_deviation'] = $result['standard_deviation'];
+  while ($result = db_fetch_array($results)) {
+    $cache[$result['tag']]['percent']['standard_deviation'] = $result['standard_deviation'];
   }
 }
 

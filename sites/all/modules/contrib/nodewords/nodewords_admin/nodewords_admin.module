@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_admin.module,v 1.1.2.13 2010/11/08 04:56:40 davereid Exp $
 
 /**
  * @file
@@ -126,10 +125,6 @@ function nodewords_admin_node_operations() {
 function nodewords_admin_theme() {
   return array(
     'nodewords_admin_enabled_metatags' => array(
-      'arguments' => array('form' => array()),
-      'file' => 'nodewords_admin.admin.inc',
-    ),
-    'nodewords_admin_output_fieldset' => array(
       'arguments' => array('form' => array()),
       'file' => 'nodewords_admin.admin.inc',
     ),

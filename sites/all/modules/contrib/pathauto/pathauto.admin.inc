@@ -1,5 +1,4 @@
 <?php
-// $Id: pathauto.admin.inc,v 1.20.2.18 2010/08/10 03:30:02 davereid Exp $
 
 /**
  * @file
@@ -24,8 +23,6 @@ function pathauto_patterns_form($form_state) {
     $patterndescr = $settings->patterndescr;
     $patterndefault = $settings->patterndefault;
     $groupheader = $settings->groupheader;
-    $supportsfeeds = isset($settings->supportsfeeds) ? $settings->supportsfeeds : NULL;
-    variable_set('pathauto_' . $module . '_supportsfeeds', $supportsfeeds);
 
     $form[$module] = array(
       '#type' => 'fieldset',
@@ -45,6 +42,7 @@ function pathauto_patterns_form($form_state) {
       '#element_validate' => array('_pathauto_validate_pattern_element'),
       '#after_build' => array('_pathauto_validate_pattern_element'),
       '#token_types' => array($settings->token_type),
+      '#min_tokens' => 1,
       '#parents' => array($variable),
     );
 
@@ -62,6 +60,7 @@ function pathauto_patterns_form($form_state) {
           '#element_validate' => array('_pathauto_validate_pattern_element'),
           '#after_build' => array('_pathauto_validate_pattern_element'),
           '#token_types' => array($settings->token_type),
+          '#min_tokens' => 1,
           '#parents' => array($variable),
         );
       }
@@ -78,21 +77,8 @@ function pathauto_patterns_form($form_state) {
     );
     $form[$module]['token_help']['help'] = array(
       '#type' => 'markup',
-      '#value' => theme('token_tree', array($settings->token_type), FALSE),
+      '#value' => theme('token_tree', array($settings->token_type)),
     );
-
-    // If the module supports feeds, offer to generate aliases for them
-    if ($supportsfeeds) {
-      $variable = 'pathauto_' . $module . '_applytofeeds';
-      $form[$module][$variable] = array(
-        '#type' => 'textfield',
-        '#title' => t('Internal feed alias text (leave blank to disable)'),
-        '#size' => 65,
-        '#maxlength' => 1280,
-        '#default_value' => variable_get($variable, $supportsfeeds),
-        '#description' => t('The text to use for aliases for RSS feeds. Examples are "0/feed" (used throughout Drupal core) and "feed" (used by some contributed Drupal modules, like Views).'),
-      );
-    }
   }
 
   return system_settings_form($form);
@@ -221,7 +207,7 @@ function pathauto_settings_form() {
     }
     $form['punctuation']['pathauto_punctuation_' . $name] = array(
       '#type' => 'select',
-      '#title' => $details['name'],
+      '#title' => $details['name'] . ' (<code>' . check_plain($details['value']) . '</code>)',
       '#default_value' => variable_get('pathauto_punctuation_' . $name, $details['default']),
       '#options' => array(
         PATHAUTO_PUNCTUATION_REMOVE => t('Remove'),
@@ -253,31 +239,28 @@ function _pathauto_validate_pattern_element(&$element, &$form_state) {
   }
 
   // Check to see if the required token functions are available.
-  if (!function_exists('token_scan') || !function_exists('token_element_validate_token_context')) {
+  if (!function_exists('token_scan') || !function_exists('token_element_validate')) {
     drupal_set_message(t('Please make sure you are using the latest version of the Token module.'), 'error', FALSE);
     return $element;
   }
 
-  // Check for at least one token.
-  $tokens = token_scan($value);
-  if (empty($tokens)) {
-    form_error($element, t('The %name should contain at least one token to ensure unique URL aliases are created.', array('%name' => $element['#title'])));
-  }
-  else {
-    token_element_validate_token_context($element, $form_state);
-  }
+  // Run token validation.
+  $element = token_element_validate($element, $form_state);
 
   // Find any non-raw tokens that do have a raw companion token and warn.
-  module_load_include('inc', 'pathauto');
-  $not_raw_tokens = array();
-  $raw_tokens = _pathauto_get_raw_tokens();
-  foreach ($tokens as $token) {
-    if (substr($token, -4) === '-raw') {
-      // Skip raw tokens.
-      continue;
-    }
-    elseif (in_array($token . '-raw', $raw_tokens)) {
-      drupal_set_message(t('You are using the token [%token] which has a raw companion token [%raw_token]. For Pathauto patterns you should use the -raw version of tokens unless you really know what you are doing. See the <a href="@pathauto-help">Pathauto help</a> for more details.', array('%token' => $token, '%raw_token' => $token . '-raw', '@pathauto-help' => url('admin/help/pathauto'))), 'error', FALSE);
+  if (!form_get_errors($element)) {
+    // Skip if there are already errors on this field.
+    module_load_include('inc', 'pathauto');
+    $not_raw_tokens = array();
+    $raw_tokens = _pathauto_get_raw_tokens();
+    foreach (token_scan($value) as $token) {
+      if (substr($token, -4) === '-raw') {
+        // Skip raw tokens.
+        continue;
+      }
+      elseif (in_array($token . '-raw', $raw_tokens)) {
+        drupal_set_message(t('You are using the token [%token] which has a raw companion token [%raw_token]. For Pathauto patterns you should use the -raw version of tokens unless you really know what you are doing. See the <a href="@pathauto-help">Pathauto help</a> for more details.', array('%token' => $token, '%raw_token' => $token . '-raw', '@pathauto-help' => url('admin/help/pathauto'))), 'error', FALSE);
+      }
     }
   }
 
@@ -422,7 +405,7 @@ function pathauto_bulk_update_batch_finished($success, $results, $operations) {
       drupal_set_message(format_plural($results['count_changed'], 'Generated 1 URL alias.', 'Generated @count URL aliases.'));
     }
     else {
-      drupal_set_message('No new URL aliases to generate.');
+      drupal_set_message(t('No new URL aliases to generate.'));
     }
   }
   else {

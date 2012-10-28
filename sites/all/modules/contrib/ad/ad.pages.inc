@@ -1,5 +1,4 @@
 <?php
-// $Id: ad.pages.inc,v 1.1.2.6.2.4 2009/11/30 16:31:20 Jeremy Exp $
 
 /**
  * @file

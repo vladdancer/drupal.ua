@@ -1,5 +1,4 @@
 <?php
-// $Id: node-embed-default.tpl.php,v 1.1 2010/04/21 18:22:44 febbraro Exp $
 ?>
 <div id="embedded-node-<?php print $embedded_node->nid; ?>" class="embedded-node 
   <?php if (!$embedded_node->status) { print ' node-unpublished'; } ?>">

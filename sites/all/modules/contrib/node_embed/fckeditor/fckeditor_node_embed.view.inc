@@ -1,5 +1,4 @@
 <?php
-// $Id: fckeditor_node_embed.view.inc,v 1.2 2010/07/08 15:39:20 emackn Exp $
 // @file fckeditor_node_embed.view.inc
 $view = new view;
 $view->name = 'fckeditor_node_embed';

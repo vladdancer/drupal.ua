@@ -1,5 +1,4 @@
 <?php
-// $Id: pathauto.module,v 1.126.2.37 2010/09/24 22:35:50 greggles Exp $
 
 /**
  * @defgroup pathauto Pathauto: Automatically generates aliases for content
@@ -35,7 +34,7 @@ function pathauto_help($path, $arg) {
       $output .= '<h3>' . t('Settings') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Maximum alias and component length') . '</dt>';
-      $output .= '<dd>' . t('The <strong>maximum alias length</strong> and <strong>maximum component length</strong> values default to 100 and have a limit of @max from Pathauto. This length is limited by the length of the "alias" column of the url_alias database table. The default database schema for this column is @max. If you set a length that is equal to that of the one set in the "alias" column it will cause problems in situations where the system needs to append additional words to the aliased URL. For example, URLs generated for feeds will have "/feed" added to the end. You should enter a value that is the length of the "alias" column minus the length of any strings that might get added to the end of the URL. The length of strings that might get added to the end of your URLs depends on which modules you have enabled and on your Pathauto settings. The recommended and default value is 100.', array('@max' => _pathauto_get_schema_alias_maxlength())) . '</dd>';
+      $output .= '<dd>' . t('The <strong>maximum alias length</strong> and <strong>maximum component length</strong> values default to 100 and have a limit of @max from Pathauto. This length is limited by the length of the "alias" column of the url_alias database table. The default database schema for this column is @max. If you set a length that is equal to that of the one set in the "alias" column it will cause problems in situations where the system needs to append additional words to the aliased URL. You should enter a value that is the length of the "alias" column minus the length of any strings that might get added to the end of the URL. The length of strings that might get added to the end of your URLs depends on which modules you have enabled and on your Pathauto settings. The recommended and default value is 100.', array('@max' => _pathauto_get_schema_alias_maxlength())) . '</dd>';
       $output .= '<dt>' . t('Raw tokens') . '</dt>';
       $output .= '<dd>' . t('In Pathauto it is appropriate to use the -raw form of tokens. Paths are sent through a filtering system which ensures that raw user content is filtered. Failure to use -raw tokens can cause problems with the Pathauto punctuation filtering system.') . '</dd>';
       $output .= '</dl>';
@@ -98,6 +97,24 @@ function pathauto_menu() {
 }
 
 /**
+ * Deprecated. Use module_load_include('inc', 'pathauto') instead.
+ */
+function _pathauto_include() {
+  module_load_include('inc', 'pathauto');
+
+  // Trigger a watchdog notice about whatever file/function is improperly
+  // calling this deprecated function.
+  $backtrace = debug_backtrace();
+  watchdog('pathauto', "The !deprecated function has been deprecated and !replacement should be used instead. It was called from %file on line %line, function %function().", array(
+    '!deprecated' => __FUNCTION__,
+    '!replacement' => "module_load_include('inc', 'pathauto')",
+    '%file' => basename($backtrace[0]['file']),
+    '%line' => $backtrace[0]['line'],
+    '%function' => $backtrace[1]['function'],
+  ), WATCHDOG_NOTICE);
+}
+
+/**
  * Implements hook_token_list().
  */
 function pathauto_token_list($type = 'all') {
@@ -142,16 +159,9 @@ function pathauto_path_alias_types() {
  *   A bundle (e.g. node type, vocabulary ID, etc.)
  * @param $language
  *   A language code, defaults to the language-neutral empty string.
- * @param $clear
- *   An optional boolean to clear the function's internal cache if TRUE.
  */
-function pathauto_pattern_load_by_entity($entity, $bundle = '', $language = '', $clear = FALSE) {
-  static $patterns = array();
-
-  if ($clear) {
-    $patterns = array();
-    return;
-  }
+function pathauto_pattern_load_by_entity($entity, $bundle = '', $language = '') {
+  $patterns = &pathauto_static(__FUNCTION__, array());
 
   $pattern_id = "$entity:$bundle:$language";
   if (!isset($patterns[$pattern_id])) {
@@ -196,6 +206,70 @@ function pathauto_path_delete_all($source) {
   drupal_clear_path_cache();
 }
 
+/**
+ * Return the proper SQL to perform cross-db and field-type concatenation.
+ *
+ * @return
+ *   A string of SQL with the concatenation.
+ */
+function _pathauto_sql_concat() {
+  $args = func_get_args();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      return 'CONCAT(' . implode(', ', $args) . ')';
+    default:
+      // The ANSI standard of concatentation uses the double-pipe.
+      return '(' . implode(' || ', $args) . ')';
+  }
+}
+
+/**
+ * Return the proper SQL to perform a simple count query.
+ *
+ * This is an internal Pathauto function and should not be used in any other
+ * modules.
+ *
+ * @param $sql
+ *   A simple SQL query string.
+ *
+ * @return
+ *   The count query SQL string.
+ */
+function _pathauto_sql_count($sql) {
+  $sql = preg_replace('/SELECT .* FROM/', 'SELECT COUNT(*) FROM', $sql);
+  $sql = preg_replace('/ORDER BY .*/', '', $sql);
+  return $sql;
+}
+
+
+/**
+ * Implements hook_field_attach_rename_bundle().
+ *
+ * Respond to machine name changes for pattern variables.
+ */
+function pathauto_field_attach_rename_bundle($entity_type, $bundle_old, $bundle_new) {
+  $result = db_query("SELECT name FROM {variable} WHERE name LIKE '%s%%'", "pathauto_{$entity_type}_{$bundle_old}_");
+  while ($variable = db_result($result)) {
+    $value = variable_get($variable, '');
+    variable_del($variable);
+    $variable = strtr($variable, array("{$entity_type}_{$bundle_old}" => "{$entity_type}_{$bundle_new}"));
+    variable_set($variable, $value);
+  }
+}
+
+/**
+ * Implements hook_field_attach_delete_bundle().
+ *
+ * Respond to sub-types being deleted, their patterns can be removed.
+ */
+function pathauto_field_attach_delete_bundle($entity_type, $bundle) {
+  $result = db_query("SELECT name FROM {variable} WHERE name LIKE '%s%%'", "pathauto_{$entity_type}_{$bundle}_");
+  while ($variable = db_result($result)) {
+    variable_del($variable);
+  }
+}
+
 //==============================================================================
 // Some node related functions.
 
@@ -227,12 +301,26 @@ function pathauto_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
       break;
     case 'insert':
     case 'update':
-      if (!isset($node->pathauto_perform_alias) || !empty($node->pathauto_perform_alias)) {
-        pathauto_node_update_alias($node, $op);
-      }
+      pathauto_node_update_alias($node, $op);
       break;
     case 'delete':
       pathauto_path_delete_all("node/{$node->nid}");
+      break;
+  }
+}
+
+/**
+ * Implements hook_node_type().
+ */
+function pathauto_node_type($op, $info) {
+  switch ($op) {
+    case 'update':
+      if (!empty($info->old_type) && $info->old_type != $info->type) {
+        pathauto_field_attach_rename_bundle('node', $info->old_type, $info->type);
+      }
+      break;
+    case 'delete':
+      pathauto_field_attach_delete_bundle('node', $info->type);
       break;
   }
 }
@@ -279,14 +367,15 @@ function pathauto_form_alter(&$form, $form_state, $form_id) {
 
       $form['path']['pathauto_perform_alias'] = array(
         '#type' => 'checkbox',
-        '#title' => t('Automatic alias'),
+        '#title' => t('Generate automatic URL alias'),
         '#default_value' => $node->pathauto_perform_alias,
-        '#description' => t('An alias will be generated for you. If you wish to create your own alias below, uncheck this option.'),
+        '#description' => t('Uncheck this to create a custom alias below.'),
         '#weight' => -1,
       );
 
-      if (user_access('administer pathauto')) {
-        $form['path']['pathauto_perform_alias']['#description'] .= ' ' . t('To control the format of the generated aliases, see the <a href="@url-patterns">URL alias patterns</a>.', array('@url-patterns' => url('admin/build/path/patterns')));
+      // Add a shortcut link to configure URL alias patterns.
+      if (menu_valid_path(array('link_path' => 'admin/build/path/patterns'))) {
+        $form['path']['pathauto_perform_alias']['#description'] .= ' ' . l(t('Configure URL alias patterns.'), 'admin/build/path/patterns');
       }
 
       if ($node->pathauto_perform_alias && !empty($node->old_alias) && empty($node->path)) {
@@ -328,14 +417,24 @@ function pathauto_node_operations() {
  *   An optional array of additional options.
  */
 function pathauto_node_update_alias($node, $op, $options = array()) {
-  // Skip processing if the term has no pattern.
-  $language = isset($node->language) ? $node->language : '';
-  if (!pathauto_pattern_load_by_entity('node', $node->type, $language)) {
+  // Skip processing if the user has disabled pathauto for the node.
+  if (isset($node->pathauto_perform_alias) && empty($node->pathauto_perform_alias)) {
+    return;
+  }
+
+  $options += array(
+    'language' => isset($node->language) ? $node->language : '',
+  );
+
+  // Skip processing if the node has no pattern.
+  if (!pathauto_pattern_load_by_entity('node', $node->type, $options['language'])) {
     return;
   }
 
   module_load_include('inc', 'pathauto');
-  pathauto_create_alias('node', $op, "node/{$node->nid}", array('node' => $node), $node->nid, $node->type, $language);
+  if ($alias = pathauto_create_alias('node', $op, "node/{$node->nid}", array('node' => $node), $node->nid, $node->type, $options['language'])) {
+    $node->path = $alias;
+  }
 }
 
 /**
@@ -400,6 +499,7 @@ function pathauto_taxonomy($op, $type, $object = NULL) {
 
           pathauto_taxonomy_term_update_alias($term, $op);
           break;
+
         case 'delete':
           // If the category is deleted, remove the path aliases
           $term = (object) $object;
@@ -408,6 +508,15 @@ function pathauto_taxonomy($op, $type, $object = NULL) {
           if ($term_path != "taxonomy/term/{$term->tid}") {
             pathauto_path_delete_all("taxonomy/term/{$term->tid}");
           }
+          break;
+      }
+      break;
+
+    case 'vocabulary':
+      $vocabulary = (object) $object;
+      switch ($op) {
+        case 'delete':
+          pathauto_field_attach_delete_bundle('taxonomy', $vocabulary->vid);
           break;
       }
       break;
@@ -425,7 +534,15 @@ function pathauto_taxonomy($op, $type, $object = NULL) {
  *   An optional array of additional options.
  */
 function pathauto_taxonomy_term_update_alias($term, $op, $options = array()) {
-  $options += array('alias children' => FALSE);
+  // Skip processing if the user has disabled pathauto for the term.
+  if (isset($term->pathauto_perform_alias) && empty($term->pathauto_perform_alias)) {
+    return;
+  }
+
+  $options += array(
+    'alias children' => FALSE,
+    'language' => isset($term->language) ? $term->language : '',
+  );
 
   $module = 'taxonomy';
   if (module_exists('forum') && $term->vid == variable_get('forum_nav_vocabulary', '')) {
@@ -433,17 +550,18 @@ function pathauto_taxonomy_term_update_alias($term, $op, $options = array()) {
   }
 
   // Skip processing if the term has no pattern.
-  if (!pathauto_pattern_load_by_entity($module, $term->vid)) {
+  if (!pathauto_pattern_load_by_entity($module, $term->vid, $options['language'])) {
     return;
   }
 
   module_load_include('inc', 'pathauto');
   $source = taxonomy_term_path($term);
-  pathauto_create_alias($module, $op, $source, array('taxonomy' => $term), $term->tid, $term->vid);
+  pathauto_create_alias($module, $op, $source, array('taxonomy' => $term), $term->tid, $term->vid, $options['language']);
 
   if (!empty($options['alias children'])) {
-    // For all children generate new alias.
+    // For all children generate new aliases.
     $options['alias children'] = FALSE;
+    unset($options['language']);
     foreach (taxonomy_get_tree($term->vid, $term->tid) as $subterm) {
       pathauto_taxonomy_term_update_alias($subterm, $op, $options);
     }
@@ -564,15 +682,23 @@ function pathauto_user_operations() {
  *   An optional array of additional options.
  */
 function pathauto_user_update_alias($account, $op, $options = array()) {
-  $options += array('alias blog' => module_exists('blog'));
+  // Skip processing if the user has disabled pathauto for the account.
+  if (isset($account->pathauto_perform_alias) && empty($account->pathauto_perform_alias)) {
+    return;
+  }
+
+  $options += array(
+    'alias blog' => module_exists('blog'),
+    'language' => '',
+  );
 
   // Skip processing if the account has no pattern.
-  if (!pathauto_pattern_load_by_entity('user')) {
+  if (!pathauto_pattern_load_by_entity('user', '', $options['language'])) {
     return;
   }
 
   module_load_include('inc', 'pathauto');
-  pathauto_create_alias('user', $op, "user/{$account->uid}", array('user' => $account), $account->uid);
+  pathauto_create_alias('user', $op, "user/{$account->uid}", array('user' => $account), $account->uid, NULL, $options['language']);
 
   // Because blogs are also associated with users, also generate the blog paths.
   if (!empty($options['alias blog'])) {
@@ -622,11 +748,67 @@ function pathauto_blog_update_alias($account, $op, $options = array()) {
     return;
   }
 
+  $options += array(
+    'language' => '',
+  );
+
   module_load_include('inc', 'pathauto');
   if (node_access('create', 'blog', $account)) {
-    pathauto_create_alias('blog', $op, "blog/{$account->uid}", array('user' => $account), $account->uid);
+    pathauto_create_alias('blog', $op, "blog/{$account->uid}", array('user' => $account), $account->uid, NULL, $options['language']);
   }
   else {
     pathauto_path_delete_all("blog/{$account->uid}");
   }
 }
+
+/**
+ * @name pathauto_backport Backported functions from Drupal 7 for Pathauto.
+ * @{
+ */
+
+/**
+ * Backport of drupal_static from Drupal 7.
+ */
+function &pathauto_static($name, $default_value = NULL, $reset = FALSE) {
+  static $data = array(), $default = array();
+  // First check if dealing with a previously defined static variable.
+  if (isset($data[$name]) || array_key_exists($name, $data)) {
+    // Non-NULL $name and both $data[$name] and $default[$name] statics exist.
+    if ($reset) {
+      // Reset pre-existing static variable to its default value.
+      $data[$name] = $default[$name];
+    }
+    return $data[$name];
+  }
+  // Neither $data[$name] nor $default[$name] static variables exist.
+  if (isset($name)) {
+    if ($reset) {
+      // Reset was called before a default is set and yet a variable must be
+      // returned.
+      return $data;
+    }
+    // First call with new non-NULL $name. Initialize a new static variable.
+    $default[$name] = $data[$name] = $default_value;
+    return $data[$name];
+  }
+  // Reset all: ($name == NULL). This needs to be done one at a time so that
+  // references returned by earlier invocations of drupal_static() also get
+  // reset.
+  foreach ($default as $name => $value) {
+    $data[$name] = $value;
+  }
+  // As the function returns a reference, the return should always be a
+  // variable.
+  return $data;
+}
+
+/**
+ * Backport of drupal_static_reset() from Drupal 7.
+ */
+function pathauto_static_reset($name = NULL) {
+  pathauto_static($name, NULL, TRUE);
+}
+
+/**
+ * @} End of "name pathauto_backport".
+ */

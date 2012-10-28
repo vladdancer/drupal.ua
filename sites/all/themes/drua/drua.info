@@ -9,6 +9,7 @@ screenshot = screenshot.jpg
 ; ------------- REGIONS -------------- ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+regions[header_banner] = Header banner
 regions[header_left] = Header left
 regions[header_right] = Header right
 regions[featured] = Featured content
@@ -42,6 +43,3 @@ scripts[] = scripts/scripts.js
 
 ; Load Panel Layouts
 plugins[panels][layouts] = panels/layouts
-
-
-plugins[vud][widgets] = widgets

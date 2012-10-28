@@ -1,5 +1,4 @@
-<?php 
-// $Id: mimemail-message.tpl.php,v 1.3 2010/09/12 16:35:48 sgabe Exp $
+<?php
 
 /**
  * @file
@@ -10,10 +9,11 @@
  * specific mail.
  *
  * Available variables:
- * - $subject: The message subject
- * - $body: The message body
- * - $css: Internal style sheets
- * - $mailkey: The message identifier
+ * - $subject: The message subject.
+ * - $body: The message body in HTML format.
+ * - $mailkey: The message identifier.
+ * - $recipient: An email address or user object who is receiving the message.
+ * - $css: Internal style sheets.
  *
  * @see template_preprocess_mimemail_message()
  */

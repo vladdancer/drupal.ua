@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_cache_file.inc,v 1.1.4.23.2.5.2.6 2009/05/07 13:52:13 jeremy Exp $
 
 /**
  * @file

@@ -1,5 +1,4 @@
 <?php
-// $Id: http_response.inc,v 1.1.2.2 2010/11/19 18:34:27 merlinofchaos Exp $
 
 /**
  * @file
@@ -188,7 +187,7 @@ function page_manager_http_response_admin_summary($handler, $task, $subtask, $pa
 
   $output .= '<div class="clear-block">';
   if ($show_title) {
-  $output .= '<div class="handler-title clear-block">';
+    $output .= '<div class="handler-title clear-block">';
     $output .= '<div class="actions handler-actions">' . $rendered_operations['actions'] . '</div>';
     $output .= '<span class="title-label">' . $title . '</span>';
   }

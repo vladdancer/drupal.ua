@@ -1,4 +1,3 @@
-// $Id: README.txt,v 1.1.2.3 2010/12/19 22:55:33 sutharsan Exp $
 
 Localization Update
 -------------------

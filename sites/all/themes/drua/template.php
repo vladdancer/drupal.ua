@@ -60,8 +60,19 @@ function drua_preprocess_page(&$vars) {
     }
   }
   
-  // Determine if the current page is a panels page
-  $vars['is_panels'] = panels_get_current_page_display() ? TRUE : FALSE;
+  $theme_key = 'drua';
+  $settings = theme_get_settings($theme_key);
+  $themes = list_themes();
+  $theme_object = $themes[$theme_key];
+  if ($settings['toggle_logo']) {
+    if ($settings['default_logo']) {
+      $logo = file_create_url(dirname($theme_object->filename) .'/logo.png');
+    }
+    elseif ($settings['logo_path']) {
+      $logo = file_create_url($settings['logo_path']);
+    }
+  }
+  $vars['logo'] = theme('image', $logo, '', '', NULL, FALSE);
 }
 
 /**
@@ -290,7 +301,6 @@ function user_menu_block() {
     if ($node->tnid) {
       $translation = translation_node_get_translations($node->tnid);
     }
-    $path = $_GET['q'];
   }
   else {
     $path = drupal_is_front_page() ? '<front>' : $_GET['q'];

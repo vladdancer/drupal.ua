@@ -1,5 +1,4 @@
 <?php
-// $Id: sphinxsearch.xmlpipe.inc,v 1.4.2.3 2008/10/31 13:15:45 markuspetrux Exp $
 
 /**
  * @file
@@ -35,7 +34,6 @@ function sphinxsearch_xmlpipe($caller_version = 0) {
       }
     }
   }
-        $access_xmlpipe = TRUE;
   if (!$access_xmlpipe) {
     $message = t('Not authorized.');
     watchdog('sphinxsearch', $message, NULL, WATCHDOG_ERROR);
@@ -51,9 +49,8 @@ function sphinxsearch_xmlpipe($caller_version = 0) {
   $GLOBALS['sphinxsearch_max_execution_time'] = (int)ini_get('max_execution_time');
   $GLOBALS['sphinxsearch_memory_limit'] = sphinxsearch_get_memory_limit();
   $GLOBALS['sphinxsearch_initial_memory_usage'] = memory_get_usage();
-  $GLOBALS['sphinxsearch_taxonomy_module_exists'] = module_exists('taxonomy');
 
-  if ($GLOBALS['sphinxsearch_taxonomy_module_exists']) {
+  if (module_exists('taxonomy')) {
     require_once(drupal_get_path('module', 'sphinxsearch') .'/sphinxsearch.taxonomy.inc');
   }
 
@@ -675,8 +672,12 @@ function _sphinxsearch_wrapper_watchdog($type, $message, $variables = array(), $
  */
 function sphinxsearch_ip_check_cidr($ip, $cidr) {
   list($net, $mask) = explode('/', $cidr);
+  $php_integer_bits = (PHP_INT_SIZE * 8);
+  if (empty($mask)) {
+    $mask = $php_integer_bits;
+  }
   $ip_net = ip2long($net);
-  $ip_mask = ~((1 << (32 - $mask)) - 1);
+  $ip_mask = ~((1 << ($php_integer_bits - $mask)) - 1);
   $ip_ip = ip2long($ip);
   $ip_ip_net = $ip_ip & $ip_mask;
   return ($ip_ip_net == $ip_net);

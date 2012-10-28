@@ -1,5 +1,4 @@
 <?php
-// $Id: tracker.inc,v 1.1.4.9 2010/11/07 19:40:10 davereid Exp $
 
 /**
  * @file

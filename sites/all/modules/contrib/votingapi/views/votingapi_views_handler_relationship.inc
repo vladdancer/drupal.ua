@@ -1,5 +1,5 @@
 <?php
-// $Id: votingapi_views_handler_relationship.inc,v 1.1.2.9 2010/10/10 00:55:54 eaton Exp $
+// $Id: votingapi_views_handler_relationship.inc,v 1.1.2.8 2009/08/15 17:58:06 eaton Exp $
 
 /**
  * @file
@@ -190,7 +190,7 @@ class votingapi_views_handler_relationship extends views_handler_relationship {
             'value' => $value,
             'numeric' => FALSE
           );
-          $alias .= '_'. str_replace(array(' ','-','.'), '_', $value);
+          $alias .= '_'. $value;
         }
       }
     }

@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_token.inc,v 1.1.2.2 2009/10/20 00:20:57 jeremy Exp $
 
 /**
  * @file

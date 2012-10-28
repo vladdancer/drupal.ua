@@ -1,4 +1,3 @@
-// $Id: googleajaxsearch.js,v 1.1.2.1 2009/09/30 12:02:27 macperlinski Exp $
 
 /**
  * @file
@@ -19,20 +18,16 @@ function OnLoad() {
 //     For every delta, load settings for Google Ajax Search
     jQuery.each(deltas, function(iteration, delta){  
         var blockId = this; 
-//     Id of a setting. Needed because of this fucked up indexing of settings array -> indexing starts from delta of the first block        
-//        var settingId = parseInt(firstBlockId)+parseInt(iteration);
-//        var blockSettings = settings[settingId];
+//     Id of a setting. Needed because of indexing of settings array -> indexing starts from delta of the first block        
         var blockSettings = settings[delta];
-        //Function checking the Show/Hide form option
-
-        
         searchControls[delta] = new google.search.SearchControl();
 
 //Set searcher place  
         searcherOptions[delta] = new google.search.SearcherOptions();
-
+        searcherOptions[delta].setExpandMode(eval(blockSettings.expansion_mode));
         if(blockSettings.results_place) {
 //        If target place exists, show results in it. Otherwise show under textfield (like there's no place selected)
+           
           if(document.getElementById(blockSettings.results_place)) {
             searcherOptions[delta].setRoot(document.getElementById(blockSettings.results_place));
           }
@@ -106,7 +101,16 @@ function OnLoad() {
             searchSetOrderBy(blockSettings, Patent, "patent");
             searchControls[delta].addSearcher(Patent, searcherOptions[delta]);
         }
+//      Set settings for searcher type Local
+        
+        if(blockSettings.search_options.local_search != 0) {
+        
+            var Local = new google.search.LocalSearch();
+            searchControls[delta].addSearcher(Local, searcherOptions[delta]);
+        }
 
+        
+        
         drawOptions[delta] = new google.search.DrawOptions();
         
 //  End of set searcher type

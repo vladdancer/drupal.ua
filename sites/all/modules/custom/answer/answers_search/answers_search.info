@@ -1,9 +1,0 @@
-; $Id: answers_search.info,v 1.1 07.02.2010 11:36:17 seaji Exp $
-name = Answers search
-description =  Extends Answers module for search in drupal.ua
-dependencies[] = answers
-dependencies[] = search
-package = "Answers"
-core = "6.x"
-
-version = "6.x-1.x-dev"

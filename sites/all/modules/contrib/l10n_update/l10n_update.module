@@ -1,5 +1,4 @@
 <?php
-// $Id: l10n_update.module,v 1.12.2.12 2010/12/08 16:19:25 goba Exp $
 
 /**
  * @file
@@ -22,6 +21,22 @@ define('L10N_UPDATE_CHECK_LOCAL', 2);
  * Update mode: both.
  */
 define('L10N_UPDATE_CHECK_ALL', L10N_UPDATE_CHECK_REMOTE | L10N_UPDATE_CHECK_LOCAL);
+
+/**
+ * Translation import mode keeping translations which are edited after enabling
+ * Locale Update module an only override default (un-edited) translations.
+ */
+define('LOCALE_UPDATE_OVERRIDE_DEFAULT', 2);
+
+ /**
+ * The maximum number of projects which are checked for available translations each cron run.
+ */
+define('L10N_UPDATE_CRON_PROJECTS', 10);
+
+/**
+ * The maximum number of projects which are updated each cron run.
+ */
+define('L10N_UPDATE_CRON_UPDATES', 2);
 
 /**
  * Implementation of hook_help().
@@ -82,7 +97,7 @@ function l10n_update_menu_alter(&$menu) {
 function l10n_update_cron() {
   if ($frequency = variable_get('l10n_update_check_frequency', 0)) {
     module_load_include('check.inc', 'l10n_update');
-    list($checked, $updated) = l10n_update_check_translations(1, time() - $frequency * 24 * 3600);
+    list($checked, $updated) = l10n_update_check_translations(L10N_UPDATE_CRON_PROJECTS, time() - $frequency * 24 * 3600, L10N_UPDATE_CRON_UPDATES);
     watchdog('l10n_update', 'Automatically checked @checked translations, updated @updated.', array('@checked' => count($checked), '@updated' => count($updated)));
   }
 }
@@ -98,6 +113,9 @@ function l10n_update_form_alter(&$form, $form_state, $form_id) {
       break;
     case 'system_modules':
       $form['#submit'][] = 'l10n_update_system_modules_submit';
+      break;
+    case 'system_modules_uninstall':
+      $form['#submit'][] = 'l10n_update_system_modules_uninstall_submit';
       break;
     case 'locale_languages_predefined_form':
     case 'locale_languages_custom_form':
@@ -123,6 +141,20 @@ function l10n_update_system_modules_submit($form, $form_state) {
   if (!isset($form_state['storage'])) {
     module_load_include('project.inc', 'l10n_update');
     l10n_update_project_refresh();
+  }
+}
+
+ /**
+ * Additional submit hander for System Modules Uninstall form.
+ *
+ * Remove data of uninstalled modules from {l10n_update_file} table.
+ *
+ * @see l10n_update_form_alter()
+ */
+function l10n_update_system_modules_uninstall_submit($form, $form_state) {
+  if (isset($form['#confirmed'])) {
+    $uninstall = array_keys(array_filter($form_state['values']['uninstall']));
+    db_query("DELETE FROM {l10n_update_file} WHERE project IN (" . db_placeholders($uninstall, 'text') . ")", $uninstall);
   }
 }
 
@@ -316,10 +348,10 @@ function l10n_update_server($name = NULL, $url = NULL, $refresh = FALSE) {
   $cid = 'l10n_update_server:' . $url;
   if ($refresh) {
     unset($info);
-    cache_clear_all($cid, 'cache');
+    cache_clear_all($cid, 'cache_l10n_update');
   }
   if (!isset($info[$url])) {
-    if ($cache = cache_get($cid)) {
+    if ($cache = cache_get($cid, 'cache_l10n_update')) {
       $info[$url] = $cache->data;
     }
     else {
@@ -338,7 +370,7 @@ function l10n_update_server($name = NULL, $url = NULL, $refresh = FALSE) {
       }
       // Now fetch server meta information form the server itself
       if ($server = l10n_update_get_server($server)) {
-        cache_set($cid, $server);
+        cache_set($cid, $server, 'cache_l10n_update');
         $info[$url] = $server;
       }
       else {
@@ -460,5 +492,9 @@ function l10n_update_available_updates($refresh = NULL) {
  * Called from update.php (among others) to flush the caches.
  */
 function l10n_update_flush_caches() {
-  variable_set('l10n_update_rebuild_projects', 1);
+  if (defined('MAINTENANCE_MODE') && MAINTENANCE_MODE == 'update') {
+    cache_clear_all('*', 'cache_l10n_update', TRUE);
+    variable_set('l10n_update_rebuild_projects', 1);
+  }
+  return array();
 }

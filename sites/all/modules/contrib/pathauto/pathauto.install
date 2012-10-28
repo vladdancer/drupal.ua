@@ -1,5 +1,4 @@
 <?php
-// $Id: pathauto.install,v 1.14.2.6 2010/07/29 07:38:59 davereid Exp $
 
 /**
  * @file
@@ -23,7 +22,7 @@ function pathauto_install() {
   variable_set('pathauto_punctuation_hyphen', 1);
 
   // Set the weight to 1
-  db_query("UPDATE {system} SET weight = 1 WHERE name = 'pathauto'");
+  db_query("UPDATE {system} SET weight = 1 WHERE type = 'module' AND name = 'pathauto'");
 }
 
 /**
@@ -40,7 +39,7 @@ function pathauto_uninstall() {
  */
 function pathauto_update_1() {
   $ret = array();
-  $ret[] = update_sql("UPDATE {system} SET weight = 1 WHERE name = 'pathauto'");
+  $ret[] = update_sql("UPDATE {system} SET weight = 1 WHERE type = 'module' AND name = 'pathauto'");
   return $ret;
 }
 
@@ -106,5 +105,22 @@ function pathauto_update_6201() {
   variable_del('pathauto_modulelist');
   variable_del('pathauto_indexaliases');
   variable_del('pathauto_indexaliases_bulkupdate');
+  return array();
+}
+
+/**
+ * Remove obsolete variables for removed feed handling.
+ */
+function pathauto_update_6202() {
+  variable_del('pathauto_node_supportsfeeds');
+  variable_del('pathauto_node_applytofeeds');
+  variable_del('pathauto_taxonomy_supportsfeeds');
+  variable_del('pathauto_taxonomy_applytofeeds');
+  variable_del('pathauto_forum_supportsfeeds');
+  variable_del('pathauto_forum_applytofeeds');
+  variable_del('pathauto_user_supportsfeeds');
+  variable_del('pathauto_user_applytofeeds');
+  variable_del('pathauto_blog_supportsfeeds');
+  variable_del('pathauto_blog_applytofeeds');
   return array();
 }

@@ -1,5 +1,4 @@
 <?php
-// $Id: page-fckeditor-node-embed.tpl.php,v 1.1 2010/04/21 18:22:44 febbraro Exp $
 /**
  * @file page-fckeditor-node-embed.tpl.php
  * This file provides the template for the node embed search results when using the fckeditor

@@ -1,5 +1,4 @@
 <?php
-// $Id: l10n_update.parser.inc,v 1.4.2.2 2010/11/18 20:54:54 sutharsan Exp $
 
 /**
  * @file

@@ -32,7 +32,7 @@ function ad_channel_cache_filter($ads) {
         $channel = $channels['channels'][$chid];
         $display_by_url = $channel->display;
         $urls = unserialize($channel->urls);
-        $frontpage = adserve_variable('site_frontpage') ? adserve_variable('site_frontpage') : 'node';
+        $frontpage = variable_get('site_frontpage', 'node');
         $regexp = '/^('. preg_replace(array('/(\r\n?|\n)/', '/\\\\\*/', '/(^|\|)\\\\<front\\\\>($|\|)/'), array('|', '.*', '\1'. preg_quote($frontpage, '/') .'\2'), preg_quote($urls, '/')) .')$/';
         foreach (array('url', 'alias') as $search) {
           $match = preg_match($regexp, adserve_variable($search));

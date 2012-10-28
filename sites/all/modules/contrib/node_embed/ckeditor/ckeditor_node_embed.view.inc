@@ -1,5 +1,4 @@
 <?php
-// $Id: ckeditor_node_embed.view.inc,v 1.1 2010/07/26 20:11:44 emackn Exp $
 // @file ckeditor_node_embed.view.inc
 $view = new view;
 $view->name = 'ckeditor_node_embed';
@@ -157,7 +156,8 @@ $handler->override_option('filters', array(
   ),
 ));
 $handler->override_option('access', array(
-  'type' => 'none',
+  'type' => 'perm',
+  'perm' => 'administer nodes',
 ));
 $handler->override_option('cache', array(
   'type' => 'none',

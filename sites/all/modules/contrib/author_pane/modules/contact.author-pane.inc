@@ -1,5 +1,4 @@
 <?php
-// $Id: contact.author-pane.inc,v 1.1.2.1.2.5 2010/08/10 02:32:40 michellec Exp $
 
 /**
  * @file
@@ -19,10 +18,14 @@ function contact_preprocess_author_pane(&$variables) {
   $account = $variables['account'];
   $account_id = $account->uid;
 
-  // If the account has the contact form on, and the account isn't the viewing
-  // user, and neither the account nor the viewer are anonymous.
-  if ((!empty($account->contact)) && ($account_id != $user->uid) && ($user->uid != 0) && ($account_id != 0)) {
-    $variables['contact'] = l(t('Email'), "user/$account_id/contact", array('attributes' => array('class' => 'author-email-icon'), 'html' => TRUE));
+  // If the viewer isn't anonymous and
+  // the author isn't anonymous and
+  // the viewer isn't the author and
+  // either the author has contact enabled or the viewer has admin users access
+  // then show the link.
+  $variables['contact'] = '';
+  if (($user->uid != 0) && ($account_id != 0) && ($account_id != $user->uid) && (!empty($account->contact) || user_access('administer users'))) {
+    $variables['contact'] = l('<span>' . t('Email') . '</span>', "user/$account_id/contact", array('attributes' => array('class' => 'author-pane-link'), 'html' => TRUE));
   }
 }
 

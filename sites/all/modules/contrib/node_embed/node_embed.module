@@ -1,5 +1,4 @@
 <?php 
-// $Id: node_embed.module,v 1.5 2010/09/08 02:11:40 jec006 Exp $
 
 /**
  * This module defines an input filter for taking an embed code syntax ([[nid: ###]])

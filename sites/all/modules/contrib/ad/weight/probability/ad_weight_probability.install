@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_weight_probability.install,v 1.1.4.2 2009/02/27 22:11:20 jeremy Exp $
 
 /**
  * Ad weight probability module database schema.
@@ -8,26 +7,46 @@
  */
 
 /**
- * Installation of the ad_weight_probability schema.
+ * Implementation of hook_schema().
+ */
+
+function ad_weight_probability_schema() {
+  $schema['ad_weight_probability'] = array(
+    'description' => 'Stores ad_weight_probability data.', 
+    'fields' => array(
+      'aid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Ad id',
+      ),
+      'probability' => array(
+        'type' => 'int',
+        'length' => 3, 
+        'unsigned' => TRUE, 
+        'not null' => TRUE, 
+        'default' => 0,
+        'description' => 'Probability',
+      ),
+    ),
+    'primary key' => array('aid'),
+  );
+
+  return $schema;
+}
+
+/** 
+ * Implementation of hook_install()
  */
 function ad_weight_probability_install() {
-  switch ($GLOBALS['db_type']) {
-    case 'mysql':
-    case 'mysqli':
-    default:
-      db_query("CREATE TABLE {ad_weight_probability} (
-        aid INT NOT NULL DEFAULT '0',
-        probability INT(3) NOT NULL DEFAULT '0',
-
-        PRIMARY KEY (aid))");
-  }
+  drupal_install_schema('ad_weight_probability');
 }
 
 /**
  * Complete uninstallation of the ad_weight_probability module.
  */
 function ad_weight_probability_uninstall() {
-  db_query('DROP TABLE IF EXISTS {ad_weight_probability}');
-  drupal_set_message('The ad_weight_probability module has been completely uninstalled.');
+  drupal_uninstall_schema('ad_weight_probability');
+  drupal_set_message(t('The ad_weight_probability module has been completely uninstalled.'));
 }
 

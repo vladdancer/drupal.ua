@@ -1,5 +1,4 @@
 <?php
-// $Id: serve.php,v 1.1.2.2.2.1.2.1 2009/02/23 22:39:02 jeremy Exp $
 
 /**
  * @file

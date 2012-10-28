@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_report.module,v 1.1.2.3.2.7.2.6.2.12 2009/11/23 06:12:21 Jeremy Exp $
 
 /**
  * @file
@@ -279,7 +278,7 @@ function ad_report_admin_display() {
     foreach ($ads as $aid) {
       if (++$i >5) {
         // if we include too many ads, the URL is too long for the browser
-        drupal_set_message('Only plotting the first five ads on the graph.');
+        drupal_set_message(t('Only plotting the first five ads on the graph.'));
         break;
       }
       $ad = node_load($aid);
@@ -298,8 +297,9 @@ function ad_report_admin_display() {
 
 /**
  * Generate a table reporting on the selected advertisements.
+ * Returns an array of ad NIDs in $ads.
  */
-function ad_report_admin_ad_table($start = 0, $end = 0, $group = array(), $csv = FALSE, $ads) {
+function ad_report_admin_ad_table($start = 0, $end = 0, $group = array(), $csv = FALSE, &$ads) {
   if (!$start) {
     $start = isset($_SESSION['ad_report_start']) ? strtotime($_SESSION['ad_report_start']) : 0;
   }
@@ -435,6 +435,8 @@ function ad_report_admin_ad_table($start = 0, $end = 0, $group = array(), $csv =
   // Build the query.
   $query = $select .' '. implode(' ', $join) .' WHERE '. implode(' AND ', $where);
   $result = db_query($query, $args);
+
+  $ads = array();
   while ($ad = db_fetch_object($result)) {
     if ($ad->nid) {
       $ads[$ad->nid] = $ad->nid;
@@ -444,7 +446,7 @@ function ad_report_admin_ad_table($start = 0, $end = 0, $group = array(), $csv =
   if ($csv) {
     header('Content-type: application/octet-stream');
     header("Content-Disposition: attachment; filename=report-$start-$end.csv");
-    echo "ad id, title, first view, last view, clicks, impressions, click-thru\n";
+    echo "ad id, title, first impression, latest impression, impressions, clicks, click-thru\n";
   }
   else {
     $output = '<div class="describe">' . t('There !count found.', array('!count' => format_plural(sizeof($ads), 'was <strong>1</strong> ad', 'were <strong>@count</strong> ads'))) . '</div>';
@@ -464,7 +466,7 @@ function ad_report_admin_ad_table($start = 0, $end = 0, $group = array(), $csv =
       $last = format_date($last, 'small');
       $clicks = (int)db_result(db_query("SELECT SUM(count) FROM {ad_statistics} WHERE aid = %d AND action = 'click' AND date >= %d AND date <= %d", $nid, $start, $end));
       if ($views) {
-        $clickthru = number_format($clicks / $views, 2) .'%';
+        $clickthru = number_format(100 * $clicks / $views, 2) .'%';
       }
       else {
         $clickthru = '0%';
@@ -476,7 +478,7 @@ function ad_report_admin_ad_table($start = 0, $end = 0, $group = array(), $csv =
         else {
           $row = array();
           $row[] = l($ad->title, "node/$ad->nid");
-          $row[] = "first impression: $first<br />last view: $last";
+          $row[] = "first impression: $first<br />latest impression: $last";
           $row[] = number_format($views);
           $row[] = number_format($clicks);
           $row[] = $clickthru;
@@ -497,7 +499,7 @@ function ad_report_admin_ad_table($start = 0, $end = 0, $group = array(), $csv =
     $row[] = '<strong>'. number_format($total_views) .'</strong>';
     $row[] = '<strong>'. number_format($total_clicks) .'</strong>';
     if ($total_views) {
-      $row[] = '<strong>'. number_format($total_clicks / $total_views, 2) .'%' .'</strong>';
+      $row[] = '<strong>'. number_format(100 * $total_clicks / $total_views, 2) .'%' .'</strong>';
     }
     else {
       $row[] = '<strong>'. '0%' .'</strong>';

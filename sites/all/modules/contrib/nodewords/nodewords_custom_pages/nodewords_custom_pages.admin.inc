@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_custom_pages.admin.inc,v 1.1.2.6 2010/10/30 16:51:20 davereid Exp $
 
 /**
  * @file
@@ -136,6 +135,11 @@ function nodewords_custom_pages_edit($form_state, $page = NULL) {
   );
 
   if (empty($nodewords_form)) {
+    $form['warning'] = array(
+      '#value' => t('You have not yet enabled any <a href="@url">meta tags for administrative settings pages</a>.', array('@url' => url('admin/content/nodewords'))),
+      '#prefix' => '<div class="messages warning">',
+      '#suffix' => '</div>',
+    );
     return $form;
   }
 
@@ -203,6 +207,19 @@ function nodewords_custom_pages_edit_validate($form, &$form_state) {
     if ($bool) {
       form_set_error('path', t('The path is already used.'));
     }
+
+    // Meta tags will not be output on administration pages.
+    $paths = preg_split('/[\r\n]+/', $path, 0, PREG_SPLIT_NO_EMPTY);
+    foreach ($paths as $path) {
+      if (drupal_match_path($path, 'admin/*')) {
+        if (!form_get_error($form['path'])) {
+          form_set_error('path', t('You cannot assign the path %path since meta tags are not output on administration paths.', array('%path' => $path)));
+        }
+        else {
+          drupal_set_message(t('You cannot assign the path %path since meta tags are not output on administration paths.', array('%path' => $path)), 'error');
+        }
+      }
+    }
   }
   else {
     form_set_error('path', t('The path contains only spaces, and other not printable characters.'));
@@ -217,7 +234,7 @@ function nodewords_custom_pages_edit_submit($form, &$form_state) {
 
   $row = new stdClass();
 
-  if (isset($form_state['values']['pid'])) {
+  if (!empty($form_state['values']['pid'])) {
     $row->pid = $form_state['values']['pid'];
   }
 
@@ -226,13 +243,14 @@ function nodewords_custom_pages_edit_submit($form, &$form_state) {
   $row->weight = $form_state['values']['weight'];
   $row->enabled = $form_state['values']['enabled'];
 
-  drupal_write_record('nodewords_custom', $row, isset($row->pid) ? 'pid' : array());
+  drupal_write_record('nodewords_custom', $row, !empty($row->pid) ? array('pid') : array());
   nodewords_save_tags($form_state['values']['nodewords']['metatags'], array(
     'type' => NODEWORDS_TYPE_PAGE, 'id' => $row->pid,
   ));
 
   drupal_set_message(t('The configuration options have been saved.'));
 
+  $form_state['values']['pid'] = $row->pid;
   $form_state['redirect'] = 'admin/content/nodewords/custom';
 }
 

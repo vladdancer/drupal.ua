@@ -1,5 +1,4 @@
 <?php
-// $Id: ad_weight_percent.inc,v 1.1.2.2.2.2 2009/02/16 17:06:50 jeremy Exp $
 
 /**
  * @file

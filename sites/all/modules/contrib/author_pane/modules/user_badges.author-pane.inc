@@ -1,5 +1,4 @@
 <?php
-// $Id: user_badges.author-pane.inc,v 1.1.2.2.2.4 2010/10/04 14:59:56 michellec Exp $
 
 /**
  * @file
@@ -26,7 +25,13 @@ function user_badges_preprocess_author_pane(&$variables) {
       $variables['user_badges'] = $cached_user_badges[$account_id];
     }
     else {
-      $variables['user_badges'] = user_badges_for_uid($account_id);
+      if (isset($variables['account']->badges)) {
+        $shtml = '';
+        foreach ($variables['account']->badges as $obadge) {
+          $shtml .= theme('user_badge', $obadge, $variables['account']);
+        }
+      }
+      $variables['user_badges'] = $shtml;
       $cached_user_badges[$account_id] = $variables['user_badges'];
     }
   }

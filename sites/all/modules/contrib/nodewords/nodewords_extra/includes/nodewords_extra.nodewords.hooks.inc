@@ -1,5 +1,4 @@
 <?php
-// $Id: nodewords_extra.nodewords.hooks.inc,v 1.1.2.10 2010/10/30 19:10:16 damienmckenna Exp $
 
 /**
  * @file
